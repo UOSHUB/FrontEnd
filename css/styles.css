@@ -1,0 +1,7 @@
+body > [ng-include] {
+    min-height: 80%;
+}
+
+[ng-click] {
+    cursor: pointer;
+}
