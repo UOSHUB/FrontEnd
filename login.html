@@ -1,0 +1,24 @@
+<md-dialog flex="20" layout="column" style="background: white">
+    <md-toolbar flex="10">
+        <div class="md-toolbar-tools" flex>
+            <span flex>Welcome to UOS HUB</span>
+            <md-button class="md-icon-button" ng-click="dialog.cancel()">
+                <md-icon md-font-icon="fa fa-times fa-lg"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-margin>
+        <br>
+        <div layout-margin layout="column">
+        <md-input-container>
+            <label>Student ID</label>
+            <input ng-model="sid">
+        </md-input-container>
+        <md-input-container>
+            <label>Password</label>
+            <input ng-model="pin">
+        </md-input-container>
+        <md-button class="md-raised md-primary" ng-click="dialog.hide(sid)">Login</md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

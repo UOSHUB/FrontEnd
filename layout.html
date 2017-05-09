@@ -8,8 +8,27 @@
         <!-- Our Style Sheets -->
         <link rel="stylesheet" href="/static/css/styles.css">
     </head>
-    <body ng-app="UOSHUB" ng-cloak>
-        <div ng-include="url"></div>
+    <body ng-app="UOSHUB" layout="row" ng-cloak>
+        <md-sidenav flex-none class="md-sidenav-left outside" md-is-locked-open="$mdMedia('gt-xs')" md-whiteframe="1">
+            <md-content md-colors="::{background: 'grey-A100'}" layout="column">
+                <span id="logo" style="margin: 11px">
+                    <md-icon md-svg-src="/static/img/logo.svg"></md-icon>
+                    <b style="margin-left: 8px" md-colors="::{color: 'accent-800'}">UOS </b>
+                    <span style="font-weight: 300; margin-right: 6px" md-colors="::{color: 'primary-800'}">HUB</span>
+                </span>
+            </md-content>
+        </md-sidenav>
+
+        <div flex>
+            <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}" ng-controller="toolbar">
+                <div class="md-toolbar-tools" id="toolbar">
+                    <span flex></span>
+                    <md-button ng-hide="sid" class="md-accent" ng-click="login($event)">Login</md-button>
+                    <h2 ng-show="sid" md-colors="::{color: 'accent-800'}">Welcome {{ sid }}</h2>
+                </div>
+            </md-toolbar>
+            <md-content ng-include="url"></md-content>
+        </div>
 
         <!-- Angular Material requires Angular.js Libraries -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>

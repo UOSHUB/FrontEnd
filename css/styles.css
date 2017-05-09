@@ -5,3 +5,26 @@ body > [ng-include] {
 [ng-click] {
     cursor: pointer;
 }
+
+#toolbar {
+    height: 64px;
+    max-height: 64px;
+}
+
+#logo * {
+    width: 54px;
+    height: 42px;
+    font-size: 28px;
+    vertical-align: middle;
+}
+
+.outside {
+    height: 64px;
+    width: auto;
+}
+
+md-dialog .md-toolbar-tools {
+    max-height: 100%;
+    padding: 0 24px;
+    font-size: 28px;
+}
