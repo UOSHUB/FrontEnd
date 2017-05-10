@@ -9,21 +9,30 @@
         <link rel="stylesheet" href="/static/css/styles.css">
     </head>
     <body ng-app="UOSHUB" layout="row" ng-cloak>
-        <md-sidenav flex-none class="md-sidenav-left outside" md-is-locked-open="$mdMedia('gt-xs')" md-whiteframe="1">
-            <md-content md-colors="::{background: 'grey-A100'}" layout="column">
-                <span id="logo" style="margin: 11px">
-                    <md-icon md-svg-src="/static/img/logo.svg"></md-icon>
-                    <b style="margin-left: 8px" md-colors="::{color: 'accent-800'}">UOS </b>
-                    <span style="font-weight: 300; margin-right: 6px" md-colors="::{color: 'primary-800'}">HUB</span>
-                </span>
+        <md-sidenav class="md-sidenav-left" ng-class="status" md-whiteframe="1"
+                    md-is-locked-open="$mdMedia('gt-xs')" flex-none>
+            <header id="logo" style="padding: 11px" md-colors="::{background: 'grey-A100'}">
+                <md-icon md-svg-src="/static/img/logo.svg"></md-icon>
+                <b style="margin-left: 8px" md-colors="::{color: 'accent-800'}">UOS </b>
+                <span style="font-weight: 300; margin-right: 6px" md-colors="::{color: 'primary-800'}">HUB</span>
+            </header>
+            <md-content md-colors="::{background: 'accent-900'}" flex>
+                <md-list ng-controller="sidenav" flex>
+                    <md-list-item class="md-1-line" ng-repeat="link in links" ng-click="redirect(link.title)">
+                        <md-icon md-font-icon="fa fa-{{ link.icon }} fa-fw" class="md-avatar-icon"></md-icon>
+                        <div class="md-list-item-text" flex>
+                            <p class="md-title">{{ link.title }}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
             </md-content>
         </md-sidenav>
 
         <div flex>
-            <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}" ng-controller="toolbar">
+            <md-toolbar ng-controller="toolbar" md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar">
                     <span flex></span>
-                    <md-button ng-hide="sid" class="md-accent" ng-click="login($event)">Login</md-button>
+                    <md-button ng-hide="sid" class="md-primary md-hue-2" ng-click="login($event)">Login</md-button>
                     <h2 ng-show="sid" md-colors="::{color: 'accent-800'}">Welcome {{ sid }}</h2>
                 </div>
             </md-toolbar>

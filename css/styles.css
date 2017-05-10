@@ -18,9 +18,22 @@ body > [ng-include] {
     vertical-align: middle;
 }
 
-.outside {
-    height: 64px;
+md-sidenav {
+    transition: height ease 0.8s;
     width: auto;
+}
+
+.md-avatar-icon {
+    font-size: 20px;
+    padding: 11px !important;
+}
+
+.logged-in {
+    height: 100%;
+}
+
+.logged-out {
+    height: 64px;
 }
 
 md-dialog .md-toolbar-tools {

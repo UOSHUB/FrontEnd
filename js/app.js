@@ -16,9 +16,31 @@ angular.module('UOSHUB', ['ngMaterial'])
         $window.history.pushState(null, null, '/' + url);
         $rootScope.url = filePath(url);
     };
+    $rootScope.status = 'logged-out';
 })
 
-.controller('toolbar', function($scope, $mdDialog) {
+.controller('sidenav', function($scope, $rootScope) {
+    $rootScope.$on('login', function(event) {
+        $scope.links = [{
+            title: 'Dashboard',
+            icon: 'tachometer'
+        },{
+            title: 'Schedule',
+            icon: 'calendar'
+        },{
+            title: 'Courses',
+            icon: 'book'
+        },{
+            title: 'Email',
+            icon: 'envelope'
+        },{
+            title: 'Calendar',
+            icon: 'globe'
+        }];
+    });
+})
+
+.controller('toolbar', function($scope, $mdDialog, $rootScope) {
     $scope.login = function(event) {
         $mdDialog.show({
             controller: 'toolbar',
@@ -28,6 +50,8 @@ angular.module('UOSHUB', ['ngMaterial'])
             clickOutsideToClose: true
         }).then(function(sid) {
             $scope.sid = sid;
+            $rootScope.$emit('login');
+            $rootScope.status = 'logged-in';
         }, function(){});
     };
     $scope.dialog = $mdDialog;
