@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="/">
         <!-- Angular Material style sheet -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.css">
         <!-- Font Awesome Icon Pack -->
@@ -12,7 +13,7 @@
         <md-sidenav class="md-sidenav-left" ng-class="status" md-whiteframe="1"
                     md-is-locked-open="$mdMedia('gt-xs')" flex-none>
             <header id="logo" style="padding: 11px" md-colors="::{background: 'grey-A100'}">
-                <md-icon md-svg-src="/static/img/logo.svg"></md-icon>
+                <md-icon md-svg-icon="logo"></md-icon>
                 <b style="margin-left: 8px" md-colors="::{color: 'accent-800'}">UOS </b>
                 <span style="font-weight: 300; margin-right: 6px" md-colors="::{color: 'primary-800'}">HUB</span>
             </header>
@@ -36,11 +37,12 @@
                     <h2 ng-show="sid" md-colors="::{color: 'accent-800'}">Welcome {{ sid }}</h2>
                 </div>
             </md-toolbar>
-            <md-content ng-include="url"></md-content>
+            <ng-view></ng-view>
         </div>
 
         <!-- Angular Material requires Angular.js Libraries -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-aria.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-messages.min.js"></script>
