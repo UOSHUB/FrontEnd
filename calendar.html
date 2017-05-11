@@ -1,0 +1,17 @@
+<md-card flex layout="column" style="overflow: hidden">
+    <calendar-md flex style="height: 0" 
+        calendar-direction="direction"
+        on-prev-month="prevMonth"
+        on-next-month="nextMonth"
+        on-day-click="dayClick"
+        title-format="'MMMM y'"
+        ng-model='selectedDate'
+        week-starts-on="firstDayOfWeek"
+        tooltips="tooltips"
+        day-format="dayFormat"
+        day-label-format="'EEE'"
+        day-label-tooltip-format="'EEEE'"
+        day-tooltip-format="'fullDate'"
+        day-content="setDayContent"
+        disable-future-selection="false"></calendar-md>
+</md-card>

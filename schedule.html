@@ -1,4 +1,4 @@
-<md-card md-colors="::{background: 'grey-50'}" flex>
+<md-card flex>
     <md-card-content class="card-content" layout="row">
         <div class="day as-hours-head" md-colors="::{background: 'green-50'}"></div>
         <div class="day" ng-repeat="day in [1,2,3,4]"></div>
@@ -7,8 +7,8 @@
         <div ng-repeat-start="fraction in fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * height }}%">
             {{ labels[$index][0] }}<span class="hide-on-med-and-down">{{ labels[$index][1] }}</span>
         </div>
-        <div class="half hour" style="top: {{ 5 + height * (0.5 + fraction) }}%"></div>
-        <div ng-if="!($last && fraction == -1)" class="hour" style="top: {{ 5 + fraction * height }}%" ng-repeat-end></div>
+        <div ng-if="!$last" class="half hour" style="top: {{ 5 + height * (0.5 + fraction) }}%"></div>
+        <div class="hour" style="top: {{ 5 + fraction * height }}%" ng-repeat-end></div>
 
         <div ng-repeat="(id, course) in courses">
             <div ng-repeat="point in course.points" ng-click="showClass($event, id, point[0])"

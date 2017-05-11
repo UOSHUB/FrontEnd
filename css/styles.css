@@ -129,3 +129,13 @@ md-dialog p md-icon {
     margin-right: 8px;
 }
 /* Schedule card end */
+
+.breadcrumb {
+    background-color: lightgrey;
+    border-radius: 16px;
+    height: 32px;
+    line-height: 32px;
+    margin: 8px 8px 0 0;
+    padding: 0 12px !important;
+    float: left;
+}

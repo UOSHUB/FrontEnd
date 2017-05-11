@@ -1,4 +1,4 @@
-angular.module('UOSHUB', ['ngMaterial', 'ngRoute'])
+angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
 
 .config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider, $mdIconProvider, $routeProvider) {
     $locationProvider.html5Mode(true);
@@ -6,9 +6,10 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute'])
     $mdAriaProvider.disableWarnings();
     $mdThemingProvider.theme('default')
         .primaryPalette('green')
-        .accentPalette('blue-grey')
-        .backgroundPalette('blue-grey');
-    $mdIconProvider.icon("logo", "/static/img/logo.svg");
+        .accentPalette('blue-grey');
+    $mdIconProvider
+        .icon("logo", "/static/img/logo.svg")
+        .icon("md-tabs-arrow", "/static/img/tabs-arrow-icon.svg");
     $routeProvider.when('/', {
         templateUrl: filePath()
     }).when('/Dashboard', {
@@ -21,7 +22,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute'])
     }).when('/Email', {
         templateUrl: filePath('email')
     }).when('/Calendar', {
-        templateUrl: filePath('calendar')
+        templateUrl: filePath('calendar'),
+        controller: 'Calendar'
     });
 })
 
@@ -53,17 +55,18 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute'])
 })
 
 .controller('Toolbar', function($scope, $mdDialog, $rootScope) {
-    $scope.dialog = $mdDialog;
     $rootScope.status = 'logged-out';
+    $scope.cancel = $mdDialog.cancel;
+    $scope.hide = $mdDialog.hide;
     $scope.login = function(event) {
         $mdDialog.show({
-            controller: 'Toolbar',
-            templateUrl: filePath('login'),
+            templateUrl: 'login-dialog',
             parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            preserveScope: true,
             targetEvent: event,
-            clickOutsideToClose: true
-        }).then(function(sid) {
-            $scope.sid = sid;
+            scope: $scope
+        }).then(function() {
             $rootScope.$emit('login');
             $rootScope.status = 'logged-in';
             $rootScope.redirect('Dashboard');
@@ -91,6 +94,42 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute'])
             targetEvent: event,
             scope: $scope
         });
+    };
+})
+
+.controller("Calendar", function($scope, $filter) {
+    $scope.dayFormat = "d";
+    $scope.selectedDate = new Date();
+    $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
+    $scope.tooltips = true;
+
+    $scope.setDirection = function(direction) {
+      $scope.direction = direction;
+      $scope.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
+    };
+
+    $scope.events = {
+        '13 4': 'IELTS Exam',
+        '17 4': 'TOEFL Exam',
+        '18 4': 'Classes end',
+        '20 4': 'Final Examinations',
+        '21 4': 'Final Examinations',
+        '22 4': 'Final Examinations',
+        '23 4': 'Final Examinations',
+        '24 4': 'Final Examinations',
+        '25 4': 'Final Examinations',
+        '26 4': 'Final Examinations',
+        '27 4': 'Final Examinations',
+        '28 4': 'Final Examinations',
+        '29 4': 'Final Examinations',
+        '30 4': 'Final Examinations',
+        '31 4': 'Final Examinations'
+    };
+
+    $scope.setDayContent = function(date) {
+        var event = $scope.events[date.getDate() + ' ' + date.getMonth()]
+        if(event)
+            return "<div class='breadcrumb'>" + event + "</div>";
     };
 });
 

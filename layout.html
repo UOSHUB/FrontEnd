@@ -9,7 +9,7 @@
         <!-- Our Style Sheets -->
         <link rel="stylesheet" href="/static/css/styles.css">
     </head>
-    <body ng-app="UOSHUB" layout="row" ng-cloak>
+    <body ng-app="UOSHUB" layout="row" md-colors="::{background: 'accent-50'}" ng-cloak>
         <md-sidenav class="md-sidenav-left" ng-class="status" md-whiteframe="1"
                     md-is-locked-open="$mdMedia('gt-xs')" flex-none>
             <header id="logo" style="padding: 11px" md-colors="::{background: 'grey-A100'}">
@@ -40,14 +40,45 @@
             <ng-view layout="column" layout-margin flex></ng-view>
         </div>
 
+        <script type="text/ng-template" id="login-dialog">
+            <md-dialog flex="20" md-colors="{background: 'default-grey-A100'}">
+                <form layout="column" style="margin: 0" ng-submit="hide()">
+                    <md-toolbar flex="10">
+                        <div class="md-toolbar-tools" flex>
+                            <span flex>Welcome to UOS HUB</span>
+                            <md-button class="md-icon-button" ng-click="cancel()">
+                                <md-icon md-font-icon="fa fa-times fa-lg"></md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-dialog-content layout-margin>
+                        <br>
+                        <div layout-margin layout="column">
+                        <md-input-container>
+                            <label>Student ID</label>
+                            <input ng-model="sid" required>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Password</label>
+                            <input ng-model="pin">
+                        </md-input-container>
+                        <md-button type="submit" class="md-raised md-primary">Login</md-button>
+                        </div>
+                    </md-dialog-content>
+                </form>
+            </md-dialog>
+        </script>
         <!-- Angular Material requires Angular.js Libraries -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-aria.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-messages.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-sanitize.min.js"></script>
         <!-- Angular Material Library -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.js"></script>
+        <!-- Angular Material Calendar -->
+        <script src="https://cdn.rawgit.com/bradberger/angular-material-calendar/master/dist/angular-material-calendar.js"></script>
         <!-- Our Angular App -->
         <script src="/static/js/app.js"></script>
     </body>
