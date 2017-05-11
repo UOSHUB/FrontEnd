@@ -37,3 +37,95 @@ md-dialog .md-toolbar-tools {
     padding: 0 24px;
     font-size: 28px;
 }
+
+
+/* Schedule card start */
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.card-content {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.day {
+    width: 19%;
+    float: left;
+    border-right: 1px solid #cfd8dc;
+}
+
+.day.as-hours-head {
+    width: 5%;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.day-label {
+    position: absolute;
+    width: 19%;
+    height: 5%;
+    top: 1%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.hour {
+    position: absolute;
+    width: 95%;
+    margin-left: 5%;
+    border-bottom: 1px solid #cfd8dc;
+}
+
+.half.hour {
+    border-bottom-color: #eceff1;
+}
+
+.hour.as-days-head {
+    height: 5%;
+    width: calc(95% + 1px);
+    margin-left: calc(5% - 1px);
+    border-top-right-radius: 2px;
+}
+
+.hour-label {
+    position: absolute;
+    width: 5%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.class {
+    width: calc(19% - 1px);
+    position: absolute;
+    padding: 0.5rem 0.5rem 0.7rem 0.7rem;
+    color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    word-wrap: break-word;
+    box-shadow: inset 0 0 10rem 2rem rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.class:hover {
+    box-shadow: inset 0 0 10rem 2rem rgba(255, 255, 255, 0.1);
+}
+
+.course-name {
+    font-weight: 500;
+}
+
+md-dialog p {
+    font-size: 20px;
+    padding: 4px 0;
+}
+
+md-dialog p md-icon {
+    margin-right: 8px;
+}
+/* Schedule card end */
