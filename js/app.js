@@ -13,7 +13,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     $routeProvider.when('/', {
         templateUrl: filePath()
     }).when('/Dashboard', {
-        templateUrl: filePath('dashboard')
+        templateUrl: filePath('dashboard'),
+        controller: 'Dashboard'
     }).when('/Schedule', {
         templateUrl: filePath('schedule'),
         controller: 'Schedule'
@@ -38,16 +39,16 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
         $scope.links = [{
             title: 'Dashboard',
             icon: 'tachometer'
-        },{
+        }, {
             title: 'Schedule',
             icon: 'calendar'
-        },{
+        }, {
             title: 'Courses',
             icon: 'book'
-        },{
+        }, {
             title: 'Email',
             icon: 'envelope'
-        },{
+        }, {
             title: 'Calendar',
             icon: 'globe'
         }];
@@ -55,7 +56,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
 })
 
 .controller('Toolbar', function($scope, $mdDialog, $rootScope) {
-    $rootScope.status = 'logged-out';
+    $rootScope.status = 'logged-in';
+    $rootScope.$emit('login');
     $scope.cancel = $mdDialog.cancel;
     $scope.hide = $mdDialog.hide;
     $scope.login = function(event) {
@@ -72,6 +74,79 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
             $rootScope.redirect('Dashboard');
         }, function(){});
     };
+})
+
+.controller('Dashboard', function($scope) {
+    $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
+    $scope.announcements = [{
+        title: 'Project Final Submission Due',
+        course: 'Introduction to Computer Graphics',
+        time: '13 hours ago'
+    }, {
+        title: 'Chapter 6 Available',
+        course: 'Critical Reading and Writing',
+        time: '2 days ago'
+    }, {
+        title: 'Notes - 3dsmax Available',
+        course: '2D/3D Computer Animation',
+        time: '3 days ago'
+    }];
+
+    $scope.emails = [{
+        subject: 'Project Final Submission Due',
+        sender: 'Introduction to Computer Graphics',
+        time: '13 hours ago'
+    }, {
+        subject: 'Chapter 6 Available',
+        sender: 'Critical Reading and Writing',
+        time: '2 days ago'
+    }, {
+        subject: 'Notes - 3dsmax Available',
+        sender: '2D/3D Computer Animation',
+        time: '3 days ago'
+    }];
+    $scope.getInitials = function(name) {
+        var words = name.split(' ');
+        return (words[0].slice(0, 1) + words[1].slice(0, 1)).toUpperCase();
+    };
+
+    $scope.tasks = [{
+        title: 'Project Final Submission Due',
+        group: 'Introduction to Computer Graphics',
+        day: 'Today',
+        time: '11:59 AM'
+    }, {
+        title: 'Chapter 6 Available',
+        group: 'Critical Reading and Writing',
+        day: 'Tomorrow',
+        time: '1:59 AM'
+    }, {
+        title: 'Notes - 3dsmax Available',
+        group: '2D/3D Computer Animation',
+        day: 'In Two days',
+        time: '5:59 AM'
+    }];
+
+    $scope.classes = {"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["09:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25}};
+
+
+    $scope.grades = [{
+        course: 'Networking Fundamentals',
+        letter: 'A',
+        color: 'green'
+    },{
+        course: 'Multimedia Programming & Design',
+        letter: 'B',
+        color: 'lime'
+    },{
+        course: 'Principles of Marketing',
+        letter: 'C',
+        color: 'orange'
+    },{
+        course: 'Statistics for Science',
+        letter: 'D',
+        color: 'red'
+    }];
 })
 
 .controller('Schedule', function($scope, $mdDialog) {

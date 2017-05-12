@@ -37,12 +37,12 @@
                     <h2 ng-show="sid" md-colors="::{color: 'accent-800'}">Welcome {{ sid }}</h2>
                 </div>
             </md-toolbar>
-            <ng-view layout="column" layout-margin flex></ng-view>
+            <ng-view layout="column" flex></ng-view>
         </div>
 
         <script type="text/ng-template" id="login-dialog">
             <md-dialog flex="20" md-colors="{background: 'default-grey-A100'}">
-                <form layout="column" style="margin: 0" ng-submit="hide()">
+                <form layout="column" class="no-margin" ng-submit="hide()">
                     <md-toolbar flex="10">
                         <div class="md-toolbar-tools" flex>
                             <span flex>Welcome to UOS HUB</span>
