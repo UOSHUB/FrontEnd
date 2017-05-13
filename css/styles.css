@@ -168,3 +168,8 @@ md-dialog p md-icon {
     padding: 0 12px !important;
     float: left;
 }
+
+#course-info md-icon, md-dialog p md-icon {
+    font-size: 20px;
+    color: #424242;
+}

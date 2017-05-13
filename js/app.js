@@ -20,7 +20,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
         templateUrl: filePath('schedule'),
         controller: 'Schedule'
     }).when('/Courses', {
-        templateUrl: filePath('courses')
+        templateUrl: filePath('courses'),
+        controller: 'Courses'
     }).when('/Email', {
         templateUrl: filePath('email'),
         controller: 'Email'
@@ -34,6 +35,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     $rootScope.redirect = function(link) {
         $location.path(link);
     };
+    $rootScope.courses = {"1411341":{"ch":3,"crn":10889,"days":["M","W"],"doctor":["Manar Abu Talib","Mtalib@sharjah.ac.ae"],"name":"Web Programming","place":["W8","106"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"red","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"1411440":{"ch":3,"crn":10893,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Introduction to Computer Graphics","place":["W8","005"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"teal","minutes":[480,555],"points":[[24,12.037037037037038],[62,12.037037037037038]],"length":1.25},"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25},"0202227":{"ch":3,"crn":10214,"days":["M","W"],"doctor":["Muhieddin AlQaddour","malqaddour@sharjah.ac.ae"],"name":"Critical Reading and Writing","place":["M10","101"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"purple","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25}};
 })
 
 .controller('Sidenav', function($scope, $rootScope) {
@@ -78,7 +80,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     };
 })
 
-.controller('Dashboard', function($scope) {
+.controller('Dashboard', function($scope, $rootScope) {
     $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
     $scope.announcements = [{
         title: 'Project Final Submission Due',
@@ -129,9 +131,10 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
         time: '5:59 AM'
     }];
 
-    $scope.classes = {"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["09:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25}};
-
-
+    $scope.classes = {
+        "1412340": $rootScope.courses["1412340"],
+        "1412444": $rootScope.courses["1412444"]
+    };
     $scope.grades = [{
         course: 'Networking Fundamentals',
         letter: 'A',
@@ -151,9 +154,9 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     }];
 })
 
-.controller('Schedule', function($scope, $mdDialog) {
+.controller('Schedule', function($scope, $mdDialog, $rootScope) {
+    $scope.courses = $rootScope.courses;
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
-    $scope.courses = {"1411341":{"ch":3,"crn":10889,"days":["M","W"],"doctor":["Manar Abu Talib","Mtalib@sharjah.ac.ae"],"name":"Web Programming","place":["W8","106"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"red","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"1411440":{"ch":3,"crn":10893,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Introduction to Computer Graphics","place":["W8","005"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"teal","minutes":[480,555],"points":[[24,12.037037037037038],[62,12.037037037037038]],"length":1.25},"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25},"0202227":{"ch":3,"crn":10214,"days":["M","W"],"doctor":["Muhieddin AlQaddour","malqaddour@sharjah.ac.ae"],"name":"Critical Reading and Writing","place":["M10","101"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"purple","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25}};
     $scope.height = 14.074074074074074;
     $scope.labels = [[8,"AM"],[9,"AM"],[10,"AM"],[11,"AM"],[12,"PM"],[1,"PM"],[2,"PM"]];
     $scope.fractions = [0.5,1.5,2.5,3.5,4.5,5.5,6.5];
@@ -172,6 +175,42 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
             scope: $scope
         });
     };
+})
+
+.controller('Courses', function($scope, $rootScope) {
+    $scope.repeat = new Array(12);
+    $scope.mass = false;
+    $scope.all = false;
+    $scope.announcements = [{
+        title: 'There Will Be No Classes Next Week!',
+        time: '13 hours ago'
+    }, {
+        title: 'Chapter 6 is Now Available',
+        time: '2 days ago'
+    }, {
+        title: 'Be Prepared For a Quiz Tomorrow',
+        time: '3 days ago'
+    }];
+
+    $scope.tasks = [{
+        title: 'Project Final Submission Due',
+        group: 'By Course',
+        day: 'Today',
+        time: '11:59 AM'
+    }, {
+        title: 'Study Chapter 5',
+        group: 'My Task',
+        day: 'Tomorrow',
+        time: '1:59 AM'
+    }, {
+        title: 'Final Exam',
+        group: 'By Course',
+        day: 'In Two days',
+        time: '5:59 AM'
+    }];
+    
+    $scope.class = $scope.courses["1412340"];
+    $scope.class.id = "1412340";
 })
 
 .controller('Email', function($scope) {

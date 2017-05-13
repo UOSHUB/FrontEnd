@@ -1,0 +1,183 @@
+<div layout="row" flex>
+    <md-card flex="30">
+        <md-toolbar md-colors="{background: 'brown-600'}">
+            <div class="md-toolbar-tools" flex>
+                <span flex>Documents</span>
+                <md-button class="md-icon-button" style="margin-right: 8px" ng-hide="mass" ng-click="mass = !mass">
+                    <md-icon md-font-icon="fa fa-cloud-download fa-2x fa-fw"></md-icon>
+                </md-button>
+                <md-button ng-show="mass" class="md-raised" style="margin-right: 16px" md-colors="{background: 'amber-300'}">Download Selected</md-button>
+                <md-checkbox ng-show="mass" ng-checked="all" ng-click="all = !all"></md-checkbox>
+            </div>
+        </md-toolbar>
+        <md-content flex>
+            <md-list flex>
+                <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index">
+                    <div class="md-list-item-text" flex>
+                        <h3>Chapter #{{ $index + 1 }} - Chapter Title</h3>
+                        <p>{{ ($index + 1) * 3.273 % 10 | number:3 }} MB</p>
+                        <p class="md-secondary">
+                            <md-button class="md-icon-button" ng-if="!mass">
+                                <md-icon md-font-icon="fa fa-download fa-2x"></md-icon>
+                            </md-button>
+                            <md-checkbox ng-if="mass" ng-checked="all" class="md-accent md-hue-3"></md-checkbox>
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-card>
+    <div layout="column" flex>
+        <div layout="row" flex="55">
+            <md-card flex>
+                <md-toolbar md-colors="{background: 'orange-600', color: 'grey-A100'}">
+                    <div class="md-toolbar-tools" flex>
+                        <span flex>Announcements</span>
+                    </div>
+                </md-toolbar>
+                <md-content flex>
+                    <md-list flex>
+                        <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="ann = announcements[$index%3]" ng-click="null">
+                            <div class="md-list-item-text" flex>
+                                <h3>{{ ann.title }}</h3>
+                                <p class="md-secondary">{{ ann.time }}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-card>
+            <md-card flex>
+                <md-toolbar md-colors="{background: 'primary-600'}">
+                    <div class="md-toolbar-tools" flex>
+                        <span flex>Upcomming Deadlines</span>
+                    </div>
+                </md-toolbar>
+                <md-content flex>
+                    <md-list flex>
+                        <md-list-item class="md-3-line" ng-repeat="loop in repeat track by $index" ng-init="task = tasks[$index%3]" ng-click="null">
+                            <div class="md-list-item-text" flex>
+                                <h3>{{ task.title }}</h3>
+                                <p>{{ task.group }}</p>
+                                <md-progress-linear style="margin-top: 4px" md-mode="determinate" flex="80"
+                                                    value="{{task.title.length * (index+3) % 90}}"></md-progress-linear>
+                                <div class="md-secondary" style="line-height: 24px; text-align: end" layout="column">
+                                    <span>{{ task.day }}</span>
+                                    <span>{{ task.time }}</span>
+                                </div>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-card>
+        </div>
+        <div layout="row" flex>
+            <md-card flex="66">
+                <md-toolbar md-colors="{background: 'pink-500', color: 'grey-A100'}">
+                    <div class="md-toolbar-tools" flex>
+                        <span flex>Course Info</span>
+                    </div>
+                </md-toolbar>
+                <md-content id="course-info" layout="row" flex>
+                    <div layout="column" layout-align="space-between start" flex layout-margin>
+                        <p>
+                            <md-icon md-font-icon="fa fa-user fa-fw"></md-icon>
+                            {{ class.doctor[0] }}
+                            <md-tooltip md-direction="right">Doctor Name</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-calendar-o fa-fw"></md-icon>
+                            {{ class.days[0] }} {{ class.days[1] }}
+                            <md-tooltip md-direction="right">Days</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-hourglass-start fa-fw"></md-icon>
+                            {{ class.time[0] }}
+                            <md-tooltip md-direction="right">Start Time</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-puzzle-piece fa-fw"></md-icon>
+                            {{ class.section }} <span md-colors="{color: 'default-grey-500'}">(Section)</span>
+                            <md-tooltip md-direction="right">Section</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-key fa-fw"></md-icon>
+                            {{ class.id }}
+                            <md-tooltip md-direction="right">Course key</md-tooltip>
+                        </p>
+                    </div>
+                    <div layout="column" layout-align="space-between start" flex layout-margin>
+                        <p>
+                            <md-icon md-font-icon="fa fa-envelope fa-fw"></md-icon>
+                            {{ class.doctor[1] }}
+                            <md-tooltip md-direction="right">Doctor Email</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-map-marker fa-fw"></md-icon>
+                            {{ class.place[0] }}, {{ class.place[1] }}
+                            <md-tooltip md-direction="right">Building, Room</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-hourglass-end fa-fw"></md-icon>
+                            {{ class.time[1] }}
+                            <md-tooltip md-direction="right">End Time</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-certificate fa-fw"></md-icon>
+                            {{ class.ch }} <span md-colors="{color: 'default-grey-500'}">(CrHrs)</span>
+                            <md-tooltip md-direction="right">Credit Hours</md-tooltip>
+                        </p>
+                        <p>
+                            <md-icon md-font-icon="fa fa-info fa-fw"></md-icon>
+                            {{ class.crn }}
+                            <md-tooltip md-direction="right">CRN</md-tooltip>
+                        </p>
+                    </div>
+                </md-content>
+            </md-card>
+            <md-card flex>
+                <md-toolbar md-colors="{background: 'light-blue-500', color: 'grey-A100'}">
+                    <div class="md-toolbar-tools" flex>
+                        <span flex>Action Board</span>
+                    </div>
+                </md-toolbar>
+                <md-content flex layout-padding>
+                    <div layout="column">
+                        <md-input-container style="margin-top: 8px" class="md-block md-warn">
+                            <label>Subject</label>
+                            <input>
+                        </md-input-container>
+                        <md-input-container style="margin: -20px 0 0" class="md-block md-warn">
+                            <label>Description</label>
+                            <textarea rows="3"></textarea>
+                        </md-input-container>
+                        <div layout="row" style="position: relative">
+                            <md-button class="md-raised no-margin" md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
+                            <md-fab-speed-dial md-direction="up" class="md-scale" style="position: absolute; right: -8px; bottom: -8px">
+                                <md-fab-trigger>
+                                    <md-button class="md-fab" md-colors="{background: 'yellow-300'}">
+                                        <md-icon md-font-icon="fa fa-pencil fa-lg" md-colors="{color: 'grey-700'}"></md-icon>
+                                        <md-tooltip md-direction="left">Compose</md-tooltip>
+                                    </md-button>
+                                </md-fab-trigger>
+                                <md-fab-actions>
+                                    <md-button md-colors="{background: 'grey-A100'}" class="md-fab md-raised md-mini">
+                                        <md-icon md-font-icon="fa fa-user fa-lg" md-colors="{color: 'grey-700'}"></md-icon>
+                                        <md-tooltip md-direction="left">Email Doctor</md-tooltip>
+                                    </md-button>
+                                    <md-button md-colors="{background: 'grey-A100'}" class="md-fab md-raised md-mini">
+                                        <md-icon md-font-icon="fa fa-thumb-tack fa-lg" md-colors="{color: 'grey-700'}"></md-icon>
+                                        <md-tooltip md-direction="left">Add a Task</md-tooltip>
+                                    </md-button>
+                                    <md-button md-colors="{background: 'grey-A100'}" class="md-fab md-raised md-mini">
+                                        <md-icon md-font-icon="fa fa-paperclip fa-lg" md-colors="{color: 'grey-700'}"></md-icon>
+                                        <md-tooltip md-direction="left">Attach Document</md-tooltip>
+                                    </md-button>
+                                </md-fab-actions>
+                            </md-fab-speed-dial>
+                        </div>
+                    </div>
+                </md-content>
+            </md-card>
+        </div>
+    </div>
+</div>
