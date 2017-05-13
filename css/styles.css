@@ -23,9 +23,22 @@ md-card {
     overflow: hidden;
 }
 
+md-list {
+    padding: 0;
+}
+
 md-sidenav .md-avatar-icon {
     font-size: 20px;
     padding: 11px !important;
+}
+
+#email-circle {
+    margin-right: 16px;
+    padding: 8px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    height: 36px;
+    line-height: 36px;
 }
 
 .fix-icon {
@@ -54,6 +67,10 @@ md-dialog .md-toolbar-tools {
 
 ng-view, ng-view md-card {
     margin: 12px;
+}
+
+md-pagination-wrapper, md-tab-item {
+    width: 100%;
 }
 
 /* Schedule card start */

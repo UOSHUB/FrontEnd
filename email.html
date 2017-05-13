@@ -1,0 +1,77 @@
+<div layout="row" flex>
+    <md-card flex="33">
+        <md-content layout="row" flex>
+            <md-tabs class="md-warn md-hue-1" md-selected="filter" flex>
+                <md-tab>
+                    <md-tab-label>Personal</md-tab-label>
+                    <md-tab-body>
+                        <md-list flex>
+                            <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="c = content[0]" ng-click="openEmail($index)">
+                                <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ c.initial + ($index+1) }}</div>
+                                <div class="md-list-item-text" flex>
+                                    <h3>{{ c.title + ($index+1) }}</h3>
+                                    <p>{{ c.sender($index+1) }}</p>
+                                    <p class="md-secondary">{{ ($index+1) + c.time }}</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab>
+                    <md-tab-label>For Courses</md-tab-label>
+                    <md-tab-body>
+                        <md-list flex>
+                            <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="c = content[1]" ng-click="openEmail($index)">
+                                <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ c.initial + ($index+1) }}</div>
+                                <div class="md-list-item-text" flex>
+                                    <h3>{{ c.title + ($index+1) }}</h3>
+                                    <p>{{ c.sender($index+1) }}</p>
+                                    <p class="md-secondary">{{ ($index+1) + c.time }}</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab>
+                    <md-tab-label>Others</md-tab-label>
+                    <md-tab-body>
+                        <md-list flex>
+                            <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="c = content[2]" ng-click="openEmail($index)">
+                                <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ c.initial + ($index+1) }}</div>
+                                <div class="md-list-item-text" flex>
+                                    <h3>{{ c.title + ($index+1) }}</h3>
+                                    <p>{{ c.sender($index+1) }}</p>
+                                    <p class="md-secondary">{{ ($index+1) + c.time }}</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </md-card>
+    <md-card flex>
+        <md-content layout-padding flex>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-display-1">{{ current.title + current.index }}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-header style="margin: 8px 0 24px">
+                <div id="email-circle" class="fix-icon" md-colors="{background: 'blue-grey-400'}">{{ current.initial + current.index }}</div>
+                <md-card-header-text>
+                    <span class="md-title">{{ current.sender(current.index) }}</span>
+                    <span class="md-subhead">{{ current.index + current.time }}</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content layout="column" layout-align="end start" flex>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis commodo sem sit amet tortor condimentum, sit amet mollis lorem egestas. Nunc orci est, tempor sed semper sed, molestie eu dui. Aliquam vestibulum semper mauris id sagittis. Nunc aliquet eget eros eu tristique. Etiam eget laoreet justo, nec lobortis enim. Proin volutpat est at rutrum ornare. Vestibulum vel enim eget elit mollis sagittis nec at nisi. Pellentesque aliquam nibh sit amet iaculis vulputate.
+                    <br><br>
+                    Maecenas dignissim pretium sem nec facilisis. Vestibulum facilisis consectetur suscipit. Donec tincidunt purus non nisi placerat aliquet. Mauris et felis feugiat, mattis est at, mollis augue. Vivamus in rhoncus turpis, sed maximus sapien. Nullam varius semper nibh maximus sollicitudin. In ullamcorper mi tortor, quis elementum libero semper at. Vivamus volutpat varius mattis. Duis quis interdum tellus, commodo luctus nulla.
+                </p>
+                <img ng-src="https://images.pexels.com/photos/75652/boards-glasses-smartphone-phone-75652.jpeg?dl&fit=crop&w=640&h=427" class="md-card-image">
+            </md-card-content>
+        </md-content>
+    </md-card>
+</div>

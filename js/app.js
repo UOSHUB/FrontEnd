@@ -6,7 +6,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     $mdAriaProvider.disableWarnings();
     $mdThemingProvider.theme('default')
         .primaryPalette('green')
-        .accentPalette('blue-grey');
+        .accentPalette('blue-grey')
+        .warnPalette('blue');
     $mdIconProvider
         .icon("logo", "/static/img/logo.svg")
         .icon("md-tabs-arrow", "/static/img/tabs-arrow-icon.svg");
@@ -21,7 +22,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     }).when('/Courses', {
         templateUrl: filePath('courses')
     }).when('/Email', {
-        templateUrl: filePath('email')
+        templateUrl: filePath('email'),
+        controller: 'Email'
     }).when('/Calendar', {
         templateUrl: filePath('calendar'),
         controller: 'Calendar'
@@ -134,15 +136,15 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
         course: 'Networking Fundamentals',
         letter: 'A',
         color: 'green'
-    },{
+    }, {
         course: 'Multimedia Programming & Design',
         letter: 'B',
         color: 'lime'
-    },{
+    }, {
         course: 'Principles of Marketing',
         letter: 'C',
         color: 'orange'
-    },{
+    }, {
         course: 'Statistics for Science',
         letter: 'D',
         color: 'red'
@@ -172,7 +174,32 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     };
 })
 
-.controller("Calendar", function($scope, $filter) {
+.controller('Email', function($scope) {
+    $scope.filter = 0;
+    $scope.repeat = new Array(15);
+    $scope.content = [{
+        initial: 'D',
+        title: 'Personal Email #',
+        sender: function(index) { return 'Doctor Name #' + index + ' <doctor' + index + '@sharjah.ac.ae>'; },
+        time: ' Days Ago'
+    }, {
+        initial: 'C',
+        title: 'Course Announcement #',
+        sender: function(index) { return 'Course Name #' + index; },
+        time: ' Hours Ago'
+    }, {
+        initial: 'S',
+        title: 'New Announcement #',
+        sender: function(index) { return 'Sender Name #' + index + ' <doctor' + index + '@sharjah.ac.ae>'; },
+        time: ' Minutes Ago'
+    }];
+    ($scope.openEmail = function(index) {
+        $scope.current = $scope.content[$scope.filter];
+        $scope.current.index = index + 1;
+    })(0);
+})
+
+.controller('Calendar', function($scope, $filter) {
     $scope.dayFormat = "d";
     $scope.selectedDate = new Date();
     $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
