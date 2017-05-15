@@ -1,9 +1,11 @@
-angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
+angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalendar'])
 
-.config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider, $mdIconProvider, $routeProvider) {
+.config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider,
+                 $mdIconProvider, $routeProvider, $localStorageProvider) {
     $locationProvider.html5Mode(true);
     $compileProvider.debugInfoEnabled(false);
     $mdAriaProvider.disableWarnings();
+    $localStorageProvider.setKeyPrefix('');
     $mdThemingProvider.theme('default')
         .primaryPalette('green')
         .accentPalette('blue-grey')
@@ -31,37 +33,36 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     });
 })
 
-.run(function($location, $rootScope) {
+.run(function($location, $rootScope, $localStorage) {
     $rootScope.redirect = function(link) {
         $location.path(link);
     };
-    $rootScope.courses = {"1411341":{"ch":3,"crn":10889,"days":["M","W"],"doctor":["Manar Abu Talib","Mtalib@sharjah.ac.ae"],"name":"Web Programming","place":["W8","106"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"red","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"1411440":{"ch":3,"crn":10893,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Introduction to Computer Graphics","place":["W8","005"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"teal","minutes":[480,555],"points":[[24,12.037037037037038],[62,12.037037037037038]],"length":1.25},"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25},"0202227":{"ch":3,"crn":10214,"days":["M","W"],"doctor":["Muhieddin AlQaddour","malqaddour@sharjah.ac.ae"],"name":"Critical Reading and Writing","place":["M10","101"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"purple","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25}};
-})
-
-.controller('Sidenav', function($scope, $rootScope) {
-    $rootScope.$on('login', function(event) {
-        $scope.links = [{
-            title: 'Dashboard',
-            icon: 'tachometer'
-        }, {
-            title: 'Schedule',
-            icon: 'calendar'
-        }, {
-            title: 'Courses',
-            icon: 'book'
-        }, {
-            title: 'Email',
-            icon: 'envelope'
-        }, {
-            title: 'Calendar',
-            icon: 'globe'
-        }];
+    $rootScope.$ls = $localStorage.$default({
+        status: 'logged-out',
+        courses: {"1411341":{"ch":3,"crn":10889,"days":["M","W"],"doctor":["Manar Abu Talib","Mtalib@sharjah.ac.ae"],"name":"Web Programming","place":["W8","106"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"red","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"1411440":{"ch":3,"crn":10893,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Introduction to Computer Graphics","place":["W8","005"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"teal","minutes":[480,555],"points":[[24,12.037037037037038],[62,12.037037037037038]],"length":1.25},"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25},"0202227":{"ch":3,"crn":10214,"days":["M","W"],"doctor":["Muhieddin AlQaddour","malqaddour@sharjah.ac.ae"],"name":"Critical Reading and Writing","place":["M10","101"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"purple","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25}}
     });
 })
 
-.controller('Toolbar', function($scope, $mdDialog, $rootScope) {
-    $rootScope.status = 'logged-in';
-    $rootScope.$emit('login');
+.controller('Sidenav', function($scope) {
+    $scope.links = [{
+        title: 'Dashboard',
+        icon: 'tachometer'
+    }, {
+        title: 'Schedule',
+        icon: 'calendar'
+    }, {
+        title: 'Courses',
+        icon: 'book'
+    }, {
+        title: 'Email',
+        icon: 'envelope'
+    }, {
+        title: 'Calendar',
+        icon: 'globe'
+    }];
+})
+
+.controller('Toolbar', function($scope, $mdDialog, $rootScope, $localStorage) {
     $scope.cancel = $mdDialog.cancel;
     $scope.hide = $mdDialog.hide;
     $scope.login = function(event) {
@@ -73,14 +74,20 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
             targetEvent: event,
             scope: $scope
         }).then(function() {
-            $rootScope.$emit('login');
-            $rootScope.status = 'logged-in';
+            $localStorage.status = 'logged-in';
             $rootScope.redirect('Dashboard');
-        }, function(){});
+        }, function(){
+            $localStorage.sid = null;
+        });
+    };
+    $scope.logout = function() {
+        $localStorage.sid = null;
+        $localStorage.status = 'logged-out';
+        $rootScope.redirect('/');
     };
 })
 
-.controller('Dashboard', function($scope, $rootScope) {
+.controller('Dashboard', function($scope, $localStorage) {
     $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
     $scope.announcements = [{
         title: 'Project Final Submission Due',
@@ -132,8 +139,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     }];
 
     $scope.classes = {
-        "1412340": $rootScope.courses["1412340"],
-        "1412444": $rootScope.courses["1412444"]
+        "1412340": $localStorage.courses["1412340"],
+        "1412444": $localStorage.courses["1412444"]
     };
     $scope.grades = [{
         course: 'Networking Fundamentals',
@@ -154,8 +161,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     }];
 })
 
-.controller('Schedule', function($scope, $mdDialog, $rootScope) {
-    $scope.courses = $rootScope.courses;
+.controller('Schedule', function($scope, $mdDialog, $localStorage) {
+    $scope.courses = $localStorage.courses;
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
     $scope.height = 14.074074074074074;
     $scope.labels = [[8,"AM"],[9,"AM"],[10,"AM"],[11,"AM"],[12,"PM"],[1,"PM"],[2,"PM"]];
@@ -177,7 +184,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
     };
 })
 
-.controller('Courses', function($scope, $rootScope) {
+.controller('Courses', function($scope, $localStorage) {
     $scope.repeat = new Array(12);
     $scope.mass = false;
     $scope.all = false;
@@ -209,7 +216,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'materialCalendar'])
         time: '5:59 AM'
     }];
     
-    $scope.class = $scope.courses["1412340"];
+    $scope.class = $localStorage.courses["1412340"];
     $scope.class.id = "1412340";
 })
 
