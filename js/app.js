@@ -34,17 +34,25 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 })
 
 .run(function($location, $rootScope, $localStorage) {
+    $rootScope.$loc = $location;
     $rootScope.redirect = function(link) {
         $location.path(link);
     };
     $rootScope.$ls = $localStorage.$default({
+        semesters: [
+            {"1411445":{"ch":3,"crn":21155,"days":["T","R"],"doctor":["Djedjiga Mouheb","dmouheb@sharjah.ac.ae"],"name":"IT Application in E-Commerce","place":["W8","105"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"red","minutes":[480,555],"points":[[43,12.037037037037038],[81,12.037037037037038]],"length":1.25},"1411490":{"ch":3,"crn":21167,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Topics in Computer Science I","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"teal","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412341":{"ch":3,"crn":21163,"days":["M","W"],"doctor":["Imran N. Junejo","ijunejo@sharjah.ac.ae"],"name":"3D Design for Web","place":["W8","106"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25},"1412443":{"ch":3,"crn":21168,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Human-Computer Interaction","place":["W9","005"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"orange","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"0602246":{"ch":3,"crn":20935,"days":["M","W"],"doctor":["Wael A. Allam","wallam@sharjah.ac.ae"],"name":"Human Rights in Islam & International Declaration","place":["M1","023"],"section":"02A","time":["11:00 AM","12:15 PM"],"color":"purple","minutes":[660,735],"points":[[24,54.25925925925926],[62,54.25925925925926]],"length":1.25}},
+            {"1411341":{"ch":3,"crn":10889,"days":["M","W"],"doctor":["Manar Abu Talib","Mtalib@sharjah.ac.ae"],"name":"Web Programming","place":["W8","106"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"red","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"1411440":{"ch":3,"crn":10893,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Introduction to Computer Graphics","place":["W8","005"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"teal","minutes":[480,555],"points":[[24,12.037037037037038],[62,12.037037037037038]],"length":1.25},"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25},"0202227":{"ch":3,"crn":10214,"days":["M","W"],"doctor":["Muhieddin AlQaddour","malqaddour@sharjah.ac.ae"],"name":"Critical Reading and Writing","place":["M10","101"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"purple","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25}}
+        ],
+        semester: 1,
         loggedIn: false,
         tightNav: false,
-        courses: {"1411341":{"ch":3,"crn":10889,"days":["M","W"],"doctor":["Manar Abu Talib","Mtalib@sharjah.ac.ae"],"name":"Web Programming","place":["W8","106"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"red","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"1411440":{"ch":3,"crn":10893,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Introduction to Computer Graphics","place":["W8","005"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"teal","minutes":[480,555],"points":[[24,12.037037037037038],[62,12.037037037037038]],"length":1.25},"1412340":{"ch":3,"crn":10899,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"2D/3D Computer Animation","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412444":{"ch":3,"crn":10900,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Game Design & Development","place":["W8","106"],"section":"11","time":["11:00 AM","12:15 PM"],"color":"orange","minutes":[660,735],"points":[[43,54.25925925925926],[81,54.25925925925926]],"length":1.25},"0202227":{"ch":3,"crn":10214,"days":["M","W"],"doctor":["Muhieddin AlQaddour","malqaddour@sharjah.ac.ae"],"name":"Critical Reading and Writing","place":["M10","101"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"purple","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25}}
+        dayFormat: "d"
     });
+    if(!$localStorage.loggedIn && $location.path() != '/Calendar' && $location.path() != '/')
+        $rootScope.redirect('/');
 })
 
-.controller('Sidenav', function($scope, $rootScope) {
+.controller('Sidenav', function($scope) {
     $scope.links = [{
         title: 'Dashboard',
         icon: 'tachometer'
@@ -61,19 +69,13 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         title: 'Calendar',
         icon: 'globe'
     }];
-    $scope.active = {};
-    $scope.loadPage = function(link) {
-        $scope.active = {};
-        $scope.active[link] = true;
-        $rootScope.redirect(link);
-    };
 })
 
-.controller('Toolbar', function($scope, $mdDialog, $rootScope, $localStorage) {
+.controller('Toolbar', function($scope, $mdDialog, $rootScope, $localStorage, $location) {
     $scope.cancel = $mdDialog.cancel;
     $scope.hide = $mdDialog.hide;
     $scope.login = function(event) {
-        /*$mdDialog.show({
+        $mdDialog.show({
             templateUrl: 'login-dialog',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
@@ -85,13 +87,23 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
             $rootScope.redirect('Dashboard');
         }, function(){
             $localStorage.sid = null;
-        });*/
-        $localStorage.loggedIn = true;
+        });
     };
     $scope.logout = function() {
         $localStorage.sid = null;
         $localStorage.loggedIn = false;
-        $rootScope.redirect('/');
+        if($location.path() != "/Calendar")
+            $rootScope.redirect('/');
+    };
+    $scope.semesters = [
+        "Spring Semester 2016 - 2017",
+        "Fall Semester 2016 - 2017",
+        "Spring Semester 2015 - 2016",
+        "Fall Semester 2015 - 2016"
+    ];
+    $scope.setDirection = function(direction) {
+        $localStorage.direction = direction;
+        $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
 })
 
@@ -147,8 +159,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     }];
 
     $scope.classes = {
-        "1412340": $localStorage.courses["1412340"],
-        "1412444": $localStorage.courses["1412444"]
+        "1412340": $localStorage.semesters[1]["1412340"],
+        "1412444": $localStorage.semesters[1]["1412444"]
     };
     $scope.grades = [{
         course: 'Networking Fundamentals',
@@ -170,7 +182,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 })
 
 .controller('Schedule', function($scope, $mdDialog, $localStorage) {
-    $scope.courses = $localStorage.courses;
+    if($localStorage.semester == -1)
+        $localStorage.semester = 1;
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
     $scope.height = 14.074074074074074;
     $scope.labels = [[8,"AM"],[9,"AM"],[10,"AM"],[11,"AM"],[12,"PM"],[1,"PM"],[2,"PM"]];
@@ -179,7 +192,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 
     $scope.cancel = $mdDialog.cancel;
     $scope.showClass = function(event, id, x) {
-        $scope.class = $scope.courses[id];
+        $scope.class = $localStorage.semesters[$localStorage.semester][id];
         $scope.class.id = id;
         $mdDialog.show({
             templateUrl: 'class-dialog',
@@ -193,6 +206,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 })
 
 .controller('Courses', function($scope, $localStorage) {
+    for (var firstCourseId in $localStorage.semesters[$localStorage.semester]) break;
+    $localStorage.course = firstCourseId;
     $scope.repeat = new Array(12);
     $scope.mass = false;
     $scope.all = false;
@@ -223,9 +238,6 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         day: 'In Two days',
         time: '5:59 AM'
     }];
-    
-    $scope.class = $localStorage.courses["1412340"];
-    $scope.class.id = "1412340";
 })
 
 .controller('Email', function($scope) {
@@ -254,15 +266,9 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 })
 
 .controller('Calendar', function($scope, $filter) {
-    $scope.dayFormat = "d";
     $scope.selectedDate = new Date();
     $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     $scope.tooltips = true;
-
-    $scope.setDirection = function(direction) {
-      $scope.direction = direction;
-      $scope.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
-    };
 
     $scope.events = {
         '13 4': 'IELTS Exam',

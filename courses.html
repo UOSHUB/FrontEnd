@@ -81,54 +81,54 @@
                     <div layout="column" layout-align="space-between start" flex layout-margin>
                         <p>
                             <md-icon md-font-icon="fa fa-user fa-fw"></md-icon>
-                            {{ class.doctor[0] }}
+                            {{ $ls.semesters[$ls.semester][$ls.course].doctor[0] }}
                             <md-tooltip md-direction="right">Doctor Name</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-calendar-o fa-fw"></md-icon>
-                            {{ class.days[0] }} {{ class.days[1] }}
+                            {{ $ls.semesters[$ls.semester][$ls.course].days[0] }} {{ $ls.semesters[$ls.semester][$ls.course].days[1] }}
                             <md-tooltip md-direction="right">Days</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-hourglass-start fa-fw"></md-icon>
-                            {{ class.time[0] }}
+                            {{ $ls.semesters[$ls.semester][$ls.course].time[0] }}
                             <md-tooltip md-direction="right">Start Time</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-puzzle-piece fa-fw"></md-icon>
-                            {{ class.section }} <span md-colors="{color: 'default-grey-500'}">(Section)</span>
+                            {{ $ls.semesters[$ls.semester][$ls.course].section }} <span md-colors="{color: 'default-grey-500'}">(Section)</span>
                             <md-tooltip md-direction="right">Section</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-key fa-fw"></md-icon>
-                            {{ class.id }}
+                            {{ $ls.course }}
                             <md-tooltip md-direction="right">Course key</md-tooltip>
                         </p>
                     </div>
                     <div layout="column" layout-align="space-between start" flex layout-margin>
                         <p>
                             <md-icon md-font-icon="fa fa-envelope fa-fw"></md-icon>
-                            {{ class.doctor[1] }}
+                            {{ $ls.semesters[$ls.semester][$ls.course].doctor[1] }}
                             <md-tooltip md-direction="right">Doctor Email</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-map-marker fa-fw"></md-icon>
-                            {{ class.place[0] }}, {{ class.place[1] }}
+                            {{ $ls.semesters[$ls.semester][$ls.course].place[0] }}, {{ $ls.semesters[$ls.semester][$ls.course].place[1] }}
                             <md-tooltip md-direction="right">Building, Room</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-hourglass-end fa-fw"></md-icon>
-                            {{ class.time[1] }}
+                            {{ $ls.semesters[$ls.semester][$ls.course].time[1] }}
                             <md-tooltip md-direction="right">End Time</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-certificate fa-fw"></md-icon>
-                            {{ class.ch }} <span md-colors="{color: 'default-grey-500'}">(CrHrs)</span>
+                            {{ $ls.semesters[$ls.semester][$ls.course].ch }} <span md-colors="{color: 'default-grey-500'}">(CrHrs)</span>
                             <md-tooltip md-direction="right">Credit Hours</md-tooltip>
                         </p>
                         <p>
                             <md-icon md-font-icon="fa fa-info fa-fw"></md-icon>
-                            {{ class.crn }}
+                            {{ $ls.semesters[$ls.semester][$ls.course].crn }}
                             <md-tooltip md-direction="right">CRN</md-tooltip>
                         </p>
                     </div>

@@ -10,7 +10,7 @@
         <div ng-if="!$last" class="half hour" style="top: {{ 5 + height * (0.5 + fraction) }}%"></div>
         <div class="hour" style="top: {{ 5 + fraction * height }}%" ng-repeat-end></div>
 
-        <div ng-repeat="(id, course) in courses">
+        <div ng-repeat="(id, course) in $ls.semesters[$ls.semester]">
             <div ng-repeat="point in course.points" ng-click="showClass($event, id, point[0])"
                  class="class" md-colors="::{background: course.color, color: 'grey-A100'}"
                  ng-style="{height: course.length * height + '%', left: point[0] + '%', top: point[1] + '%'}">

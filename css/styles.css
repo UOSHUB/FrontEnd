@@ -32,6 +32,14 @@ md-sidenav md-content {
     overflow-x: hidden;
 }
 
+#right-margin,
+#toolbar button[ng-show],
+#toolbar button[ng-hide],
+#toolbar md-select,
+md-sidenav {
+    transition: all ease 0.8s;
+}
+
 md-sidenav.ng-animate md-content,
 md-card {
     overflow: hidden;
@@ -45,12 +53,16 @@ md-sidenav.tight {
     width: 76px;
 }
 
-#tighten-btn,
-md-sidenav {
-    transition: all ease 0.8s;
+#right-margin {
+    width: 0;
 }
 
-#tighten-btn.ng-hide {
+#right-margin.inflate {
+    width: 222px;
+}
+
+#toolbar button.ng-hide,
+#toolbar md-select.ng-hide {
     opacity: 0;
 }
 
