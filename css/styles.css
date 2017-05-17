@@ -7,20 +7,51 @@
     max-height: 64px;
 }
 
-#logo * {
-    width: 54px;
-    height: 42px;
-    font-size: 28px;
-    vertical-align: middle;
-}
-
 md-sidenav {
-    transition: height ease 0.8s;
-    width: auto;
+    width: 210px;
+    height: 64px;
 }
 
+md-sidenav md-toolbar {
+    font-size: 28px;
+}
+
+md-sidenav md-toolbar md-icon {
+    min-width: 52px;
+    height: 40px;
+    margin: 12px;
+}
+
+md-sidenav md-toolbar span {
+    font-weight: 300;
+    margin-left: 8px
+}
+
+md-sidenav md-toolbar,
+md-sidenav md-content {
+    overflow-x: hidden;
+}
+
+md-sidenav.ng-animate md-content,
 md-card {
     overflow: hidden;
+}
+
+md-sidenav.open {
+    height: inherit;
+}
+
+md-sidenav.tight {
+    width: 76px;
+}
+
+#tighten-btn,
+md-sidenav {
+    transition: all ease 0.8s;
+}
+
+#tighten-btn.ng-hide {
+    opacity: 0;
 }
 
 md-list {
@@ -29,7 +60,7 @@ md-list {
 
 md-sidenav .md-avatar-icon {
     font-size: 20px;
-    padding: 11px !important;
+    padding: 10px !important;
 }
 
 #email-circle {
@@ -45,14 +76,6 @@ md-sidenav .md-avatar-icon {
     width: 36px;
     text-align: center;
     font-size: 20px;
-}
-
-.logged-in {
-    height: 100%;
-}
-
-.logged-out {
-    height: 64px;
 }
 
 .no-margin {

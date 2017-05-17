@@ -10,16 +10,17 @@
         <link rel="stylesheet" href="/static/css/styles.css">
     </head>
     <body ng-app="UOSHUB" layout="row" md-colors="::{background: 'accent-50'}" ng-cloak>
-        <md-sidenav class="md-sidenav-left" ng-class="$ls.status" md-whiteframe="1"
-                    md-is-locked-open="$mdMedia('gt-xs')" flex-none>
-            <header id="logo" style="padding: 11px" md-colors="::{background: 'grey-A100'}">
+        <md-sidenav class="md-sidenav-left" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.tightNav}"
+                    md-whiteframe="1" md-is-locked-open="$mdMedia('gt-xs')" flex-none>
+            <md-toolbar layout="row" layout-align="start center" md-colors="::{background: 'grey-A100'}">
                 <md-icon md-svg-icon="logo"></md-icon>
-                <b style="margin-left: 8px" md-colors="::{color: 'accent-800'}">UOS </b>
-                <span style="font-weight: 300; margin-right: 6px" md-colors="::{color: 'primary-800'}">HUB</span>
-            </header>
+                <b md-colors="::{color: 'accent-800'}">UOS</b>
+                <span md-colors="::{color: 'primary-800'}">HUB</span>
+            </md-toolbar>
             <md-content md-colors="::{background: 'accent-900'}" flex>
                 <md-list ng-controller="Sidenav" flex>
-                    <md-list-item class="md-1-line" ng-repeat="link in links" ng-click="redirect(link.title)">
+                    <md-list-item class="md-1-line" ng-repeat="link in links" ng-click="loadPage(link.title)"
+                                  md-colors="{background: active[link.title] ? 'accent-700' : 'accent-900'}">
                         <md-icon md-font-icon="fa fa-{{ link.icon }} fa-fw" class="md-avatar-icon"></md-icon>
                         <div class="md-list-item-text" flex>
                             <p class="md-title">{{ link.title }}</p>
@@ -32,10 +33,13 @@
         <div layout="column" flex>
             <md-toolbar ng-controller="Toolbar" md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar">
+                    <md-button id="tighten-btn" ng-show="$ls.loggedIn" class="md-icon-button md-accent md-hue-3" ng-click="$ls.tightNav = !$ls.tightNav">
+                        <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
+                    </md-button>
                     <span flex></span>
                     <h2 ng-show="$ls.sid" md-colors="::{color: 'accent-800'}">Welcome {{ $ls.sid }}</h2>
-                    <md-button ng-if="$ls.status == 'logged-out'" class="md-primary md-hue-2" ng-click="login($event)">Login</md-button>
-                    <md-button ng-if="$ls.status == 'logged-in'" class="md-primary md-hue-2" ng-click="logout()">Logout</md-button>
+                    <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" ng-click="login($event)">Login</md-button>
+                    <md-button ng-if="$ls.loggedIn" class="md-primary md-hue-2" ng-click="logout()">Logout</md-button>
                 </div>
             </md-toolbar>
             <ng-view layout="column" flex></ng-view>
