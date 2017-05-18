@@ -11,8 +11,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         .accentPalette('blue-grey')
         .warnPalette('blue');
     $mdIconProvider
-        .icon("logo", "/static/img/logo.svg")
-        .icon("md-tabs-arrow", "/static/img/tabs-arrow-icon.svg");
+        .icon("logo", "img/logo.svg")
+        .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");
     $routeProvider.when('/', {
         templateUrl: filePath(),
         controller: 'Index'
@@ -109,10 +109,10 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 })
 
 .controller('Index', function($scope, $interval, $mdDialog, $localStorage) {
-    $scope.slideshow = "/static/img/dashboard.png";
+    $scope.slideshow = "img/dashboard.png";
     $scope.counter = 1;
     $interval(function() {
-        $scope.slideshow = "/static/img/" + ["dashboard", "schedule", "courses", "email", "calendar"][$scope.counter] + ".png";
+        $scope.slideshow = "img/" + ["dashboard", "schedule", "courses", "email", "calendar"][$scope.counter] + ".png";
         $scope.counter = ($scope.counter + 1) % 5;
     }, 2000);
     $scope.cancel = $mdDialog.cancel;
@@ -324,5 +324,5 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 });
 
 function filePath(url) {
-    return '/static/' + (url || 'index') + '.html';
+    return (url || 'home') + '.html';
 }
