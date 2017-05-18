@@ -14,7 +14,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         .icon("logo", "/static/img/logo.svg")
         .icon("md-tabs-arrow", "/static/img/tabs-arrow-icon.svg");
     $routeProvider.when('/', {
-        templateUrl: filePath()
+        templateUrl: filePath(),
+        controller: 'Index'
     }).when('/Dashboard', {
         templateUrl: filePath('dashboard'),
         controller: 'Dashboard'
@@ -105,6 +106,33 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         $localStorage.direction = direction;
         $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
+})
+
+.controller('Index', function($scope, $interval, $mdDialog, $localStorage) {
+    $scope.slideshow = "/static/img/dashboard.png";
+    $scope.counter = 1;
+    $interval(function() {
+        $scope.slideshow = "/static/img/" + ["dashboard", "schedule", "courses", "email", "calendar"][$scope.counter] + ".png";
+        $scope.counter = ($scope.counter + 1) % 5;
+    }, 2000);
+    $scope.cancel = $mdDialog.cancel;
+    $scope.hide = $mdDialog.hide;
+    $scope.login = function(event) {
+        $mdDialog.show({
+            templateUrl: 'login-dialog',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            preserveScope: true,
+            targetEvent: event,
+            scope: $scope
+        }).then(function() {
+            $localStorage.loggedIn = true;
+            $rootScope.redirect('Dashboard');
+        }, function(){
+            $localStorage.sid = null;
+        });
+    };
+
 })
 
 .controller('Dashboard', function($scope, $localStorage) {
