@@ -1,13 +1,16 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <base href="/">
+        <!-- Set Base URL According to Current Host -->
+        <script>document.write('<base href="' + location.pathname + '">');</script>
         <!-- Angular Material style sheet -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.css">
         <!-- Font Awesome Icon Pack -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Our Style Sheets -->
         <link rel="stylesheet" href="css/styles.css">
+        <!-- Set Website Titile-->
+        <title>UOS HUB</title>
     </head>
     <body ng-app="UOSHUB" layout="row" md-colors="::{background: 'accent-50'}" ng-cloak>
         <md-sidenav class="md-sidenav-left" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.tightNav}"

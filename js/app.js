@@ -2,7 +2,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 
 .config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider,
                  $mdIconProvider, $routeProvider, $localStorageProvider) {
-    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('');
     $compileProvider.debugInfoEnabled(false);
     $mdAriaProvider.disableWarnings();
     $localStorageProvider.setKeyPrefix('');
@@ -51,6 +51,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     });
     if(!$localStorage.loggedIn && $location.path() != '/Calendar' && $location.path() != '/')
         $rootScope.redirect('/');
+    if(location.pathname == "/index.html")
+        location.pathname = "/";
 })
 
 .controller('Sidenav', function($scope) {
