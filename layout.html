@@ -54,7 +54,7 @@
                     <md-button ng-if="$ls.loggedIn" class="md-primary md-hue-2" ng-click="logout()">Logout</md-button>
                 </div>
             </md-toolbar>
-            <div layout="row" flex>
+            <div id="content" layout="row" flex>
                 <ng-view layout="column" flex></ng-view>
                 <div id="right-margin" ng-class="{'inflate': !$ls.loggedIn}"></div>
             </div>

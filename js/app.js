@@ -14,27 +14,46 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         .icon("logo", "img/logo.svg")
         .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");
     $routeProvider.when('/', {
-        templateUrl: filePath(),
-        controller: 'Index'
+        templateUrl: 'welcome.html',
+        controller: 'Welcome'
     }).when('/Dashboard', {
-        templateUrl: filePath('dashboard'),
-        controller: 'Dashboard'
+        templateUrl: 'dashboard.html',
+        controller: 'Dashboard',
+        requiresLogin: true
     }).when('/Schedule', {
-        templateUrl: filePath('schedule'),
-        controller: 'Schedule'
+        templateUrl: 'schedule.html',
+        controller: 'Schedule',
+        requiresLogin: true
     }).when('/Courses', {
-        templateUrl: filePath('courses'),
-        controller: 'Courses'
+        templateUrl: 'courses.html',
+        controller: 'Courses',
+        requiresLogin: true
     }).when('/Email', {
-        templateUrl: filePath('email'),
-        controller: 'Email'
+        templateUrl: 'email.html',
+        controller: 'Email',
+        requiresLogin: true
     }).when('/Calendar', {
-        templateUrl: filePath('calendar'),
+        templateUrl: 'calendar.html',
         controller: 'Calendar'
     });
 })
 
-.run(function($location, $rootScope, $localStorage) {
+.run(function($location, $rootScope, $localStorage, $mdToast, $timeout, $route) {
+    $rootScope.$route = $route;
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+        if(next.requiresLogin && !$localStorage.loggedIn) {
+            $rootScope.redirect('/');
+            $timeout(function() {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('You need to login first!')
+                        .position('top right')
+                        .parent($('#content'))
+                        .hideDelay(2000)
+                );
+            }, 300);
+        }
+    });
     $rootScope.$loc = $location;
     $rootScope.redirect = function(link) {
         $location.path(link);
@@ -49,8 +68,6 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         tightNav: false,
         dayFormat: "d"
     });
-    if(!$localStorage.loggedIn && $location.path() != '/Calendar' && $location.path() != '/')
-        $rootScope.redirect('/');
 })
 
 .controller('Sidenav', function($scope) {
@@ -108,7 +125,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     };
 })
 
-.controller('Index', function($scope, $interval, $mdDialog, $localStorage) {
+.controller('Welcome', function($scope, $interval, $mdDialog, $localStorage) {
     $scope.slideshow = "img/dashboard.png";
     $scope.counter = 1;
     $interval(function() {
@@ -323,6 +340,6 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     };
 });
 
-function filePath(url) {
-    return (url || 'home') + '.html';
+function $(selector) {
+    return angular.element(document.querySelector(selector));
 }
