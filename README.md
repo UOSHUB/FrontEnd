@@ -1,4 +1,4 @@
-![](./img/brand.png)
+![](https://github.com/UOSHUB/Images/raw/master/slogan.png)
 
 # UOS HUB Website Front-End
 
