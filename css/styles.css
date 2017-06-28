@@ -104,7 +104,7 @@ ng-view, ng-view md-card {
     margin: 12px;
 }
 
-md-pagination-wrapper, md-tab-item {
+md-pagination-wrapper, md-tab-item, .fill-width {
     width: 100%;
 }
 

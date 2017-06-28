@@ -35,6 +35,8 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     }).when('/Calendar', {
         templateUrl: 'calendar.html',
         controller: 'Calendar'
+    }).otherwise({
+        templateUrl: 'notfound.html'
     });
 })
 
