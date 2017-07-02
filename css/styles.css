@@ -8,7 +8,7 @@
 }
 
 md-sidenav {
-    width: 210px;
+    width: 200px;
     height: 64px;
 }
 
@@ -17,9 +17,9 @@ md-sidenav md-toolbar {
 }
 
 md-sidenav md-toolbar md-icon {
-    min-width: 52px;
-    height: 40px;
-    margin: 12px;
+    width: 32px;
+    height: 36px;
+    margin: 14px;
 }
 
 md-sidenav md-toolbar span {
