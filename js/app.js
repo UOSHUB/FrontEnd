@@ -56,6 +56,9 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
             }, 300);
         }
     });
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+        window.document.title = (current.$$route ? current.$$route.controller : 'Page not found') + ' - UOS HUB';
+    });
     $rootScope.$loc = $location;
     $rootScope.redirect = function(link) {
         $location.path(link);
