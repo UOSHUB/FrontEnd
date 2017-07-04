@@ -208,3 +208,16 @@ md-dialog p md-icon {
     font-size: 20px;
     color: #424242;
 }
+
+#slideshow-new-logo {
+    position: relative;
+}
+
+#slideshow-new-logo span {
+    background-color: white;
+    position: absolute;
+    height: 18px;
+    width: 22px;
+    left: 140px;
+    top: 74px;
+}
