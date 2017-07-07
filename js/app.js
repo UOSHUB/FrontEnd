@@ -8,8 +8,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     $localStorageProvider.setKeyPrefix('');
     $mdThemingProvider.theme('default')
         .primaryPalette('green')
-        .accentPalette('blue-grey')
-        .warnPalette('blue');
+        .accentPalette('blue-grey');
     $mdIconProvider
         .icon("logo", "img/logo.svg")
         .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");

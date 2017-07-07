@@ -221,3 +221,11 @@ md-dialog p md-icon {
     left: 140px;
     top: 74px;
 }
+
+md-input-container.md-block.md-input-focused .md-input {
+    border-color: #039be5;
+}
+
+md-input-container.md-block.md-input-focused label {
+    color: #039be5;
+}
