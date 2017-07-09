@@ -24,7 +24,7 @@
                                   md-colors="{background: $loc.path() == '/' + link.title ? 'accent-700' : 'accent-900'}">
                         <md-icon md-font-icon="fa fa-{{ link.icon }} fa-fw" class="md-avatar-icon"></md-icon>
                         <div class="md-list-item-text" flex>
-                            <p class="md-title">{{ link.title }}</p>
+                            <p class="md-title">{{ capitalize(link.title) }}</p>
                         </div>
                     </md-list-item>
                 </md-list>
@@ -38,18 +38,18 @@
                                ng-click="$ls.tightNav = !$ls.tightNav" style="margin-right: 16px">
                         <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
                     </md-button>
-                    <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="redirect('Calendar')">Academic Calendar</md-button>
-                    <md-select ng-show="$loc.path() == '/Schedule'" ng-model="$ls.semester" flex="25">
+                    <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="redirect('calendar')">Academic Calendar</md-button>
+                    <md-select ng-show="$loc.path() == '/schedule'" ng-model="$ls.semester" flex="25">
                         <md-option ng-repeat="semester in semesters track by $index" ng-value="$index" ng-disabled="$index > 1">{{ semester }}</md-option>
                     </md-select>
-                    <md-select ng-show="$loc.path() == '/Courses'" ng-model="$ls.course" flex="25">
+                    <md-select ng-show="$loc.path() == '/courses'" ng-model="$ls.course" flex="25">
                         <md-option ng-repeat="(id, course) in $ls.semesters[$ls.semester]" ng-value="id">{{ course.name }}</md-option>
                     </md-select>
                     <span flex></span>
-                    <md-button ng-show="$loc.path() == '/Schedule'" class="md-accent md-hue-2" ng-click="$ls.semester = -1">Design Your Schedule</md-button>
-                    <md-button ng-show="$loc.path() == '/Email'" class="md-accent md-hue-2" ng-click="null">Write a new Email</md-button>
-                    <md-button ng-show="$loc.path() == '/Calendar'" class="md-accent md-hue-2" ng-click="setDirection('vertical')">List View</md-button>
-                    <md-button ng-show="$loc.path() == '/Calendar'" class="md-accent md-hue-2" ng-click="setDirection('horizontal')">Table View</md-button>
+                    <md-button ng-show="$loc.path() == '/schedule'" class="md-accent md-hue-2" ng-click="$ls.semester = -1">Design Your Schedule</md-button>
+                    <md-button ng-show="$loc.path() == '/email'" class="md-accent md-hue-2" ng-click="null">Write a new Email</md-button>
+                    <md-button ng-show="$loc.path() == '/calendar'" class="md-accent md-hue-2" ng-click="setDirection('vertical')">List View</md-button>
+                    <md-button ng-show="$loc.path() == '/calendar'" class="md-accent md-hue-2" ng-click="setDirection('horizontal')">Table View</md-button>
                     <h2 ng-show="$ls.sid" md-colors="::{color: 'accent-800'}">Welcome {{ $ls.sid }}</h2>
                     <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" ng-click="login($event)">Login</md-button>
                     <md-button ng-if="$ls.loggedIn" class="md-primary md-hue-2" ng-click="logout()">Logout</md-button>

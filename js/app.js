@@ -15,23 +15,23 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     $routeProvider.when('/', {
         templateUrl: 'welcome.html',
         controller: 'Welcome'
-    }).when('/Dashboard', {
+    }).when('/dashboard', {
         templateUrl: 'dashboard.html',
         controller: 'Dashboard',
         requiresLogin: true
-    }).when('/Schedule', {
+    }).when('/schedule', {
         templateUrl: 'schedule.html',
         controller: 'Schedule',
         requiresLogin: true
-    }).when('/Courses', {
+    }).when('/courses', {
         templateUrl: 'courses.html',
         controller: 'Courses',
         requiresLogin: true
-    }).when('/Email', {
+    }).when('/email', {
         templateUrl: 'email.html',
         controller: 'Email',
         requiresLogin: true
-    }).when('/Calendar', {
+    }).when('/calendar', {
         templateUrl: 'calendar.html',
         controller: 'Calendar'
     }).otherwise({
@@ -76,21 +76,24 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
 
 .controller('Sidenav', function($scope) {
     $scope.links = [{
-        title: 'Dashboard',
+        title: 'dashboard',
         icon: 'tachometer'
     }, {
-        title: 'Schedule',
+        title: 'schedule',
         icon: 'calendar'
     }, {
-        title: 'Courses',
+        title: 'courses',
         icon: 'book'
     }, {
-        title: 'Email',
+        title: 'email',
         icon: 'envelope'
     }, {
-        title: 'Calendar',
+        title: 'calendar',
         icon: 'globe'
     }];
+    $scope.capitalize = function(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
 })
 
 .controller('Toolbar', function($scope, $mdDialog, $rootScope, $localStorage, $location) {
@@ -106,7 +109,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
             scope: $scope
         }).then(function() {
             $localStorage.loggedIn = true;
-            $rootScope.redirect('Dashboard');
+            $rootScope.redirect('dashboard');
         }, function(){
             $localStorage.sid = null;
         });
@@ -114,7 +117,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     $scope.logout = function() {
         $localStorage.sid = null;
         $localStorage.loggedIn = false;
-        if($location.path() != "/Calendar")
+        if($location.path() != "/calendar")
             $rootScope.redirect('/');
     };
     $scope.semesters = [
@@ -148,7 +151,7 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
             scope: $scope
         }).then(function() {
             $localStorage.loggedIn = true;
-            $rootScope.redirect('Dashboard');
+            $rootScope.redirect('dashboard');
         }, function(){
             $localStorage.sid = null;
         });
