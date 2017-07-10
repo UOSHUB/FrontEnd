@@ -19,7 +19,7 @@ md-sidenav md-toolbar {
 md-sidenav md-toolbar md-icon {
     width: 32px;
     height: 36px;
-    margin: 14px;
+    margin: 14px 16px;
 }
 
 md-sidenav md-toolbar span {
@@ -53,6 +53,20 @@ md-sidenav.tight {
     width: 76px;
 }
 
+md-list {
+    padding: 0;
+}
+
+md-sidenav md-list-item .md-list-item-inner .md-avatar-icon {
+    margin-right: 14px;
+    font-size: 18px;
+    padding: 6px;
+}
+
+md-sidenav md-list-item .md-button {
+    padding: 0 14px !important;
+}
+
 #right-margin {
     width: 0;
 }
@@ -64,15 +78,6 @@ md-sidenav.tight {
 #toolbar button.ng-hide,
 #toolbar md-select.ng-hide {
     opacity: 0;
-}
-
-md-list {
-    padding: 0;
-}
-
-md-sidenav .md-avatar-icon {
-    font-size: 20px;
-    padding: 10px !important;
 }
 
 #email-circle {
