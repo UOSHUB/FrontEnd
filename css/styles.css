@@ -7,28 +7,28 @@
     max-height: 64px;
 }
 
-md-sidenav {
+#sidenav {
     width: 200px;
     height: 64px;
 }
 
-md-sidenav md-toolbar {
+#sidenav md-toolbar {
     font-size: 28px;
 }
 
-md-sidenav md-toolbar md-icon {
+#sidenav md-toolbar md-icon {
     width: 32px;
     height: 36px;
     margin: 14px 16px;
 }
 
-md-sidenav md-toolbar span {
+#sidenav md-toolbar span {
     font-weight: 300;
     margin-left: 8px
 }
 
-md-sidenav md-toolbar,
-md-sidenav md-content {
+#sidenav md-toolbar,
+#sidenav md-content {
     overflow-x: hidden;
 }
 
@@ -36,35 +36,35 @@ md-sidenav md-content {
 #toolbar button[ng-show],
 #toolbar button[ng-hide],
 #toolbar md-select,
-md-sidenav {
+#sidenav {
     transition: all ease 0.8s;
 }
 
-md-sidenav.ng-animate md-content,
+#sidenav.ng-animate md-content,
 md-card {
     overflow: hidden;
 }
 
-md-sidenav.open {
+#sidenav.open {
     height: inherit;
 }
 
-md-sidenav.tight {
+#sidenav.tight {
     width: 76px;
 }
 
-md-list {
+#sidenav md-list {
     padding: 0;
 }
 
-md-sidenav md-list-item .md-list-item-inner .md-avatar-icon {
+#sidenav md-list-item .md-avatar-icon {
     margin-right: 14px;
     font-size: 18px;
     padding: 6px;
 }
 
-md-sidenav md-list-item .md-button {
-    padding: 0 14px !important;
+#sidenav md-list-item .md-button {
+    padding: 0 14px;
 }
 
 #right-margin {
