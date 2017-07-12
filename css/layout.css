@@ -79,6 +79,18 @@ ng-view, ng-view md-card {
     margin: 12px;
 }
 
+md-dialog p {
+    font-size: 20px;
+    padding: 4px 0;
+}
+
+.course-info-icons md-icon {
+    vertical-align: baseline;
+    font-size: 20px;
+    color: #424242;
+    margin-right: 8px;
+}
+
 .fix-icon {
     width: 36px;
     text-align: center;

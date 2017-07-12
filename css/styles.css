@@ -93,14 +93,6 @@ md-pagination-wrapper, md-tab-item, .fill-width {
     font-weight: 500;
 }
 
-md-dialog p {
-    font-size: 20px;
-    padding: 4px 0;
-}
-
-md-dialog p md-icon {
-    margin-right: 8px;
-}
 /* Schedule card end */
 
 .breadcrumb {
@@ -111,11 +103,6 @@ md-dialog p md-icon {
     margin: 8px 8px 0 0;
     padding: 0 12px !important;
     float: left;
-}
-
-#course-info md-icon, md-dialog p md-icon {
-    font-size: 20px;
-    color: #424242;
 }
 
 #slideshow-new-logo {
