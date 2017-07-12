@@ -1,0 +1,90 @@
+[ng-click] {
+    cursor: pointer;
+}
+
+#sidenav {
+    width: 200px;
+    height: 64px;
+}
+
+#sidenav.open {
+    height: inherit;
+}
+
+#sidenav.tight {
+    width: 76px;
+}
+
+#sidenav md-toolbar {
+    font-size: 28px;
+}
+
+#sidenav md-toolbar md-icon {
+    width: 32px;
+    height: 36px;
+    margin: 14px 16px;
+}
+
+#sidenav md-toolbar span {
+    font-weight: 300;
+    margin-left: 8px
+}
+
+#sidenav md-toolbar,
+#sidenav md-content {
+    overflow-x: hidden;
+}
+
+#sidenav.ng-animate md-content,
+md-card {
+    overflow: hidden;
+}
+
+#sidenav md-list-item .md-button {
+    padding: 0 14px;
+}
+
+#sidenav md-list-item .md-avatar-icon {
+    margin-right: 14px;
+    font-size: 18px;
+    padding: 6px;
+}
+
+#sidenav, #right-margin,
+#toolbar button[ng-show],
+#toolbar button[ng-hide],
+#toolbar md-select {
+    transition: all ease 0.8s;
+}
+
+#right-margin {
+    width: 0;
+}
+
+#right-margin.inflate {
+    width: 222px;
+}
+
+#toolbar {
+    height: 64px;
+    max-height: 64px;
+}
+
+#toolbar button.ng-hide,
+#toolbar md-select.ng-hide {
+    opacity: 0;
+}
+
+ng-view, ng-view md-card {
+    margin: 12px;
+}
+
+.fix-icon {
+    width: 36px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.no-margin {
+    margin: 0;
+}
