@@ -79,6 +79,12 @@ ng-view, ng-view md-card {
     margin: 12px;
 }
 
+md-dialog .md-toolbar-tools {
+    max-height: 100%;
+    padding: 0 24px;
+    font-size: 28px;
+}
+
 md-dialog p {
     font-size: 20px;
     padding: 4px 0;

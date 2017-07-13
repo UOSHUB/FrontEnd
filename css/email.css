@@ -1,0 +1,12 @@
+#email-circle {
+    margin-right: 16px;
+    padding: 8px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    height: 36px;
+    line-height: 36px;
+}
+
+md-pagination-wrapper, md-tab-item {
+    width: 100%;
+}
