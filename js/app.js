@@ -1,7 +1,8 @@
-angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalendar'])
+var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalendar'])
 
 .config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider,
-                 $mdIconProvider, $routeProvider, $localStorageProvider) {
+                 $mdIconProvider, $routeProvider, $localStorageProvider, $controllerProvider) {
+    app.controller = $controllerProvider.register;
     $locationProvider.html5Mode(true);
     $compileProvider.debugInfoEnabled(false);
     $mdAriaProvider.disableWarnings();
@@ -12,9 +13,19 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
     $mdIconProvider
         .icon("logo", "img/logo.svg")
         .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");
+    function load(file) {
+        return {
+            function($http) {
+                return $http.get('js/' + file).then(function(response) {
+                    eval(response.data);
+                });
+            }
+        }
+    }
     $routeProvider.when('/', {
         templateUrl: 'welcome.html',
-        controller: 'Welcome'
+        controller: 'Welcome',
+        resolve: load('welcome.js')
     }).when('/dashboard', {
         templateUrl: 'dashboard.html',
         controller: 'Dashboard',
@@ -130,33 +141,6 @@ angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalenda
         $localStorage.direction = direction;
         $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
-})
-
-.controller('Welcome', function($scope, $interval, $mdDialog, $localStorage) {
-    $scope.slideshow = "img/dashboard.png";
-    $scope.counter = 1;
-    $interval(function() {
-        $scope.slideshow = "img/" + ["dashboard", "schedule", "courses", "email", "calendar"][$scope.counter] + ".png";
-        $scope.counter = ($scope.counter + 1) % 5;
-    }, 2000);
-    $scope.cancel = $mdDialog.cancel;
-    $scope.hide = $mdDialog.hide;
-    $scope.login = function(event) {
-        $mdDialog.show({
-            templateUrl: 'login-dialog',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-            preserveScope: true,
-            targetEvent: event,
-            scope: $scope
-        }).then(function() {
-            $localStorage.loggedIn = true;
-            $rootScope.redirect('dashboard');
-        }, function(){
-            $localStorage.sid = null;
-        });
-    };
-
 })
 
 .controller('Dashboard', function($scope, $localStorage) {
