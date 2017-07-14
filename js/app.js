@@ -1,8 +1,7 @@
 var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalendar'])
 
 .config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider,
-                 $mdIconProvider, $routeProvider, $localStorageProvider, $controllerProvider) {
-    app.controller = $controllerProvider.register;
+                 $mdIconProvider, $localStorageProvider, $controllerProvider) {
     $locationProvider.html5Mode(true);
     $compileProvider.debugInfoEnabled(false);
     $mdAriaProvider.disableWarnings();
@@ -13,12 +12,20 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     $mdIconProvider
         .icon("logo", "img/logo.svg")
         .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");
+    app.controller = $controllerProvider.register;
+})
+
+.config(function($routeProvider) {
+    var requested = {};
     function load(file) {
         return {
             function($http) {
-                return $http.get('js/' + file).then(function(response) {
-                    eval(response.data);
-                });
+                if(!requested[file])
+                    requested[file] = $http.get('js/' + file)
+                        .then(function(response) {
+                            eval(response.data);
+                        });
+                return requested[file];
             }
         }
     }
