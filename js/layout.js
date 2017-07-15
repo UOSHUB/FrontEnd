@@ -31,26 +31,31 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     }
     $routeProvider.when('/', {
         templateUrl: 'welcome.html',
-        controller: 'Welcome',
-        resolve: load('welcome.js')
+        resolve: load('welcome.js'),
+        controller: 'Welcome'
     }).when('/dashboard', {
         templateUrl: 'dashboard.html',
+        resolve: load('dashboard.js'),
         controller: 'Dashboard',
         requiresLogin: true
     }).when('/schedule', {
         templateUrl: 'schedule.html',
+        resolve: load('schedule.js'),
         controller: 'Schedule',
         requiresLogin: true
     }).when('/courses', {
         templateUrl: 'courses.html',
+        resolve: load('courses.js'),
         controller: 'Courses',
         requiresLogin: true
     }).when('/email', {
         templateUrl: 'email.html',
+        resolve: load('email.js'),
         controller: 'Email',
         requiresLogin: true
     }).when('/calendar', {
         templateUrl: 'calendar.html',
+        resolve: load('calendar.js'),
         controller: 'Calendar'
     }).otherwise({
         templateUrl: 'notfound.html'
@@ -147,194 +152,6 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     $scope.setDirection = function(direction) {
         $localStorage.direction = direction;
         $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
-    };
-})
-
-.controller('Dashboard', function($scope, $localStorage) {
-    $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
-    $scope.announcements = [{
-        title: 'Project Final Submission Due',
-        course: 'Introduction to Computer Graphics',
-        time: '13 hours ago'
-    }, {
-        title: 'Chapter 6 Available',
-        course: 'Critical Reading and Writing',
-        time: '2 days ago'
-    }, {
-        title: 'Notes - 3dsmax Available',
-        course: '2D/3D Computer Animation',
-        time: '3 days ago'
-    }];
-
-    $scope.emails = [{
-        subject: 'Project Final Submission Due',
-        sender: 'Introduction to Computer Graphics',
-        time: '13 hours ago'
-    }, {
-        subject: 'Chapter 6 Available',
-        sender: 'Critical Reading and Writing',
-        time: '2 days ago'
-    }, {
-        subject: 'Notes - 3dsmax Available',
-        sender: '2D/3D Computer Animation',
-        time: '3 days ago'
-    }];
-    $scope.getInitials = function(name) {
-        var words = name.split(' ');
-        return (words[0].slice(0, 1) + words[1].slice(0, 1)).toUpperCase();
-    };
-
-    $scope.tasks = [{
-        title: 'Project Final Submission Due',
-        group: 'Introduction to Computer Graphics',
-        day: 'Today',
-        time: '11:59 AM'
-    }, {
-        title: 'Chapter 6 Available',
-        group: 'Critical Reading and Writing',
-        day: 'Tomorrow',
-        time: '1:59 AM'
-    }, {
-        title: 'Notes - 3dsmax Available',
-        group: '2D/3D Computer Animation',
-        day: 'In Two days',
-        time: '5:59 AM'
-    }];
-
-    $scope.classes = {
-        "1412340": $localStorage.semesters[1]["1412340"],
-        "1412444": $localStorage.semesters[1]["1412444"]
-    };
-    $scope.grades = [{
-        course: 'Networking Fundamentals',
-        letter: 'A',
-        color: 'green'
-    }, {
-        course: 'Multimedia Programming & Design',
-        letter: 'B',
-        color: 'lime'
-    }, {
-        course: 'Principles of Marketing',
-        letter: 'C',
-        color: 'orange'
-    }, {
-        course: 'Statistics for Science',
-        letter: 'D',
-        color: 'red'
-    }];
-})
-
-.controller('Schedule', function($scope, $mdDialog, $localStorage) {
-    if($localStorage.semester == -1)
-        $localStorage.semester = 1;
-    $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
-    $scope.height = 14.074074074074074;
-    $scope.labels = [[8,"AM"],[9,"AM"],[10,"AM"],[11,"AM"],[12,"PM"],[1,"PM"],[2,"PM"]];
-    $scope.fractions = [0.5,1.5,2.5,3.5,4.5,5.5,6.5];
-    $scope.dates = ["5/7","5/8","5/9","5/10","5/11"];
-
-    $scope.cancel = $mdDialog.cancel;
-    $scope.showClass = function(event, id, x) {
-        $scope.class = $localStorage.semesters[$localStorage.semester][id];
-        $scope.class.id = id;
-        $mdDialog.show({
-            templateUrl: 'class-dialog',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-            preserveScope: true,
-            targetEvent: event,
-            scope: $scope
-        });
-    };
-})
-
-.controller('Courses', function($scope, $localStorage) {
-    for (var firstCourseId in $localStorage.semesters[$localStorage.semester]) break;
-    $localStorage.course = firstCourseId;
-    $scope.repeat = new Array(12);
-    $scope.mass = false;
-    $scope.all = false;
-    $scope.announcements = [{
-        title: 'There Will Be No Classes Next Week!',
-        time: '13 hours ago'
-    }, {
-        title: 'Chapter 6 is Now Available',
-        time: '2 days ago'
-    }, {
-        title: 'Be Prepared For a Quiz Tomorrow',
-        time: '3 days ago'
-    }];
-
-    $scope.tasks = [{
-        title: 'Project Final Submission Due',
-        group: 'By Course',
-        day: 'Today',
-        time: '11:59 AM'
-    }, {
-        title: 'Study Chapter 5',
-        group: 'My Task',
-        day: 'Tomorrow',
-        time: '1:59 AM'
-    }, {
-        title: 'Final Exam',
-        group: 'By Course',
-        day: 'In Two days',
-        time: '5:59 AM'
-    }];
-})
-
-.controller('Email', function($scope) {
-    $scope.filter = 0;
-    $scope.repeat = new Array(15);
-    $scope.content = [{
-        initial: 'D',
-        title: 'Personal Email #',
-        sender: function(index) { return 'Doctor Name #' + index + ' <doctor' + index + '@sharjah.ac.ae>'; },
-        time: ' Days Ago'
-    }, {
-        initial: 'C',
-        title: 'Course Announcement #',
-        sender: function(index) { return 'Course Name #' + index; },
-        time: ' Hours Ago'
-    }, {
-        initial: 'S',
-        title: 'New Announcement #',
-        sender: function(index) { return 'Sender Name #' + index + ' <doctor' + index + '@sharjah.ac.ae>'; },
-        time: ' Minutes Ago'
-    }];
-    ($scope.openEmail = function(index) {
-        $scope.current = $scope.content[$scope.filter];
-        $scope.current.index = index + 1;
-    })(0);
-})
-
-.controller('Calendar', function($scope, $filter) {
-    $scope.selectedDate = new Date();
-    $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
-    $scope.tooltips = true;
-
-    $scope.events = {
-        '13 4': 'IELTS Exam',
-        '17 4': 'TOEFL Exam',
-        '18 4': 'Classes end',
-        '20 4': 'Final Examinations',
-        '21 4': 'Final Examinations',
-        '22 4': 'Final Examinations',
-        '23 4': 'Final Examinations',
-        '24 4': 'Final Examinations',
-        '25 4': 'Final Examinations',
-        '26 4': 'Final Examinations',
-        '27 4': 'Final Examinations',
-        '28 4': 'Final Examinations',
-        '29 4': 'Final Examinations',
-        '30 4': 'Final Examinations',
-        '31 4': 'Final Examinations'
-    };
-
-    $scope.setDayContent = function(date) {
-        var event = $scope.events[date.getDate() + ' ' + date.getMonth()]
-        if(event)
-            return "<div class='breadcrumb'>" + event + "</div>";
     };
 });
 
