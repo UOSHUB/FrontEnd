@@ -1,4 +1,4 @@
-app.controller('Schedule', function($scope, $mdDialog, $localStorage) {
+app.controller('schedule', function($scope, $mdDialog, $localStorage) {
     if($localStorage.semester == -1)
         $localStorage.semester = 1;
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];

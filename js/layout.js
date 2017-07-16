@@ -17,51 +17,34 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
 
 .config(function($routeProvider) {
     var requested = {}, head = $("head");
-    function load(file) {
+    function load(file, secure) {
         return {
-            function($http) {
-                if(!requested[file]) {
-                    head.append('<link rel="stylesheet" href="css/' + file + '.css">');
-                    requested[file] = $http.get('js/' + file + '.js')
-                        .then(function(response) {
-                            eval(response.data);
-                        });
+            requiresLogin: secure,
+            templateUrl: file + '.html',
+            controller: file,
+            resolve: {
+                function($http) {
+                    if(!requested[file]) {
+                        head.append('<link rel="stylesheet" href="css/' + file + '.css">');
+                        requested[file] = $http.get('js/' + file + '.js')
+                            .then(function(response) {
+                                eval(response.data);
+                            });
+                    }
+                    return requested[file];
                 }
-                return requested[file];
             }
-        }
+        };
     }
-    $routeProvider.when('/', {
-        templateUrl: 'welcome.html',
-        resolve: load('welcome'),
-        controller: 'Welcome'
-    }).when('/dashboard', {
-        templateUrl: 'dashboard.html',
-        resolve: load('dashboard'),
-        controller: 'Dashboard',
-        requiresLogin: true
-    }).when('/schedule', {
-        templateUrl: 'schedule.html',
-        resolve: load('schedule'),
-        controller: 'Schedule',
-        requiresLogin: true
-    }).when('/courses', {
-        templateUrl: 'courses.html',
-        resolve: load('courses'),
-        controller: 'Courses',
-        requiresLogin: true
-    }).when('/email', {
-        templateUrl: 'email.html',
-        resolve: load('email'),
-        controller: 'Email',
-        requiresLogin: true
-    }).when('/calendar', {
-        templateUrl: 'calendar.html',
-        resolve: load('calendar'),
-        controller: 'Calendar'
-    }).otherwise({
-        templateUrl: 'notfound.html'
-    });
+
+    $routeProvider
+        .when('/', load('welcome'))
+        .when('/dashboard', load('dashboard', true))
+        .when('/schedule', load('schedule', true))
+        .when('/courses', load('courses', true))
+        .when('/email', load('email', true))
+        .when('/calendar', load('calendar'))
+        .otherwise({ templateUrl: 'notfound.html' });
 })
 
 .run(function($location, $rootScope, $localStorage, $mdToast, $timeout, $route) {
@@ -99,7 +82,7 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     });
 })
 
-.controller('Sidenav', function($scope) {
+.controller('sidenav', function($scope) {
     $scope.links = [{
         title: 'dashboard',
         icon: 'tachometer'
@@ -121,7 +104,7 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     };
 })
 
-.controller('Toolbar', function($scope, $mdDialog, $rootScope, $localStorage, $location) {
+.controller('toolbar', function($scope, $mdDialog, $rootScope, $localStorage, $location) {
     $scope.cancel = $mdDialog.cancel;
     $scope.hide = $mdDialog.hide;
     $scope.login = function(event) {

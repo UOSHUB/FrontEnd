@@ -1,4 +1,4 @@
-app.controller('Welcome', function($scope, $interval, $mdDialog, $localStorage) {
+app.controller('welcome', function($scope, $interval, $mdDialog, $localStorage) {
     $scope.slideshow = "img/dashboard.png";
     $scope.counter = 1;
     $interval(function() {

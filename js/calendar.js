@@ -1,4 +1,4 @@
-app.controller('Calendar', function($scope, $filter) {
+app.controller('calendar', function($scope, $filter) {
     $scope.selectedDate = new Date();
     $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     $scope.tooltips = true;

@@ -1,4 +1,4 @@
-app.controller('Email', function($scope) {
+app.controller('email', function($scope) {
     $scope.filter = 0;
     $scope.repeat = new Array(15);
     $scope.content = [{
