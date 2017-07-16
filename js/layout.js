@@ -16,46 +16,48 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
 })
 
 .config(function($routeProvider) {
-    var requested = {};
+    var requested = {}, head = $("head");
     function load(file) {
         return {
             function($http) {
-                if(!requested[file])
-                    requested[file] = $http.get('js/' + file)
+                if(!requested[file]) {
+                    head.append('<link rel="stylesheet" href="css/' + file + '.css">');
+                    requested[file] = $http.get('js/' + file + '.js')
                         .then(function(response) {
                             eval(response.data);
                         });
+                }
                 return requested[file];
             }
         }
     }
     $routeProvider.when('/', {
         templateUrl: 'welcome.html',
-        resolve: load('welcome.js'),
+        resolve: load('welcome'),
         controller: 'Welcome'
     }).when('/dashboard', {
         templateUrl: 'dashboard.html',
-        resolve: load('dashboard.js'),
+        resolve: load('dashboard'),
         controller: 'Dashboard',
         requiresLogin: true
     }).when('/schedule', {
         templateUrl: 'schedule.html',
-        resolve: load('schedule.js'),
+        resolve: load('schedule'),
         controller: 'Schedule',
         requiresLogin: true
     }).when('/courses', {
         templateUrl: 'courses.html',
-        resolve: load('courses.js'),
+        resolve: load('courses'),
         controller: 'Courses',
         requiresLogin: true
     }).when('/email', {
         templateUrl: 'email.html',
-        resolve: load('email.js'),
+        resolve: load('email'),
         controller: 'Email',
         requiresLogin: true
     }).when('/calendar', {
         templateUrl: 'calendar.html',
-        resolve: load('calendar.js'),
+        resolve: load('calendar'),
         controller: 'Calendar'
     }).otherwise({
         templateUrl: 'notfound.html'
