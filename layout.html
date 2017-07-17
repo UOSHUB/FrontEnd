@@ -10,7 +10,7 @@
         <!-- Our Style Sheets -->
         <link rel="stylesheet" href="css/layout.css">
     </head>
-    <body ng-app="UOSHUB" layout="row" md-colors="::{background: 'accent-50'}" ng-cloak>
+    <body ng-app="UOSHUB" ng-controller="layout" layout="row" md-colors="::{background: 'accent-50'}" ng-cloak>
         <md-sidenav id="sidenav" class="md-sidenav-left" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.tightNav}"
                     md-whiteframe="1" md-is-locked-open="$mdMedia('gt-xs')" flex-none>
             <md-toolbar layout="row" layout-align="start center" md-colors="::{background: 'grey-A100'}">
@@ -19,7 +19,7 @@
                 <span md-colors="::{color: 'primary-800'}">HUB</span>
             </md-toolbar>
             <md-content md-colors="::{background: 'accent-900'}" flex>
-                <md-list ng-controller="sidenav" flex>
+                <md-list flex>
                     <md-list-item class="md-1-line" ng-repeat="link in links" ng-click="redirect(link.title)"
                                   md-colors="{background: $loc.path() == '/' + link.title ? 'accent-700' : 'accent-900'}">
                         <md-icon md-font-icon="fa fa-{{ link.icon }} fa-fw" class="md-avatar-icon"></md-icon>
@@ -32,7 +32,7 @@
         </md-sidenav>
 
         <div layout="column" flex>
-            <md-toolbar ng-controller="toolbar" md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
+            <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar">
                     <md-button ng-show="$ls.loggedIn" class="md-icon-button md-accent md-hue-3"
                                ng-click="$ls.tightNav = !$ls.tightNav" style="margin-right: 16px">

@@ -9,8 +9,7 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     $mdThemingProvider.theme('default')
         .primaryPalette('green')
         .accentPalette('blue-grey');
-    $mdIconProvider
-        .icon("logo", "img/logo.svg")
+    $mdIconProvider.icon("logo", "img/logo.svg")
         .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");
     app.controller = $controllerProvider.register;
     $routeProvider
@@ -58,7 +57,7 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     });
 })
 
-.controller('sidenav', function($scope) {
+.controller('layout', function($scope, $mdDialog, $rootScope, $localStorage, $location) {
     $scope.links = [{
         title: 'dashboard',
         icon: 'tachometer'
@@ -78,9 +77,6 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     $scope.capitalize = function(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
-})
-
-.controller('toolbar', function($scope, $mdDialog, $rootScope, $localStorage, $location) {
     $scope.cancel = $mdDialog.cancel;
     $scope.hide = $mdDialog.hide;
     $scope.login = function(event) {
