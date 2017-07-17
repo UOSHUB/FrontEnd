@@ -1,7 +1,7 @@
 var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalendar'])
 
 .config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider,
-                 $mdIconProvider, $localStorageProvider, $controllerProvider) {
+                 $mdIconProvider, $localStorageProvider, $controllerProvider, $routeProvider) {
     $locationProvider.html5Mode(true);
     $compileProvider.debugInfoEnabled(false);
     $mdAriaProvider.disableWarnings();
@@ -13,30 +13,6 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
         .icon("logo", "img/logo.svg")
         .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");
     app.controller = $controllerProvider.register;
-})
-
-.config(function($routeProvider) {
-    var requested = {}, head = $("head");
-    function load(file, secure) {
-        return {
-            requiresLogin: secure,
-            templateUrl: file + '.html',
-            controller: file,
-            resolve: {
-                function($http) {
-                    if(!requested[file]) {
-                        head.append('<link rel="stylesheet" href="css/' + file + '.css">');
-                        requested[file] = $http.get('js/' + file + '.js')
-                            .then(function(response) {
-                                eval(response.data);
-                            });
-                    }
-                    return requested[file];
-                }
-            }
-        };
-    }
-
     $routeProvider
         .when('/', load('welcome'))
         .when('/dashboard', load('dashboard', true))
@@ -139,7 +115,3 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
         $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
 });
-
-function $(selector) {
-    return angular.element(document.querySelector(selector));
-}
