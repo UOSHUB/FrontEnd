@@ -3,12 +3,13 @@
     <div layout="column" flex>
         <h1 class="md-display-1" md-colors="{color: 'primary'}">Forget UOS, Try UOS HUB</h1>
         <p class="md-headline">This'll revolutionize your experience with UOS online services and combine all of them in one place (Blackboard, myUDC, Outlook Email)</p>
-        <md-button class="md-raised" layout-padding ng-click="login($event)">Take a Tour</md-button>
-        <md-button class="md-raised" layout-padding ng-click="login($event)">Get Started, Login</md-button>
+        <md-button class="md-raised" layout-padding ng-click="$parent.login($event)">Take a Tour</md-button>
+        <md-button class="md-raised" layout-padding ng-click="$parent.login($event)">Get Started, Login</md-button>
     </div>
     <div layout="column" layout-margin></div>
     <div id="slideshow-new-logo" layout="column" flex-none>
-        <img src="{{slideshow}}" width="1000"/>
+        <img ng-repeat="image in images track by $index" width="1000"
+             ng-src="img/{{ image }}.png" ng-show="$index == counter"/>
         <span layout="row" layout-align="center center">
             <img src="img/favicon.ico">
         </span>
