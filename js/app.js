@@ -9,8 +9,8 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
     $mdThemingProvider.theme('default')
         .primaryPalette('green')
         .accentPalette('blue-grey');
-    $mdIconProvider.icon("logo", "img/logo.svg")
-        .icon("md-tabs-arrow", "img/tabs-arrow-icon.svg");
+    $mdIconProvider.icon("logo", "static/img/logo.svg")
+        .icon("md-tabs-arrow", "static/img/tabs-arrow-icon.svg");
     app.controller = $controllerProvider.register;
     $routeProvider
         .when('/', load('welcome'))
@@ -19,7 +19,7 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
         .when('/courses', load('courses', true))
         .when('/email', load('email', true))
         .when('/calendar', load('calendar'))
-        .otherwise({ templateUrl: 'notfound.html' });
+        .otherwise({ templateUrl: 'static/notfound.html' });
 })
 
 .run(function($location, $rootScope, $localStorage, $mdToast, $timeout, $route) {
