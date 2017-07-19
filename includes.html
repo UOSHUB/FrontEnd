@@ -1,0 +1,41 @@
+{% load compress %}
+        <!-- Angular Material style sheet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.css">
+        <!-- Font Awesome Icon Pack -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Our Style Sheets -->
+        {% compress css %}
+            <link rel="stylesheet" href="/static/css/layout.css">
+            <link rel="stylesheet" href="/static/css/welcome.css">
+            <link rel="stylesheet" href="/static/css/dashboard.css">
+            <link rel="stylesheet" href="/static/css/schedule.css">
+            <link rel="stylesheet" href="/static/css/courses.css">
+            <link rel="stylesheet" href="/static/css/email.css">
+            <link rel="stylesheet" href="/static/css/calendar.css">
+        {% endcompress %}
+
+        <!-- Angular Material requires Angular.js Libraries -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-aria.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-messages.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-sanitize.min.js"></script>
+        <!-- Angular Local Storage -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+        <!-- Angular Material Library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.js"></script>
+        <!-- Angular Material Calendar -->
+        <script src="https://cdn.rawgit.com/bradberger/angular-material-calendar/master/dist/angular-material-calendar.min.js"></script>
+        <!-- Our Angular App & Scripts -->
+        {% compress js %}
+            <script src="/static/js/scripts.js"></script>
+            <script src="/static/js/app.js"></script>
+            <script src="/static/js/layout.js"></script>
+            <script src="/static/js/welcome.js"></script>
+            <script src="/static/js/dashboard.js"></script>
+            <script src="/static/js/schedule.js"></script>
+            <script src="/static/js/courses.js"></script>
+            <script src="/static/js/email.js"></script>
+            <script src="/static/js/calendar.js"></script>
+        {% endcompress %}
