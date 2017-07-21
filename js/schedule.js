@@ -8,9 +8,9 @@ app.controller('schedule', function($scope, $mdDialog, $localStorage) {
     $scope.dates = ["5/7","5/8","5/9","5/10","5/11"];
 
     $scope.cancel = $mdDialog.cancel;
-    $scope.showClass = function(event, id, x) {
-        $scope.class = $localStorage.semesters[$localStorage.semester][id];
-        $scope.class.id = id;
+    $scope.showCourse = function(event, id, x) {
+        $scope.course = $localStorage.semesters[$localStorage.semester][id];
+        $scope.course.id = id;
         $mdDialog.show({
             templateUrl: 'class-dialog',
             parent: angular.element(document.body),

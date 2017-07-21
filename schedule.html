@@ -11,7 +11,7 @@
         <div class="hour" style="top: {{ 5 + fraction * height }}%" ng-repeat-end></div>
 
         <div class="classes-container" ng-repeat="(id, course) in $ls.semesters[$ls.semester]">
-            <div ng-repeat="point in course.points" ng-click="showClass($event, id, point[0])"
+            <div ng-repeat="point in course.points" ng-click="showCourse($event, id, point[0])"
                  class="class" md-colors="::{background: course.color, color: 'grey-A100'}"
                  ng-style="{height: course.length * height + '%', left: point[0] + '%', top: point[1] + '%'}">
                 <span class="course-name">{{ course.name }}</span><br>
@@ -27,9 +27,9 @@
 
 <script type="text/ng-template" id="class-dialog">
     <md-dialog flex="40" md-colors="{background: 'default-grey-A100', color: 'default-grey-800'}" layout="column">
-        <md-toolbar flex="10" md-colors="{background: 'default-' + class.color, color: 'default-grey-A100'}">
+        <md-toolbar flex="10" md-colors="{background: 'default-' + course.color, color: 'default-grey-A100'}">
             <div class="md-toolbar-tools" flex>
-                <span flex>{{ class.name }}</span>
+                <span flex>{{ course.name }}</span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-font-icon="fa fa-times fa-lg"></md-icon>
                 </md-button>
@@ -39,54 +39,54 @@
             <div layout="column" layout-align="space-between start" flex layout-margin>
                 <p>
                     <md-icon md-font-icon="fa fa-user fa-fw"></md-icon>
-                    {{ class.doctor[0] }}
+                    {{ course.doctor[0] }}
                     <md-tooltip md-direction="right">Doctor Name</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-calendar-o fa-fw"></md-icon>
-                    {{ class.days[0] }} {{ class.days[1] }}
+                    {{ course.days[0] }} {{ course.days[1] }}
                     <md-tooltip md-direction="right">Days</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-hourglass-start fa-fw"></md-icon>
-                    {{ class.time[0] }}
+                    {{ course.time[0] }}
                     <md-tooltip md-direction="right">Start Time</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-puzzle-piece fa-fw"></md-icon>
-                    {{ class.section }} <span md-colors="{color: 'default-grey-500'}">(Section)</span>
+                    {{ course.section }} <span md-colors="{color: 'default-grey-500'}">(Section)</span>
                     <md-tooltip md-direction="right">Section</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-key fa-fw"></md-icon>
-                    {{ class.id }}
+                    {{ course.id }}
                     <md-tooltip md-direction="right">Course key</md-tooltip>
                 </p>
             </div>
             <div layout="column" layout-align="space-between start" flex layout-margin>
                 <p>
                     <md-icon md-font-icon="fa fa-envelope fa-fw"></md-icon>
-                    {{ class.doctor[1] }}
+                    {{ course.doctor[1] }}
                     <md-tooltip md-direction="right">Doctor Email</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-map-marker fa-fw"></md-icon>
-                    {{ class.place[0] }}, {{ class.place[1] }}
+                    {{ course.place[0] }}, {{ course.place[1] }}
                     <md-tooltip md-direction="right">Building, Room</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-hourglass-end fa-fw"></md-icon>
-                    {{ class.time[1] }}
+                    {{ course.time[1] }}
                     <md-tooltip md-direction="right">End Time</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-certificate fa-fw"></md-icon>
-                    {{ class.ch }} <span md-colors="{color: 'default-grey-500'}">(CrHrs)</span>
+                    {{ course.ch }} <span md-colors="{color: 'default-grey-500'}">(CrHrs)</span>
                     <md-tooltip md-direction="right">Credit Hours</md-tooltip>
                 </p>
                 <p>
                     <md-icon md-font-icon="fa fa-info fa-fw"></md-icon>
-                    {{ class.crn }}
+                    {{ course.crn }}
                     <md-tooltip md-direction="right">CRN</md-tooltip>
                 </p>
             </div>
