@@ -1,4 +1,6 @@
-app.controller('dashboard', function($scope, $localStorage) {
+app.controller('dashboard', ["$scope", "$localStorage",
+
+function($scope, $localStorage) {
     $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
     $scope.announcements = [{
         title: 'Project Final Submission Due',
@@ -70,4 +72,4 @@ app.controller('dashboard', function($scope, $localStorage) {
         letter: 'D',
         color: 'red'
     }];
-});
+}]);

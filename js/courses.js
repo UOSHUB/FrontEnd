@@ -1,4 +1,6 @@
-app.controller('courses', function($scope, $localStorage) {
+app.controller('courses', ["$scope", "$localStorage",
+
+function($scope, $localStorage) {
     for (var firstCourseId in $localStorage.semesters[$localStorage.semester]) break;
     $localStorage.course = firstCourseId;
     $scope.repeat = new Array(12);
@@ -31,4 +33,4 @@ app.controller('courses', function($scope, $localStorage) {
         day: 'In Two days',
         time: '5:59 AM'
     }];
-});
+}]);

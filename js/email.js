@@ -1,4 +1,6 @@
-app.controller('email', function($scope) {
+app.controller('email', ["$scope",
+
+function($scope) {
     $scope.filter = 0;
     $scope.repeat = new Array(15);
     $scope.content = [{
@@ -21,4 +23,4 @@ app.controller('email', function($scope) {
         $scope.current = $scope.content[$scope.filter];
         $scope.current.index = index + 1;
     })(0);
-});
+}]);

@@ -1,4 +1,6 @@
-app.controller('layout', function($scope, $mdDialog, $rootScope, $localStorage, $location) {
+app.controller('layout', ["$scope", "$mdDialog", "$rootScope", "$localStorage", "$location",
+
+function($scope, $mdDialog, $rootScope, $localStorage, $location) {
     $scope.links = [{
         title: 'dashboard',
         icon: 'tachometer'
@@ -51,4 +53,4 @@ app.controller('layout', function($scope, $mdDialog, $rootScope, $localStorage, 
         $localStorage.direction = direction;
         $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
-});
+}]);

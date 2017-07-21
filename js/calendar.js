@@ -1,4 +1,6 @@
-app.controller('calendar', function($scope, $filter) {
+app.controller('calendar', ["$scope", "$filter",
+
+function($scope, $filter) {
     $scope.selectedDate = new Date();
     $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     $scope.tooltips = true;
@@ -26,4 +28,4 @@ app.controller('calendar', function($scope, $filter) {
         if(event)
             return "<div class='breadcrumb'>" + event + "</div>";
     };
-});
+}]);

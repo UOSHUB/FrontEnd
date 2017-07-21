@@ -1,7 +1,10 @@
 var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalendar'])
 
-.config(function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider,
-                 $mdIconProvider, $localStorageProvider, $controllerProvider, $routeProvider) {
+.config(["$locationProvider", "$compileProvider", "$mdAriaProvider", "$mdThemingProvider",
+         "$mdIconProvider", "$localStorageProvider", "$controllerProvider", "$routeProvider",
+
+function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvider,
+         $mdIconProvider, $localStorageProvider, $controllerProvider, $routeProvider) {
     $locationProvider.html5Mode(true);
     $compileProvider.debugInfoEnabled(false);
     $mdAriaProvider.disableWarnings();
@@ -20,9 +23,11 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
         .when('/email', load('email', true))
         .when('/calendar', load('calendar'))
         .otherwise({ templateUrl: 'static/notfound.html' });
-})
+}])
 
-.run(function($location, $rootScope, $localStorage, $mdToast, $timeout, $route) {
+.run(["$location", "$rootScope", "$localStorage", "$mdToast", "$timeout", "$route",
+
+function($location, $rootScope, $localStorage, $mdToast, $timeout, $route) {
     $rootScope.$route = $route;
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
         if(next.requiresLogin && !$localStorage.loggedIn) {
@@ -55,4 +60,4 @@ var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'mater
         tightNav: false,
         dayFormat: "d"
     });
-});
+}]);
