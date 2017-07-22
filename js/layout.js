@@ -32,7 +32,7 @@ function($scope, $mdDialog, $rootScope, $localStorage, $location) {
             scope: $scope
         }).then(function() {
             $localStorage.loggedIn = true;
-            $rootScope.redirect('dashboard');
+            $rootScope.redirect('/dashboard/');
         }, function(){
             $localStorage.sid = null;
         });
@@ -40,7 +40,7 @@ function($scope, $mdDialog, $rootScope, $localStorage, $location) {
     $scope.logout = function() {
         $localStorage.sid = null;
         $localStorage.loggedIn = false;
-        if($location.path() != "/calendar")
+        if($location.path() != "/calendar/")
             $rootScope.redirect('/');
     };
     $scope.semesters = [

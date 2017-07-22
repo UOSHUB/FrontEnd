@@ -12,17 +12,17 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
     $mdThemingProvider.theme('default')
         .primaryPalette('green')
         .accentPalette('blue-grey');
-    $mdIconProvider.icon("logo", "static/img/logo.svg")
-        .icon("md-tabs-arrow", "static/img/tabs-arrow-icon.svg");
+    $mdIconProvider.icon("logo", "/static/img/logo.svg")
+        .icon("md-tabs-arrow", "/static/img/tabs-arrow-icon.svg");
     app.controller = $controllerProvider.register;
     $routeProvider
         .when('/', load('welcome'))
-        .when('/dashboard', load('dashboard', true))
-        .when('/schedule', load('schedule', true))
-        .when('/courses', load('courses', true))
-        .when('/email', load('email', true))
-        .when('/calendar', load('calendar'))
-        .otherwise({ templateUrl: 'static/notfound.html' });
+        .when('/dashboard/', load('dashboard', true))
+        .when('/schedule/', load('schedule', true))
+        .when('/courses/', load('courses', true))
+        .when('/email/', load('email', true))
+        .when('/calendar/', load('calendar'))
+        .otherwise({ templateUrl: '/static/notfound.html' });
 }])
 
 .run(["$location", "$rootScope", "$localStorage", "$mdToast", "$timeout", "$route",

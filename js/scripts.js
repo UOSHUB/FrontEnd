@@ -1,7 +1,7 @@
 function load(file, secure) {
     return {
         requiresLogin: secure,
-        templateUrl: 'static/' + file + '.html',
+        templateUrl: '/static/' + file + '.html',
         controller: file
     };
 }
