@@ -1,2 +1,2 @@
-# Ignore Back-End Compression Cache Folder
-CACHE
+# Ignore Folder Of Minfied JS & CSS Files
+min
