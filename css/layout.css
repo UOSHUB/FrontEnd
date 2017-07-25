@@ -25,6 +25,10 @@
     margin: 14px 16px;
 }
 
+#sidenav md-toolbar md-icon .dome {
+    fill: #2e7d32;
+}
+
 #sidenav md-toolbar span {
     font-weight: 300;
     margin-left: 8px
