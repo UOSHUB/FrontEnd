@@ -1,0 +1,134 @@
+#slogan { position: relative; }
+#slogan div {
+    position: relative;
+    animation: role 5s ease-in-out forwards;
+    transform-origin: 50% 50%;
+    height: 260px;
+    width: 260px;
+    left: 0;
+    z-index: 10;
+}
+    #slogan i {
+        top: 70px;
+        left: 70px;
+        z-index: -1;
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        background-color: #eceff1;
+    }
+
+    #slogan md-icon {
+        left: 80px;
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        transform-origin: 50% 128.5%;
+    }
+        #slogan md-icon .hub {
+            opacity: 1 !important;
+            fill: #eceff1;
+        }
+
+        #slogan md-icon .base {
+            fill: #37474f;
+        }
+
+        #slogan md-icon:nth-child(1) {
+            animation: tic1 .5s ease-out 2s forwards;
+        }
+            #slogan md-icon:nth-child(1) .dome {
+                fill: #f57c00;
+            }
+
+        #slogan md-icon:nth-child(2) {
+            animation: tic2 .5s ease-out 1.5s forwards;
+        }
+            #slogan md-icon:nth-child(2) .dome {
+                fill: #d32f2f;
+            }
+
+        #slogan md-icon:nth-child(3) {
+            animation: tic3 .5s ease-out 1s forwards;
+        }
+            #slogan md-icon:nth-child(3) .dome {
+                fill: #7b1fa2;
+            }
+
+        #slogan md-icon:nth-child(4) {
+            animation: tic4 .5s ease-out .5s forwards;
+        }
+            #slogan :nth-child(4) .dome {
+                fill: #1976d2;
+            }
+
+        #slogan md-icon:nth-child(5) {
+            animation: tic5 .5s ease-out forwards;
+        }
+            #slogan md-icon:nth-child(5) .dome {
+                fill: #00796b;
+            }
+
+        #slogan md-icon:nth-child(6) .dome {
+            fill: #388e3c;
+        }
+
+#slogan img {
+    margin-left: 36px;
+    width: 600px;
+    height: 175px;
+}
+
+#slogan span {
+    position: relative;
+}
+    #slogan span span {
+        animation: reveal 2.2s ease-in-out 2.5s forwards;
+        background-color: #eceff1;
+        position: absolute;
+        height: 200px;
+        width: 700px;
+        top: 0;
+    }
+
+@keyframes tic1 {
+    from { transform: rotate(240deg); }
+    to { transform: rotate(300deg); }
+}
+
+@keyframes tic2 {
+    from { transform: rotate(180deg); }
+    to { transform: rotate(240deg); }
+}
+
+@keyframes tic3 {
+    from { transform: rotate(120deg); }
+    to { transform: rotate(180deg); }
+}
+
+@keyframes tic4 {
+    from { transform: rotate(60deg); }
+    to { transform: rotate(120deg); }
+}
+
+@keyframes tic5 {
+    to { transform: rotate(60deg); }
+}
+
+@keyframes role {
+    50% {
+        transform: rotate(400deg);
+        left: 750px;
+    }
+    54% {
+        transform: rotate(400deg);
+        left: 750px;
+    }
+    100% {
+        transform: rotate(30deg);
+    }
+}
+
+@keyframes reveal {
+    to { width: 0; }
+}
