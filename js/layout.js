@@ -1,6 +1,6 @@
-app.controller('layout', ["$scope", "$mdDialog", "$rootScope", "$localStorage", "$location",
+app.controller('layout', ["$scope", "$rootScope", "$localStorage", "$location",
 
-function($scope, $mdDialog, $rootScope, $localStorage, $location) {
+function($scope, $rootScope, $localStorage, $location) {
     $scope.links = [{
         title: 'dashboard',
         icon: 'tachometer'
@@ -20,23 +20,7 @@ function($scope, $mdDialog, $rootScope, $localStorage, $location) {
     $scope.capitalize = function(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
-    $scope.cancel = $mdDialog.cancel;
-    $scope.hide = $mdDialog.hide;
-    $scope.login = function(event) {
-        $mdDialog.show({
-            templateUrl: 'login-dialog',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-            preserveScope: true,
-            targetEvent: event,
-            scope: $scope
-        }).then(function() {
-            $localStorage.loggedIn = true;
-            $rootScope.redirect('/dashboard/');
-        }, function(){
-            $localStorage.sid = null;
-        });
-    };
+
     $scope.logout = function() {
         $localStorage.sid = null;
         $localStorage.loggedIn = false;
@@ -53,4 +37,23 @@ function($scope, $mdDialog, $rootScope, $localStorage, $location) {
         $localStorage.direction = direction;
         $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
+}])
+
+.directive('login', ["$mdDialog", function($mdDialog) {
+    return {
+        link: function($scope, element, attrs) {
+            $scope.cancel = $mdDialog.cancel;
+            $scope.hide = $mdDialog.hide;
+            element.on('click', function($event) {
+                $mdDialog.show({
+                    templateUrl: 'login-dialog',
+                    clickOutsideToClose: true,
+                    preserveScope: true,
+                    targetEvent: $event,
+                    parent: $('body'),
+                    scope: $scope
+                });
+            });
+        }
+    }
 }]);

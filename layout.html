@@ -46,7 +46,7 @@
                     <md-button ng-show="$loc.path() == '/calendar/'" class="md-accent md-hue-2" ng-click="setDirection('vertical')">List View</md-button>
                     <md-button ng-show="$loc.path() == '/calendar/'" class="md-accent md-hue-2" ng-click="setDirection('horizontal')">Table View</md-button>
                     <h2 ng-show="$ls.sid" md-colors="::{color: 'accent-800'}">Welcome {{ $ls.sid }}</h2>
-                    <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" ng-click="login($event)">Login</md-button>
+                    <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
                     <md-button ng-if="$ls.loggedIn" class="md-primary md-hue-2" ng-click="logout()">Logout</md-button>
                 </div>
             </md-toolbar>
