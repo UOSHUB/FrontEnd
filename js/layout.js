@@ -46,7 +46,7 @@ function($scope, $rootScope, $localStorage, $location) {
             $scope.hide = $mdDialog.hide;
             element.on('click', function($event) {
                 $mdDialog.show({
-                    templateUrl: 'login-dialog',
+                    templateUrl: '/static/login.html',
                     clickOutsideToClose: true,
                     preserveScope: true,
                     targetEvent: $event,
