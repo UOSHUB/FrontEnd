@@ -22,7 +22,6 @@ function($scope, $rootScope, $localStorage, $location) {
     };
 
     $scope.logout = function() {
-        $localStorage.sid = null;
         $localStorage.loggedIn = false;
         if($location.path() != "/calendar/")
             $rootScope.redirect('/');
@@ -39,11 +38,14 @@ function($scope, $rootScope, $localStorage, $location) {
     };
 }])
 
-.directive('login', ["$mdDialog", function($mdDialog) {
+
+.directive('login', ["$mdDialog", "$http", "$localStorage",
+
+function($mdDialog, $http, $localStorage) {
     return {
         link: function($scope, element, attrs) {
             $scope.cancel = $mdDialog.cancel;
-            $scope.hide = $mdDialog.hide;
+            $scope.submit = $mdDialog.hide;
             element.on('click', function($event) {
                 $mdDialog.show({
                     templateUrl: '/static/login.html',
@@ -52,7 +54,14 @@ function($scope, $rootScope, $localStorage, $location) {
                     targetEvent: $event,
                     parent: $('body'),
                     scope: $scope
-                });
+                }).then(function(data) {
+                    if(!$localStorage.name) data.new = true;
+                    $http.post("/api/login/", data).then(function(response) {
+                        angular.extend($localStorage, response.data, {loggedIn: true});
+                    }, function(response) {
+                        element.triggerHandler('click');
+                    });
+                }, function() {});
             });
         }
     }

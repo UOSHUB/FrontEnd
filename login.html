@@ -1,5 +1,5 @@
 <md-dialog flex="20" md-colors="{background: 'default-grey-A100'}">
-    <form layout="column" class="no-margin" ng-submit="hide()">
+    <form layout="column" class="no-margin" ng-submit="submit({sid, pin})">
         <md-toolbar flex="10">
             <div class="md-toolbar-tools" flex>
                 <span flex>Welcome to UOS HUB</span>
@@ -13,11 +13,11 @@
             <div layout-margin layout="column">
                 <md-input-container>
                     <label>Student ID</label>
-                    <input ng-model="$ls.sid" required>
+                    <input type="text" ng-model="sid" required>
                 </md-input-container>
                 <md-input-container>
                     <label>Password</label>
-                    <input ng-model="$ls.pin">
+                    <input type="password" ng-model="pin" required>
                 </md-input-container>
                 <md-button type="submit" class="md-raised md-primary">Login</md-button>
             </div>
