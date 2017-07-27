@@ -1,6 +1,6 @@
-app.controller('layout', ["$scope", "$rootScope", "$localStorage", "$location",
+app.controller('layout', ["$scope", "$rootScope", "$ls", "$location",
 
-function($scope, $rootScope, $localStorage, $location) {
+function($scope, $rootScope, $ls, $location) {
     $scope.links = [{
         title: 'dashboard',
         icon: 'tachometer'
@@ -22,7 +22,7 @@ function($scope, $rootScope, $localStorage, $location) {
     };
 
     $scope.logout = function() {
-        $localStorage.loggedIn = false;
+        $ls.loggedIn = false;
         if($location.path() != "/calendar/")
             $rootScope.redirect('/');
     };
@@ -33,15 +33,15 @@ function($scope, $rootScope, $localStorage, $location) {
         "Fall Semester 2015 - 2016"
     ];
     $scope.setDirection = function(direction) {
-        $localStorage.direction = direction;
-        $localStorage.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
+        $ls.direction = direction;
+        $ls.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
 }])
 
 
-.directive('login', ["$mdDialog", "$http", "$localStorage",
+.directive('login', ["$mdDialog", "$http", "$ls",
 
-function($mdDialog, $http, $localStorage) {
+function($mdDialog, $http, $ls) {
     return {
         link: function($scope, element, attrs) {
             $scope.cancel = $mdDialog.cancel;
@@ -55,9 +55,9 @@ function($mdDialog, $http, $localStorage) {
                     parent: $('body'),
                     scope: $scope
                 }).then(function(data) {
-                    if(!$localStorage.name) data.new = true;
+                    if(!$ls.name) data.new = true;
                     $http.post("/api/login/", data).then(function(response) {
-                        angular.extend($localStorage, response.data, {loggedIn: true});
+                        angular.extend($ls, response.data, {loggedIn: true});
                     }, function(response) {
                         element.triggerHandler('click');
                     });

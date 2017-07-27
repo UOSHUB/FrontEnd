@@ -1,6 +1,6 @@
-app.controller('dashboard', ["$scope", "$localStorage",
+app.controller('dashboard', ["$scope", "$ls",
 
-function($scope, $localStorage) {
+function($scope, $ls) {
     $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
     $scope.announcements = [{
         title: 'Project Final Submission Due',
@@ -52,8 +52,8 @@ function($scope, $localStorage) {
     }];
 
     $scope.classes = {
-        "1412340": $localStorage.semesters[1]["1412340"],
-        "1412444": $localStorage.semesters[1]["1412444"]
+        "1412340": $ls.semesters[1]["1412340"],
+        "1412444": $ls.semesters[1]["1412444"]
     };
     $scope.grades = [{
         course: 'Networking Fundamentals',

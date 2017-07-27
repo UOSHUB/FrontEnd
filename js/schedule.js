@@ -1,8 +1,8 @@
-app.controller('schedule', ["$scope", "$mdDialog", "$localStorage",
+app.controller('schedule', ["$scope", "$mdDialog", "$ls",
 
-function($scope, $mdDialog, $localStorage) {
-    if($localStorage.semester == -1)
-        $localStorage.semester = 1;
+function($scope, $mdDialog, $ls) {
+    if($ls.semester == -1)
+        $ls.semester = 1;
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
     $scope.height = 14.074074074074074;
     $scope.labels = [[8,"AM"],[9,"AM"],[10,"AM"],[11,"AM"],[12,"PM"],[1,"PM"],[2,"PM"]];
@@ -11,7 +11,7 @@ function($scope, $mdDialog, $localStorage) {
 
     $scope.cancel = $mdDialog.cancel;
     $scope.showCourse = function(event, id, x) {
-        $scope.course = $localStorage.semesters[$localStorage.semester][id];
+        $scope.course = $ls.semesters[$ls.semester][id];
         $scope.course.id = id;
         $mdDialog.show({
             templateUrl: 'class-dialog',

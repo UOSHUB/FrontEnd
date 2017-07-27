@@ -1,8 +1,8 @@
-app.controller('courses', ["$scope", "$localStorage",
+app.controller('courses', ["$scope", "$ls",
 
-function($scope, $localStorage) {
-    for (var firstCourseId in $localStorage.semesters[$localStorage.semester]) break;
-    $localStorage.course = firstCourseId;
+function($scope, $ls) {
+    for (var firstCourseId in $ls.semesters[$ls.semester]) break;
+    $ls.course = firstCourseId;
     $scope.repeat = new Array(12);
     $scope.mass = false;
     $scope.all = false;
