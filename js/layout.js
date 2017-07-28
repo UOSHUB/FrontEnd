@@ -1,7 +1,11 @@
 app.controller('layout', ["$scope", "$ls", "$location", "$goto",
 
 function($scope, $ls, $location, $goto) {
-    $scope.goto = $goto;
+    angular.extend($scope, {
+        $loc: $location,
+        goto: $goto,
+        $ls: $ls
+    });
     $scope.links = [{
         title: 'dashboard',
         icon: 'tachometer'
@@ -56,10 +60,10 @@ function($mdDialog, $http, $ls, $goto) {
                     parent: $('body'),
                     scope: $scope
                 }).then(function(data) {
-                    if(!$ls.name) data.new = true;
+                    if(!$ls.name) data['new'] = true;
                     $http.post("/api/login/", data).then(function(response) {
                         angular.extend($ls, response.data, {loggedIn: true});
-                        $goto('dashboard')
+                        $goto('dashboard');
                     }, function(response) {
                         element.triggerHandler('click');
                     });

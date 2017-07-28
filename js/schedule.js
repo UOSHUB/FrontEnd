@@ -15,7 +15,7 @@ function($scope, $mdDialog, $ls) {
         $scope.course.id = id;
         $mdDialog.show({
             templateUrl: 'class-dialog',
-            parent: angular.element(document.body),
+            parent: $('body'),
             clickOutsideToClose: true,
             preserveScope: true,
             targetEvent: event,
