@@ -15,7 +15,7 @@
             </md-toolbar>
             <md-content md-colors="::{background: 'accent-900'}" flex>
                 <md-list flex>
-                    <md-list-item class="md-1-line" ng-repeat="link in links" ng-click="redirect('/' + link.title + '/')"
+                    <md-list-item class="md-1-line" ng-repeat="link in links" ng-click="goto(link.title)"
                                   md-colors="{background: $loc.path() == '/' + link.title + '/' ? 'accent-700' : 'accent-900'}">
                         <md-icon md-font-icon="fa fa-{{ link.icon }} fa-fw" class="md-avatar-icon"></md-icon>
                         <div class="md-list-item-text" flex>
@@ -33,7 +33,7 @@
                                ng-click="$ls.tightNav = !$ls.tightNav" style="margin-right: 16px">
                         <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
                     </md-button>
-                    <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="redirect('/calendar/')">Academic Calendar</md-button>
+                    <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('/calendar/')">Academic Calendar</md-button>
                     <md-select ng-show="$loc.path() == '/schedule/'" ng-model="$ls.semester" flex="25">
                         <md-option ng-repeat="semester in semesters track by $index" ng-value="$index" ng-disabled="$index > 1">{{ semester }}</md-option>
                     </md-select>

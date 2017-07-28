@@ -25,13 +25,13 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
         .otherwise({ templateUrl: '/static/notfound.html' });
 }])
 
-.run(["$location", "$rootScope", "$ls", "$mdToast", "$timeout", "$route",
+.run(["$location", "$rootScope", "$ls", "$mdToast", "$timeout", "$route", "$goto",
 
-function($location, $rootScope, $ls, $mdToast, $timeout, $route) {
+function($location, $rootScope, $ls, $mdToast, $timeout, $route, $goto) {
     $rootScope.$route = $route;
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
         if(next.requiresLogin && !$ls.loggedIn) {
-            $rootScope.redirect('/');
+            $goto('/');
             $timeout(function() {
                 $mdToast.show(
                     $mdToast.simple()
@@ -47,9 +47,6 @@ function($location, $rootScope, $ls, $mdToast, $timeout, $route) {
         window.document.title = (current.$$route ? current.$$route.controller : 'Page not found') + ' - UOS HUB';
     });
     $rootScope.$loc = $location;
-    $rootScope.redirect = function(link) {
-        $location.path(link);
-    };
     $rootScope.$ls = $ls.$default({
         semesters: [
             {"1411445":{"ch":3,"crn":21155,"days":["T","R"],"doctor":["Djedjiga Mouheb","dmouheb@sharjah.ac.ae"],"name":"IT Application in E-Commerce","place":["W8","105"],"section":"11","time":["8:00 AM","9:15 AM"],"color":"red","minutes":[480,555],"points":[[43,12.037037037037038],[81,12.037037037037038]],"length":1.25},"1411490":{"ch":3,"crn":21167,"days":["T","R"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Topics in Computer Science I","place":["W8","105"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"teal","minutes":[570,645],"points":[[43,33.14814814814815],[81,33.14814814814815]],"length":1.25},"1412341":{"ch":3,"crn":21163,"days":["M","W"],"doctor":["Imran N. Junejo","ijunejo@sharjah.ac.ae"],"name":"3D Design for Web","place":["W8","106"],"section":"11","time":["9:30 AM","10:45 AM"],"color":"green","minutes":[570,645],"points":[[24,33.14814814814815],[62,33.14814814814815]],"length":1.25},"1412443":{"ch":3,"crn":21168,"days":["M","W"],"doctor":["Naveed Ahmed","nahmed@sharjah.ac.ae"],"name":"Human-Computer Interaction","place":["W9","005"],"section":"11","time":["12:30 PM","1:45 PM"],"color":"orange","minutes":[750,825],"points":[[24,75.37037037037038],[62,75.37037037037038]],"length":1.25},"0602246":{"ch":3,"crn":20935,"days":["M","W"],"doctor":["Wael A. Allam","wallam@sharjah.ac.ae"],"name":"Human Rights in Islam & International Declaration","place":["M1","023"],"section":"02A","time":["11:00 AM","12:15 PM"],"color":"purple","minutes":[660,735],"points":[[24,54.25925925925926],[62,54.25925925925926]],"length":1.25}},
@@ -64,4 +61,10 @@ function($location, $rootScope, $ls, $mdToast, $timeout, $route) {
 
 .factory('$ls', ["$localStorage", function($localStorage) {
     return $localStorage;
-}]);
+}])
+
+.factory('$goto', ["$location", function($location) {
+    return function(link) {
+        $location.path(link.replace(/\/?$/, '/'));
+    };
+}])

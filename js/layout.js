@@ -1,6 +1,7 @@
-app.controller('layout', ["$scope", "$rootScope", "$ls", "$location",
+app.controller('layout', ["$scope", "$ls", "$location", "$goto",
 
-function($scope, $rootScope, $ls, $location) {
+function($scope, $ls, $location, $goto) {
+    $scope.goto = $goto;
     $scope.links = [{
         title: 'dashboard',
         icon: 'tachometer'
@@ -24,7 +25,7 @@ function($scope, $rootScope, $ls, $location) {
     $scope.logout = function() {
         $ls.loggedIn = false;
         if($location.path() != "/calendar/")
-            $rootScope.redirect('/');
+            $goto('/');
     };
     $scope.semesters = [
         "Spring Semester 2016 - 2017",
@@ -39,9 +40,9 @@ function($scope, $rootScope, $ls, $location) {
 }])
 
 
-.directive('login', ["$mdDialog", "$http", "$ls",
+.directive('login', ["$mdDialog", "$http", "$ls", "$goto",
 
-function($mdDialog, $http, $ls) {
+function($mdDialog, $http, $ls, $goto) {
     return {
         link: function($scope, element, attrs) {
             $scope.cancel = $mdDialog.cancel;
@@ -58,6 +59,7 @@ function($mdDialog, $http, $ls) {
                     if(!$ls.name) data.new = true;
                     $http.post("/api/login/", data).then(function(response) {
                         angular.extend($ls, response.data, {loggedIn: true});
+                        $goto('dashboard')
                     }, function(response) {
                         element.triggerHandler('click');
                     });
