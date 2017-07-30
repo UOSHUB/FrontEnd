@@ -50,7 +50,9 @@ function($ls) {
     };
 }])
 
-.factory('$load', ["$rootScope", function($rootScope) {
+.factory('$load', ["$rootScope", "$ls", "$goto", "$timeout", "$mdToast",
+
+function($rootScope, $ls, $goto, $timeout, $mdToast) {
     return function(route, secure) {
         return {
             templateUrl: '/static/' + route + '.html',
@@ -58,27 +60,21 @@ function($ls) {
             resolve: angular.extend({
                 pageTitle: function() { $rootScope.title = route + " - UOS HUB"; }
             }, secure && {
-                security: [ "$security", function($security) { $security(); } ]
+                security: function() {
+                    if(!$ls.loggedIn) {
+                        $goto('/');
+                        $timeout(function() {
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .textContent('You need to login first!')
+                                    .position('top right')
+                                    .parent($('#content'))
+                                    .hideDelay(2000)
+                            );
+                        }, 300);
+                    }
+                }
             })
         };
-    };
-}])
-
-.factory('$security', ["$ls", "$goto", "$timeout", "$mdToast",
-
-function($ls, $goto, $timeout, $mdToast) {
-    return function() {
-        if(!$ls.loggedIn) {
-            $goto('/');
-            $timeout(function() {
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('You need to login first!')
-                        .position('top right')
-                        .parent($('#content'))
-                        .hideDelay(2000)
-                );
-            }, 300);
-        }
     };
 }]);
