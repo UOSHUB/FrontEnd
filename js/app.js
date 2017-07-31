@@ -22,7 +22,7 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
         .when('/courses/', $load('courses', true))
         .when('/email/', $load('email', true))
         .when('/calendar/', $load('calendar'))
-        .otherwise({ templateUrl: '/static/notfound.html' });
+        .otherwise($load('notfound', false, "Page not found"));
 }])
 
 .run(["$ls",
@@ -53,12 +53,12 @@ function($ls) {
 .factory('$load', ["$rootScope", "$ls", "$goto", "$timeout", "$mdToast",
 
 function($rootScope, $ls, $goto, $timeout, $mdToast) {
-    return function(route, secure) {
+    return function(route, secure, title) {
         return {
             templateUrl: '/static/' + route + '.html',
             controller: route,
             resolve: angular.extend({
-                pageTitle: function() { $rootScope.title = route + " - UOS HUB"; }
+                pageTitle: function() { $rootScope.title = (title || route) + " - UOS HUB"; }
             }, secure && {
                 security: function() {
                     if(!$ls.loggedIn) {
