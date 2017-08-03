@@ -12,7 +12,7 @@
 }
 
 #sidenav.tight {
-    width: 76px;
+    width: 64px;
 }
 
 #sidenav md-toolbar {
@@ -20,8 +20,8 @@
 }
 
 #sidenav md-toolbar md-icon {
-    width: 32px;
     height: 36px;
+    min-width: 32px;
     margin: 14px 16px;
 }
 
@@ -86,7 +86,7 @@ ng-view, ng-view md-card {
 md-dialog .md-toolbar-tools {
     max-height: 100%;
     padding: 0 24px;
-    font-size: 28px;
+    font-size: 25px;
 }
 
 md-dialog p {

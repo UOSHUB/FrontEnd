@@ -59,10 +59,13 @@ function($mdDialog, $http, $ls, $goto) {
                     parent: $('body'),
                     scope: $scope
                 }).then(function(data) {
-                    if(!$ls.name) data['new'] = true;
                     $http.post("/api/login/", data).then(function(response) {
-                        angular.extend($ls, response.data, {loggedIn: true});
+                        $ls.loggedIn = true;
                         $goto('dashboard');
+                        if(!$ls.name)
+                            $http.get("/api/details/").then(function(response) {
+                                angular.extend($ls, response.data);
+                            }, function() {});
                     }, function(response) {
                         element.triggerHandler('click');
                     });
