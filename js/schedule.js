@@ -1,6 +1,12 @@
 app.controller('schedule', ["$scope", "$mdDialog", "$ls",
 
 function($scope, $mdDialog, $ls) {
+    $ls.semestersTitles = [
+        "Spring Semester 2016 - 2017",
+        "Fall Semester 2016 - 2017",
+        "Spring Semester 2015 - 2016",
+        "Fall Semester 2015 - 2016"
+    ];
     if($ls.semester == -1)
         $ls.semester = 1;
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];

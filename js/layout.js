@@ -1,6 +1,11 @@
 app.controller('layout', ["$scope", "$ls", "$location", "$goto",
 
 function($scope, $ls, $location, $goto) {
+    var toolbars = ['schedule'];
+    $scope.$on('$routeChangeSuccess', function(event, current) {
+        $scope.toolbar = toolbars[toolbars.indexOf(current.$$route.controller)];
+    });
+
     angular.extend($scope, {
         $loc: $location,
         goto: $goto,
@@ -30,12 +35,6 @@ function($scope, $ls, $location, $goto) {
         if($location.path() != "/calendar/")
             $goto('/');
     };
-    $scope.semesters = [
-        "Spring Semester 2016 - 2017",
-        "Fall Semester 2016 - 2017",
-        "Spring Semester 2015 - 2016",
-        "Fall Semester 2015 - 2016"
-    ];
     $scope.setDirection = function(direction) {
         $ls.direction = direction;
         $ls.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
