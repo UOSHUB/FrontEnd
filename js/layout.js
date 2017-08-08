@@ -1,13 +1,12 @@
-app.controller('layout', ["$scope", "$ls", "$location", "$goto",
+app.controller('layout', ["$scope", "$ls", "$goto",
 
-function($scope, $ls, $location, $goto) {
-    var toolbars = ['schedule'];
+function($scope, $ls, $goto) {
+    var toolbars = ['schedule', 'courses', 'email', 'calendar'];
     $scope.$on('$routeChangeSuccess', function(event, current) {
-        $scope.toolbar = toolbars[toolbars.indexOf(current.$$route.controller)];
+        $scope.page = current.$$route.controller;
+        $scope.hasToolbar = toolbars.indexOf($scope.page) > -1;
     });
-
     angular.extend($scope, {
-        $loc: $location,
         goto: $goto,
         $ls: $ls
     });
@@ -32,12 +31,8 @@ function($scope, $ls, $location, $goto) {
     };
     $scope.logout = function() {
         $ls.loggedIn = false;
-        if($location.path() != "/calendar/")
+        if($scope.page != 'calendar')
             $goto('/');
-    };
-    $scope.setDirection = function(direction) {
-        $ls.direction = direction;
-        $ls.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
 }])
 

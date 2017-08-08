@@ -1,3 +1,9 @@
+<script type="text/ng-template" id="courses">
+    <md-select ng-model="$ls.course" flex="25">
+        <md-option ng-repeat="(id, course) in $ls.semesters[$ls.semester]" ng-value="id">{{ course.name }}</md-option>
+    </md-select>
+</script>
+
 <div layout="row" flex>
     <md-card flex="30">
         <md-toolbar md-colors="{background: 'brown-600'}">

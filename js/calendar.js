@@ -28,4 +28,9 @@ function($scope, $filter) {
         if(event)
             return "<div class='breadcrumb'>" + event + "</div>";
     };
+
+    $scope.$parent.setDirection = function(direction) {
+        $scope.direction = direction;
+        $scope.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
+    };
 }]);
