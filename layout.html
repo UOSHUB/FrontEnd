@@ -15,11 +15,11 @@
             </md-toolbar>
             <md-content md-colors="::{background: 'accent-900'}" flex>
                 <md-list flex>
-                    <md-list-item class="md-1-line" ng-repeat="link in links" ng-click="goto(link.title)"
-                                  md-colors="{background: page == link.title ? 'accent-700' : 'accent-900'}">
-                        <md-icon md-font-icon="fa fa-{{ link.icon }} fa-fw" class="md-avatar-icon"></md-icon>
+                    <md-list-item class="md-1-line" ng-repeat="(page, icon) in pages" ng-click="goto(page)"
+                                  md-colors="{background: page == currentPage ? 'accent-700' : 'accent-900'}">
+                        <md-icon md-font-icon="fa fa-{{ icon }} fa-fw" class="md-avatar-icon"></md-icon>
                         <div class="md-list-item-text" flex>
-                            <p class="md-title">{{ capitalize(link.title) }}</p>
+                            <p class="md-title">{{ capitalize(page) }}</p>
                         </div>
                     </md-list-item>
                 </md-list>
@@ -34,7 +34,7 @@
                         <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
                     </md-button>
                     <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('/calendar/')">Academic Calendar</md-button>
-                    <ng-include src="hasToolbar && page" layout="row" flex></ng-include>
+                    <ng-include src="hasToolbar && currentPage" layout="row" flex></ng-include>
                     <div ng-if="!hasToolbar" flex></div>
                     <h2 ng-show="$ls.loggedIn" md-colors="::{color: 'accent-800'}">{{ $ls.name }}</h2>
                     <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>

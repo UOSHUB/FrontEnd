@@ -8,7 +8,7 @@
     </div>
     <div id="slideshow-new-logo" layout="column" flex="60">
         <div id="slideshow">
-            <img ng-repeat="image in images track by $index"
+            <img ng-repeat="(image, icon) in pages track by $index"
                  ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
         </div>
         <span id="new-logo" layout="row" layout-align="center center">

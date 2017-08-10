@@ -1,7 +1,6 @@
 app.controller('welcome', ["$scope", "$interval",
 
 function($scope, $interval) {
-    $scope.images = ["dashboard", "schedule", "courses", "email", "calendar"];
     $scope.counter = 0;
     $interval(function() {
         $scope.counter++;

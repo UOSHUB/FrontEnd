@@ -54,10 +54,7 @@ md-card {
     padding: 6px;
 }
 
-#sidenav, #right-margin,
-#toolbar button[ng-show],
-#toolbar button[ng-hide],
-#toolbar md-select {
+#sidenav, #right-margin {
     transition: all ease 0.8s;
 }
 
@@ -74,11 +71,6 @@ md-card {
     max-height: 64px;
 }
 
-#toolbar button.ng-hide,
-#toolbar md-select.ng-hide {
-    opacity: 0;
-}
-
 ng-view, ng-view md-card {
     margin: 12px;
 }
@@ -86,7 +78,6 @@ ng-view, ng-view md-card {
 md-dialog .md-toolbar-tools {
     max-height: 100%;
     padding: 0 24px;
-    font-size: 25px;
 }
 
 md-dialog p {
