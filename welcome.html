@@ -1,16 +1,17 @@
 <div layout="row" flex="10"></div>
 <div layout="row" layout-align="center center">
-    <div layout="column" flex>
+    <div layout="column" flex="40" layout-padding>
         <h1 class="md-display-1" md-colors="{color: 'primary'}">Forget UOS, Try UOS HUB</h1>
         <p class="md-headline">This'll revolutionize your experience with UOS online services and combine all of them in one place (Blackboard, myUDC, Outlook Email)</p>
         <md-button class="md-raised" layout-padding login>Take a Tour</md-button>
         <md-button class="md-raised" layout-padding login>Get Started, Login</md-button>
     </div>
-    <div layout="column" layout-margin></div>
-    <div id="slideshow-new-logo" layout="column" flex-none>
-        <img ng-repeat="image in images track by $index" width="1000"
-             ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
-        <span layout="row" layout-align="center center">
+    <div id="slideshow-new-logo" layout="column" flex="60">
+        <div id="slideshow">
+            <img ng-repeat="image in images track by $index"
+                 ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
+        </div>
+        <span id="new-logo" layout="row" layout-align="center center">
             <img src="/static/img/favicon.ico">
         </span>
     </div>

@@ -2,11 +2,19 @@
     position: relative;
 }
 
-#slideshow-new-logo span {
-    background-color: white;
-    position: absolute;
-    height: 18px;
-    width: 22px;
-    left: 140px;
-    top: 74px;
-}
+    #slideshow img {
+        width: 100%;
+    }
+
+    #new-logo {
+        background-color: white;
+        position: absolute;
+        height: calc(100% * .030);;
+        width: calc(100% * .022);
+        left: calc(100% * .14);
+        top: calc(100% * .13);
+    }
+        #new-logo img {
+            width: calc(100% * .75);
+            height: 100%;
+        }
