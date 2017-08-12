@@ -43,7 +43,7 @@
             </md-toolbar>
             <div id="content" layout="row" flex>
                 <ng-view layout="column" flex ng-cloak></ng-view>
-                <div id="right-margin" ng-class="{'inflate': !$ls.loggedIn}"></div>
+                <div id="right-margin" ng-class="{'inflate': !$ls.loggedIn}" hide-xs></div>
             </div>
         </div>
     </body>

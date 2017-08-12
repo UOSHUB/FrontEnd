@@ -2,9 +2,22 @@
     cursor: pointer;
 }
 
+#sidenav, #right-margin {
+    transition: all ease 0.8s;
+}
+
+#right-margin {
+    width: 0;
+}
+
+#right-margin.inflate,
 #sidenav {
     width: 200px;
+}
+
+#toolbar, #sidenav {
     height: 64px;
+    max-height: none;
 }
 
 #sidenav.open {
@@ -52,23 +65,6 @@ md-card {
     margin-right: 14px;
     font-size: 18px;
     padding: 6px;
-}
-
-#sidenav, #right-margin {
-    transition: all ease 0.8s;
-}
-
-#right-margin {
-    width: 0;
-}
-
-#right-margin.inflate {
-    width: 222px;
-}
-
-#toolbar {
-    height: 64px;
-    max-height: 64px;
 }
 
 ng-view, ng-view md-card {
