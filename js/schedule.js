@@ -1,6 +1,14 @@
-app.controller('schedule', ["$scope", "$mdDialog", "$ls",
+app.controller('schedule', ["$scope", "$mdDialog", "$ls", "$http",
 
-function($scope, $mdDialog, $ls) {
+function($scope, $mdDialog, $ls, $http) {
+    ($scope.getTerm = function(term) {
+        if(!$ls.terms[term])
+            $http.get('/api/schedule/' + term).then(function(response) {
+                $ls.terms[term] = response.data;
+                $ls.term = term;
+            }, function() {});
+    })($ls.term || currentTerm());
+
     $ls.semestersTitles = [
         "Spring Semester 2016 - 2017",
         "Fall Semester 2016 - 2017",

@@ -36,7 +36,8 @@ function($ls) {
         semester: 1,
         loggedIn: false,
         tightNav: false,
-        dayFormat: "d"
+        dayFormat: "d",
+        terms: {}
     });
 }])
 
