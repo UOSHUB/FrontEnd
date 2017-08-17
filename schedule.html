@@ -44,58 +44,11 @@
             </div>
         </md-toolbar>
         <md-dialog-content class="course-info-icons" layout="row" layout-margin>
-            <div layout="column" layout-align="space-between start" flex layout-margin>
-                <p>
-                    <md-icon md-font-icon="fa fa-user fa-fw"></md-icon>
-                    {{ course.doctor[0] }}
-                    <md-tooltip md-direction="right">Doctor Name</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-calendar-o fa-fw"></md-icon>
-                    {{ course.days[0] }} {{ course.days[1] }}
-                    <md-tooltip md-direction="right">Days</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-hourglass-start fa-fw"></md-icon>
-                    {{ course.time[0] }}
-                    <md-tooltip md-direction="right">Start Time</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-puzzle-piece fa-fw"></md-icon>
-                    {{ course.section }} <span md-colors="{color: 'default-grey-500'}">(Section)</span>
-                    <md-tooltip md-direction="right">Section</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-key fa-fw"></md-icon>
-                    {{ course.id }}
-                    <md-tooltip md-direction="right">Course key</md-tooltip>
-                </p>
-            </div>
-            <div layout="column" layout-align="space-between start" flex layout-margin>
-                <p>
-                    <md-icon md-font-icon="fa fa-envelope fa-fw"></md-icon>
-                    {{ course.doctor[1] }}
-                    <md-tooltip md-direction="right">Doctor Email</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-map-marker fa-fw"></md-icon>
-                    {{ course.place[0] }}, {{ course.place[1] }}
-                    <md-tooltip md-direction="right">Building, Room</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-hourglass-end fa-fw"></md-icon>
-                    {{ course.time[1] }}
-                    <md-tooltip md-direction="right">End Time</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-certificate fa-fw"></md-icon>
-                    {{ course.ch }} <span md-colors="{color: 'default-grey-500'}">(CrHrs)</span>
-                    <md-tooltip md-direction="right">Credit Hours</md-tooltip>
-                </p>
-                <p>
-                    <md-icon md-font-icon="fa fa-info fa-fw"></md-icon>
-                    {{ course.crn }}
-                    <md-tooltip md-direction="right">CRN</md-tooltip>
+            <div ng-repeat="column in course.columns" layout="column" layout-align="space-between start" flex layout-margin>
+                <p ng-repeat="row in column">
+                    <md-icon md-font-icon="fa fa-{{ row[2] }} fa-fw"></md-icon>
+                    {{ row[1] }} <span ng-if="row[3]" md-colors="{color: 'default-grey-500'}">{{ row[3] }}</span>
+                    <md-tooltip md-direction="right">{{ row[0] }}</md-tooltip>
                 </p>
             </div>
         </md-dialog-content>

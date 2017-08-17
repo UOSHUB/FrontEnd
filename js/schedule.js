@@ -25,8 +25,7 @@ function($scope, $mdDialog, $ls, $http) {
 
     $scope.cancel = $mdDialog.cancel;
     $scope.showCourse = function(event, id, x) {
-        $scope.course = $ls.semesters[$ls.semester][id];
-        $scope.course.id = id;
+        $scope.course = structureCourse($ls.semesters[$ls.semester][id], id);
         $mdDialog.show({
             templateUrl: 'class-dialog',
             parent: $('body'),
