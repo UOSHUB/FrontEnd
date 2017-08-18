@@ -1,8 +1,13 @@
 app.controller('courses', ["$scope", "$ls",
 
 function($scope, $ls) {
-    for (var firstCourseId in $ls.semesters[$ls.semester]) break;
-    $ls.course = firstCourseId;
+    $scope.$watch(function() { return $ls.course; }, function(id) {
+        $scope.course = structureCourse($ls.semesters[$ls.semester][id], id);
+    });
+    if(!$ls.course) {
+        for(var firstCourseId in $ls.semesters[$ls.semester]) break;
+        $ls.course = firstCourseId;
+    }
     $scope.repeat = new Array(12);
     $scope.mass = false;
     $scope.all = false;
