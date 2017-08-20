@@ -6,7 +6,7 @@
         <!--INCLUDES-->
     </head>
     <body ng-controller="layout" layout="row" md-colors="::{background: 'accent-50'}">
-        <md-sidenav id="sidenav" class="md-sidenav-left" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.tightNav}"
+        <md-sidenav id="sidenav" class="md-sidenav-left" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.selected.tightNav}"
                     md-whiteframe="1" md-is-locked-open="$mdMedia('gt-xs')" flex-none>
             <md-toolbar layout="row" layout-align="start center" md-colors="::{background: 'grey-A100'}">
                 <md-icon md-svg-icon="logo" md-colors="::{fill: 'accent-800'}"></md-icon>
@@ -30,7 +30,7 @@
             <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar">
                     <md-button ng-show="$ls.loggedIn" class="md-icon-button md-accent md-hue-3"
-                               ng-click="$ls.tightNav = !$ls.tightNav" style="margin-right: 16px">
+                               ng-click="$ls.selected.tightNav = !$ls.selected.tightNav" style="margin-right: 16px">
                         <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
                     </md-button>
                     <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('/calendar/')">Academic Calendar</md-button>

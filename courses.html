@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="courses">
-    <md-select ng-model="$ls.course" flex="25">
-        <md-option ng-repeat="(id, course) in $ls.semesters[$ls.semester]" ng-value="id">{{ course.name }}</md-option>
+    <md-select ng-model="$ls.selected.course" flex="25">
+        <md-option ng-repeat="(id, course) in $ls.semesters[$ls.selected.semester]" ng-value="id">{{ course.name }}</md-option>
     </md-select>
 </script>
 

@@ -15,8 +15,8 @@ function($scope, $mdDialog, $ls, $http) {
         "Spring Semester 2015 - 2016",
         "Fall Semester 2015 - 2016"
     ];
-    if($ls.semester == -1)
-        $ls.semester = 1;
+    if($ls.selected.semester == -1)
+        $ls.selected.semester = 1;
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
     $scope.height = 14.074074074074074;
     $scope.labels = [[8,"AM"],[9,"AM"],[10,"AM"],[11,"AM"],[12,"PM"],[1,"PM"],[2,"PM"]];
@@ -25,7 +25,7 @@ function($scope, $mdDialog, $ls, $http) {
 
     $scope.cancel = $mdDialog.cancel;
     $scope.showCourse = function(event, id, x) {
-        $scope.course = structureCourse($ls.semesters[$ls.semester][id], id);
+        $scope.course = structureCourse($ls.semesters[$ls.selected.semester][id], id);
         $mdDialog.show({
             templateUrl: 'class-dialog',
             parent: $('body'),

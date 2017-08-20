@@ -1,12 +1,12 @@
 app.controller('courses', ["$scope", "$ls",
 
 function($scope, $ls) {
-    $scope.$watch(function() { return $ls.course; }, function(id) {
-        $scope.course = structureCourse($ls.semesters[$ls.semester][id], id);
+    $scope.$watch(function() { return $ls.selected.course; }, function(id) {
+        $scope.course = structureCourse($ls.semesters[$ls.selected.semester][id], id);
     });
-    if(!$ls.course) {
-        for(var firstCourseId in $ls.semesters[$ls.semester]) break;
-        $ls.course = firstCourseId;
+    if(!$ls.selected.course) {
+        for(var firstCourseId in $ls.semesters[$ls.selected.semester]) break;
+        $ls.selected.course = firstCourseId;
     }
     $scope.repeat = new Array(12);
     $scope.mass = false;

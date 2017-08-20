@@ -1,17 +1,17 @@
 <script type="text/ng-template" id="calendar">
     <div flex></div>
-    <md-button class="md-accent md-hue-2" ng-click="setDirection('vertical')">List View</md-button>
-    <md-button class="md-accent md-hue-2" ng-click="setDirection('horizontal')">Table View</md-button>
+    <md-button class="md-accent md-hue-2" ng-click="$ls.selected.calDir = 'vertical'">List View</md-button>
+    <md-button class="md-accent md-hue-2" ng-click="$ls.selected.calDir = 'horizontal'">Table View</md-button>
 </script>
 
 <md-card flex layout="column">
     <calendar-md flex style="height: 0" 
-        calendar-direction="direction"
+        calendar-direction="$ls.selected.calDir"
         title-format="'MMMM y'"
         ng-model="selectedDate"
         week-starts-on="firstDayOfWeek"
         tooltips="tooltips"
-        day-format="dayFormat"
+        day-format="$ls.selected.calDir == 'vertical' ? 'EEEE, MMMM d' : 'd'"
         day-label-format="'EEE'"
         day-label-tooltip-format="'EEEE'"
         day-tooltip-format="'fullDate'"
