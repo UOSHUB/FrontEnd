@@ -1,6 +1,6 @@
-app.controller('calendar', ["$scope", "$filter",
+app.controller('calendar', ["$scope",
 
-function($scope, $filter) {
+function($scope) {
     $scope.selectedDate = new Date();
     $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     $scope.tooltips = true;
@@ -27,10 +27,5 @@ function($scope, $filter) {
         var event = $scope.events[date.getDate() + ' ' + date.getMonth()];
         if(event)
             return "<div class='breadcrumb'>" + event + "</div>";
-    };
-
-    $scope.$parent.setDirection = function(direction) {
-        $scope.direction = direction;
-        $scope.dayFormat = direction === "vertical" ? "EEEE, MMMM d" : "d";
     };
 }]);

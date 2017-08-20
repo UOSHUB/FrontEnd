@@ -10,3 +10,7 @@
 md-pagination-wrapper, md-tab-item {
     width: 100%;
 }
+
+md-card-header {
+    margin: 8px 0 24px;
+}
