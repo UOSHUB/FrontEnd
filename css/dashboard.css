@@ -1,3 +1,12 @@
 .fill-width {
     width: 100%;
 }
+
+.align-right {
+    line-height: 22px;
+    text-align: end;
+}
+
+.align-right .md-caption {
+    color: rgba(0, 0, 0, .54);
+}

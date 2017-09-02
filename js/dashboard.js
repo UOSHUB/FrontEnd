@@ -1,20 +1,15 @@
-app.controller('dashboard', ["$scope", "$ls",
+app.controller('dashboard', ["$scope", "$ls", "$http",
 
-function($scope, $ls) {
+function($scope, $ls, $http) {
+    if(!$ls.updates)
+        $http.get("/api/updates/").then(function(response) {
+            angular.forEach(response.data.updates, function(item) {
+                item.course = response.data.courses[item.courseId].split('-')[0];
+            });
+            angular.extend($ls, {updates: response.data.updates});
+        }, function() {});
+
     $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
-    $scope.announcements = [{
-        title: 'Project Final Submission Due',
-        course: 'Introduction to Computer Graphics',
-        time: '13 hours ago'
-    }, {
-        title: 'Chapter 6 Available',
-        course: 'Critical Reading and Writing',
-        time: '2 days ago'
-    }, {
-        title: 'Notes - 3dsmax Available',
-        course: '2D/3D Computer Animation',
-        time: '3 days ago'
-    }];
 
     $scope.emails = [{
         subject: 'Project Final Submission Due',

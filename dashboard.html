@@ -2,16 +2,19 @@
     <md-card flex>
         <md-toolbar md-colors="{background: 'orange-600', color: 'grey-A100'}">
             <div class="md-toolbar-tools" flex>
-                <span flex>Announcements</span>
+                <span flex>Updates</span>
             </div>
         </md-toolbar>
         <md-content flex>
             <md-list flex>
-                <md-list-item class="md-2-line" ng-repeat="index in repeat" ng-init="ann = announcements[index%3]" ng-click="null">
+                <md-list-item class="md-2-line" ng-repeat="update in $ls.updates | orderBy: '-time'" ng-click="null">
                     <div class="md-list-item-text" flex>
-                        <h3>{{ ann.title }}</h3>
-                        <p>{{ ann.course }}</p>
-                        <p class="md-secondary">{{ ann.time }}</p>
+                        <h3>{{ update.title }}</h3>
+                        <p>{{ update.course }}</p>
+                        <div class="md-secondary align-right" layout="column">
+                            <span>{{ update.time | date: 'MMM d' }}</span>
+                            <span class="md-caption">{{ update.event }}</span>
+                        </div>
                     </div>
                 </md-list-item>
             </md-list>
@@ -50,7 +53,7 @@
                         <p>{{ task.group }}</p>
                         <md-progress-linear style="margin-top: 4px" md-mode="determinate" flex="80"
                                             value="{{task.title.length * (index+3) % 90}}"></md-progress-linear>
-                        <div class="md-secondary" style="line-height: 24px; text-align: end" layout="column">
+                        <div class="md-secondary align-right" layout="column">
                             <span>{{ task.day }}</span>
                             <span>{{ task.time }}</span>
                         </div>
