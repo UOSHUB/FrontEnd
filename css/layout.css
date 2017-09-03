@@ -67,8 +67,16 @@ md-card {
     padding: 6px;
 }
 
+md-toolbar {
+    min-height: 64px;
+}
+
 ng-view, ng-view md-card {
     margin: 12px;
+}
+
+md-card {
+    background-color: #fafafa;
 }
 
 md-dialog .md-toolbar-tools {

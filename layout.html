@@ -25,8 +25,7 @@
                 </md-list>
             </md-content>
         </md-sidenav>
-
-        <div layout="column" flex>
+        <md-content layout="column" md-colors="::{background: 'accent-50'}" flex>
             <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar">
                     <md-button ng-show="$ls.loggedIn" class="md-icon-button md-accent md-hue-3"
@@ -36,15 +35,15 @@
                     <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('/calendar/')">Academic Calendar</md-button>
                     <ng-include src="hasToolbar && currentPage" layout="row" flex></ng-include>
                     <div ng-if="!hasToolbar" flex></div>
-                    <h2 ng-show="$ls.loggedIn" md-colors="::{color: 'accent-800'}">{{ $ls.name }}</h2>
+                    <h2 ng-show="$ls.loggedIn" md-colors="::{color: 'accent-800'}">{{ $ls.student.name }}</h2>
                     <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
                     <md-button ng-if="$ls.loggedIn" class="md-primary md-hue-2" ng-click="logout()">Logout</md-button>
                 </div>
             </md-toolbar>
             <div id="content" layout="row" flex>
-                <ng-view layout="column" flex ng-cloak></ng-view>
+                <ng-view layout-gt-xs="column" flex ng-cloak></ng-view>
                 <div id="right-margin" ng-class="{'inflate': !$ls.loggedIn}" hide-xs></div>
             </div>
-        </div>
+        </md-content>
     </body>
 </html>

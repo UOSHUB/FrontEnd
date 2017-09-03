@@ -17,7 +17,7 @@ function($mdDialog, $http, $ls, $goto) {
                     $http.post("/api/login/", data).then(function(response) {
                         $ls.loggedIn = true;
                         $goto('dashboard');
-                        if(!$ls.name)
+                        if(!$ls.student)
                             $http.get("/api/details/").then(function(response) {
                                 angular.extend($ls, response.data);
                             }, function() {});
