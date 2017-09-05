@@ -28,12 +28,15 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-2-line" ng-repeat="index in repeat" ng-init="email = emails[index%3]" ng-click="null">
+                <md-list-item class="md-2-line limited-width" ng-repeat="email in $ls.emails" ng-click="null">
                     <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ getInitials(email.sender) }}</div>
-                    <div class="md-list-item-text" flex>
-                        <h3>{{ email.subject }}</h3>
+                    <div class="md-list-item-text">
+                        <h3>{{ email.title }}</h3>
                         <p>{{ email.sender }}</p>
-                        <p class="md-secondary">{{ email.time }}</p>
+                        <p class="md-secondary align-right" layout="column">
+                            <span>{{ email.time | date: 'MMM d' }}</span>
+                            <span class="md-caption">{{ email.event | limitTo: 10 }}</span>
+                        </p>
                     </div>
                 </md-list-item>
             </md-list>

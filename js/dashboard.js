@@ -1,33 +1,32 @@
 app.controller('dashboard', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
-    if(!$ls.updates)
+    ($scope.getUpdates = function() {
         $http.get("/api/updates/").then(function(response) {
             angular.forEach(response.data.updates, function(item) {
                 item.course = response.data.courses[item.courseId].split('-')[0];
             });
             angular.extend($ls, {updates: response.data.updates});
         }, function() {});
+    })();
+
+    ($scope.getEmails = function() {
+        $http.get("/api/emails/previews").then(function(response) {
+            $ls.emails = response.data;
+        }, function() {});
+    })();
+
+    $scope.getInitials = function(name) {
+        if(!name) return;
+        var words = name.split(' ');
+        return (
+            words[1] ?
+            words[0].slice(0, 1) + words[1].slice(0, 1):
+            words[0].slice(0, 2)
+        ).toUpperCase();
+    };
 
     $scope.repeat = [0,1,2,3,4,5,6,7,8,9];
-
-    $scope.emails = [{
-        subject: 'Project Final Submission Due',
-        sender: 'Introduction to Computer Graphics',
-        time: '13 hours ago'
-    }, {
-        subject: 'Chapter 6 Available',
-        sender: 'Critical Reading and Writing',
-        time: '2 days ago'
-    }, {
-        subject: 'Notes - 3dsmax Available',
-        sender: '2D/3D Computer Animation',
-        time: '3 days ago'
-    }];
-    $scope.getInitials = function(name) {
-        var words = name.split(' ');
-        return (words[0].slice(0, 1) + words[1].slice(0, 1)).toUpperCase();
-    };
 
     $scope.tasks = [{
         title: 'Project Final Submission Due',
