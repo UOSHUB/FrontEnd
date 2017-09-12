@@ -1,5 +1,7 @@
-.layout-xs-column md-card {
-    max-height: 350px;
+@media (max-width: 599px) {
+    .layout-xs-column md-card {
+        max-height: 350px;
+    }
 }
 
 .fill-width {
@@ -20,5 +22,5 @@
 }
 
 .limited-width .md-avatar-icon {
-        min-width: 36px;
+    min-width: 36px;
 }

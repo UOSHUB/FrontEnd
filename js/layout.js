@@ -22,7 +22,7 @@ function($scope, $ls, $goto) {
     };
     $scope.logout = function() {
         $ls.loggedIn = false;
-        if($scope.page != 'calendar')
+        if($scope.currentPage != 'calendar')
             $goto('/');
     };
 }]);
