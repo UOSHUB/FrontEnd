@@ -16,6 +16,13 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
             }, function() {});
     })($ls.selected.term || currentTerm());
 
+    $toolbar.getTerms = function() {
+        if(!terms() || Object.keys($ls.terms).length == 1)
+            $http.get('/api/schedule/').then(function(response) {
+                $ls.terms = angular.extend(response.data, $ls.terms);
+            }, function() {});
+    };
+
     $ls.semestersTitles = [
         "Spring Semester 2016 - 2017",
         "Fall Semester 2016 - 2017",
@@ -42,4 +49,18 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
             scope: $scope
         });
     };
-}]);
+}])
+
+.filter('termTitle', function() {
+    return function(termCode) {
+        var year = termCode.slice(0, 4);
+        return {"10": "Fall", "20": "Spring", "30": "Summer"}[termCode.slice(4)]
+               + " Semester " + year + " - " + (Number(year) + 1);
+    };
+})
+
+.filter('orderTerms', function() {
+    return function(terms) {
+        return Object.keys(terms).reverse();
+    };
+});
