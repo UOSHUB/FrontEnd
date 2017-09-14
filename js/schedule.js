@@ -1,9 +1,15 @@
-app.controller('schedule', ["$scope", "$mdDialog", "$ls", "$http",
+app.controller('schedule', ["$scope", "$toolbar", "$ls", "$http", "$mdDialog",
 
-function($scope, $mdDialog, $ls, $http) {
+function($scope, $toolbar, $ls, $http, $mdDialog) {
+    function terms() {
+        if($ls.terms)
+            return true;
+        $ls.terms = {};
+        return false;
+    }
+
     ($scope.getSchedule = function(term) {
-        if(!$ls.terms) $ls.terms = {};
-        if(!$ls.terms[term])
+        if(!terms() || !angular.isObject($ls.terms[term]))
             $http.get('/api/schedule/' + term).then(function(response) {
                 $ls.terms[term] = response.data;
                 $ls.selected.term = term;
