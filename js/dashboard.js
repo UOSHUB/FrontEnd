@@ -45,10 +45,6 @@ function($scope, $ls, $http) {
         time: '5:59 AM'
     }];
 
-    $scope.classes = {
-        "1412340": $ls.semesters[1]["1412340"],
-        "1412444": $ls.semesters[1]["1412444"]
-    };
     $scope.grades = [{
         course: 'Networking Fundamentals',
         letter: 'A',
