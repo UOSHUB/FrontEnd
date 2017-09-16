@@ -19,7 +19,7 @@ function structureCourse(course, id) {
                 ['Section', course.section, 'puzzle-piece', '(Section)'],
                 ['Course key', id, 'key']
             ], [
-                ['Doctor Email', course.doctor, 'envelope'],
+                ['Doctor Email', course.email, 'envelope'],
                 ['Building, Room', course.location, 'map-marker'],
                 ['End Time', course.end, 'hourglass-end'],
                 ['Credit Hours', course.ch, 'certificate', '(CrHrs)'],
@@ -30,15 +30,14 @@ function structureCourse(course, id) {
 }
 
 var switchDay = {'U': 0, 'M': 1, 'T': 2, 'W': 3, 'R': 4, 'F': 5, 'S': 6},
-    topShift = 5, leftShift = 5, columnWidth = 19,
-    maxTime, minTime, hoursCount, rowHeight,
-    colors = ["red", "teal", "green", "orange",
-              "purple", "light-blue", "brown",
-              "yellow", "deep-orange", "blue"];
+    maxTime, minTime, hoursCount, colors = [
+        "red", "teal", "green", "orange", "purple",
+        "light-blue", "brown", "yellow", "deep-orange", "blue"
+    ];
 
 function processSchedule(courses) {
     maxTime = 0; minTime = 24 * 60;
-    var index = -1;
+    var rowHeight, topShift = 5, leftShift = 5, columnWidth = 19, index = -1;
     angular.forEach(courses, function(course, id) {
         if(course.start) {
             colorAndTime(course, ++index);
@@ -61,7 +60,7 @@ function processSchedule(courses) {
             course.points = [];
             var y = topShift + rowHeight * (toMinutes(course.start) - minTime) / 60;
             angular.forEach(course.days, function(day) {
-                course.points.push({x: leftShift + switchDay[day] * columnWidth, y});
+                course.points.push({x: leftShift + switchDay[day] * columnWidth, y: y});
             });
         }
     });
@@ -97,7 +96,7 @@ function hoursLabels() {
             period = (period == "PM" ? "AM" : "PM");
             hour = 12;
         } else hour = i % 12;
-        labels.push({hour, period});
+        labels.push({hour: hour, period: period});
     }
     return labels;
 }
