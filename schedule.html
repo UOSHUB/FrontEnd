@@ -1,34 +1,35 @@
 <script type="text/ng-template" id="schedule">
     <md-select ng-model="$ls.selected.term" ng-click="$toolbar.getTerms()" flex="25">
-        <md-option ng-repeat="term in $ls.terms | orderTerms" ng-value="term">{{ term | termTitle }}</md-option>
+        <md-option ng-repeat="term in $ls.terms | orderTerms" ng-value="term" ng-click="$toolbar.getSchedule(term)">{{ term | termTitle }}</md-option>
     </md-select>
     <span flex></span>
-    <md-button class="md-accent md-hue-2" ng-click="$ls.selected.semester = -1">Design Your Schedule</md-button>
+    <md-button class="md-accent md-hue-2" ng-click="$ls.selected.term = -1">Design Your Schedule</md-button>
 </script>
 
 <md-card flex>
     <md-card-content layout="row">
+        {{ term = !loading && $ls.terms[$ls.selected.term]; get = term.settings; '' }}
         <div class="day as-hours-head" md-colors="::{background: 'green-50'}"></div>
         <div class="day" ng-repeat="day in [1,2,3,4]"></div>
 
         <div class="hour as-days-head" md-colors="::{background: 'green-50'}"></div>
-        <div ng-repeat-start="fraction in fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * height }}%">
-            {{ labels[$index][0] }}<span class="hide-on-med-and-down">{{ labels[$index][1] }}</span>
+        <div ng-repeat-start="fraction in get.fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * get.height }}%">
+            {{ get.labels[$index].hour }}<span class="hide-on-med-and-down">{{ get.labels[$index].period }}</span>
         </div>
-        <div ng-if="!$last" class="half hour" style="top: {{ 5 + height * (0.5 + fraction) }}%"></div>
-        <div class="hour" style="top: {{ 5 + fraction * height }}%" ng-repeat-end></div>
+        <div ng-if="!$last" class="half hour" style="top: {{ 5 + get.height * (0.5 + fraction) }}%"></div>
+        <div class="hour" style="top: {{ 5 + fraction * get.height }}%" ng-repeat-end></div>
 
-        <div class="classes-container" ng-repeat="(id, course) in $ls.semesters[$ls.selected.semester]">
-            <div ng-repeat="point in course.points" ng-click="showCourse($event, id, point[0])"
+        <div class="classes-container" ng-repeat="(id, course) in term" ng-if="course.start">
+            <div ng-repeat="point in course.points" ng-click="showCourse($event, id)"
                  class="class" md-colors="::{background: course.color, color: 'grey-A100'}"
-                 ng-style="{height: course.length * height + '%', left: point[0] + '%', top: point[1] + '%'}">
-                <span class="course-name">{{ course.name }}</span><br>
-                <md-icon md-font-icon="fa fa-user fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.doctor[0] }}<br>
-                <md-icon md-font-icon="fa fa-map-marker fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.place[0] }} {{ course.place[1] }}
+                 ng-style="{height: course.length * get.height + '%', left: point.x + '%', top: point.y + '%'}">
+                <span class="course-title">{{ course.title }}</span><br>
+                <md-icon md-font-icon="fa fa-user fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.doctor }}<br>
+                <md-icon md-font-icon="fa fa-map-marker fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.location }}
             </div>
         </div>
         <div ng-repeat="day in days" class="day-label blue-grey-text text-darken-2" style="left: {{ 5 + $index * 19 }}%">
-            {{ day }} <span class="hide-on-small-only">{{ dates[$index] }}</span>
+            {{ day }} <span class="hide-on-small-only">{{ get.dates[$index] }}</span>
         </div>
     </md-card-content>
 </md-card><!--Schedule card end-->
@@ -37,7 +38,7 @@
     <md-dialog flex="40" md-colors="{background: 'default-grey-A100', color: 'default-grey-800'}" layout="column">
         <md-toolbar flex="10" md-colors="{background: 'default-' + course.color, color: 'default-grey-A100'}">
             <div class="md-toolbar-tools" flex>
-                <span flex>{{ course.name }}</span>
+                <span flex>{{ course.title }}</span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-font-icon="fa fa-times fa-lg"></md-icon>
                 </md-button>

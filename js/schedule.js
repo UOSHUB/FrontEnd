@@ -1,19 +1,22 @@
 app.controller('schedule', ["$scope", "$toolbar", "$ls", "$http", "$mdDialog",
 
 function($scope, $toolbar, $ls, $http, $mdDialog) {
-    function terms() {
+    function terms(term) {
         if($ls.terms)
             return true;
         $ls.terms = {};
+        if(term) $ls.selected.term = term;
         return false;
     }
 
-    ($scope.getSchedule = function(term) {
-        if(!terms() || !angular.isObject($ls.terms[term]))
+    ($toolbar.getSchedule = function(term) {
+        if(!terms(term) || !angular.isObject($ls.terms[term])) {
+            $scope.loading = true;
             $http.get('/api/schedule/' + term).then(function(response) {
-                $ls.terms[term] = response.data;
-                $ls.selected.term = term;
+                $ls.terms[term] = processSchedule(response.data);
+                $scope.loading = false;
             }, function() {});
+        }
     })($ls.selected.term || currentTerm());
 
     $toolbar.getTerms = function() {
@@ -38,8 +41,8 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
     $scope.dates = ["5/7","5/8","5/9","5/10","5/11"];
 
     $scope.cancel = $mdDialog.cancel;
-    $scope.showCourse = function(event, id, x) {
-        $scope.course = structureCourse($ls.semesters[$ls.selected.semester][id], id);
+    $scope.showCourse = function(event, id) {
+        $scope.course = structureCourse($ls.terms[$ls.selected.term][id], id);
         $mdDialog.show({
             templateUrl: 'class-dialog',
             parent: $('body'),

@@ -9,18 +9,19 @@ function currentTerm() {
 
 function structureCourse(course, id) {
     return {
-        name: course.name,
+        title: course.title,
+        color: course.color,
         columns: [
             [
-                ['Doctor Name', course.doctor[0], 'user'],
-                ['Days', course.days.join(' '), 'calendar-o'],
-                ['Start Time', course.time[0], 'hourglass-start'],
+                ['Doctor Name', course.doctor, 'user'],
+                ['Days', course.days, 'calendar-o'],
+                ['Start Time', course.start, 'hourglass-start'],
                 ['Section', course.section, 'puzzle-piece', '(Section)'],
                 ['Course key', id, 'key']
             ], [
-                ['Doctor Email', course.doctor[1], 'envelope'],
-                ['Building, Room', course.place.join(', '), 'map-marker'],
-                ['End Time', course.time[1], 'hourglass-end'],
+                ['Doctor Email', course.doctor, 'envelope'],
+                ['Building, Room', course.location, 'map-marker'],
+                ['End Time', course.end, 'hourglass-end'],
                 ['Credit Hours', course.ch, 'certificate', '(CrHrs)'],
                 ['CRN', course.crn, 'info']
             ]

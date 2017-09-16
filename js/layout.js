@@ -9,7 +9,9 @@ function($scope, $ls, $toolbar, $goto) {
     angular.extend($scope, {
         $toolbar: $toolbar,
         goto: $goto,
-        $ls: $ls
+        $ls: $ls.$default({
+            selected: {}
+        })
     });
     $scope.pages = {
         dashboard: 'tachometer',
