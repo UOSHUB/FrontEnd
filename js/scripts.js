@@ -35,6 +35,44 @@ var switchDay = {'U': 0, 'M': 1, 'T': 2, 'W': 3, 'R': 4, 'F': 5, 'S': 6},
               "purple", "light-blue", "brown",
               "yellow", "deep-orange", "blue"];
 
+function processSchedule(courses) {
+    maxTime = 0; minTime = 24 * 60;
+    var index = -1;
+    angular.forEach(courses, function(course, id) {
+        if(course.start) {
+            colorAndTime(course, ++index);
+            if("lab" in course) {
+                var copy = angular.copy(course);
+                angular.extend(copy, copy.lab, {lab: true});
+                if(!copy.title.includes("Lab"))
+                    copy.title += " Lab";
+                colorAndTime(copy, index);
+                courses[id + "-lab"] = copy;
+                delete course.lab;
+            }
+        }
+    });
+    maxTime += 30; minTime -= 30;
+    hoursCount = (maxTime - minTime) / 60;
+    rowHeight = (100 - topShift) / hoursCount;
+    angular.forEach(courses, function(course) {
+        if(course.start) {
+            course.points = [];
+            var y = topShift + rowHeight * (toMinutes(course.start) - minTime) / 60;
+            angular.forEach(course.days, function(day) {
+                course.points.push({x: leftShift + switchDay[day] * columnWidth, y});
+            });
+        }
+    });
+    courses.settings = {
+        height: rowHeight,
+        labels: hoursLabels(),
+        fractions: hoursFractions(),
+        dates: dates()
+    };
+    return courses;
+}
+
 function colorAndTime(course, index) {
     course.color = colors[index];
     var start = toMinutes(course.start),
