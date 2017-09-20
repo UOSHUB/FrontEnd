@@ -1,6 +1,6 @@
-app.controller('layout', ["$scope", "$ls", "$toolbar", "$goto",
+app.controller('layout', ["$scope", "$ls", "$toolbar", "$goto", "$http",
 
-function($scope, $ls, $toolbar, $goto) {
+function($scope, $ls, $toolbar, $goto, $http) {
     var toolbars = ['schedule', 'courses', 'email', 'calendar'];
     $scope.$on('$routeChangeSuccess', function(event, current) {
         $scope.currentPage = current.$$route.controller;
@@ -24,9 +24,11 @@ function($scope, $ls, $toolbar, $goto) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
     $scope.logout = function() {
-        $ls.loggedIn = false;
-        if($scope.currentPage != 'calendar')
-            $goto('/');
+        $http({method: "delete", url: "/api/login/"}).then(function(response) {
+            $ls.loggedIn = false;
+            if($scope.currentPage != 'calendar')
+                $goto('/');
+            }, function(response) {});
     };
 }])
 
