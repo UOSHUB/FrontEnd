@@ -13,7 +13,7 @@
                         <p>{{ update.course }}</p>
                     </div>
                     <div class="md-list-item-text align-right">
-                        <h3>{{ update.time | date: 'MMM d' }}</h3>
+                        <h3>{{ update.time | timeAgo }}</h3>
                         <p class="md-caption">{{ update.event }}</p>
                     </div>
                 </md-list-item>
@@ -37,7 +37,7 @@
                         <p>{{ email.sender }}</p>
                     </div>
                     <div class="md-list-item-text align-right">
-                        <h3>{{ email.time | date: 'MMM d' }}</h3>
+                        <h3>{{ email.time | timeAgo }}</h3>
                         <p class="md-caption">{{ email.event | limitTo: 10 }}</p>
                     </div>
                 </md-list-item>

@@ -62,4 +62,27 @@ function($rootScope, $ls, $goto, $timeout, $mdToast) {
             })
         };
     };
-}]);
+}])
+
+
+.filter('timeAgo', function() {
+    return function(date) {
+        var label, time = (
+            (new Date()).getTime() - (new Date(date)).getTime()
+        ) / 86400000;
+        if(time >= 1)
+            label = "day";
+        else {
+            time *= 24;
+            if(time >= 1)
+                label = "hour";
+            else {
+                time *= 60;
+                label = "min";
+            }
+        }
+        time = parseInt(time);
+        if(time > 1) label += "s";
+        return time + " " + label + " ago";
+    };
+});
