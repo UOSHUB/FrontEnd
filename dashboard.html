@@ -8,13 +8,13 @@
         <md-content>
             <md-list>
                 <md-list-item class="md-2-line" ng-repeat="update in $ls.updates | orderBy: '-time'" ng-click="null">
-                    <div class="md-list-item-text" flex>
+                    <div class="md-list-item-text">
                         <h3>{{ update.title }}</h3>
                         <p>{{ update.course }}</p>
-                        <div class="md-secondary align-right" layout="column">
-                            <span>{{ update.time | date: 'MMM d' }}</span>
-                            <span class="md-caption">{{ update.event }}</span>
-                        </div>
+                    </div>
+                    <div class="md-list-item-text align-right">
+                        <h3>{{ update.time | date: 'MMM d' }}</h3>
+                        <p class="md-caption">{{ update.event }}</p>
                     </div>
                 </md-list-item>
             </md-list>
@@ -28,15 +28,17 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-2-line limited-width" ng-repeat="email in $ls.emails" ng-click="null">
-                    <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ getInitials(email.sender) }}</div>
+                <md-list-item class="md-2-line" ng-repeat="email in $ls.emails" ng-click="null">
+                    <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}" style="min-width: 36px">
+                        {{ getInitials(email.sender) }}
+                    </div>
                     <div class="md-list-item-text">
                         <h3>{{ email.title }}</h3>
                         <p>{{ email.sender }}</p>
-                        <p class="md-secondary align-right" layout="column">
-                            <span>{{ email.time | date: 'MMM d' }}</span>
-                            <span class="md-caption">{{ email.event | limitTo: 10 }}</span>
-                        </p>
+                    </div>
+                    <div class="md-list-item-text align-right">
+                        <h3>{{ email.time | date: 'MMM d' }}</h3>
+                        <p class="md-caption">{{ email.event | limitTo: 10 }}</p>
                     </div>
                 </md-list-item>
             </md-list>

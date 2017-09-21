@@ -9,18 +9,15 @@
 }
 
 .align-right {
-    line-height: 22px;
     text-align: end;
+    min-width: 90px;
 }
 
-.align-right .md-caption {
-    color: rgba(0, 0, 0, .54);
+.align-right h3 {
+    font-size: 15px !important;
+    margin-bottom: 4px !important;
 }
 
-.limited-width .md-list-item-inner {
-    width: 80% !important;
-}
-
-.limited-width .md-avatar-icon {
-    min-width: 36px;
+.align-right p.md-caption {
+    font-size: 12px !important;
 }

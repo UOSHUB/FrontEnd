@@ -3,10 +3,7 @@ app.controller('dashboard', ["$scope", "$ls", "$http",
 function($scope, $ls, $http) {
     ($scope.getUpdates = function() {
         $http.get("/api/updates/").then(function(response) {
-            angular.forEach(response.data.updates, function(item) {
-                item.course = response.data.courses[item.courseId].split('-')[0];
-            });
-            angular.extend($ls, {updates: response.data.updates});
+            $ls.updates = response.data;
         }, function() {});
     })();
 
