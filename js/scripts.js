@@ -1,10 +1,16 @@
+var days = ['U', 'M', 'T', 'W', 'R', 'F', 'S'], today = new Date(),
+    maxTime, minTime, hoursCount, colors = [
+        "red", "teal", "green", "orange", "purple",
+        "light-blue", "brown", "yellow", "deep-orange", "blue"
+    ];
+
 function $(selector) {
     return angular.element(document.querySelector(selector));
 }
 
 function currentTerm() {
-    var date = new Date(), month = date.getMonth() + 1;
-    return date.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30');
+    var month = today.getMonth() + 1;
+    return today.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30');
 }
 
 function structureCourse(course, id) {
@@ -28,12 +34,6 @@ function structureCourse(course, id) {
         ]
     };
 }
-
-var switchDay = {'U': 0, 'M': 1, 'T': 2, 'W': 3, 'R': 4, 'F': 5, 'S': 6},
-    maxTime, minTime, hoursCount, colors = [
-        "red", "teal", "green", "orange", "purple",
-        "light-blue", "brown", "yellow", "deep-orange", "blue"
-    ];
 
 function processSchedule(courses) {
     maxTime = 0; minTime = 24 * 60;
@@ -60,7 +60,7 @@ function processSchedule(courses) {
             course.points = [];
             var y = topShift + rowHeight * (toMinutes(course.start) - minTime) / 60;
             angular.forEach(course.days, function(day) {
-                course.points.push({x: leftShift + switchDay[day] * columnWidth, y: y});
+                course.points.push({x: leftShift + days.indexOf(day) * columnWidth, y: y});
             });
         }
     });
