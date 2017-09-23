@@ -21,3 +21,20 @@
 .align-right p.md-caption {
     font-size: 12px !important;
 }
+
+.today-classes {
+    border-left: 4px solid;
+}
+
+.today-classes .md-list-item-text:first-child {
+    min-width: 86px;
+    max-width: 86px;
+}
+
+.today-classes .md-list-item-text:first-child h3:first-child {
+     margin-bottom: 5px;
+}
+
+.today-classes md-icon {
+    min-width: 16px;
+}
