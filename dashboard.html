@@ -89,17 +89,19 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-2-line" ng-repeat="class in classes" ng-click="null"
-                              style="border-left: 4px solid" md-colors="{borderColor: class.color}">
-                    <div class="md-list-item-text" flex="30">
-                        <h3 style="margin-bottom: 10px">{{ class.time[0] }}</h3>
-                        <h3>{{ class.time[1] }}</h3>
+                <md-list-item ng-if="!$ls.terms[thisTerm]">You haven't loaded your schedule yet!</md-list-item>
+                <md-list-item id="no-classes" ng-if="$ls.terms[thisTerm]">You have no classes today :D</md-list-item>
+                <md-list-item class="md-2-line" ng-repeat="class in $ls.terms[thisTerm] | todayClasses | orderBy: 'points[0].y'"
+                              style="border-left: 4px solid" md-colors="{borderColor: class.color}"  ng-click="null">
+                    <style>#no-classes { display: none }</style>
+                    <div class="md-list-item-text" style="min-width: 84px; max-width: 84px">
+                        <h3 style="margin-bottom: 5px">{{ class.start }}</h3>
+                        <h3>{{ class.end }}</h3>
                     </div>
-                    <div class="md-list-item-text" flex>
-                        <h3><md-icon md-font-icon="fa fa-map-marker fa-lg fa-fw" md-colors="{color: 'grey-800'}"
-                                     style="line-height: .75em"></md-icon>
-                            {{ class.place[0] }} {{ class.place[1] }}</h3>
-                        <p>{{ class.name }}</p>
+                    <div class="md-list-item-text class-time">
+                        <h3><md-icon md-font-icon="fa fa-map-marker" md-colors="{color: 'grey-800'}" style="min-width: 16px"></md-icon>
+                            {{ class.location }}</h3>
+                        <p>{{ class.title }}</p>
                     </div>
                 </md-list-item>
             </md-list>
