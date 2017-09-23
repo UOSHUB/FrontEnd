@@ -1,6 +1,8 @@
 app.controller('dashboard', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
+    $scope.thisTerm = currentTerm();
+
     ($scope.getUpdates = function() {
         $http.get("/api/updates/").then(function(response) {
             $ls.updates = response.data;
@@ -59,4 +61,15 @@ function($scope, $ls, $http) {
         letter: 'D',
         color: 'red'
     }];
-}]);
+}])
+
+.filter('todayClasses', function() {
+    return function(courses) {
+        var classes = [], day = days[today.getDay()];
+        angular.forEach(courses, function(course) {
+            if(course.days && course.days.indexOf(day) > -1)
+                classes.push(course);
+        });
+        return classes;
+    };
+});
