@@ -89,7 +89,6 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item ng-if="!$ls.terms[thisTerm]">You haven't loaded your schedule yet!</md-list-item>
                 <md-list-item id="no-classes" ng-if="$ls.terms[thisTerm]">You have no classes today :D</md-list-item>
                 <md-list-item ng-repeat="class in $ls.terms[thisTerm] | todayClasses | orderBy: 'points[0].y'"
                               md-colors="{borderColor: class.color}" class="md-2-line today-classes" ng-click="null">

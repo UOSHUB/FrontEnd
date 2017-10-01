@@ -43,7 +43,7 @@ function($rootScope, $ls, $goto, $timeout, $mdToast) {
             templateUrl: '/static/' + route + '.html',
             controller: route,
             resolve: angular.extend({
-                pageTitle: function() { $rootScope.title = (title || route) + " - UOS HUB"; }
+                pageTitle: function() { $rootScope.title = (title || route.capitalize()) + " - UOS HUB"; }
             }, secure && {
                 security: function() {
                     if(!$ls.loggedIn) {

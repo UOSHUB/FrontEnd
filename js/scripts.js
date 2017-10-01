@@ -4,6 +4,10 @@ var days = ['U', 'M', 'T', 'W', 'R', 'F', 'S'], today = new Date(),
         "light-blue", "brown", "yellow", "deep-orange", "blue"
     ];
 
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 function $(selector) {
     return angular.element(document.querySelector(selector));
 }

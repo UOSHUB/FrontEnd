@@ -2,6 +2,11 @@ app.controller('dashboard', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
     $scope.thisTerm = currentTerm();
+    if(!$ls.terms)
+        $http.get("/api/schedule/" + $scope.thisTerm).then(function(response) {
+            $ls.terms = {};
+            $ls.terms[$scope.thisTerm] = processSchedule(response.data);
+        }, function() {});
 
     ($scope.getUpdates = function() {
         $http.get("/api/updates/").then(function(response) {

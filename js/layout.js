@@ -20,9 +20,6 @@ function($scope, $ls, $toolbar, $goto, $http) {
         email: 'envelope',
         calendar: 'globe'
     };
-    $scope.capitalize = function(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
     $scope.logout = function() {
         $http({method: "delete", url: "/api/login/"}).then(function(response) {
             $ls.loggedIn = false;

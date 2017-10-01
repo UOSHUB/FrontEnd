@@ -16,7 +16,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
                 $ls.terms[term] = processSchedule(response.data);
                 $scope.loading = false;
             }, function() {});
-        }
+        } else $ls.selected.term = term;
     })($ls.selected.term || currentTerm());
 
     $toolbar.getTerms = function() {

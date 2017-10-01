@@ -19,7 +19,7 @@
                                   md-colors="{background: page == currentPage ? 'accent-700' : 'accent-900'}">
                         <md-icon md-font-icon="fa fa-{{ icon }} fa-fw" class="md-avatar-icon"></md-icon>
                         <div class="md-list-item-text" flex>
-                            <p class="md-title">{{ capitalize(page) }}</p>
+                            <p class="md-title">{{ page.capitalize() }}</p>
                         </div>
                     </md-list-item>
                 </md-list>
