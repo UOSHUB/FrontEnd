@@ -8,6 +8,10 @@ String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
+function error() {
+    console.log("An error occurred while carrying out the request");
+}
+
 function $(selector) {
     return angular.element(document.querySelector(selector));
 }

@@ -15,7 +15,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
             $http.get('/api/schedule/' + term).then(function(response) {
                 $ls.terms[term] = processSchedule(response.data);
                 $scope.loading = false;
-            }, function() {});
+            }, error);
         } else $ls.selected.term = term;
     })($ls.selected.term || currentTerm());
 
@@ -23,7 +23,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
         if(!terms() || Object.keys($ls.terms).length == 1)
             $http.get('/api/schedule/').then(function(response) {
                 $ls.terms = angular.extend(response.data, $ls.terms);
-            }, function() {});
+            }, error);
     };
 
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];

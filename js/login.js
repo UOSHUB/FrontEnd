@@ -20,11 +20,11 @@ function($mdDialog, $http, $ls, $goto) {
                         if(!$ls.student)
                             $http.get("/api/details/").then(function(response) {
                                 angular.extend($ls, response.data);
-                            }, function() {});
+                            }, error);
                     }, function(response) {
                         element.triggerHandler('click');
                     });
-                }, function() {});
+                }, error);
             });
         }
     }

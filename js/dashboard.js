@@ -6,18 +6,18 @@ function($scope, $ls, $http) {
         $http.get("/api/schedule/" + $scope.thisTerm).then(function(response) {
             $ls.terms = {};
             $ls.terms[$scope.thisTerm] = processSchedule(response.data);
-        }, function() {});
+        }, error);
 
     ($scope.getUpdates = function() {
         $http.get("/api/updates/").then(function(response) {
             $ls.updates = response.data;
-        }, function() {});
+        }, error);
     })();
 
     ($scope.getEmails = function() {
         $http.get("/api/emails/previews").then(function(response) {
             $ls.emails = response.data;
-        }, function() {});
+        }, error);
     })();
 
     $scope.getInitials = function(name) {
