@@ -52,16 +52,14 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-3-line" ng-repeat="index in repeat" ng-init="task = tasks[index%3]" ng-click="null">
+                <md-list-item class="md-2-line" ng-repeat="deadline in $ls.terms[term] | deadlines | orderBy: '-dueDate'" ng-click="null">
                     <div class="md-list-item-text" flex>
-                        <h3>{{ task.title }}</h3>
-                        <p>{{ task.group }}</p>
-                        <md-progress-linear style="margin-top: 4px" md-mode="determinate" flex="80"
-                                            value="{{task.title.length * (index+3) % 90}}"></md-progress-linear>
-                        <div class="md-secondary align-right" layout="column">
-                            <span>{{ task.day }}</span>
-                            <span>{{ task.time }}</span>
-                        </div>
+                        <h3>{{ deadline.title }}</h3>
+                        <p>{{ deadline.course }}</p>
+                    </div>
+                    <div class="md-list-item-text align-right">
+                        <h3>{{ deadline.dueDate | timeDistance }}</h3>
+                        <p class="md-caption">Due {{ deadline.dueDate | date: 'shortTime' }}</p>
                     </div>
                 </md-list-item>
             </md-list>

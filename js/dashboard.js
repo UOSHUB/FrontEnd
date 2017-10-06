@@ -7,6 +7,12 @@ function($scope, $ls, $http) {
             angular.extend($ls.terms[$scope.term], processSchedule(response.data));
         }, error);
 
+    ($scope.getDeadlines = function() {
+        $http.get("/api/terms/" + $scope.term + "/content/").then(function(response) {
+            angular.extend($ls.terms[$scope.term], response.data);
+        }, error);
+    })();
+
     ($scope.getUpdates = function() {
         $http.get("/api/updates/").then(function(response) {
             $ls.updates = response.data;
@@ -75,5 +81,18 @@ function($scope, $ls, $http) {
                 classes.push(course);
         });
         return classes;
+    };
+})
+
+.filter('deadlines', function() {
+    return function(courses) {
+        var deadlines = [];
+        angular.forEach(courses, function(course) {
+            angular.forEach(course.deadlines, function(deadline) {
+                deadline.course = course.title;
+                deadlines.push(deadline);
+            });
+        });
+        return deadlines;
     };
 });
