@@ -65,24 +65,31 @@ function($rootScope, $ls, $goto, $timeout, $mdToast) {
 }])
 
 
-.filter('timeAgo', function() {
+.filter('timeDistance', function() {
     return function(date) {
-        var label, time = (
-            (new Date()).getTime() - (new Date(date)).getTime()
-        ) / 86400000;
-        if(time >= 1)
-            label = "day";
+        date = new Date(date);
+        var period, now = new Date(), direction = "ago",
+            time = (now - date) / 86400000;
+        if(time < 0) {
+            if(now.getDay() == date.getDay())
+                return "Today";
+            if(now.getDay() + 1 == date.getDay())
+                return "Tomorrow";
+            period = "day";
+            direction = "left";
+        } else if(time >= 1)
+            period = "day";
         else {
             time *= 24;
             if(time >= 1)
-                label = "hour";
+                period = "hour";
             else {
                 time *= 60;
-                label = "min";
+                period = "min";
             }
         }
-        time = parseInt(time);
-        if(time > 1) label += "s";
-        return time + " " + label + " ago";
+        time = Math.abs(parseInt(time));
+        if(time > 1) period += "s";
+        return [time, period, direction].join(" ");
     };
 });
