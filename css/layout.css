@@ -72,7 +72,7 @@ md-toolbar {
 }
 
 ng-view, ng-view md-card {
-    margin: 12px;
+    margin: 10px;
 }
 
 md-card {
