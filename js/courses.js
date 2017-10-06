@@ -4,7 +4,7 @@ function($scope, $ls) {
     $scope.$watch(function() { return $ls.selected.course; }, function(id) {
         $scope.course = structureCourse($ls.terms[$ls.selected.term][id], id);
     });
-    if(!$ls.selected.course) {
+    if(!$ls.selected.course || !($ls.selected.course in $ls.terms[$ls.selected.term])) {
         for(var firstCourseId in $ls.terms[$ls.selected.term]) break;
         $ls.selected.course = firstCourseId;
     }

@@ -4,12 +4,12 @@ function($scope, $ls, $http) {
     $scope.term = currentTerm();
     if(!$ls.terms[$scope.term] && ($ls.terms[$scope.term] = {}) || !$ls.terms[$scope.term].settings)
         $http.get("/api/terms/" + $scope.term).then(function(response) {
-            angular.extend($ls.terms[$scope.term], processSchedule(response.data));
+            angular.merge($ls.terms[$scope.term], processSchedule(response.data));
         }, error);
 
     ($scope.getDeadlines = function() {
         $http.get("/api/terms/" + $scope.term + "/content/").then(function(response) {
-            angular.extend($ls.terms[$scope.term], response.data);
+            angular.merge($ls.terms[$scope.term], response.data);
         }, error);
     })();
 
