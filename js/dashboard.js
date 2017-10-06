@@ -1,11 +1,10 @@
 app.controller('dashboard', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
-    $scope.thisTerm = currentTerm();
-    if(!$ls.terms)
-        $http.get("/api/schedule/" + $scope.thisTerm).then(function(response) {
-            $ls.terms = {};
-            $ls.terms[$scope.thisTerm] = processSchedule(response.data);
+    $scope.term = currentTerm();
+    if(!$ls.terms[$scope.term] && ($ls.terms[$scope.term] = {}) || !$ls.terms[$scope.term].settings)
+        $http.get("/api/terms/" + $scope.term).then(function(response) {
+            angular.extend($ls.terms[$scope.term], processSchedule(response.data));
         }, error);
 
     ($scope.getUpdates = function() {

@@ -10,7 +10,8 @@ function($scope, $ls, $toolbar, $goto, $http) {
         $toolbar: $toolbar,
         goto: $goto,
         $ls: $ls.$default({
-            selected: {}
+            selected: {},
+            terms: {}
         })
     });
     $scope.pages = {

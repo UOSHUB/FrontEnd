@@ -1,27 +1,20 @@
 app.controller('schedule', ["$scope", "$toolbar", "$ls", "$http", "$mdDialog",
 
 function($scope, $toolbar, $ls, $http, $mdDialog) {
-    function terms(term) {
-        if($ls.terms)
-            return true;
-        $ls.terms = {};
-        if(term) $ls.selected.term = term;
-        return false;
-    }
-
     ($toolbar.getSchedule = function(term) {
-        if(!terms(term) || !angular.isObject($ls.terms[term])) {
+        $ls.selected.term = term;
+        if(!$ls.terms[term] && ($ls.terms[term] = {}) || !$ls.terms[term].settings) {
             $scope.loading = true;
-            $http.get('/api/schedule/' + term).then(function(response) {
-                $ls.terms[term] = processSchedule(response.data);
+            $http.get('/api/terms/' + term).then(function(response) {
+                angular.extend($ls.terms[term], processSchedule(response.data));
                 $scope.loading = false;
             }, error);
-        } else $ls.selected.term = term;
+        }
     })($ls.selected.term || currentTerm());
 
     $toolbar.getTerms = function() {
-        if(!terms() || Object.keys($ls.terms).length == 1)
-            $http.get('/api/schedule/').then(function(response) {
+        if(Object.keys($ls.terms).length >= 1)
+            $http.get('/api/terms/').then(function(response) {
                 $ls.terms = angular.extend(response.data, $ls.terms);
             }, error);
     };
