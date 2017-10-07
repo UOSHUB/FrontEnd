@@ -44,6 +44,12 @@ function($scope, $ls, $http) {
         }, error);
     else selectFirstCourse();
 
+    ($scope.getUpdates = function() {
+        $http.get("/api/updates/").then(function(response) {
+            $ls.updates = response.data;
+        }, error);
+    })();
+
     $scope.repeat = new Array(12);
     $scope.mass = false;
     $scope.all = false;
@@ -74,4 +80,16 @@ function($scope, $ls, $http) {
         day: 'In Two days',
         time: '5:59 AM'
     }];
-}]);
+}])
+
+.filter('courseUpdates', function() {
+    return function(updates, course) {
+        var courseUpdates = [];
+        course = parseInt(course);
+        angular.forEach(updates, function(update) {
+            if(course == update.courseId)
+                courseUpdates.push(update);
+        });
+        return courseUpdates;
+    };
+});

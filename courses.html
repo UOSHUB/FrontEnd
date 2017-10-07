@@ -43,10 +43,14 @@
                 </md-toolbar>
                 <md-content flex>
                     <md-list flex>
-                        <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="ann = announcements[$index%3]" ng-click="null">
-                            <div class="md-list-item-text" flex>
-                                <h3>{{ ann.title }}</h3>
-                                <p class="md-secondary">{{ ann.time }}</p>
+                        <md-list-item class="md-2-line" ng-click="null" ng-repeat="update in $ls.updates
+                            | courseUpdates: $ls.terms[$ls.selected.term][$ls.selected.course].bb | orderBy: '-time'">
+                            <div class="md-list-item-text">
+                                <h3>{{ update.title }}</h3>
+                            </div>
+                            <div class="md-list-item-text align-right">
+                                <h3>{{ update.time | timeDistance }}</h3>
+                                <p class="md-caption">{{ update.event }}</p>
                             </div>
                         </md-list-item>
                     </md-list>
