@@ -1,13 +1,36 @@
-app.controller('courses', ["$scope", "$ls",
+app.controller('courses', ["$scope", "$ls", "$http",
 
-function($scope, $ls) {
-    $scope.$watch(function() { return $ls.selected.course; }, function(id) {
-        $scope.course = structureCourse($ls.terms[$ls.selected.term][id], id);
-    });
-    if(!$ls.selected.course || !($ls.selected.course in $ls.terms[$ls.selected.term])) {
-        for(var firstCourseId in $ls.terms[$ls.selected.term]) break;
-        $ls.selected.course = firstCourseId;
+function($scope, $ls, $http) {
+    function selectFirstCourse() {
+        if(!$ls.selected.course) {
+            for(var course in $ls.terms[$ls.selected.term]) break;
+            $ls.selected.course = course;
+        }
     }
+
+    $scope.getContent = function() {
+        $http.get("/api/courses/" + $ls.terms[$ls.selected.term][$ls.selected.course].bb).then(function(response) {
+            angular.extend($ls.terms[$ls.selected.term][$ls.selected.course], response.data);
+        }, error);
+    };
+
+    $scope.$watch(function() { return $ls.selected.course; }, function(course) {
+        $scope.course = structureCourse($ls.terms[$ls.selected.term][course], course);
+        if(!$ls.terms[$ls.selected.term][course].documents)
+            $scope.getContent();
+    });
+
+    if(!$ls.selected.term)
+        $ls.selected.term = currentTerm();
+
+    if(!$ls.terms[$ls.selected.term] || !selectFirstCourse() && !$ls.terms[$ls.selected.term][$ls.selected.course].bb)
+        $http.get("/api/terms/" + $ls.selected.term + "/courses/").then(function(response) {
+            angular.merge($ls.terms[$ls.selected.term], response.data);
+            selectFirstCourse();
+            $scope.getContent();
+        }, error);
+    else selectFirstCourse();
+
     $scope.repeat = new Array(12);
     $scope.mass = false;
     $scope.all = false;
