@@ -16,11 +16,6 @@ function $(selector) {
     return angular.element(document.querySelector(selector));
 }
 
-function currentTerm() {
-    var month = today.getMonth() + 1;
-    return today.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30');
-}
-
 function structureCourse(course, id) {
     return {
         title: course.title,

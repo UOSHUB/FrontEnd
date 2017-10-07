@@ -10,8 +10,12 @@ function($scope, $ls, $toolbar, $goto, $http) {
         $toolbar: $toolbar,
         goto: $goto,
         $ls: $ls.$default({
-            selected: {},
-            terms: {}
+            selected: {
+                term: (function() {
+                    var month = today.getMonth() + 1;
+                    return today.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30');
+                })()
+            }, terms: {}
         })
     });
     $scope.pages = {

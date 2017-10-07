@@ -10,7 +10,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
                 $scope.loading = false;
             }, error);
         }
-    })($ls.selected.term || currentTerm());
+    })($ls.selected.term);
 
     $toolbar.getTerms = function() {
         if(Object.keys($ls.terms).length >= 1)

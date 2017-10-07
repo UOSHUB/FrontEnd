@@ -1,7 +1,7 @@
 app.controller('dashboard', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
-    $scope.term = currentTerm();
+    $scope.term = $ls.selected.term;
     if(!$ls.terms[$scope.term] && ($ls.terms[$scope.term] = {}) || !$ls.terms[$scope.term].settings)
         $http.get("/api/terms/" + $scope.term).then(function(response) {
             angular.merge($ls.terms[$scope.term], processSchedule(response.data));

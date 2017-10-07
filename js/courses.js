@@ -14,16 +14,29 @@ function($scope, $ls, $http) {
         }, error);
     };
 
-    $scope.$watch(function() { return $ls.selected.course; }, function(course) {
-        $scope.course = structureCourse($ls.terms[$ls.selected.term][course], course);
-        if(!$ls.terms[$ls.selected.term][course].documents)
-            $scope.getContent();
+    $scope.getInfo = function() {
+        $http.get("/api/courses/" + $ls.selected.course +
+                  "/" + $ls.terms[$ls.selected.term][$ls.selected.course].crn +
+                  "/" + $ls.selected.term + "/").then(function(response) {
+            angular.merge($ls.terms[$ls.selected.term], response.data);
+            $scope.course = structureCourse(response.data[$ls.selected.course], $ls.selected.course);
+        }, error);
+    };
+
+    $scope.$watch(function() { return $ls.selected.course; }, function(id) {
+        var course = $ls.terms[$ls.selected.term][id];
+        if(course) {
+            if(!course.documents)
+                $scope.getContent();
+            if(!course.section)
+                $scope.getInfo();
+            else
+                $scope.course = structureCourse(course, id);
+        }
     });
 
-    if(!$ls.selected.term)
-        $ls.selected.term = currentTerm();
-
-    if(!$ls.terms[$ls.selected.term] || !selectFirstCourse() && !$ls.terms[$ls.selected.term][$ls.selected.course].bb)
+    if(!$ls.terms[$ls.selected.term] && ($ls.terms[$ls.selected.term] = {}) ||
+       !selectFirstCourse() && !$ls.terms[$ls.selected.term][$ls.selected.course].bb)
         $http.get("/api/terms/" + $ls.selected.term + "/courses/").then(function(response) {
             angular.merge($ls.terms[$ls.selected.term], response.data);
             selectFirstCourse();
