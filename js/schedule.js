@@ -5,7 +5,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
         $ls.selected.term = term;
         if(!$ls.terms[term] && ($ls.terms[term] = {}) || !$ls.terms[term].settings) {
             $scope.loading = true;
-            $http.get('/api/terms/' + term).then(function(response) {
+            $http.get('/api/terms/' + term + '/').then(function(response) {
                 angular.merge($ls.terms[term], processSchedule(response.data));
                 $scope.loading = false;
             }, error);

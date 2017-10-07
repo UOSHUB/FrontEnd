@@ -14,3 +14,9 @@ md-input-container.md-block.md-input-focused label {
     width: 42px;
     height: 42px;
 }
+
+md-fab-speed-dial {
+    position: absolute;
+    right: -8px;
+    bottom: -8px;
+}

@@ -3,7 +3,7 @@ app.controller('dashboard', ["$scope", "$ls", "$http",
 function($scope, $ls, $http) {
     $scope.term = $ls.selected.term;
     if(!$ls.terms[$scope.term] && ($ls.terms[$scope.term] = {}) || !$ls.terms[$scope.term].settings)
-        $http.get("/api/terms/" + $scope.term).then(function(response) {
+        $http.get("/api/terms/" + $scope.term + "/").then(function(response) {
             angular.merge($ls.terms[$scope.term], processSchedule(response.data));
         }, error);
 
@@ -20,7 +20,7 @@ function($scope, $ls, $http) {
     })();
 
     ($scope.getEmails = function() {
-        $http.get("/api/emails/previews").then(function(response) {
+        $http.get("/api/emails/previews/").then(function(response) {
             $ls.emails = response.data;
         }, error);
     })();
