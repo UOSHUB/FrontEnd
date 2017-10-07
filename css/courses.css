@@ -5,3 +5,12 @@ md-input-container.md-block.md-input-focused .md-input {
 md-input-container.md-block.md-input-focused label {
     color: #039be5;
 }
+
+.thin-margin .layout-margin > * {
+    margin: 7px;
+}
+
+.md-button.md-fab {
+    width: 42px;
+    height: 42px;
+}
