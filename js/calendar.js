@@ -1,30 +1,43 @@
-app.controller('calendar', ["$scope",
+app.controller('calendar', ["$scope", "$ls", "$http",
 
-function($scope) {
+function($scope, $ls, $http) {
     $scope.selectedDate = new Date();
     $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     $scope.tooltips = true;
 
-    $scope.events = {
-        '13 8': 'IELTS Exam',
-        '17 8': 'TOEFL Exam',
-        '18 8': 'Classes end',
-        '20 8': 'Final Examinations',
-        '21 8': 'Final Examinations',
-        '22 8': 'Final Examinations',
-        '23 8': 'Final Examinations',
-        '24 8': 'Final Examinations',
-        '25 8': 'Final Examinations',
-        '26 8': 'Final Examinations',
-        '27 8': 'Final Examinations',
-        '28 8': 'Final Examinations',
-        '29 8': 'Final Examinations',
-        '30 8': 'Final Examinations',
-        '31 8': 'Final Examinations'
-    };
+    function parseEvents() {
+        $scope.events = [];
+        var date, year = " " + today.getFullYear();
+        angular.forEach($ls.events, function(event) {
+            date = event.date.split(" - ");
+            if(date.length > 1) {
+                if(date[0].split(" ").length == 1)
+                    date[0] += " " + date[1].split(" ")[1];
+                date = [new Date(date[0] + year), new Date(date[1] + year)];
+            } else
+                date = new Date(date[0] + year);
+            $scope.events.push({
+                text: event.text,
+                date: date
+            });
+        });
+    }
+
+    if(!$ls.events)
+        $http.get("/api/calendar/" + $ls.selected.term + "/").then(function(response) {
+            $ls.events = response.data;
+            parseEvents();
+        }, error);
+    else parseEvents();
 
     $scope.setDayContent = function(date) {
-        var event = $scope.events[date.getDate() + ' ' + date.getMonth()];
-        if(event) return "<div class='breadcrumb'>" + event + "</div>";
+        for(var event, i = 0; i < $scope.events.length; i++) {
+            event = $scope.events[i].date;
+            if(!event.length) {
+                if(event.getDate() == date.getDate() && event.getMonth() == date.getMonth())
+                    return "<div class='breadcrumb'>" + $scope.events[i].text + "</div>";
+            } else if(event[0] < date && date < event[1])
+                    return "<div class='breadcrumb'>" + $scope.events[i].text + "</div>";
+        }
     };
 }]);
