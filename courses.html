@@ -18,10 +18,10 @@
         </md-toolbar>
         <md-content flex>
             <md-list flex>
-                <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index">
+                <md-list-item class="md-2-line" ng-repeat="document in $ls.terms[$ls.selected.term][$ls.selected.course].documents | orderBy: 'uploadDate'">
                     <div class="md-list-item-text" flex>
-                        <h3>Chapter #{{ $index + 1 }} - Chapter Title</h3>
-                        <p>{{ ($index + 1) * 3.273 % 10 | number:3 }} MB</p>
+                        <h3>{{ document.title }}</h3>
+                        <p>{{ document.file }}</p>
                         <p class="md-secondary">
                             <md-button class="md-icon-button" ng-if="!mass">
                                 <md-icon md-font-icon="fa fa-download fa-2x"></md-icon>
@@ -60,14 +60,13 @@
                 </md-toolbar>
                 <md-content flex>
                     <md-list flex>
-                        <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="task = tasks[$index%3]" ng-click="null">
+                        <md-list-item class="md-2-line" ng-repeat="deadline in $ls.terms[$ls.selected.term][$ls.selected.course].deadlines | orderBy: '-dueDate'" ng-click="null">
                             <div class="md-list-item-text" flex>
-                                <h3>{{ task.title }}</h3>
-                                <p>{{ task.group }}</p>
-                                <div class="md-secondary" style="line-height: 24px; text-align: end" layout="column">
-                                    <span>{{ task.day }}</span>
-                                    <span>{{ task.time }}</span>
-                                </div>
+                                <h3>{{ deadline.title }}</h3>
+                            </div>
+                            <div class="md-list-item-text align-right">
+                                <h3>{{ deadline.dueDate | timeDistance }}</h3>
+                                <p class="md-caption">Due {{ deadline.dueDate | date: 'shortTime' }}</p>
                             </div>
                         </md-list-item>
                     </md-list>
