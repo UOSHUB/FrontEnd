@@ -1,12 +1,14 @@
 app.controller('calendar', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
-    $scope.selectedDate = new Date();
-    $scope.firstDayOfWeek = 6; // First day of the week, 0 for Sunday, 1 for Monday, etc.
-    $scope.tooltips = true;
+    angular.extend($scope, {
+        selectedDate: new Date(),
+        firstDayOfWeek: 6, // First day of the week, 0 for Sunday, 1 for Monday, etc.
+        tooltips: true,
+        events: []
+    });
 
     function parseEvents() {
-        $scope.events = [];
         var date, year = " " + today.getFullYear();
         angular.forEach($ls.events, function(event) {
             date = event.date.split(" - ");
