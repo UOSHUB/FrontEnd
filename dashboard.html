@@ -132,11 +132,17 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-1-line" ng-click="null">
-                    <div class="md-list-item-text" flex>
-                        <p>Hold On Courses Registration</p>
-                        <p class="md-secondary">Until 26th April</p>
+                <md-list-item id="no-holds" ng-if="$ls.holds">You have no holds. Yay!</md-list-item>
+                <md-list-item ng-repeat="hold in $ls.holds" class="md-2-line" ng-click="null">
+                    <div class="md-list-item-text">
+                        <h3>{{ hold.reason }}</h3>
+                        <p>{{ hold.type }}</p>
                     </div>
+                    <div class="md-list-item-text" style="max-width: 60px; text-align: center">
+                        <h3>{{ hold.end | date: 'MMM, dd' }}</h3>
+                        <p>{{ hold.end | date: 'yyyy' }}</p>
+                    </div>
+                    <style>#no-holds { display: none }</style>
                 </md-list-item>
             </md-list>
         </md-content>

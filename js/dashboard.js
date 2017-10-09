@@ -25,6 +25,16 @@ function($scope, $ls, $http) {
         }, error);
     })();
 
+    ($scope.getHolds = function() {
+        $http.get("/api/holds/").then(function(response) {
+            angular.forEach(response.data, function(hold) {
+                hold.start = new Date(hold.start);
+                hold.end = new Date(hold.end);
+            });
+            $ls.holds = response.data;
+        }, error);
+    })();
+
     $scope.getInitials = function(name) {
         if(!name) return;
         var words = name.split(' ');
