@@ -13,7 +13,7 @@ function error() {
 }
 
 function $(selector) {
-    return angular.element(document.querySelector(selector));
+    return angular.element(document.querySelectorAll(selector));
 }
 
 function structureCourse(course, id) {

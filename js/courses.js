@@ -55,6 +55,13 @@ function($scope, $ls, $http, $window) {
     $scope.openFile = function(file) {
         $window.open(file, "_blank");
     };
+
+    $scope.downloadFiles = function() {
+        angular.forEach($(".download"), function(file) {
+            if(file.querySelector("md-checkbox").classList.contains("md-checked"))
+                file.querySelector("a").click();
+        });
+    };
 }])
 
 .filter('courseUpdates', function() {
