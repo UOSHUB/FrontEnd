@@ -1,6 +1,6 @@
-app.controller('courses', ["$scope", "$ls", "$http",
+app.controller('courses', ["$scope", "$ls", "$http", "$window",
 
-function($scope, $ls, $http) {
+function($scope, $ls, $http, $window) {
     function selectFirstCourse() {
         if(!$ls.selected.course) {
             for(var course in $ls.terms[$ls.selected.term]) break;
@@ -51,6 +51,10 @@ function($scope, $ls, $http) {
 
     $scope.mass = false;
     $scope.all = false;
+
+    $scope.openFile = function(file) {
+        $window.open(file, "_blank");
+    };
 }])
 
 .filter('courseUpdates', function() {

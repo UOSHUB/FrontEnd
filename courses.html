@@ -18,12 +18,13 @@
         </md-toolbar>
         <md-content flex>
             <md-list flex>
-                <md-list-item class="md-2-line" ng-repeat="document in $ls.terms[$ls.selected.term][$ls.selected.course].documents | orderBy: 'uploadDate'">
+                <md-list-item ng-repeat="document in $ls.terms[$ls.selected.term][$ls.selected.course].documents | orderBy: 'uploadDate'"
+                              class="md-2-line" ng-click="openFile(document.url)">
                     <div class="md-list-item-text" flex>
                         <h3>{{ document.title }}</h3>
                         <p>{{ document.file }}</p>
                         <p class="md-secondary">
-                            <md-button class="md-icon-button" ng-if="!mass">
+                            <md-button ng-href="{{ document.url }}" download="{{ document.file }}" class="md-icon-button" ng-if="!mass">
                                 <md-icon md-font-icon="fa fa-download fa-2x"></md-icon>
                             </md-button>
                             <md-checkbox ng-if="mass" ng-checked="all" class="md-accent md-hue-3"></md-checkbox>
