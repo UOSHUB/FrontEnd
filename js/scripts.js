@@ -1,5 +1,5 @@
 var days = ['U', 'M', 'T', 'W', 'R', 'F', 'S'], today = new Date(),
-    maxTime, minTime, hoursCount, colors = [
+    body = $("body"), maxTime, minTime, hoursCount, colors = [
         "red", "teal", "green", "orange", "purple",
         "light-blue", "brown", "yellow", "deep-orange", "blue"
     ];

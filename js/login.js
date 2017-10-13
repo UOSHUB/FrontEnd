@@ -11,7 +11,7 @@ function($mdDialog, $http, $ls, $goto) {
                     clickOutsideToClose: true,
                     preserveScope: true,
                     targetEvent: $event,
-                    parent: $('body'),
+                    parent: body,
                     scope: $scope
                 }).then(function(data) {
                     $http.post("/api/login/", data).then(function(response) {

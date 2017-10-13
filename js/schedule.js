@@ -25,7 +25,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
         $scope.course = structureCourse($ls.terms[$ls.selected.term][id], id);
         $mdDialog.show({
             templateUrl: 'class-dialog',
-            parent: $('body'),
+            parent: body,
             clickOutsideToClose: true,
             preserveScope: true,
             targetEvent: event,

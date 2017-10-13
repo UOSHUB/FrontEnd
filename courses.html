@@ -20,7 +20,7 @@
         <md-content flex>
             <md-list flex>
                 <md-list-item ng-repeat="document in $ls.terms[$ls.selected.term][$ls.selected.course].documents | orderBy: 'uploadDate'"
-                              class="md-2-line" ng-click="openFile(document.url)">
+                              class="md-2-line" ng-click="openFile(document)">
                     <div class="md-list-item-text" flex>
                         <h3>{{ document.title }}</h3>
                         <p>{{ document.file }}</p>
