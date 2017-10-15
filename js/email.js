@@ -9,6 +9,7 @@ function($scope, $ls, $http) {
         }, error);
     })();
 
+    $scope.tabs = ["personal", "courses", "events"];
     $scope.filter = 0;
     $scope.repeat = new Array(15);
     $scope.content = [{

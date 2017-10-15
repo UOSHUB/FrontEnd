@@ -7,46 +7,21 @@
     <md-card flex="33">
         <md-content layout="row" flex>
             <md-tabs md-selected="filter" flex>
-                <md-tab>
-                    <md-tab-label>Personal</md-tab-label>
+                <md-tab ng-repeat="tab in tabs" ng-click="getEmails(tab)">
+                    <md-tab-label>{{ tab.capitalize() }}</md-tab-label>
                     <md-tab-body>
                         <md-list flex>
-                            <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="c = content[0]" ng-click="openEmail($index)">
-                                <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ c.initial + ($index+1) }}</div>
-                                <div class="md-list-item-text" flex>
-                                    <h3>{{ c.title + ($index+1) }}</h3>
-                                    <p>{{ c.sender($index+1) }}</p>
-                                    <p class="md-secondary">{{ ($index+1) + c.time }}</p>
+                            <md-list-item class="md-2-line" ng-repeat="email in $ls.emails[tab]" ng-click="null">
+                                <div ng-if="tab != 'events'" class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}" style="min-width: 36px">
+                                    {{ getInitials(email.sender || email.course) }}
                                 </div>
-                            </md-list-item>
-                        </md-list>
-                    </md-tab-body>
-                </md-tab>
-                <md-tab>
-                    <md-tab-label>Courses</md-tab-label>
-                    <md-tab-body>
-                        <md-list flex>
-                            <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="c = content[1]" ng-click="openEmail($index)">
-                                <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ c.initial + ($index+1) }}</div>
-                                <div class="md-list-item-text" flex>
-                                    <h3>{{ c.title + ($index+1) }}</h3>
-                                    <p>{{ c.sender($index+1) }}</p>
-                                    <p class="md-secondary">{{ ($index+1) + c.time }}</p>
+                                <div class="md-list-item-text">
+                                    <h3>{{ email.title || "No Title" }}</h3>
+                                    <p>{{ email.sender || email.course }}</p>
                                 </div>
-                            </md-list-item>
-                        </md-list>
-                    </md-tab-body>
-                </md-tab>
-                <md-tab>
-                    <md-tab-label>Events</md-tab-label>
-                    <md-tab-body>
-                        <md-list flex>
-                            <md-list-item class="md-2-line" ng-repeat="loop in repeat track by $index" ng-init="c = content[2]" ng-click="openEmail($index)">
-                                <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}">{{ c.initial + ($index+1) }}</div>
-                                <div class="md-list-item-text" flex>
-                                    <h3>{{ c.title + ($index+1) }}</h3>
-                                    <p>{{ c.sender($index+1) }}</p>
-                                    <p class="md-secondary">{{ ($index+1) + c.time }}</p>
+                                <div class="md-list-item-text align-right">
+                                    <h3>{{ email.time | timeDistance }}</h3>
+                                    <p class="md-caption">{{ email.event }}</p>
                                 </div>
                             </md-list-item>
                         </md-list>
