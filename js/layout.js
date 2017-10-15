@@ -10,12 +10,14 @@ function($scope, $ls, $toolbar, $goto, $http) {
         $toolbar: $toolbar,
         goto: $goto,
         $ls: $ls.$default({
+            terms: {},
+            emails: {},
             selected: {
                 term: (function() {
                     var month = today.getMonth() + 1;
                     return today.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30');
                 })()
-            }, terms: {}
+            }
         })
     });
     $scope.pages = {
@@ -31,6 +33,15 @@ function($scope, $ls, $toolbar, $goto, $http) {
             if($scope.currentPage != 'calendar')
                 $goto('/');
             }, function(response) {});
+    };
+    $scope.getInitials = function(name) {
+        if(!name) return;
+        var words = name.split(' ');
+        return (
+            words[1] ?
+            words[0].slice(0, 1) + words[1].slice(0, 1):
+            words[0].slice(0, 2)
+        ).toUpperCase();
     };
 }])
 

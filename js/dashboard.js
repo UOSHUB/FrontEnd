@@ -20,8 +20,8 @@ function($scope, $ls, $http) {
     })();
 
     ($scope.getEmails = function() {
-        $http.get("/api/emails/previews/").then(function(response) {
-            $ls.emails = response.data;
+        $http.get("/api/emails/personal/10/").then(function(response) {
+            angular.extend($ls.emails, {personal: response.data});
         }, error);
     })();
 
@@ -34,16 +34,6 @@ function($scope, $ls, $http) {
             $ls.holds = response.data;
         }, error);
     })();
-
-    $scope.getInitials = function(name) {
-        if(!name) return;
-        var words = name.split(' ');
-        return (
-            words[1] ?
-            words[0].slice(0, 1) + words[1].slice(0, 1):
-            words[0].slice(0, 2)
-        ).toUpperCase();
-    };
 
     $scope.grades = [{
         course: 'Networking Fundamentals',

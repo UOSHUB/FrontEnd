@@ -1,6 +1,14 @@
-app.controller('email', ["$scope",
+app.controller('email', ["$scope", "$ls", "$http",
 
-function($scope) {
+function($scope, $ls, $http) {
+    ($scope.getEmails = function(category) {
+        $http.get("/api/emails/" + category + "/").then(function(response) {
+            var emails = {};
+            emails[category] = response.data;
+            angular.extend($ls.emails, emails);
+        }, error);
+    })();
+
     $scope.filter = 0;
     $scope.repeat = new Array(15);
     $scope.content = [{
