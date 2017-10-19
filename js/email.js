@@ -5,23 +5,20 @@ function($scope, $ls, $http) {
 
     if(!$ls.selected.tab)
         $ls.selected.tab = 0;
+    if(!$ls.selected.email)
+        $ls.selected.email = [];
 
     ($scope.getEmails = function(category) {
         $http.get("/api/emails/" + category + "/").then(function(response) {
-            var emails = {};
-            emails[category] = response.data;
-            angular.extend($ls.emails, emails);
+            angular.extend($ls.emails, response.data);
         }, error);
     })($scope.tabs[$ls.selected.tab]);
 
-    $scope.openEmail = function(tab, index) {
-        $ls.selected.email = [tab, index];
+    $scope.openEmail = function(tab, id) {
+        $ls.selected.email = [tab, id];
     };
 
-    $scope.isSelected = function(tab, index) {
-        return $ls.selected.email[0] == tab && $ls.selected.email[1] == index;
+    $scope.isSelected = function(tab, id) {
+        return $ls.selected.email[0] == tab && $ls.selected.email[1] == id;
     };
-
-    if(!$ls.selected.email)
-        $scope.openEmail("personal", 0);
 }]);

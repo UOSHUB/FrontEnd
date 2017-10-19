@@ -21,7 +21,7 @@ function($scope, $ls, $http) {
 
     ($scope.getEmails = function() {
         $http.get("/api/emails/personal/10/").then(function(response) {
-            angular.extend($ls.emails, {personal: response.data});
+            angular.extend($ls.emails, response.data);
         }, error);
     })();
 

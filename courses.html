@@ -25,7 +25,7 @@
                         <h3>{{ document.title }}</h3>
                         <p>{{ document.file }}</p>
                         <p class="md-secondary download">
-                            <md-button ng-href="{{ document.url }}" download="{{ document.file }}" class="md-icon-button" ng-hide="mass">
+                            <md-button ng-href="{{ document.url }}" download="{{ document.file }}" name="{{ document.file }}" class="md-icon-button" ng-hide="mass">
                                 <md-icon md-font-icon="fa fa-download fa-2x"></md-icon>
                             </md-button>
                             <md-checkbox ng-show="mass" ng-checked="all" class="md-accent md-hue-3"></md-checkbox>
