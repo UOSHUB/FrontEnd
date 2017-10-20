@@ -7,7 +7,7 @@
 </script>
 
 <md-card flex>
-    <md-card-content layout="row">
+    <md-card-content layout="row" class="fill-card">
         {{ term = !loading && $ls.terms[$ls.selected.term]; get = term.settings; '' }}
         <div class="day as-hours-head" md-colors="::{background: 'green-50'}"></div>
         <div class="day" ng-repeat="day in [1,2,3,4]"></div>

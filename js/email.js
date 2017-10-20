@@ -3,11 +3,6 @@ app.controller('email', ["$scope", "$ls", "$http",
 function($scope, $ls, $http) {
     $scope.tabs = ["personal", "courses", "events"];
 
-    if(!$ls.selected.tab)
-        $ls.selected.tab = 0;
-    if(!$ls.selected.email)
-        $ls.selected.email = [];
-
     ($scope.getEmails = function(category) {
         $http.get("/api/emails/" + category + "/").then(function(response) {
             angular.extend($ls.emails, response.data);
@@ -16,6 +11,10 @@ function($scope, $ls, $http) {
 
     $scope.openEmail = function(tab, id) {
         $ls.selected.email = [tab, id];
+        if(!$ls.emails.body[id])
+            $http.get("/api/emails/" + $ls.emails.idRoot + "_" + id + "/").then(function(response) {
+                $ls.emails.body[id] = response.data;
+            }, error);
     };
 
     $scope.isSelected = function(tab, id) {

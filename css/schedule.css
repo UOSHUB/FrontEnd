@@ -1,4 +1,4 @@
-md-card md-card-content {
+md-card md-card-content.fill-card {
     height: 100%;
     padding: 0;
     position: relative;

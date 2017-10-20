@@ -11,8 +11,10 @@ function($scope, $ls, $toolbar, $goto, $http) {
         goto: $goto,
         $ls: $ls.$default({
             terms: {},
-            emails: {},
+            emails: { body: {} },
             selected: {
+                tab: 0,
+                email: [],
                 term: (function() {
                     var month = today.getMonth() + 1;
                     return today.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30');
