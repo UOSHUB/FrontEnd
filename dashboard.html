@@ -28,7 +28,7 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-2-line" ng-repeat="email in $ls.emails['personal']" ng-click="null">
+                <md-list-item class="md-2-line" ng-repeat="email in $ls.emails['personal'] | objectToArray | orderBy: '-time'" ng-click="null">
                     <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}" style="min-width: 36px">
                         {{ getInitials(email.sender) }}
                     </div>

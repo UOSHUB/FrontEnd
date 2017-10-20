@@ -92,4 +92,15 @@ function($rootScope, $ls, $goto, $timeout, $mdToast) {
         if(time > 1) period += "s";
         return [time, period, direction].join(" ");
     };
+})
+
+.filter('objectToArray', function() {
+    return function(object) {
+        var array = [];
+        angular.forEach(object, function(item, id) {
+            item.id = id;
+            array.push(item);
+        });
+        return array;
+    };
 });
