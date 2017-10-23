@@ -35,23 +35,11 @@ function($scope, $ls, $http) {
         }, error);
     })();
 
-    $scope.grades = [{
-        course: 'Networking Fundamentals',
-        letter: 'A',
-        color: 'green'
-    }, {
-        course: 'Multimedia Programming & Design',
-        letter: 'B',
-        color: 'lime'
-    }, {
-        course: 'Principles of Marketing',
-        letter: 'C',
-        color: 'orange'
-    }, {
-        course: 'Statistics for Science',
-        letter: 'D',
-        color: 'red'
-    }];
+    ($scope.getGrades = function() {
+        $http.get("/api/grades/" + $scope.term + "/").then(function(response) {
+            angular.merge($ls.terms[$scope.term], response.data);
+        }, error);
+    })();
 }])
 
 .filter('todayClasses', function() {
@@ -65,15 +53,30 @@ function($scope, $ls, $http) {
     };
 })
 
-.filter('deadlines', function() {
-    return function(courses) {
-        var deadlines = [];
+.filter('extract', function() {
+    return function(courses, items) {
+        var list = [];
         angular.forEach(courses, function(course) {
-            angular.forEach(course.deadlines, function(deadline) {
-                deadline.course = course.title;
-                deadlines.push(deadline);
+            angular.forEach(course[items], function(item) {
+                item.course = course.title;
+                list.push(item);
             });
         });
-        return deadlines;
+        return list;
+    };
+})
+
+.filter('gradeColor', function() {
+    return function(grade) {
+        var percent = grade.grade / grade.outOf * 100;
+        if(percent < 60)
+            return "red";
+        if(percent < 70)
+            return "orange";
+        if(percent < 80)
+            return "yellow";
+        if(percent < 90)
+            return "lime";
+        return "green";
     };
 });

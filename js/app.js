@@ -71,9 +71,9 @@ function($rootScope, $ls, $goto, $timeout, $mdToast) {
         var period, now = new Date(), direction = "ago",
             time = (now - date) / 86400000;
         if(time < 0) {
-            if(now.getDay() == date.getDay())
+            if(now.getDate() == date.getDate())
                 return "Today";
-            if(now.getDay() + 1 == date.getDay())
+            if(now.getDate() + 1 == date.getDate())
                 return "Tomorrow";
             period = "day";
             direction = "left";
