@@ -2,14 +2,14 @@ app.controller('dashboard', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
     $scope.term = $ls.selected.term;
-    if(!$ls.terms[$scope.term] && ($ls.terms[$scope.term] = {}) || !$ls.terms[$scope.term].settings)
+    if(!$ls.terms[$scope.term] && ($ls.terms[$scope.term] = {}))
         $http.get("/api/terms/" + $scope.term + "/").then(function(response) {
-            angular.merge($ls.terms[$scope.term], processSchedule(response.data));
+            angular.merge($ls.courses, processSchedule(response.data, $ls.terms[$scope.term]));
         }, error);
 
     ($scope.getDeadlines = function() {
-        $http.get("/api/terms/" + $scope.term + "/content/").then(function(response) {
-            angular.merge($ls.terms[$scope.term], response.data);
+        $http.get("/api/terms/" + $scope.term + "/deadlines/").then(function(response) {
+            $ls.deadlines = response.data;
         }, error);
     })();
 
@@ -37,34 +37,20 @@ function($scope, $ls, $http) {
 
     ($scope.getGrades = function() {
         $http.get("/api/grades/" + $scope.term + "/").then(function(response) {
-            angular.merge($ls.terms[$scope.term], response.data);
+            $ls.grades = response.data;
         }, error);
     })();
-}])
 
-.filter('todayClasses', function() {
-    return function(courses) {
+    $scope.todayClasses = function() {
         var classes = [], day = days[today.getDay()];
-        angular.forEach(courses, function(course) {
+        angular.forEach($ls.terms[$scope.term].courses, function(key) {
+            var course = $ls.courses[key];
             if(course.days && course.days.indexOf(day) > -1)
                 classes.push(course);
         });
         return classes;
     };
-})
-
-.filter('extract', function() {
-    return function(courses, items) {
-        var list = [];
-        angular.forEach(courses, function(course) {
-            angular.forEach(course[items], function(item) {
-                item.course = course.title;
-                list.push(item);
-            });
-        });
-        return list;
-    };
-})
+}])
 
 .filter('gradeColor', function() {
     return function(grade) {

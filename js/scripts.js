@@ -38,10 +38,12 @@ function structureCourse(course, id) {
     };
 }
 
-function processSchedule(courses) {
+function processSchedule(courses, term) {
+    term.courses = [];
     maxTime = 0; minTime = 24 * 60;
     var rowHeight, topShift = 5, leftShift = 5, columnWidth = 19, index = -1;
     angular.forEach(courses, function(course, id) {
+        term.courses.push(id);
         if(course.start) {
             colorAndTime(course, ++index);
             if("lab" in course) {
@@ -67,12 +69,12 @@ function processSchedule(courses) {
             });
         }
     });
-    courses.settings = {
+    angular.extend(term, {
         height: rowHeight,
         labels: hoursLabels(),
         fractions: hoursFractions(),
         dates: dates()
-    };
+    });
     return courses;
 }
 

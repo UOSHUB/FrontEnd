@@ -11,7 +11,8 @@ function($scope, $ls, $toolbar, $goto, $http) {
         goto: $goto,
         $ls: $ls.$default({
             terms: {},
-            emails: { body: {} },
+            emails: {},
+            courses: {},
             selected: {
                 tab: 0,
                 email: [],
