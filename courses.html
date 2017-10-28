@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="courses">
     <md-select ng-model="$ls.selected.course" flex="25">
-        <md-option ng-repeat="(id, course) in $ls.terms[$ls.selected.term]" ng-value="id" ng-if="course.title">{{ course.title }}</md-option>
+        <md-option ng-repeat="id in $ls.terms[$ls.selected.term].courses" ng-value="id" ng-if="$ls.courses[id].title">{{ $ls.courses[id].title }}</md-option>
     </md-select>
 </script>
 
@@ -19,7 +19,7 @@
         </md-toolbar>
         <md-content flex>
             <md-list flex>
-                <md-list-item ng-repeat="document in $ls.terms[$ls.selected.term][$ls.selected.course].documents | orderBy: 'uploadDate'"
+                <md-list-item ng-repeat="document in $ls.documents | inCourse: $ls.selected.course | orderBy: 'uploadDate'"
                               class="md-2-line" ng-click="openFile(document)">
                     <div class="md-list-item-text" flex>
                         <h3>{{ document.title }}</h3>
@@ -45,8 +45,7 @@
                 </md-toolbar>
                 <md-content flex>
                     <md-list flex>
-                        <md-list-item class="md-2-line" ng-click="null" ng-repeat="update in $ls.updates
-                            | courseUpdates: $ls.terms[$ls.selected.term][$ls.selected.course].bb | orderBy: '-time'">
+                        <md-list-item class="md-2-line" ng-click="null" ng-repeat="update in $ls.updates | inCourse: $ls.selected.course | orderBy: '-time'">
                             <div class="md-list-item-text">
                                 <h3>{{ update.title }}</h3>
                             </div>
@@ -66,7 +65,7 @@
                 </md-toolbar>
                 <md-content flex>
                     <md-list flex>
-                        <md-list-item class="md-2-line" ng-repeat="deadline in $ls.terms[$ls.selected.term][$ls.selected.course].deadlines | orderBy: '-dueDate'" ng-click="null">
+                        <md-list-item class="md-2-line" ng-repeat="deadline in $ls.deadlines | inCourse: $ls.selected.course | orderBy: '-dueDate'" ng-click="null">
                             <div class="md-list-item-text" flex>
                                 <h3>{{ deadline.title }}</h3>
                             </div>
