@@ -1,6 +1,9 @@
 app.controller('email', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
+    if(!$ls.emails.body)
+        $ls.emails.body = {};
+
     $scope.tabs = ["personal", "courses", "events"];
 
     ($scope.getEmails = function(category) {

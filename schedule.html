@@ -8,28 +8,29 @@
 
 <md-card flex>
     <md-card-content layout="row" class="fill-card">
-        {{ term = !loading && $ls.terms[$ls.selected.term]; get = term.settings; '' }}
+        {{ term = !loading && $ls.terms[$ls.selected.term]; '' }}
         <div class="day as-hours-head" md-colors="::{background: 'green-50'}"></div>
         <div class="day" ng-repeat="day in [1,2,3,4]"></div>
 
         <div class="hour as-days-head" md-colors="::{background: 'green-50'}"></div>
-        <div ng-repeat-start="fraction in get.fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * get.height }}%">
-            {{ get.labels[$index].hour }}<span class="hide-on-med-and-down">{{ get.labels[$index].period }}</span>
+        <div ng-repeat-start="fraction in term.fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * term.height }}%">
+            {{ term.labels[$index].hour }}<span class="hide-on-med-and-down">{{ term.labels[$index].period }}</span>
         </div>
-        <div ng-if="!$last" class="half hour" style="top: {{ 5 + get.height * (0.5 + fraction) }}%"></div>
-        <div class="hour" style="top: {{ 5 + fraction * get.height }}%" ng-repeat-end></div>
+        <div ng-if="!$last" class="half hour" style="top: {{ 5 + term.height * (0.5 + fraction) }}%"></div>
+        <div class="hour" style="top: {{ 5 + fraction * term.height }}%" ng-repeat-end></div>
 
-        <div class="classes-container" ng-repeat="(id, course) in term" ng-if="course.start">
-            <div ng-repeat="point in course.points" ng-click="showCourse($event, id)"
-                 class="class" md-colors="::{background: course.color, color: 'grey-A100'}"
-                 ng-style="{height: course.length * get.height + '%', left: point.x + '%', top: point.y + '%'}">
+        <div class="classes-container" ng-repeat="id in term.courses">
+            {{ course = $ls.courses[id]; ''}}
+            <div ng-repeat="point in course.points" ng-click="showCourse($event, id)" class="class"
+                 md-colors="::{background: course.color, color: 'grey-A100'}" ng-if="course.start"
+                 ng-style="{height: course.length * term.height + '%', left: point.x + '%', top: point.y + '%'}">
                 <span class="course-title">{{ course.title }}</span><br>
                 <md-icon md-font-icon="fa fa-user fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.doctor }}<br>
                 <md-icon md-font-icon="fa fa-map-marker fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.location }}
             </div>
         </div>
         <div ng-repeat="day in days" class="day-label blue-grey-text text-darken-2" style="left: {{ 5 + $index * 19 }}%">
-            {{ day }} <span class="hide-on-small-only">{{ get.dates[$index] }}</span>
+            {{ day }} <span class="hide-on-small-only">{{ term.dates[$index] }}</span>
         </div>
     </md-card-content>
 </md-card><!--Schedule card end-->

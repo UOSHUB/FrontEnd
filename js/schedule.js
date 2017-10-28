@@ -3,10 +3,10 @@ app.controller('schedule', ["$scope", "$toolbar", "$ls", "$http", "$mdDialog",
 function($scope, $toolbar, $ls, $http, $mdDialog) {
     ($toolbar.getSchedule = function(term) {
         $ls.selected.term = term;
-        if(!$ls.terms[term] && ($ls.terms[term] = {}) || !$ls.terms[term].settings) {
+        if(!$ls.terms[term] && ($ls.terms[term] = {}) || !$ls.terms[term].height) {
             $scope.loading = true;
             $http.get('/api/terms/' + term + '/').then(function(response) {
-                angular.merge($ls.terms[term], processSchedule(response.data));
+                angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
                 $scope.loading = false;
             }, error);
         }
@@ -22,7 +22,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
     $scope.cancel = $mdDialog.cancel;
     $scope.showCourse = function(event, id) {
-        $scope.course = structureCourse($ls.terms[$ls.selected.term][id], id);
+        $scope.course = structureCourse($ls.courses[id], id);
         $mdDialog.show({
             templateUrl: 'class-dialog',
             parent: body,

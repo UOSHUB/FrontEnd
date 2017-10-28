@@ -94,13 +94,10 @@ function($rootScope, $ls, $goto, $timeout, $mdToast) {
     };
 })
 
-.filter('objectToArray', function() {
-    return function(object) {
-        var array = [];
-        angular.forEach(object, function(item, id) {
-            item.id = id;
-            array.push(item);
-        });
-        return array;
+.filter('find', function() {
+    return function(items, id) {
+        for(var i = 0; i < items.length; i++)
+            if(id == items[i].id)
+                return items[i];
     };
 });
