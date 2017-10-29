@@ -1,12 +1,12 @@
 app.controller('schedule', ["$scope", "$toolbar", "$ls", "$http", "$mdDialog",
 
 function($scope, $toolbar, $ls, $http, $mdDialog) {
-    ($toolbar.getSchedule = function(term) {
-        $ls.selected.term = term;
-        if(!$ls.terms[term] && ($ls.terms[term] = {}) || !$ls.terms[term].height) {
+    ($toolbar.getSchedule = function(selectedTerm) {
+        $ls.selected.term = selectedTerm;
+        if(!$ls.terms[selectedTerm] && ($ls.terms[selectedTerm] = {}) || !$ls.terms[selectedTerm].courses) {
             $scope.loading = true;
-            $http.get('/api/terms/' + term + '/').then(function(response) {
-                angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
+            $http.get('/api/terms/' + selectedTerm + '/').then(function(response) {
+                angular.merge($ls.courses, processSchedule(response.data, $ls.terms[selectedTerm]));
                 $scope.loading = false;
             }, error);
         }

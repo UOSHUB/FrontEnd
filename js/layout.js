@@ -16,10 +16,7 @@ function($scope, $ls, $toolbar, $goto, $http) {
             selected: {
                 tab: 0,
                 email: [],
-                term: (function() {
-                    var month = today.getMonth() + 1;
-                    return today.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30');
-                })()
+                term: term
             }
         })
     });

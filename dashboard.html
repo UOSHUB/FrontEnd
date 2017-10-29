@@ -87,9 +87,10 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item id="no-classes" ng-if="$ls.terms[term].courses">You have no classes today :D</md-list-item>
-                <md-list-item ng-repeat="class in todayClasses() | orderBy: 'points[0].y'"
-                              md-colors="{borderColor: class.color}" class="md-2-line today-classes" ng-click="null">
+                {{ classes = todayClasses(); '' }}
+                <md-list-item ng-if="classes.length == 0">You have no classes today :D</md-list-item>
+                <md-list-item ng-repeat="class in classes | orderBy: 'points[0].y'" ng-click="null"
+                              md-colors="{borderColor: class.color}" class="md-2-line today-classes">
                     <div class="md-list-item-text">
                         <h3>{{ class.start }}</h3>
                         <h3>{{ class.end }}</h3>
@@ -101,7 +102,6 @@
                         </h3>
                         <p>{{ class.title }}</p>
                     </div>
-                    <style>#no-classes { display: none }</style>
                 </md-list-item>
             </md-list>
         </md-content>

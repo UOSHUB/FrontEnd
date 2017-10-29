@@ -7,9 +7,10 @@ function($scope, $ls, $http) {
     $scope.tabs = ["personal", "courses", "events"];
 
     ($scope.getEmails = function(category) {
-        $http.get("/api/emails/" + category + "/").then(function(response) {
-            angular.extend($ls.emails, response.data);
-        }, error);
+        if(!$ls.emails[category] || $ls.emails[category].length < 20)
+            $http.get("/api/emails/" + category + "/").then(function(response) {
+                angular.extend($ls.emails, response.data);
+            }, error);
     })($scope.tabs[$ls.selected.tab]);
 
     $scope.openEmail = function(tab, id) {

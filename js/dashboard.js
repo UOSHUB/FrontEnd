@@ -1,31 +1,27 @@
 app.controller('dashboard', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
-    $scope.term = $ls.selected.term;
-    if(!$ls.terms[$scope.term] && ($ls.terms[$scope.term] = {}))
-        $http.get("/api/terms/" + $scope.term + "/").then(function(response) {
-            angular.merge($ls.courses, processSchedule(response.data, $ls.terms[$scope.term]));
+    if(!$ls.terms[term] && ($ls.terms[term] = {}))
+        $http.get("/api/terms/" + term + "/").then(function(response) {
+            angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
         }, error);
 
-    ($scope.getDeadlines = function() {
-        $http.get("/api/terms/" + $scope.term + "/deadlines/").then(function(response) {
+    if(!$ls.deadlines)
+        $http.get("/api/terms/" + term + "/deadlines/").then(function(response) {
             $ls.deadlines = response.data;
         }, error);
-    })();
 
-    ($scope.getUpdates = function() {
+    if(!$ls.updates)
         $http.get("/api/updates/").then(function(response) {
             $ls.updates = response.data;
         }, error);
-    })();
 
-    ($scope.getEmails = function() {
+    if(!$ls.emails.personal)
         $http.get("/api/emails/personal/10/").then(function(response) {
             angular.extend($ls.emails, response.data);
         }, error);
-    })();
 
-    ($scope.getHolds = function() {
+    if(!$ls.holds)
         $http.get("/api/holds/").then(function(response) {
             angular.forEach(response.data, function(hold) {
                 hold.start = new Date(hold.start);
@@ -33,17 +29,15 @@ function($scope, $ls, $http) {
             });
             $ls.holds = response.data;
         }, error);
-    })();
 
-    ($scope.getGrades = function() {
-        $http.get("/api/grades/" + $scope.term + "/").then(function(response) {
+    if(!$ls.grades)
+        $http.get("/api/grades/" + term + "/").then(function(response) {
             $ls.grades = response.data;
         }, error);
-    })();
 
     $scope.todayClasses = function() {
         var classes = [], day = days[today.getDay()];
-        angular.forEach($ls.terms[$scope.term].courses, function(key) {
+        angular.forEach($ls.terms[term].courses, function(key) {
             var course = $ls.courses[key];
             if(course.days && course.days.indexOf(day) > -1)
                 classes.push(course);
