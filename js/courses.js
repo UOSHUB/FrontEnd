@@ -1,53 +1,32 @@
 app.controller('courses', ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
-    function selectFirstCourse() {
-        if(!$ls.selected.course)
-            $ls.selected.course = $ls.terms[$ls.selected.term].courses[0];
+    if(!$ls.terms[term] && ($ls.terms[term] = {}))
+        $http.get("/api/terms/" + term + "/").then(function(response) {
+            angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
+            $ls.selected.course = $ls.terms[term].courses[0];
+        }, error);
+    else if(!$ls.selected.course){
+        $ls.selected.course = $ls.terms[term].courses[0];
     }
-
-    if(!$ls.terms[$ls.selected.term] && ($ls.terms[$ls.selected.term] = {}) ||
-       !selectFirstCourse() && !$ls.courses[$ls.selected.course].courseId)
-        $http.get("/api/terms/" + $ls.selected.term + "/courses/").then(function(response) {
-            angular.merge($ls.courses, response.data);
-            $ls.terms[$ls.selected.term].courses = Object.keys($ls.courses);
-            selectFirstCourse();
+    if(!$ls.deadlines)
+        $http.get("/api/terms/" + term + "/content/").then(function(response) {
+            angular.extend($ls, response.data);
         }, error);
-    else selectFirstCourse();
-
-    ($scope.getContent = function() {
-        $http.get("/api/courses/" + $ls.selected.course + "/" +
-                  $ls.courses[$ls.selected.course].courseId + "/").then(function(response) {
-            angular.merge($ls, {documents: [], deadlines: []});
-            $ls.documents = $ls.documents.concat(response.data.documents);
-            $ls.deadlines = $ls.deadlines.concat(response.data.deadlines);
+    else if(!$ls.documents)
+        $http.get("/api/terms/" + term + "/documents/").then(function(response) {
+            $ls.documents = response.data;
         }, error);
-    })();
 
-    ($scope.getInfo = function() {
-        $http.get("/api/courses/" + $ls.selected.course +
-                      "/" + $ls.courses[$ls.selected.course].crn +
-                      "/" + $ls.selected.term + "/"
-                 ).then(function(response) {
-            angular.merge($ls.courses, response.data);
-            $scope.course = structureCourse($ls.courses[$ls.selected.course], $ls.selected.course);
-        }, error);
-    })();
-
-    $scope.$watch(function() { return $ls.selected.course; }, function(id) {
-        var course = $ls.courses[id];
-        if(course)
-            if(!course.section)
-                $scope.getInfo();
-            else
-                $scope.course = structureCourse(course, id);
-    });
-
-    ($scope.getUpdates = function() {
+    if(!$ls.updates)
         $http.get("/api/updates/").then(function(response) {
             $ls.updates = response.data;
         }, error);
-    })();
+
+    $scope.$watch(function() { return $ls.selected.course; }, function(id) {
+        if($ls.courses[id])
+            $scope.course = structureCourse($ls.courses[id], id);
+    });
 
     $scope.mass = false;
     $scope.all = false;
