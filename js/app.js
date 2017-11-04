@@ -64,6 +64,35 @@ function($rootScope, $ls, $goto, $timeout, $mdToast) {
     };
 }])
 
+.factory('$refresh', ["$rootScope", "$ls", "$http", "$timeout", "$interval",
+
+function($rootScope, $ls, $http, $timeout, $interval) {
+    var timezoneOffset = today.getTimezoneOffset() * 60000, delay = 5 * 60000;
+    function setTimestamp() {
+        $ls.timestamp = (new Date(Date.now() - timezoneOffset)).toISOString().slice(0, -5);
+    }
+    function update$ls(data, ls) {
+        angular.forEach(data, function(list, key) {
+            if(list.length > 0)
+                ls[key] = list.concat(ls[key]);
+            else if(list.length == undefined)
+                update$ls(list, ls[key]);
+        });
+    }
+    function refresh(queries) {
+        $http.get("/api/refresh/" + $ls.timestamp + "/?" + queries.join('&')).then(function(response) {
+            update$ls(response.data, $ls);
+            setTimestamp();
+        }, error);
+    }
+    if(!$ls.timestamp) setTimestamp();
+    return function(queries) {
+        $rootScope.refresh = $timeout(function() {
+            refresh(queries);
+            $rootScope.refresh = $interval(refresh, delay, 0, true, queries);
+        }, Math.max((new Date($ls.timestamp)).getTime() + delay - Date.now(), 0));
+    };
+}])
 
 .filter('timeDistance', function() {
     return function(date) {
