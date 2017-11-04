@@ -43,8 +43,4 @@ function($scope, $ls, $toolbar, $goto, $http) {
             words[0].slice(0, 2)
         ).toUpperCase();
     };
-}])
-
-.factory('$toolbar', function() {
-    return {};
-});
+}]);
