@@ -35,30 +35,32 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
     };
 }])
 
-.factory('$load', ["$rootScope", "$ls", "$goto", "$timeout", "$mdToast",
+.factory('$load', ["$rootScope", "$ls", "$goto", "$timeout", "$interval", "$mdToast",
 
-function($rootScope, $ls, $goto, $timeout, $mdToast) {
+function($rootScope, $ls, $goto, $timeout, $interval, $mdToast) {
+    var toast = $mdToast.simple().hideDelay(2000)
+        .position('top right').parent($('#content'))
+        .textContent('You need to login first!');
+    function onLoggedOut() {
+        if(!$ls.loggedIn) {
+            $goto('/');
+            $timeout(function() {
+                $mdToast.show(toast);
+            }, 300);
+        }
+    }
     return function(route, secure, title) {
         return {
             templateUrl: '/static/' + route + '.html',
             controller: route,
             resolve: angular.extend({
-                pageTitle: function() { $rootScope.title = (title || route.capitalize()) + " - UOS HUB"; }
-            }, secure && {
-                security: function() {
-                    if(!$ls.loggedIn) {
-                        $goto('/');
-                        $timeout(function() {
-                            $mdToast.show(
-                                $mdToast.simple()
-                                    .textContent('You need to login first!')
-                                    .position('top right')
-                                    .parent($('#content'))
-                                    .hideDelay(2000)
-                            );
-                        }, 300);
-                    }
+                onload: function() {
+                    $rootScope.title = (title || route.capitalize()) + " - UOS HUB";
+                    $timeout.cancel($rootScope.refresh);
+                    $interval.cancel($rootScope.refresh);
                 }
+            }, secure && {
+                security: onLoggedOut
             })
         };
     };

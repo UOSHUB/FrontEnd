@@ -1,6 +1,6 @@
-app.controller('courses', ["$scope", "$ls", "$http",
+app.controller('courses', ["$scope", "$ls", "$http", "$refresh",
 
-function($scope, $ls, $http) {
+function($scope, $ls, $http, $refresh) {
     if(!$ls.terms[term] && ($ls.terms[term] = {}))
         $http.get("/api/terms/" + term + "/").then(function(response) {
             angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
@@ -44,6 +44,8 @@ function($scope, $ls, $http) {
                 file.querySelector("a").click();
         });
     };
+
+    $refresh(["content", "updates"])
 }])
 
 .filter('inCourse', function() {

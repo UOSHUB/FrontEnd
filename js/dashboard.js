@@ -1,6 +1,6 @@
-app.controller('dashboard', ["$scope", "$ls", "$http",
+app.controller('dashboard', ["$scope", "$ls", "$http", "$refresh",
 
-function($scope, $ls, $http) {
+function($scope, $ls, $http, $refresh) {
     if(!$ls.terms[term] && ($ls.terms[term] = {}))
         $http.get("/api/terms/" + term + "/").then(function(response) {
             angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
@@ -44,6 +44,8 @@ function($scope, $ls, $http) {
         });
         return classes;
     };
+
+    $refresh(["content=deadlines", "emails=personal", "updates", "grades"])
 }])
 
 .filter('gradeColor', function() {

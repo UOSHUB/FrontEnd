@@ -1,6 +1,6 @@
-app.controller('email', ["$scope", "$ls", "$http",
+app.controller('email', ["$scope", "$ls", "$http", "$refresh",
 
-function($scope, $ls, $http) {
+function($scope, $ls, $http, $refresh) {
     if(!$ls.emails.body)
         $ls.emails.body = {};
 
@@ -24,4 +24,6 @@ function($scope, $ls, $http) {
     $scope.isSelected = function(tab, id) {
         return $ls.selected.email[0] == tab && $ls.selected.email[1] == id;
     };
+
+    $refresh(["emails"])
 }]);
