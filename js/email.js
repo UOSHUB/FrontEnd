@@ -1,4 +1,4 @@
-app.controller('email', ["$scope", "$ls", "$http", "$refresh",
+app.controller("email", ["$scope", "$ls", "$http", "$refresh",
 
 function($scope, $ls, $http, $refresh) {
     if(!$ls.emails.body)
@@ -9,14 +9,14 @@ function($scope, $ls, $http, $refresh) {
     ($scope.getEmails = function(category) {
         if(!$ls.emails[category] || $ls.emails[category].length < 20)
             $http.get("/api/emails/" + category + "/").then(function(response) {
-                angular.extend($ls.emails, response.data);
+                $ls.emails[category] = response.data;
             }, error);
     })($scope.tabs[$ls.selected.tab]);
 
     $scope.openEmail = function(tab, id) {
         $ls.selected.email = [tab, id];
         if(!$ls.emails.body[id])
-            $http.get("/api/emails/" + $ls.emails.idRoot + "_" + id + "/").then(function(response) {
+            $http.get("/api/emails/" + id + "/").then(function(response) {
                 $ls.emails.body[id] = response.data;
             }, error);
     };

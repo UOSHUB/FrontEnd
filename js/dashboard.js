@@ -1,4 +1,4 @@
-app.controller('dashboard', ["$scope", "$ls", "$http", "$refresh",
+app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh",
 
 function($scope, $ls, $http, $refresh) {
     if(!$ls.terms[term] && ($ls.terms[term] = {}))
@@ -18,7 +18,7 @@ function($scope, $ls, $http, $refresh) {
 
     if(!$ls.emails.personal)
         $http.get("/api/emails/personal/10/").then(function(response) {
-            angular.extend($ls.emails, response.data);
+            $ls.emails.personal = response.data;
         }, error);
 
     if(!$ls.holds)
@@ -48,7 +48,7 @@ function($scope, $ls, $http, $refresh) {
     $refresh(["content=deadlines", "emails=personal", "updates", "grades"])
 }])
 
-.filter('gradeColor', function() {
+.filter("gradeColor", function() {
     return function(grade) {
         var percent = grade.grade / grade.outOf * 100;
         if(percent < 60)

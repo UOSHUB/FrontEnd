@@ -1,4 +1,4 @@
-app.controller('courses', ["$scope", "$ls", "$http", "$refresh",
+app.controller("courses", ["$scope", "$ls", "$http", "$refresh",
 
 function($scope, $ls, $http, $refresh) {
     if(!$ls.terms[term] && ($ls.terms[term] = {}))
@@ -48,7 +48,7 @@ function($scope, $ls, $http, $refresh) {
     $refresh(["content", "updates"])
 }])
 
-.filter('inCourse', function() {
+.filter("inCourse", function() {
     return function(items, course) {
         var inCourse = [];
         angular.forEach(items, function(item) {

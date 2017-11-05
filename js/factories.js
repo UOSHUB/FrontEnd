@@ -1,26 +1,26 @@
-app.factory('$ls', ["$localStorage", function($localStorage) {
+app.factory("$ls", ["$localStorage", function($localStorage) {
     return $localStorage;
 }])
 
-.factory('$goto', ["$location", function($location) {
+.factory("$goto", ["$location", function($location) {
     return function(link) {
-        $location.path(link.replace(/\/?$/, '/'));
+        $location.path(link.replace(/\/?$/, "/"));
     };
 }])
 
-.factory('$toolbar', function() {
+.factory("$toolbar", function() {
     return {};
 })
 
-.factory('$load', ["$rootScope", "$ls", "$goto", "$timeout", "$interval", "$mdToast",
+.factory("$load", ["$rootScope", "$ls", "$goto", "$timeout", "$interval", "$mdToast",
 
 function($rootScope, $ls, $goto, $timeout, $interval, $mdToast) {
     var toast = $mdToast.simple().hideDelay(2000)
-        .position('top right').parent($('#content'))
-        .textContent('You need to login first!');
+        .position("top right").parent($("#content"))
+        .textContent("You need to login first!");
     function onLoggedOut() {
         if(!$ls.loggedIn) {
-            $goto('/');
+            $goto("/");
             $timeout(function() {
                 $mdToast.show(toast);
             }, 300);
@@ -28,7 +28,7 @@ function($rootScope, $ls, $goto, $timeout, $interval, $mdToast) {
     }
     return function(route, secure, title) {
         return {
-            templateUrl: '/static/' + route + '.html',
+            templateUrl: "/static/" + route + ".html",
             controller: route,
             resolve: angular.extend({
                 onload: function() {
@@ -43,7 +43,7 @@ function($rootScope, $ls, $goto, $timeout, $interval, $mdToast) {
     };
 }])
 
-.factory('$refresh', ["$rootScope", "$ls", "$http", "$timeout", "$interval",
+.factory("$refresh", ["$rootScope", "$ls", "$http", "$timeout", "$interval",
 
 function($rootScope, $ls, $http, $timeout, $interval) {
     var timezoneOffset = today.getTimezoneOffset() * 60000, delay = 5 * 60000;
@@ -59,7 +59,7 @@ function($rootScope, $ls, $http, $timeout, $interval) {
         });
     }
     function refresh(queries) {
-        $http.get("/api/refresh/" + $ls.timestamp + "/?" + queries.join('&')).then(function(response) {
+        $http.get("/api/refresh/" + $ls.timestamp + "/?" + queries.join("&")).then(function(response) {
             update$ls(response.data, $ls);
             setTimestamp();
         }, error);

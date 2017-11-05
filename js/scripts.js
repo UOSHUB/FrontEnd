@@ -1,5 +1,5 @@
-var days = ['U', 'M', 'T', 'W', 'R', 'F', 'S'], today = new Date(), month = today.getMonth() + 1,
-    term = today.getFullYear() + (month > 7 ? '10' : month < 6 ? '20' : '30'),
+var days = ["U", "M", "T", "W", "R", "F", "S"], today = new Date(), month = today.getMonth() + 1,
+    term = today.getFullYear() + (month > 7 ? "10" : month < 6 ? "20" : "30"),
     body = $("body"), maxTime, minTime, hoursCount, colors = [
         "red", "teal", "green", "orange", "purple",
         "light-blue", "brown", "yellow", "deep-orange", "blue"
@@ -23,17 +23,17 @@ function structureCourse(course, id) {
         color: course.color,
         columns: [
             [
-                ['Doctor Name', course.doctor, 'user'],
-                ['Days', course.days, 'calendar-o'],
-                ['Start Time', course.start, 'hourglass-start'],
-                ['Section', course.section, 'puzzle-piece', '(Section)'],
-                ['Course key', id, 'key']
+                ["Doctor Name", course.doctor, "user"],
+                ["Days", course.days, "calendar-o"],
+                ["Start Time", course.start, "hourglass-start"],
+                ["Section", course.section, "puzzle-piece", "(Section)"],
+                ["Course key", id, "key"]
             ], [
-                ['Doctor Email', course.email, 'envelope'],
-                ['Building, Room', course.location, 'map-marker'],
-                ['End Time', course.end, 'hourglass-end'],
-                ['Credit Hours', course.ch, 'certificate', '(CrHrs)'],
-                ['CRN', course.crn, 'info']
+                ["Doctor Email", course.email, "envelope"],
+                ["Building, Room", course.location, "map-marker"],
+                ["End Time", course.end, "hourglass-end"],
+                ["Credit Hours", course.ch, "certificate", "(CrHrs)"],
+                ["CRN", course.crn, "info"]
             ]
         ]
     };
@@ -89,7 +89,7 @@ function colorAndTime(course, index) {
 }
 
 function toMinutes(timeString) {
-    var time = timeString.replace(':', ' ').split(' ');
+    var time = timeString.replace(":", " ").split(" ");
     return Number(time[0]) * 60 + Number(time[1]) + (time[2] == "PM" && time[0] != "12" ? 720 : 0);
 }
 

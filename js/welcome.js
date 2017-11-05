@@ -1,4 +1,4 @@
-app.controller('welcome', ["$scope", "$interval",
+app.controller("welcome", ["$scope", "$interval",
 
 function($scope, $interval) {
     $scope.counter = 0;

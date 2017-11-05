@@ -1,4 +1,4 @@
-var app = angular.module('UOSHUB', ['ngMaterial', 'ngRoute', 'ngStorage', 'materialCalendar'])
+var app = angular.module("UOSHUB", ["ngMaterial", "ngRoute", "ngStorage", "materialCalendar"])
 
 .config(["$locationProvider", "$compileProvider", "$mdAriaProvider", "$mdThemingProvider",
          "$mdIconProvider", "$localStorageProvider", "$routeProvider", "$loadProvider",
@@ -8,24 +8,24 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
     $locationProvider.html5Mode(true);
     $compileProvider.debugInfoEnabled(false);
     $mdAriaProvider.disableWarnings();
-    $localStorageProvider.setKeyPrefix('');
-    $mdThemingProvider.theme('default')
-        .primaryPalette('green')
-        .accentPalette('blue-grey');
+    $localStorageProvider.setKeyPrefix("");
+    $mdThemingProvider.theme("default")
+        .primaryPalette("green")
+        .accentPalette("blue-grey");
     $mdIconProvider.icon("logo", "/static/img/logo.svg")
         .icon("md-tabs-arrow", "/static/img/tabs-arrow-icon.svg");
     var $load = $loadProvider.$get();
     $routeProvider
-        .when('/', $load('welcome'))
-        .when('/dashboard/', $load('dashboard', true))
-        .when('/schedule/', $load('schedule', true))
-        .when('/courses/', $load('courses', true))
-        .when('/email/', $load('email', true))
-        .when('/calendar/', $load('calendar'))
-        .otherwise($load('notfound', false, "Page not found"));
+        .when("/", $load("welcome"))
+        .when("/dashboard/", $load("dashboard", true))
+        .when("/schedule/", $load("schedule", true))
+        .when("/courses/", $load("courses", true))
+        .when("/email/", $load("email", true))
+        .when("/calendar/", $load("calendar"))
+        .otherwise($load("notfound", false, "Page not found"));
 }])
 
-.filter('timeDistance', function() {
+.filter("timeDistance", function() {
     return function(date) {
         date = new Date(date);
         var period, now = new Date(), direction = "ago",
@@ -54,7 +54,7 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
     };
 })
 
-.filter('find', function() {
+.filter("find", function() {
     return function(items, id) {
         for(var i = 0; i < items.length; i++)
             if(id == items[i].id)

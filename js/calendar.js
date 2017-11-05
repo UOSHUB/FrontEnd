@@ -1,4 +1,4 @@
-app.controller('calendar', ["$scope", "$ls", "$http",
+app.controller("calendar", ["$scope", "$ls", "$http",
 
 function($scope, $ls, $http) {
     angular.extend($scope, {
