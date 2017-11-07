@@ -44,17 +44,18 @@ Here's a summary of the general requests sequence:
 
 There're a lot of thing we still need to do in the front-end:
 
-- Link the front-end with the back-end to reflect the retrieved data
-- Add a sub-section for designing next semester's schedule live with drag and drop
-- Add a section to display student's information and frequently looked up data
-- Make the whole website responsive to all screen sizes
-- Dynamically show or hide dashboard cards according to time of the semester
-- Redesign account fees summary and e-services to make it less confusing
-- Show classroom location on a map of the university (for freshmen)
-- Allow students to review all courses together to avoid reading the forms again
-- Add the ability to attach photos or notes to today’s classes
-- Add a feature of sharing schedule with other students to get mutual free time slots
-- Implement PWA concepts for native notifications and offline access
+- [x] Link the front-end with the back-end to reflect the retrieved data
+- [x] Process the received data and implement the required filters and factories
+- [ ] Add a sub-section for designing next semester's schedule live with drag and drop
+- [ ] Add a section to display student's information and frequently looked up data
+- [ ] Make the whole website responsive to all screen sizes
+- [ ] Dynamically show or hide dashboard cards according to time of the semester
+- [ ] Redesign account fees summary and e-services to make it less confusing
+- [ ] Show classroom location on a map of the university (for freshmen)
+- [ ] Allow students to review all courses together to avoid reading the forms again
+- [ ] Add the ability to attach photos or notes to today’s classes
+- [ ] Add a feature of sharing schedule with other students to get mutual free time slots
+- [ ] Implement PWA concepts for native notifications and offline access
 
 ***
 
