@@ -7,7 +7,7 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-2-line" ng-repeat="update in $ls.updates | orderBy: '-time'" ng-click="null">
+                <md-list-item class="md-2-line removeable" ng-repeat="update in $ls.updates | orderBy: '-time'">
                     <div class="md-list-item-text">
                         <h3>{{ update.title }}</h3>
                         <p>{{ $ls.courses[update.course].title }}</p>
@@ -15,6 +15,11 @@
                     <div class="md-list-item-text align-right">
                         <h3>{{ update.time | timeDistance }}</h3>
                         <p class="md-caption">{{ update.event }}</p>
+                    </div>
+                    <div class="md-secondary">
+                        <md-button class="md-icon-button">
+                            <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
+                        </md-button>
                     </div>
                 </md-list-item>
             </md-list>

@@ -107,3 +107,7 @@ md-dialog p {
 .no-margin {
     margin: 0;
 }
+
+.fa-1x {
+    font-size: 1.6em;
+}

@@ -38,3 +38,21 @@
 .today-classes md-icon {
     min-width: 16px;
 }
+
+md-list-item.removeable {
+    padding-right: 0;
+}
+
+md-list-item.removeable:hover {
+    background-color: rgba(160, 160, 160, 0.25);
+}
+
+.removeable > .md-secondary-container {
+    transition: width ease 0.2s;
+    overflow: hidden;
+    width: 16px;
+}
+
+.removeable:hover > .md-secondary-container {
+    width: 52px;
+}
