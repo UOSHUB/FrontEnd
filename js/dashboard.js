@@ -1,6 +1,6 @@
-app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh",
+app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh", "$filter",
 
-function($scope, $ls, $http, $refresh) {
+function($scope, $ls, $http, $refresh, $filter) {
     if(!$ls.terms[term] && ($ls.terms[term] = {}))
         $http.get("/api/terms/" + term + "/").then(function(response) {
             angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
@@ -43,6 +43,14 @@ function($scope, $ls, $http, $refresh) {
                 classes.push(course);
         });
         return classes;
+    };
+
+    $scope.dismissUpdate = function(updateId) {
+        $http({
+            method: "delete",
+            url: "/api/updates/" + updateId + "/"
+        }).then(function() {}, error);
+        $filter("find")($ls.updates, updateId, "delete");
     };
 
     $refresh(["content=deadlines", "emails=personal", "updates", "grades"])

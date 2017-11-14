@@ -55,9 +55,11 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
 })
 
 .filter("find", function() {
-    return function(items, id) {
+    return function(items, id, command) {
         for(var i = 0; i < items.length; i++)
             if(id == items[i].id)
-                return items[i];
+                if(command == "delete")
+                    return delete items[i];
+                else return items[i];
     };
 });
