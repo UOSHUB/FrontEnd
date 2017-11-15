@@ -38,7 +38,7 @@
                         {{ getInitials(email.sender) }}
                     </div>
                     <div class="md-list-item-text">
-                        <h3>{{ email.title }}</h3>
+                        <h3>{{ email.title || "No Title" }}</h3>
                         <p>{{ email.sender }}</p>
                     </div>
                     <div class="md-list-item-text align-right">

@@ -33,7 +33,7 @@
     </md-card>
     <md-card flex>
         <md-content ng-if="$ls.selected.email[1]" layout-padding flex>
-            {{ email = ($ls.emails[$ls.selected.email[0]] | find: $ls.selected.email[1]); '' }}
+            {{ email = ($ls.emails[$ls.selected.email[0]] | find: 'id' : $ls.selected.email[1]); '' }}
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-display-1">{{ email.title }}</span>

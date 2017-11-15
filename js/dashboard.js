@@ -50,7 +50,7 @@ function($scope, $ls, $http, $refresh, $filter) {
             method: "delete",
             url: "/api/updates/" + updateId + "/"
         }).then(function() {}, error);
-        $filter("find")($ls.updates, updateId, "delete");
+        $filter("find")($ls.updates, "dismiss", updateId, "delete");
     };
 
     $refresh(["content=deadlines", "emails=personal", "updates", "grades"])

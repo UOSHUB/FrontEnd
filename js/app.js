@@ -55,11 +55,11 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
 })
 
 .filter("find", function() {
-    return function(items, id, command) {
+    return function(items, key, value, command) {
         for(var i = 0; i < items.length; i++)
-            if(id == items[i].id)
+            if(value == items[i][key])
                 if(command == "delete")
-                    return delete items[i];
+                    return items.splice(i, 1);
                 else return items[i];
     };
 });
