@@ -56,3 +56,7 @@ md-list-item.removeable:hover {
 .removeable:hover > .md-secondary-container {
     width: 52px;
 }
+
+.removeable .fix-icon {
+    margin-top: 10px !important;
+}
