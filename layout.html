@@ -35,7 +35,10 @@
                     <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('/calendar/')">Academic Calendar</md-button>
                     <ng-include src="hasToolbar && currentPage" layout="row" flex></ng-include>
                     <div ng-if="!hasToolbar" flex></div>
-                    <h2 ng-show="$ls.loggedIn" md-colors="::{color: 'accent-800'}">{{ $ls.student.firstName }}</h2>
+                    <h2 ng-show="$ls.loggedIn" md-colors="::{color: 'grey-800'}">
+                        <md-icon md-colors="::{color: 'grey-800'}" style="vertical-align: top" md-font-icon="fa fa-user-circle-o"></md-icon>
+                        {{ $ls.student.firstName }}
+                    </h2>
                     <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
                     <md-button ng-if="$ls.loggedIn" class="md-primary md-hue-2" ng-click="logout()">Logout</md-button>
                 </div>

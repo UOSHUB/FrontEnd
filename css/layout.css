@@ -71,6 +71,10 @@ md-toolbar {
     min-height: 64px;
 }
 
+.md-toolbar-tools > md-icon:first-child {
+    margin-right: 8px;
+}
+
 ng-view, ng-view md-card {
     margin: 10px;
 }

@@ -5,6 +5,7 @@ function($scope, $ls, $http, $refresh) {
         $ls.emails.body = {};
 
     $scope.tabs = ["personal", "courses", "events"];
+    $scope.icons = {personal: "users", courses: "book", events: "bullhorn"};
 
     ($scope.getEmails = function(category) {
         if(!$ls.emails[category] || $ls.emails[category].length < 20)

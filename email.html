@@ -8,7 +8,10 @@
         <md-content layout="row" flex>
             <md-tabs md-selected="$ls.selected.tab" flex>
                 <md-tab ng-repeat="tab in tabs" ng-click="getEmails(tab)">
-                    <md-tab-label>{{ tab.capitalize() }}</md-tab-label>
+                    <md-tab-label>
+                        <md-icon md-font-icon="fa fa-{{ icons[tab] }} fa-fw"></md-icon>
+                        {{ tab.capitalize() }}
+                    </md-tab-label>
                     <md-tab-body>
                         <md-list flex>
                             <md-list-item ng-repeat="email in $ls.emails[tab] | orderBy: '-time'" ng-click="openEmail(tab, email.id)"
