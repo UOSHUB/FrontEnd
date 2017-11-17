@@ -3,7 +3,7 @@
 }
 
 #sidenav, #right-margin {
-    transition: all ease 0.8s;
+    transition: width .8s ease;
 }
 
 #right-margin {
@@ -71,7 +71,12 @@ md-toolbar {
     min-height: 64px;
 }
 
-.md-toolbar-tools > md-icon:first-child {
+#toolbar {
+    padding-right: 0;
+}
+
+.md-toolbar-tools > md-icon:first-child,
+#toolbar > .md-button:last-child {
     margin-right: 8px;
 }
 
@@ -115,4 +120,19 @@ md-dialog p {
 
 .fa-1x {
     font-size: 1.6em;
+}
+
+[account] {
+    cursor: pointer;
+    height: 100%;
+    font-size: 23px !important;
+    padding: 19px 24px 19px 20px;
+    box-shadow: 0 0px 3px 0 rgba(0,0,0,.2),
+        0 0px 1px 0 rgba(0,0,0,.14),
+        0 0px 1px -1px rgba(0,0,0,.12);
+}
+
+[account] > md-icon {
+    vertical-align: baseline;
+    padding-right: 4px;
 }
