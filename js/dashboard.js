@@ -2,9 +2,12 @@ app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh", "$filter",
 
 function($scope, $ls, $http, $refresh, $filter) {
     var find = $filter("find");
-    if(!$ls.terms[term] && ($ls.terms[term] = {}))
+    if(!$ls.terms[term])
         $http.get("/api/terms/" + term + "/").then(function(response) {
-            angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
+            if(!angular.equals(response.data, {})) {
+                $ls.terms[term] = {};
+                angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
+            }
         }, error);
 
     if(!$ls.deadlines)
@@ -38,11 +41,12 @@ function($scope, $ls, $http, $refresh, $filter) {
 
     $scope.todayClasses = function() {
         var classes = [], day = days[today.getDay()];
-        angular.forEach($ls.terms[term].courses, function(key) {
-            var course = $ls.courses[key];
-            if(course.days && course.days.indexOf(day) > -1)
-                classes.push(course);
-        });
+        if($ls.terms && $ls.terms[term])
+            angular.forEach($ls.terms[term].courses, function(key) {
+                var course = $ls.courses[key];
+                if(course.days && course.days.indexOf(day) > -1)
+                    classes.push(course);
+            });
         return classes;
     };
 

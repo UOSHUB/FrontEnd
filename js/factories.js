@@ -64,8 +64,8 @@ function($rootScope, $ls, $http, $timeout, $interval) {
             setTimestamp();
         }, error);
     }
-    if(!$ls.timestamp) setTimestamp();
     return function(queries) {
+        if(!$ls.timestamp) setTimestamp();
         $rootScope.refresh = $timeout(function() {
             refresh(queries);
             $rootScope.refresh = $interval(refresh, delay, 0, true, queries);
