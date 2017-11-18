@@ -15,6 +15,7 @@ function($mdDialog, $http, $ls, $goto) {
                     scope: $scope
                 }).then(function(data) {
                     $http.post("/api/login/", data).then(function(response) {
+                        $scope.pin = '';
                         $ls.$default({
                             terms: {}, emails: {}, courses: {},
                             selected: {tab: 0, email: [], term: term}
@@ -31,5 +32,5 @@ function($mdDialog, $http, $ls, $goto) {
                 }, error);
             });
         }
-    }
+    };
 }]);

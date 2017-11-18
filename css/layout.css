@@ -75,8 +75,12 @@ md-toolbar {
     padding-right: 0;
 }
 
-.md-toolbar-tools > md-icon:first-child,
-#toolbar > .md-button:last-child {
+#toolbar md-select {
+    height: 30px;
+    margin-bottom: 6px;
+}
+
+.md-toolbar-tools > md-icon:first-child {
     margin-right: 8px;
 }
 

@@ -23,17 +23,17 @@ function($mdPanel, $http, $ls, $goto) {
                     $scope.panel = panel;
                 });
             });
-            $scope.logout = function() {
-                $http({method: "delete", url: "/api/login/"}).then(function(response) {
+            $scope.logout = function(reset) {
+                $http({method: "delete", url: "/api/login/"}).then(function() {}, error);
+                $scope.panel.close().then(function() {
                     if($scope.currentPage != "calendar")
                         $goto("/");
-                    }, error);
-                $ls.loggedIn = false;
-                $scope.panel.close();
-            };
-            $scope.cleanLogout = function() {
-                $scope.logout();
-                $ls.$reset();
+                    element.addClass("ng-hide");
+                    if(reset)
+                        $ls.$reset();
+                    else
+                        $ls.loggedIn = false;
+                }, error);
             };
         }
     };

@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="courses">
-    <md-select ng-model="$ls.selected.course" flex="25">
+    <md-select ng-model="$ls.selected.course" class="no-margin" flex="30">
         <md-option ng-repeat="id in $ls.terms[$ls.selected.term].courses" ng-value="id" ng-if="$ls.courses[id].title">{{ $ls.courses[id].title }}</md-option>
     </md-select>
 </script>

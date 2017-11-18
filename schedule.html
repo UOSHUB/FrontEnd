@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="schedule">
-    <md-select ng-model="$ls.selected.term" ng-click="$toolbar.getTerms()" flex="30">
+    <md-select ng-model="$ls.selected.term" ng-click="$toolbar.getTerms()" class="no-margin" flex="30">
         <md-option ng-repeat="term in $ls.terms | orderTerms" ng-value="term" ng-click="$toolbar.getSchedule(term)">{{ term | termTitle }}</md-option>
     </md-select>
     <span flex></span>

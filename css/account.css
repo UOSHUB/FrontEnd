@@ -1,11 +1,16 @@
+#toolbar [login], [account] {
+    margin-right: 0;
+    margin-left: 16px;
+    height: 100%;
+    box-shadow: 0 0px 3px 0 rgba(0, 0, 0, .2),
+                0 0px 1px 0 rgba(0, 0, 0, .14),
+                0 0px 1px -1px rgba(0, 0, 0, .12);
+}
+
 [account] {
     cursor: pointer;
-    height: 100%;
     font-size: 23px !important;
     padding: 19px 24px 19px 20px;
-    box-shadow: 0 0px 3px 0 rgba(0, 0, 0, .2),
-        0 0px 1px 0 rgba(0, 0, 0, .14),
-        0 0px 1px -1px rgba(0, 0, 0, .12);
 }
 
 [account] > md-icon {
@@ -28,6 +33,10 @@
     line-height: 48px;
 }
 
+.account-panel div span[flex] {
+    line-height: 24px;
+}
+
 .account-panel md-icon:not(.fa-3x) {
     margin-right: 4px;
 }
@@ -35,9 +44,15 @@
 .account-panel .md-button {
     margin: 0;
     padding: 6px 14px;
+}
+
+.account-panel .md-button .md-ripple-container,
+#toolbar [login], .account-panel .md-button,
+#toolbar [login] .md-ripple-container {
     border-radius: 0;
 }
 
-.account-panel .md-button .md-ripple-container {
-    border-radius: 0;
+#toolbar [login] {
+    font-size: 18px;
+    padding: 0 24px;
 }

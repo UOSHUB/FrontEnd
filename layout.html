@@ -32,14 +32,14 @@
                                ng-click="$ls.selected.tightNav = !$ls.selected.tightNav" style="margin-right: 16px">
                         <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
                     </md-button>
-                    <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('/calendar/')">Academic Calendar</md-button>
+                    <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('calendar')">Academic Calendar</md-button>
                     <ng-include src="hasToolbar && currentPage" layout="row" flex></ng-include>
-                    <div ng-if="!hasToolbar" flex></div>
-                    <h2 ng-show="$ls.loggedIn" md-colors="::{color: 'grey-800'}" account>
+                    <div ng-hide="hasToolbar" flex></div>
+                    <span ng-show="$ls.loggedIn" md-colors="::{color: 'grey-800'}" account>
                         <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-user-circle-o"></md-icon>
                         {{ $ls.student.firstName }}
-                    </h2>
-                    <md-button ng-if="!$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
+                    </span>
+                    <md-button ng-hide="$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
                 </div>
             </md-toolbar>
             <div id="content" layout="row" flex>
