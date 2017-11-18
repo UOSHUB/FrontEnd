@@ -9,16 +9,7 @@ function($scope, $ls, $toolbar, $goto, $http) {
     angular.extend($scope, {
         $toolbar: $toolbar,
         goto: $goto,
-        $ls: $ls.$default({
-            terms: {},
-            emails: {},
-            courses: {},
-            selected: {
-                tab: 0,
-                email: [],
-                term: term
-            }
-        })
+        $ls: $ls
     });
     $scope.pages = {
         dashboard: "tachometer",
@@ -26,13 +17,6 @@ function($scope, $ls, $toolbar, $goto, $http) {
         courses: "book",
         email: "envelope",
         calendar: "globe"
-    };
-    $scope.logout = function() {
-        $http({method: "delete", url: "/api/login/"}).then(function(response) {
-            $ls.loggedIn = false;
-            if($scope.currentPage != "calendar")
-                $goto("/");
-            }, function(response) {});
     };
     $scope.getInitials = function(name) {
         if(!name) return;

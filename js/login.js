@@ -15,6 +15,10 @@ function($mdDialog, $http, $ls, $goto) {
                     scope: $scope
                 }).then(function(data) {
                     $http.post("/api/login/", data).then(function(response) {
+                        $ls.$default({
+                            terms: {}, emails: {}, courses: {},
+                            selected: {tab: 0, email: [], term: term}
+                        });
                         $ls.loggedIn = true;
                         $goto("dashboard");
                         if(!$ls.student)
@@ -28,4 +32,4 @@ function($mdDialog, $http, $ls, $goto) {
             });
         }
     }
-}])
+}]);

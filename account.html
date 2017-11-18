@@ -19,3 +19,8 @@
         <span flex>{{ $ls.student.college }}</span>
     </div>
 </div>
+<span layout="row" md-colors="{background: 'grey-100'}">
+    <md-button flex="noshrink" ng-click="logout()">Logout</md-button>
+    <span style="height: 48px; background-color: #E0E0E0; width: 1px"></span>
+    <md-button flex="noshrink" ng-click="cleanLogout()">Clean Up & Logout</md-button>
+</span>
