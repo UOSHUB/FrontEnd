@@ -1,0 +1,21 @@
+<div layout="row" layout-padding md-colors="::{color: 'grey-800'}">
+    <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-user-circle-o fa-3x"></md-icon>
+    <div layout="column" layout-align="space-between">
+        <b style="font-size: 20px">
+            {{ $ls.student.firstName }} {{ $ls.student.lastName }}
+        </b>
+        <span>
+            {{ $ls.student.studentId }}@sharjah.ac.ae
+        </span>
+    </div>
+</div>
+<div layout-padding>
+    <div layout="row">
+        <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-certificate" style="font-size: 1.3em"></md-icon>
+        <span flex>{{ $ls.student.major }}</span>
+    </div>
+    <div layout="row">
+        <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-university"></md-icon>
+        <span flex>{{ $ls.student.college }}</span>
+    </div>
+</div>

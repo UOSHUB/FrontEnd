@@ -136,3 +136,22 @@ md-dialog p {
     vertical-align: baseline;
     padding-right: 4px;
 }
+
+.account-panel {
+    background-color: white;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.account-panel > div {
+    border-bottom: #E0E0E0 solid 1px;
+}
+
+.account-panel .fa-3x {
+    height: 48px;
+    line-height: 48px;
+}
+
+.account-panel md-icon:not(.fa-3x) {
+    margin-right: 4px;
+}
