@@ -64,3 +64,16 @@ md-list-item.removeable:hover, [account]:hover {
 .removeable .fix-icon {
     margin-top: 10px !important;
 }
+
+.md-button.card-option {
+    opacity: 0;
+    transition: opacity ease .2s;
+}
+
+md-toolbar:hover .md-button.card-option {
+    opacity: 1;
+}
+
+.md-button.card-option:last-child {
+    margin-right: 0;
+}

@@ -66,6 +66,13 @@ function($scope, $ls, $http, $refresh, $filter) {
         find($ls.emails.personal, "id", emailId, "delete");
     };
 
+    $scope.cardOptions = {
+        updates: [
+            {icon: "refresh", tooltip: "Refresh"},
+            {icon: "trash", tooltip: "Delete All"},
+        ]
+    };
+
     $refresh(["content=deadlines", "emails=personal", "updates", "grades"])
 }])
 
