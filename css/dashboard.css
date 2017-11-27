@@ -54,7 +54,7 @@ md-list-item.removeable:hover, [account]:hover {
 .removeable > .md-secondary-container {
     transition: width ease .2s;
     overflow: hidden;
-    width: 16px;
+    width: 15px;
 }
 
 .removeable:hover > .md-secondary-container {
