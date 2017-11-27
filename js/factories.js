@@ -8,21 +8,26 @@ app.factory("$ls", ["$localStorage", function($localStorage) {
     };
 }])
 
+.factory("$toast", ["$mdToast", function($mdToast) {
+    var toast = $mdToast.simple().hideDelay(2000)
+        .position("top right").parent($("#content"));
+    return function(message) {
+        $mdToast.show(toast.textContent(message));
+    };
+}])
+
 .factory("$toolbar", function() {
     return {};
 })
 
-.factory("$load", ["$rootScope", "$ls", "$goto", "$timeout", "$interval", "$mdToast",
+.factory("$load", ["$rootScope", "$ls", "$goto", "$timeout", "$interval", "$toast",
 
-function($rootScope, $ls, $goto, $timeout, $interval, $mdToast) {
-    var toast = $mdToast.simple().hideDelay(2000)
-        .position("top right").parent($("#content"))
-        .textContent("You need to login first!");
+function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
     function onLoggedOut() {
         if(!$ls.loggedIn) {
             $goto("/");
             $timeout(function() {
-                $mdToast.show(toast);
+                $toast("You need to login first!");
             }, 300);
         }
     }
