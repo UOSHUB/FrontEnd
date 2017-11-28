@@ -1,1 +1,1 @@
-app.controller("notfound", function() {});
+app.controller("notfound", nothing);

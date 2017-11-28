@@ -54,7 +54,7 @@ function($scope, $ls, $http, $refresh, $filter) {
         $http({
             method: "delete",
             url: "/api/updates/" + updateId + "/"
-        }).then(function() {}, error);
+        }).then(nothing, error);
         find($ls.updates, "dismiss", updateId, "delete");
     };
 
@@ -62,7 +62,7 @@ function($scope, $ls, $http, $refresh, $filter) {
         $http({
             method: "delete",
             url: "/api/emails/" + emailId + "/"
-        }).then(function() {}, error);
+        }).then(nothing, error);
         find($ls.emails.personal, "id", emailId, "delete");
     };
 

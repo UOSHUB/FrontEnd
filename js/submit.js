@@ -12,9 +12,9 @@ function ($http, $timeout, $toast) {
                     });
                     $http.post("/api/submit/" + attr.submit, files, {
                         headers: {"Content-Type": undefined}
-                    }).then(function (response) {
+                    }).then(function () {
                         $toast("Submitted files successfully");
-                    }, function(e) {
+                    }, function() {
                         $toast("Faild to submit files!");
                     });
                 });
