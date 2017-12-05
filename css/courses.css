@@ -20,3 +20,12 @@ md-fab-speed-dial {
     right: -8px;
     bottom: -8px;
 }
+
+md-list-item.documents>div.md-button:first-child {
+    padding-right: 0;
+}
+
+.download {
+    max-width: 56px;
+    min-width: 56px;
+}

@@ -125,3 +125,9 @@ md-dialog p {
 .fa-1x {
     font-size: 1.6em;
 }
+
+md-list-item.md-2-line .md-list-item-text p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
