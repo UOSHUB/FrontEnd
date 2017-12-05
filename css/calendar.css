@@ -3,15 +3,19 @@ calendar-md {
 }
 
 .breadcrumb {
-    overflow: visible;
     font-size: 14px;
     background-color: lightgrey;
     border-radius: 16px;
     height: auto;
-    line-height: auto;
     margin: -8px -8px -8px -4px;
     padding: 6px 10px !important;
     float: left;
+}
+
+md-content.agenda .breadcrumb {
+    margin: 8px 0 0 0;
+    text-align: left !important;
+    width: auto !important;
 }
 
 div[tabindex] {

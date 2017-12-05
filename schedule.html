@@ -3,7 +3,6 @@
         <md-option ng-repeat="term in $ls.terms | orderTerms" ng-value="term" ng-click="$toolbar.getSchedule(term)">{{ term | termTitle }}</md-option>
     </md-select>
     <span flex></span>
-    <md-button class="md-accent md-hue-2" ng-click="$ls.selected.term = -1">Design Your Schedule</md-button>
 </script>
 
 <md-card flex>

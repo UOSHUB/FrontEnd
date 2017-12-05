@@ -1,6 +1,6 @@
-app.controller("calendar", ["$scope", "$ls", "$http",
+app.controller("calendar", ["$scope", "$ls", "$http", "MaterialCalendarData",
 
-function($scope, $ls, $http) {
+function($scope, $ls, $http, $calendar) {
     angular.extend($scope, {
         selectedDate: new Date(),
         firstDayOfWeek: 6, // First day of the week, 0 for Sunday, 1 for Monday, etc.
@@ -29,6 +29,9 @@ function($scope, $ls, $http) {
         $http.get("/api/calendar/" + $ls.selected.term + "/").then(function(response) {
             $ls.events = response.data;
             parseEvents();
+            var start = new Date(year, month - 2, 24), end = new Date(year, month, 6);
+            for(var date = start; date <= end; date.setDate(date.getDate() + 1))
+                $calendar.setDayContent(date, $scope.setDayContent(date));
         }, error);
     else parseEvents();
 
@@ -38,7 +41,7 @@ function($scope, $ls, $http) {
             if(!event.length) {
                 if(event.getDate() == date.getDate() && event.getMonth() == date.getMonth())
                     return "<div class='breadcrumb'>" + $scope.events[i].text + "</div>";
-            } else if(event[0] < date && date < event[1])
+            } else if(event[0] <= date && date <= event[1])
                     return "<div class='breadcrumb'>" + $scope.events[i].text + "</div>";
         }
     };
