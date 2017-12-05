@@ -25,7 +25,7 @@ md-list-item.documents>div.md-button:first-child {
     padding-right: 0;
 }
 
-.download {
+.fixed-56-width {
     max-width: 56px;
     min-width: 56px;
 }

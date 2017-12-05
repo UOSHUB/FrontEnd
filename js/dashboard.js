@@ -39,6 +39,11 @@ function($scope, $ls, $http, $refresh, $filter) {
             $ls.grades = response.data;
         }, error);
 
+    if(!$ls.finals)
+        $http.get("/api/finals/" + term + "/").then(function(response) {
+            $ls.finals = response.data;
+        }, error);
+
     $scope.todayClasses = function() {
         var classes = [], day = days[today.getDay()];
         if($ls.terms && $ls.terms[term])
@@ -64,6 +69,14 @@ function($scope, $ls, $http, $refresh, $filter) {
             url: "/api/emails/" + emailId + "/"
         }).then(nothing, error);
         find($ls.emails.personal, "id", emailId, "delete");
+    };
+
+    $scope.parseDate = function(date) {
+        return new Date(date);
+    };
+
+    $scope.beforeDue = function(date) {
+        return new Date(date) > today;
     };
 
     $refresh(["content=deadlines", "emails=personal", "updates", "grades"])

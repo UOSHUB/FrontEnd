@@ -65,7 +65,8 @@
         </md-toolbar>
         <md-content>
             <md-list>
-                <md-list-item class="md-2-line removeable" ng-repeat="deadline in $ls.deadlines | orderBy: '-dueDate'">
+                <md-list-item class="md-2-line" ng-class="beforeDue(deadline.dueDate) ? 'removeable' : 'archived'"
+                              ng-repeat="deadline in $ls.deadlines | orderBy: '-dueDate'">
                     <div class="md-list-item-text" flex>
                         <h3>{{ deadline.title }}</h3>
                         <p>{{ $ls.courses[deadline.course].title }}</p>
@@ -86,17 +87,27 @@
     </md-card>
 </div>
 <div layout="row" flex-gt-xs="40" layout-xs="column">
-    <md-card flex-gt-xs layout="row">
-        <md-button class="no-margin fill-width" layout="column" layout-align="end start" layout-padding
-                   style="background: url('https://images.pexels.com/photos/147634/pexels-photo-147634.jpeg?dl&w=640&h=426') center">
-            <div layout="column" layout-align="center center" layout-padding style="font-size: 20px">
-                <div layout="row" layout-margin>
-                    <md-icon md-font-icon="fa fa-calendar-plus-o fa-4x" md-colors="{color: 'grey-200'}"></md-icon>
-                    <md-icon md-font-icon="fa fa-calendar-minus-o fa-4x" md-colors="{color: 'grey-200'}"></md-icon>
-                </div>
-                <p md-colors="{color: 'grey-200'}">Design Your Schedule</p>
+    <md-card flex-gt-xs>
+        <md-toolbar md-colors="{background: 'brown-600'}">
+            <div class="md-toolbar-tools" flex>
+                <md-icon md-font-icon="fa fa-clipboard fa-fw"></md-icon>
+                <span flex>Final Exams</span>
             </div>
-        </md-button>
+        </md-toolbar>
+        <md-content>
+            <md-list>
+                <md-list-item class="md-2-line" ng-repeat="final in $ls.finals | orderBy: 'date'" ng-click="null">
+                    <div class="md-list-item-text">
+                        <h3>{{ $ls.courses[final.course].title }}</h3>
+                        <p>{{ final.start }} -> {{ final.end }}</p>
+                    </div>
+                    <div class="md-list-item-text align-right fixed-56-width">
+                        <h3>{{ parseDate(final.date) | date: 'MMM, dd' }}</h3>
+                        <p class="md-caption">{{ final.location }}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
     </md-card>
     <md-card flex-gt-xs>
         <md-toolbar md-colors="{background: 'lime-700', color: 'grey-A100'}">

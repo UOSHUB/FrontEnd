@@ -65,6 +65,14 @@ md-list-item.removeable:hover, [account]:hover {
     margin-top: 10px !important;
 }
 
+.archived {
+    opacity: 0.5;
+}
+
+.archived > .md-secondary-container {
+    display: none;
+}
+
 .md-button.card-option {
     opacity: 0;
     transition: opacity ease .2s;

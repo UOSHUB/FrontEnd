@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="courses">
     <md-select ng-model="$ls.selected.course" class="no-margin" flex="30">
-        <md-option ng-repeat="id in $ls.terms[$ls.selected.term].courses" ng-value="id" ng-if="$ls.courses[id].title">{{ $ls.courses[id].title }}</md-option>
+        <md-option ng-repeat="id in $ls.terms[$toolbar.term].courses" ng-value="id" ng-if="$ls.courses[id].title">{{ $ls.courses[id].title }}</md-option>
     </md-select>
 </script>
 
@@ -26,7 +26,7 @@
                         <h3>{{ document.title }}</h3>
                         <p>{{ document.file }}</p>
                     </div>
-                    <div class="md-list-item-text download">
+                    <div class="md-list-item-text fixed-56-width">
                         <md-button ng-hide="mass" ng-href="{{ document.url }}" download="{{ document.file }}" name="{{ document.file }}" class="md-icon-button">
                             <md-icon md-font-icon="fa fa-download fa-2x"></md-icon>
                         </md-button>

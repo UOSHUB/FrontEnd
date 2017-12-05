@@ -1,14 +1,15 @@
-app.controller("courses", ["$scope", "$ls", "$http", "$refresh",
+app.controller("courses", ["$scope", "$ls", "$http", "$refresh", "$toolbar",
 
-function($scope, $ls, $http, $refresh) {
+function($scope, $ls, $http, $refresh, $toolbar) {
+    $toolbar.term = term;
     if(!$ls.terms[term] && ($ls.terms[term] = {}))
         $http.get("/api/terms/" + term + "/").then(function(response) {
             angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
             $ls.selected.course = $ls.terms[term].courses[0];
         }, error);
-    else if(!$ls.selected.course){
+    else if(!$ls.selected.course)
         $ls.selected.course = $ls.terms[term].courses[0];
-    }
+
     if(!$ls.deadlines)
         $http.get("/api/terms/" + term + "/content/").then(function(response) {
             angular.extend($ls, response.data);
