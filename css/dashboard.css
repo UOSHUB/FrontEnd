@@ -85,3 +85,15 @@ md-toolbar:hover .md-button.card-option {
 .md-button.card-option:last-child {
     margin-right: 0;
 }
+
+.list-button {
+    position: absolute;
+    width: calc(100% - 52px);
+    left: 0;
+    bottom: 1;
+    top: 1;
+}
+
+.list-button:focus {
+    outline: none;
+}

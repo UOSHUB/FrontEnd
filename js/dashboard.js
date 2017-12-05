@@ -1,6 +1,6 @@
-app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh", "$filter",
+app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh", "$filter", "$goto",
 
-function($scope, $ls, $http, $refresh, $filter) {
+function($scope, $ls, $http, $refresh, $filter, $goto) {
     var find = $filter("find");
     if(!$ls.terms[term])
         $http.get("/api/terms/" + term + "/").then(function(response) {
@@ -61,6 +61,12 @@ function($scope, $ls, $http, $refresh, $filter) {
             url: "/api/updates/" + updateId + "/"
         }).then(nothing, error);
         find($ls.updates, "dismiss", updateId, "delete");
+    };
+
+    $scope.goToEmail = function(emailId) {
+        $ls.selected.tab = 0;
+        $ls.selected.email = ["personal", emailId];
+        $goto("email");
     };
 
     $scope.deleteEmail = function(emailId) {
