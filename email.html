@@ -1,6 +1,5 @@
 <script type="text/ng-template" id="email">
-    <div flex></div>
-    <md-button class="md-accent md-hue-2" ng-click="null">Write a new Email</md-button>
+    <md-button class="md-accent md-hue-2 no-margin" ng-click="$ls.writingEmail = true">Write a new Email</md-button>
 </script>
 
 <div layout="row" flex>
@@ -34,7 +33,7 @@
             </md-tabs>
         </md-content>
     </md-card>
-    <md-card flex>
+    <md-card ng-if="!$ls.writingEmail" flex>
         <md-content ng-if="$ls.selected.email[1]" layout-padding flex>
             {{ email = ($ls.emails[$ls.selected.email[0]] | find: 'id' : $ls.selected.email[1]); '' }}
             <md-card-title>
@@ -42,7 +41,7 @@
                     <span class="md-display-1">{{ email.title }}</span>
                 </md-card-title-text>
             </md-card-title>
-            <md-card-header ng-if="$ls.selected.email[0] != 'events'" >
+            <md-card-header ng-if="$ls.selected.email[0] != 'events'">
                 <div id="email-circle" class="fix-icon" md-colors="{background: 'blue-grey-400'}">
                     {{ getInitials(email.sender || email.course) }}
                 </div>
@@ -58,6 +57,37 @@
                 </md-card-header-text>
             </md-card-header>
             <md-card-content layout="column" ng-bind-html="$ls.emails.body[$ls.selected.email[1]]">
+            </md-card-content>
+        </md-content>
+    </md-card>
+    <md-card ng-if="$ls.writingEmail" flex>
+        <md-content layout-padding flex>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-display-1">New Email</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <md-card-header-text layout="column" flex>
+                    <md-input-container class="md-block">
+                        <label>To</label>
+                        <input type="text" ng-model="to">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Subject</label>
+                        <input type="text" ng-model="subject">
+                    </md-input-container>
+                </md-card-header-text>
+                <md-input-container class="md-block">
+                    <label>Add a message here</label>
+                    <textarea rows="8" ng-model="body"></textarea>
+                </md-input-container>
+                <div layout="row" flex>
+                    <md-button class="md-raised" ng-click="sendEmail($event, to, subject, body)"
+                               md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
+                    <md-button class="md-raised" ng-click="$ls.writingEmail = false"
+                               md-colors="{background: 'blue-grey-300', color: 'grey-A100'}">Cancel</md-button>
+                </div>
             </md-card-content>
         </md-content>
     </md-card>

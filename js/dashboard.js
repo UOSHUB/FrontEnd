@@ -74,6 +74,8 @@ function($scope, $ls, $http, $refresh, $filter, $goto) {
             method: "delete",
             url: "/api/emails/" + emailId + "/"
         }).then(nothing, error);
+        $ls.selected.tab = 0;
+        $ls.selected.email = [];
         find($ls.emails.personal, "id", emailId, "delete");
     };
 
