@@ -1,6 +1,11 @@
 app.controller("calendar", ["$scope", "$ls", "$http", "MaterialCalendarData",
 
 function($scope, $ls, $http, $calendar) {
+    $ls.$default({
+        terms: {}, emails: {}, courses: {},
+        selected: {tab: 0, email: [], term: term}
+    });
+
     angular.extend($scope, {
         selectedDate: new Date(),
         firstDayOfWeek: 6, // First day of the week, 0 for Sunday, 1 for Monday, etc.
@@ -9,15 +14,15 @@ function($scope, $ls, $http, $calendar) {
     });
 
     function parseEvents() {
-        var date, year = " " + today.getFullYear();
+        var date, yearString = " " + year;
         angular.forEach($ls.events, function(event) {
             date = event.date.split(" - ");
             if(date.length > 1) {
                 if(date[0].split(" ").length == 1)
                     date[0] += " " + date[1].split(" ")[1];
-                date = [new Date(date[0] + year), new Date(date[1] + year)];
+                date = [new Date(date[0] + yearString), new Date(date[1] + yearString)];
             } else
-                date = new Date(date[0] + year);
+                date = new Date(date[0] + yearString);
             $scope.events.push({
                 text: event.text,
                 date: date

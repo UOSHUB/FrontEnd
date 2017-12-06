@@ -1,7 +1,8 @@
-app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh", "$filter", "$goto",
+app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh", "$filter", "$goto", "$toolbar",
 
-function($scope, $ls, $http, $refresh, $filter, $goto) {
+function($scope, $ls, $http, $refresh, $filter, $goto, $toolbar) {
     var find = $filter("find");
+    $toolbar.thisTerm = term;
     if(!$ls.terms[term])
         $http.get("/api/terms/" + term + "/").then(function(response) {
             if(!angular.equals(response.data, {})) {
