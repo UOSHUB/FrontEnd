@@ -110,14 +110,15 @@
                     <div layout="column">
                         <md-input-container style="margin-top: 4px" class="md-block">
                             <label>Subject</label>
-                            <input type="text">
+                            <input type="text" ng-model="subject">
                         </md-input-container>
                         <md-input-container style="margin: -24px 0 -8px" class="md-block">
-                            <label>Description</label>
-                            <textarea rows="2"></textarea>
+                            <label>Body</label>
+                            <textarea rows="2" ng-model="body"></textarea>
                         </md-input-container>
                         <div layout="row" style="position: relative">
-                            <md-button class="md-raised no-margin" md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
+                            <md-button class="md-raised no-margin" ng-click="sendEmail($event, subject, body, $ls.selected.course)"
+                                       md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
                         </div>
                     </div>
                 </md-content>
