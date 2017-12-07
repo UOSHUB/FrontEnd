@@ -93,7 +93,3 @@ md-toolbar:hover .md-button.card-option {
     bottom: 1;
     top: 1;
 }
-
-.list-button:focus {
-    outline: none;
-}

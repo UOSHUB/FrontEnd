@@ -1,7 +1,10 @@
-#slideshow-new-logo {
-    position: relative;
+#welcome #title {
+    font-size: 30px;
+    line-height: 48px;
 }
 
-    #slideshow img {
-        width: 100%;
-    }
+#welcome #subtitle {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 36px;
+}

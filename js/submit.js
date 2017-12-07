@@ -7,11 +7,11 @@ function ($http, $timeout, $toast, $mdDialog) {
         openFrom: target,
         closeTo: target,
         clickOutsideToClose: true,
-        controller: function($scope, files) {
+        controller: ["$scope", "files", function($scope, files) {
             $scope.hide = $mdDialog.hide;
             $scope.cancel = $mdDialog.cancel;
             $scope.files = files;
-        }
+        }]
     };
     function confirmSubmission(event, subUrl, rawFiles) {
         dialog.locals = {files: rawFiles};

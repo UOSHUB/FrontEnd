@@ -1,13 +1,11 @@
-<div layout="row" layout-align="center center" ng-init="$ls.loggedIn && goto('dashboard')" flex>
-    <div layout="column" flex="40" layout-padding>
-        <span class="md-headline" style="font-size: 30px; line-height: 48px" md-colors="{color: 'primary'}">By Students, For Students</span>
-        <span class="md-subhead" style="font-size: 20px; line-height: 28px; margin-bottom: 36px">This'll revolutionize your experience with UOS websites and combines all of them in one place (Blackboard, MyUDC, Outlook Email)</span>
+<div id="welcome" layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="center center" ng-init="$ls.loggedIn && goto('dashboard')" flex>
+    <div layout="column" flex-gt-xs="40" flex-order-xs="2" layout-padding>
+        <span id="title" md-colors="{color: 'primary'}">By Students, For Students</span>
+        <span id="subtitle">This'll revolutionize your experience with UOS websites and combines all of them in one place (Blackboard, MyUDC, Outlook Email)</span>
         <md-button class="md-raised md-primary" layout-padding login>Get Started</md-button>
     </div>
-    <div layout="column" flex="60">
-        <div id="slideshow">
-            <img ng-repeat="(image, icon) in pages track by $index"
-                 ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
-        </div>
+    <div layout="column" flex-gt-xs="60" flex-order-xs="1">
+        <img ng-repeat="(image, icon) in pages track by $index" style="width: 100%"
+             ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
     </div>
 </div>

@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+*:focus {
+    outline: none;
+}
+
 #sidenav, #right-margin {
     transition: width .8s ease;
 }
