@@ -5,16 +5,3 @@
     #slideshow img {
         width: 100%;
     }
-
-    #new-logo {
-        background-color: white;
-        position: absolute;
-        height: calc(100% * .030);;
-        width: calc(100% * .022);
-        left: calc(100% * .14);
-        top: calc(100% * .13);
-    }
-        #new-logo img {
-            width: calc(100% * .75);
-            height: 100%;
-        }

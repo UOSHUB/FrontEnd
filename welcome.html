@@ -4,13 +4,10 @@
         <span class="md-subhead" style="font-size: 20px; line-height: 28px; margin-bottom: 36px">This'll revolutionize your experience with UOS websites and combines all of them in one place (Blackboard, MyUDC, Outlook Email)</span>
         <md-button class="md-raised md-primary" layout-padding login>Get Started</md-button>
     </div>
-    <div id="slideshow-new-logo" layout="column" flex="60">
+    <div layout="column" flex="60">
         <div id="slideshow">
             <img ng-repeat="(image, icon) in pages track by $index"
                  ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
         </div>
-        <span id="new-logo" layout="row" layout-align="center center">
-            <img src="/static/img/favicon.ico">
-        </span>
     </div>
 </div>
