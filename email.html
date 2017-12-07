@@ -61,7 +61,7 @@
         </md-content>
     </md-card>
     <md-card ng-if="$ls.writingEmail" flex>
-        <md-content layout-padding flex>
+        <md-content layout-padding flex style="position: relative">
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-display-1">New Email</span>
@@ -82,7 +82,7 @@
                     <label>Add a message here</label>
                     <textarea rows="8" ng-model="body"></textarea>
                 </md-input-container>
-                <div layout="row" flex>
+                <div layout="row" flex style="position: absolute; bottom: 16px">
                     <md-button class="md-raised" ng-click="sendEmail($event, to, subject, body)"
                                md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
                     <md-button class="md-raised" ng-click="$ls.writingEmail = false"

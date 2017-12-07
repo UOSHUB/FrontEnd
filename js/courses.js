@@ -49,6 +49,14 @@ function($scope, $ls, $http, $refresh, $toolbar, $toast, $mdDialog) {
         });
     };
 
+    $scope.dismissUpdate = function(updateId) {
+        $http({
+            method: "delete",
+            url: "/api/updates/" + updateId + "/"
+        }).then(nothing, error);
+        find($ls.updates, "dismiss", updateId, "delete");
+    };
+
     $scope.sendEmail = function($event, subject, body, course) {
         $mdDialog.show(
             $mdDialog.confirm()
@@ -69,6 +77,10 @@ function($scope, $ls, $http, $refresh, $toolbar, $toast, $mdDialog) {
                 $toast("Failed to send email!");
             });
         }, nothing);
+    };
+
+    $scope.beforeDue = function(date) {
+        return new Date(date) > today;
     };
 
     $refresh(["content", "updates"])
