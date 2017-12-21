@@ -1,2 +1,6 @@
-# Ignore Folder Of Minfied JS & CSS Files
-min
+# Ignore Minfied JS & CSS Folder
+min/
+
+# Ignore Downloaded Requirements Folders
+fonts/
+libs/
