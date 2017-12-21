@@ -1,10 +1,6 @@
 {% load compress %}
         <!-- Angular Material, Font Awesome Icon Pack & Roboto Font -->
-        {% compress css %}
-            <link rel="stylesheet" href="/static/libs/angular-material.css">
-            <link rel="stylesheet" href="/static/libs/fontawesome.css">
-            <link rel="stylesheet" href="/static/libs/roboto.css">
-        {% endcompress %}
+        <link rel="stylesheet" href="/static/min/css/requirements.css">
         <!-- Our Style Sheets -->
         {% compress css %}
             <link rel="stylesheet" href="/static/css/layout.css">
@@ -19,17 +15,7 @@
         {% endcompress %}
 
         <!-- Angular.js, ngStorage, mdCalendar, Angular Material & Dependencies -->
-        {% compress js %}
-            <script src="/static/libs/angular.js"></script>
-            <script src="/static/libs/angular-route.js"></script>
-            <script src="/static/libs/angular-animate.js"></script>
-            <script src="/static/libs/angular-aria.js"></script>
-            <script src="/static/libs/angular-messages.js"></script>
-            <script src="/static/libs/angular-sanitize.js"></script>
-            <script src="/static/libs/angular-storage.js"></script>
-            <script src="/static/libs/angular-material.js"></script>
-            <script src="/static/libs/angular-material-calendar.js"></script>
-        {% endcompress %}
+        <script src="/static/min/js/requirements.js"></script>
         <!-- Our Angular App & Scripts -->
         {% compress js %}
             <script src="/static/js/scripts.js"></script>
