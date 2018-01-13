@@ -1,5 +1,5 @@
 var days = ["U", "M", "T", "W", "R", "F", "S"], today = new Date(), month = today.getMonth() + 1,
-    year = today.getFullYear(), term = year + (month > 7 ? "10" : month < 6 ? "20" : "30"),
+    year = today.getFullYear(), term = month > 7 ? year + "10" : year - 1 + (month < 6 ? "20" : "30"),
     body = $("body"), maxTime, minTime, hoursCount, colors = [
         "red", "teal", "green", "orange", "purple",
         "light-blue", "brown", "yellow", "deep-orange", "blue"
@@ -121,11 +121,8 @@ function hoursFractions() {
 }
 
 function dates() {
-    var date = new Date(), dates = [],
-        month = date.getMonth(),
-        year = date.getFullYear(),
-        startDay = date.getDate() - date.getDay() + (date.getDay() < 5 ? 0 : 7);
+    var dates = [], startDay = today.getDate() - today.getDay() + (today.getDay() < 5 ? 0 : 7);
     for (var i = 0; i < 5; i++)
-        dates.push(new Date(year, month, startDay + i).toLocaleDateString().slice(0, -5));
+        dates.push(new Date(year, month - 1, startDay + i).toLocaleDateString().slice(0, -5));
     return dates;
 }
