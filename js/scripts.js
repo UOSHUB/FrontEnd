@@ -41,12 +41,12 @@ function structureCourse(course, id) {
     };
 }
 
-function processSchedule(courses, term) {
-    term.courses = [];
+function processSchedule(courses, termData) {
+    termData.courses = [];
     maxTime = 0; minTime = 24 * 60;
     var rowHeight, topShift = 5, leftShift = 5, columnWidth = 19, index = -1;
     angular.forEach(courses, function(course, id) {
-        term.courses.push(id);
+        termData.courses.push(id);
         if(course.start) {
             colorAndTime(course, ++index);
             if("lab" in course) {
@@ -56,6 +56,7 @@ function processSchedule(courses, term) {
                     copy.title += " Lab";
                 colorAndTime(copy, index);
                 courses[id + "-lab"] = copy;
+                termData.courses.push(id + "-lab");
                 delete course.lab;
             }
         }
@@ -72,7 +73,7 @@ function processSchedule(courses, term) {
             });
         }
     });
-    angular.extend(term, {
+    angular.extend(termData, {
         height: rowHeight,
         labels: hoursLabels(),
         fractions: hoursFractions(),
