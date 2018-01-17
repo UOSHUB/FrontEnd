@@ -27,4 +27,17 @@ function($scope, $ls, $toolbar, $goto, $http) {
             words[0].slice(0, 2)
         ).toUpperCase();
     };
-}]);
+}])
+.directive("card", function() {
+    return {
+        templateUrl: "/static/card.html",
+        transclude: true,
+        restrict: "E",
+        replace: true,
+        scope: {
+            name: "@name",
+            icon: "@icon",
+            color: "@color"
+        }
+    };
+});
