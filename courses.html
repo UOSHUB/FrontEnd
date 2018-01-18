@@ -38,60 +38,40 @@
     </md-card>
     <div layout="column" flex>
         <div layout="row" flex="50">
-            <md-card flex>
-                <md-toolbar md-colors="{background: 'primary-600'}">
-                    <div class="md-toolbar-tools" flex>
-                        <md-icon md-font-icon="fa fa-bell fa-fw"></md-icon>
-                        <span flex>Updates</span>
+            <card name="Updates" color="green-600" icon="bell">
+                <md-list-item class="md-2-line removeable" ng-repeat="update in $ls.updates | inCourse: $ls.selected.course | orderBy: '-time'">
+                    <div class="md-list-item-text">
+                        <h3>{{ update.title }}</h3>
                     </div>
-                </md-toolbar>
-                <md-content>
-                    <md-list>
-                        <md-list-item class="md-2-line removeable" ng-repeat="update in $ls.updates | inCourse: $ls.selected.course | orderBy: '-time'">
-                            <div class="md-list-item-text">
-                                <h3>{{ update.title }}</h3>
-                            </div>
-                            <div class="md-list-item-text align-right">
-                                <h3>{{ update.time | timeDistance }}</h3>
-                                <p class="md-caption">{{ update.event }}</p>
-                            </div>
-                            <div class="md-secondary">
-                                <md-button class="md-icon-button" ng-click="dismissUpdate(update.dismiss)">
-                                    <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
-                                </md-button>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </md-content>
-            </md-card>
-            <md-card flex id="confirm">
-                <md-toolbar md-colors="{background: 'orange-600', color: 'grey-A100'}">
-                    <div class="md-toolbar-tools" flex>
-                        <md-icon md-font-icon="fa fa-tasks fa-fw"></md-icon>
-                        <span flex>Deadlines</span>
+                    <div class="md-list-item-text align-right">
+                        <h3>{{ update.time | timeDistance }}</h3>
+                        <p class="md-caption">{{ update.event }}</p>
                     </div>
-                </md-toolbar>
-                <md-content>
-                    <md-list>
-                        <md-list-item class="md-2-line" ng-class="beforeDue(deadline.dueDate) ? 'removeable' : 'archived'"
-                                      ng-repeat="deadline in $ls.deadlines | inCourse: $ls.selected.course | orderBy: '-dueDate'">
-                            <div class="md-list-item-text" flex>
-                                <h3>{{ deadline.title }}</h3>
-                            </div>
-                            <div class="md-list-item-text align-right">
-                                <h3>{{ deadline.dueDate | timeDistance }}</h3>
-                                <p class="md-caption">Due {{ deadline.dueDate | date: 'shortTime' }}</p>
-                            </div>
-                            <div class="md-secondary">
-                                <md-button class="md-icon-button" submit="{{ deadline.courseId }}/{{ deadline.contentId }}/">
-                                    <md-icon md-font-icon="fa fa-upload fa-1x"></md-icon>
-                                    <input type="file" style="display: none" multiple>
-                                </md-button>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </md-content>
-            </md-card>
+                    <div class="md-secondary">
+                        <md-button class="md-icon-button" ng-click="dismissUpdate(update.dismiss)">
+                            <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
+                        </md-button>
+                    </div>
+                </md-list-item>
+            </card>
+            <card name="Deadlines" color="orange-600" icon="tasks" id="confirm">
+                <md-list-item class="md-2-line" ng-class="beforeDue(deadline.dueDate) ? 'removeable' : 'archived'"
+                              ng-repeat="deadline in $ls.deadlines | inCourse: $ls.selected.course | orderBy: '-dueDate'">
+                    <div class="md-list-item-text" flex>
+                        <h3>{{ deadline.title }}</h3>
+                    </div>
+                    <div class="md-list-item-text align-right">
+                        <h3>{{ deadline.dueDate | timeDistance }}</h3>
+                        <p class="md-caption">Due {{ deadline.dueDate | date: 'shortTime' }}</p>
+                    </div>
+                    <div class="md-secondary">
+                        <md-button class="md-icon-button" submit="{{ deadline.courseId }}/{{ deadline.contentId }}/">
+                            <md-icon md-font-icon="fa fa-upload fa-1x"></md-icon>
+                            <input type="file" style="display: none" multiple>
+                        </md-button>
+                    </div>
+                </md-list-item>
+            </card>
         </div>
         <div layout="row" flex>
             <md-card flex="66">
