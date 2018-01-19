@@ -1,49 +1,10 @@
 app.controller("dashboard", ["$scope", "$ls", "$http", "$refresh", "$filter", "$goto", "$toolbar",
 
 function($scope, $ls, $http, $refresh, $filter, $goto, $toolbar) {
-    var find = $filter("find");
     $toolbar.thisTerm = term;
-    if(!$ls.terms[term])
-        $http.get("/api/terms/" + term + "/").then(function(response) {
-            if(!angular.equals(response.data, {})) {
-                $ls.terms[term] = {};
-                angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
-            }
-        }, error);
 
-    if(!$ls.deadlines)
-        $http.get("/api/terms/" + term + "/deadlines/").then(function(response) {
-            $ls.deadlines = response.data;
-        }, error);
-
-    if(!$ls.updates)
-        $http.get("/api/updates/").then(function(response) {
-            $ls.updates = response.data;
-        }, error);
-
-    if(!$ls.emails.personal)
-        $http.get("/api/emails/personal/10/").then(function(response) {
-            $ls.emails.personal = response.data;
-        }, error);
-
-    if(!$ls.holds)
-        $http.get("/api/holds/").then(function(response) {
-            angular.forEach(response.data, function(hold) {
-                hold.start = new Date(hold.start);
-                hold.end = new Date(hold.end);
-            });
-            $ls.holds = response.data;
-        }, error);
-
-    if(!$ls.grades)
-        $http.get("/api/grades/" + term + "/").then(function(response) {
-            $ls.grades = response.data;
-        }, error);
-
-    if(!$ls.finals)
-        $http.get("/api/finals/" + term + "/").then(function(response) {
-            $ls.finals = response.data;
-        }, error);
+    $scope.mainCards = ["updates", "emails", "deadlines"];
+    $scope.subCards = ["finals", "classes", "grades", "holds"];
 
     $scope.todayClasses = function() {
         var classes = [], day = days[today.getDay()];
