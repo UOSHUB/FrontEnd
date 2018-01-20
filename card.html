@@ -1,12 +1,11 @@
-<md-card flex-gt-xs>
-    <md-toolbar md-colors="{background: color, color: 'grey-A100'}">
+<md-card flex-gt-xs ng-init="card.getData()">
+    <md-toolbar md-colors="{background: card.color, color: 'grey-A100'}">
         <div class="md-toolbar-tools" flex>
-            <md-icon md-font-icon="fa fa-{{ icon }} fa-fw"></md-icon>
-            <span flex>{{ name }}</span>
+            <md-icon md-font-icon="fa fa-{{ card.icon }} fa-fw"></md-icon>
+            <span flex>{{ card.title }}</span>
         </div>
     </md-toolbar>
     <md-content>
-        <md-list ng-transclude>
-        </md-list>
+        <md-list ng-include="template + '_card'"></md-list>
     </md-content>
 </md-card>
