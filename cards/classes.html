@@ -1,0 +1,16 @@
+{{ classes = todayClasses(); '' }}
+<md-list-item ng-if="classes.length == 0">You have no classes today :D</md-list-item>
+<md-list-item ng-repeat="class in classes | orderBy: 'points[0].y'" ng-click="null"
+              md-colors="{borderColor: class.color}" class="md-2-line today-classes">
+    <div class="md-list-item-text">
+        <h3>{{ class.start }}</h3>
+        <h3>{{ class.end }}</h3>
+    </div>
+    <div class="md-list-item-text">
+        <h3>
+            <md-icon md-font-icon="fa fa-map-marker" md-colors="{color: 'grey-800'}"></md-icon>
+            {{ class.location }}
+        </h3>
+        <p>{{ class.title }}</p>
+    </div>
+</md-list-item>

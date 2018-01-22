@@ -46,7 +46,7 @@ app.directive("card", ["$http", "$ls", function($http, $ls) {
         },
     };
     return {
-        templateUrl: "/static/card.html",
+        templateUrl: "/static/cards/layout.html",
         restrict: "E",
         replace: true,
         scope: { template: "=" },

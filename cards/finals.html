@@ -1,0 +1,10 @@
+<md-list-item class="md-2-line" ng-repeat="final in $ls.finals | orderBy: 'date'" ng-click="null">
+    <div class="md-list-item-text">
+        <h3>{{ $ls.courses[final.course].title }}</h3>
+        <p>{{ final.start }} -> {{ final.end }}</p>
+    </div>
+    <div class="md-list-item-text align-right fixed-56-width">
+        <h3>{{ parseDate(final.date) | date: 'MMM, dd' }}</h3>
+        <p class="md-caption">{{ final.location }}</p>
+    </div>
+</md-list-item>

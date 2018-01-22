@@ -1,0 +1,17 @@
+<md-list-item class="md-2-line" ng-class="beforeDue(deadline.dueDate) ? 'removeable' : 'archived'"
+              ng-repeat="deadline in $ls.deadlines | orderBy: '-dueDate'">
+    <div class="md-list-item-text" flex>
+        <h3>{{ deadline.title }}</h3>
+        <p>{{ $ls.courses[deadline.course].title }}</p>
+    </div>
+    <div class="md-list-item-text align-right">
+        <h3>{{ deadline.dueDate | timeDistance }}</h3>
+        <p class="md-caption">Due {{ deadline.dueDate | date: 'shortTime' }}</p>
+    </div>
+    <div class="md-secondary">
+        <md-button class="md-icon-button" submit="{{ deadline.courseId }}/{{ deadline.contentId }}/">
+            <md-icon md-font-icon="fa fa-upload fa-1x"></md-icon>
+            <input type="file" style="display: none" multiple>
+        </md-button>
+    </div>
+</md-list-item>
