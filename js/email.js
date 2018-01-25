@@ -5,6 +5,7 @@ function($scope, $ls, $http, $refresh, $toast, $mdDialog) {
         $ls.emails.body = {};
 
     $ls.writingEmail = false;
+    $scope.getInitials = getInitials;
     $scope.tabs = ["personal", "courses", "events"];
     $scope.icons = {personal: "users", courses: "book", events: "bullhorn"};
 

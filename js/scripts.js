@@ -19,6 +19,16 @@ function $(selector) {
     return angular.element(document.querySelectorAll(selector));
 }
 
+function getInitials(name) {
+    if(!name) return;
+    var words = name.split(" ");
+    return (
+        words[1] ?
+        words[0].slice(0, 1) + words[1].slice(0, 1):
+        words[0].slice(0, 2)
+    ).toUpperCase();
+}
+
 function structureCourse(course, id) {
     return {
         title: course.title,

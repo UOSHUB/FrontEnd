@@ -18,13 +18,4 @@ function($scope, $ls, $toolbar, $goto, $http) {
         email: "envelope",
         calendar: "globe"
     };
-    $scope.getInitials = function(name) {
-        if(!name) return;
-        var words = name.split(" ");
-        return (
-            words[1] ?
-            words[0].slice(0, 1) + words[1].slice(0, 1):
-            words[0].slice(0, 2)
-        ).toUpperCase();
-    };
 }]);
