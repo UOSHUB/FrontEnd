@@ -19,6 +19,10 @@ function $(selector) {
     return angular.element(document.querySelectorAll(selector));
 }
 
+function parseDate(date) {
+    return new Date(date);
+}
+
 function getInitials(name) {
     if(!name) return;
     var words = name.split(" ");

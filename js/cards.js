@@ -47,7 +47,8 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", function($http, $ls, 
         },
         holds: {
             title: "Holds", color: "red-600", icon: "exclamation-triangle",
-            getData: getData($ls, "holds", "holds")
+            getData: getData($ls, "holds", "holds"),
+            parseDate: parseDate
         },
         grades: {
             title: "Grades", color: "teal-600", icon: "graduation-cap",
@@ -56,9 +57,7 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", function($http, $ls, 
         finals: {
             title: "Final Exams", color: "brown-600", icon: "clipboard",
             getData: getData($ls, "finals", "finals/" + term),
-            parseDate: function(date) {
-                return new Date(date);
-            }
+            parseDate: parseDate
         },
         classes: {
             title: "Today's Classes", color: "lime-700", icon: "flag",
@@ -89,8 +88,7 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", function($http, $ls, 
         replace: true,
         scope: { template: "=" },
         controller: ["$scope", function($scope) {
-            $scope.$ls = $ls;
-            $scope.card = cards[$scope.template];
+            angular.extend($scope, {$ls: $ls}, cards[$scope.template]);
         }]
     };
 }]);
