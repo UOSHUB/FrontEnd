@@ -81,6 +81,21 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", function($http, $ls, 
                 return classes;
             }
         },
+        courses: {
+            title: "Courses", color: "purple-500", icon: "book",
+            getData: nothing, term: term, updatesCount: function(courseId) {
+                var count = 0;
+                angular.forEach($ls.updates, function(update) {
+                    if(update.course == courseId)
+                        count++;
+                });
+                return count;
+            },
+            goToCourse: function(courseId) {
+                $ls.selected.course = courseId;
+                $goto("courses");
+            }
+        }
     };
     return {
         templateUrl: "/static/cards/layout.html",
