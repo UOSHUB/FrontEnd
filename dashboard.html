@@ -2,9 +2,14 @@
     {{ $toolbar.thisTerm | termTitle }}
 </script>
 
-<div layout="row" flex-gt-xs="60" layout-xs="column">
-    <card ng-repeat="card in mainCards" template="card"></card>
-</div>
-<div layout="row" flex-gt-xs="40" layout-xs="column">
-    <card ng-repeat="card in subCards" template="card"></card>
+<div layout="row">
+    <div layout="column" flex-gt-xs="66">
+        <div layout="row" flex-gt-xs="60" layout-xs="column">
+            <card ng-repeat="card in mainCards" template="card"></card>
+        </div>
+        <div layout="row" flex-gt-xs="40" layout-xs="column">
+            <card ng-repeat="card in subCards" template="card"></card>
+        </div>
+    </div>
+    <card layout="column" flex-gt-xs="33" template="defaultCard"></card>
 </div>

@@ -1,5 +1,5 @@
 {{ classes = todayClasses(); '' }}
-<md-list-item ng-if="classes.length == 0">You have no classes today :D</md-list-item>
+<md-list-item ng-if="$ls.courses && classes.length == 0">You have no classes today :D</md-list-item>
 <md-list-item ng-repeat="class in classes | orderBy: 'points[0].y'" ng-click="null"
               md-colors="{borderColor: class.color}" class="md-2-line today-classes">
     <div class="md-list-item-text">

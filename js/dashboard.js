@@ -1,8 +1,9 @@
 app.controller("dashboard", ["$scope", "$refresh", "$toolbar", function($scope, $refresh, $toolbar) {
     $toolbar.thisTerm = term;
 
-    $scope.mainCards = ["updates", "emails", "deadlines"];
-    $scope.subCards = ["finals", "classes", "grades", "holds"];
+    $scope.defaultCard = "emails";
+    $scope.mainCards = ["updates", "courses"];
+    $scope.subCards = ["deadlines", "classes"];
 
     $refresh(["content=deadlines", "emails=personal", "updates", "grades"])
 }])
