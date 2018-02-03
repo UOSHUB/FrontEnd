@@ -1,4 +1,4 @@
-app.directive("card", ["$http", "$ls", "$goto", "$filter", function($http, $ls, $goto, $filter) {
+app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function($http, $ls, $goto, $filter, $location) {
     function getData(storage, location, url) {
         return function() {
             if(!storage[location])
@@ -23,7 +23,7 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", function($http, $ls, 
                     method: "delete",
                     url: "/api/updates/" + updateId + "/"
                 }).then(nothing, error);
-                find($ls.updates, "dismiss", updateId, "delete");
+                $filter("find")($ls.updates, "dismiss", updateId, "delete");
             }
         },
         emails: {
@@ -104,6 +104,8 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", function($http, $ls, 
         scope: { template: "=" },
         controller: ["$scope", function($scope) {
             angular.extend($scope, {$ls: $ls}, cards[$scope.template]);
+            if($location.path() == "/courses/")
+                $scope.inCourse = true;
         }]
     };
 }]);

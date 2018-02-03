@@ -1,7 +1,8 @@
-<md-list-item class="md-2-line removeable" ng-repeat="update in $ls.updates | orderBy: '-time'">
+<md-list-item class="md-2-line removeable"
+              ng-repeat="update in $ls.updates | filter: inCourse && {course: $ls.selected.course} | orderBy: '-time'">
     <div class="md-list-item-text">
         <h3>{{ update.title }}</h3>
-        <p>{{ $ls.courses[update.course].title }}</p>
+        <p ng-if="!inCourse">{{ $ls.courses[update.course].title }}</p>
     </div>
     <div class="md-list-item-text align-right">
         <h3>{{ update.time | timeDistance }}</h3>
