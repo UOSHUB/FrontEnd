@@ -13,18 +13,9 @@ function($scope, $ls, $http, $refresh, $toolbar, $toast, $mdDialog) {
     else if(!$ls.selected.course)
         $ls.selected.course = $ls.terms[term].courses[0];
 
-    if(!$ls.deadlines)
-        $http.get("/api/terms/" + term + "/content/").then(function(response) {
-            angular.extend($ls, response.data);
-        }, error);
     else if(!$ls.documents)
         $http.get("/api/terms/" + term + "/documents/").then(function(response) {
             $ls.documents = response.data;
-        }, error);
-
-    if(!$ls.updates)
-        $http.get("/api/updates/").then(function(response) {
-            $ls.updates = response.data;
         }, error);
 
     $scope.$watch(function() { return $ls.selected.course; }, function(id) {
@@ -49,14 +40,6 @@ function($scope, $ls, $http, $refresh, $toolbar, $toast, $mdDialog) {
         });
     };
 
-    $scope.dismissUpdate = function(updateId) {
-        $http({
-            method: "delete",
-            url: "/api/updates/" + updateId + "/"
-        }).then(nothing, error);
-        find($ls.updates, "dismiss", updateId, "delete");
-    };
-
     $scope.sendEmail = function($event, subject, body, course) {
         $mdDialog.show(
             $mdDialog.confirm()
@@ -79,20 +62,5 @@ function($scope, $ls, $http, $refresh, $toolbar, $toast, $mdDialog) {
         }, nothing);
     };
 
-    $scope.beforeDue = function(date) {
-        return new Date(date) > today;
-    };
-
     $refresh(["content", "updates"])
-}])
-
-.filter("inCourse", function() {
-    return function(items, course) {
-        var inCourse = [];
-        angular.forEach(items, function(item) {
-            if(course == item.course)
-                inCourse.push(item);
-        });
-        return inCourse;
-    };
-});
+}]);
