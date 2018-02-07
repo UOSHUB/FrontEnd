@@ -1,6 +1,6 @@
-app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http",
+app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSidenav", "$mdMedia",
 
-function($scope, $ls, $toolbar, $goto, $http) {
+function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
     var toolbars = ["dashboard", "schedule", "courses", "email", "calendar"];
     $scope.$on("$routeChangeSuccess", function(event, current) {
         $scope.currentPage = current.$$route.controller;
@@ -17,5 +17,13 @@ function($scope, $ls, $toolbar, $goto, $http) {
         courses: "book",
         email: "envelope",
         calendar: "globe"
+    };
+    $scope.toggleSidenav = function() {
+        if($mdMedia("gt-sm"))
+            $ls.selected.tightNav = !$ls.selected.tightNav;
+        else {
+            $mdSidenav("sidenav").toggle();
+            $ls.selected.tightNav = false;
+        }
     };
 }]);

@@ -6,10 +6,6 @@
     outline: none;
 }
 
-#sidenav, #right-margin {
-    transition: width .8s ease;
-}
-
 #right-margin {
     width: 0;
 }
@@ -30,6 +26,18 @@
 
 #sidenav.tight {
     width: 64px;
+}
+
+#sidenav.open-add,
+#sidenav.open-remove {
+    transition: height .5s cubic-bezier(.55, 0, .55, .2);
+}
+
+#sidenav.tight-add,
+#sidenav.tight-remove,
+#right-margin.inflate-add,
+#right-margin.inflate-remove {
+    transition: width .4s cubic-bezier(.55, 0, .55, .2);
 }
 
 #sidenav md-toolbar {

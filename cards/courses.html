@@ -1,4 +1,4 @@
-<md-list-item ng-repeat="id in $ls.terms[term].courses" ng-click="goToCourse(id)" class="md-2-line">
+<md-list-item ng-repeat="id in $ls.terms[term].courses" ng-if="id.length < 8" ng-click="goToCourse(id)" class="md-2-line">
     <div class="md-list-item-text">
         <h3>{{ $ls.courses[id].title }}</h3>
         <p>{{ $ls.courses[id].doctor }}</p>
@@ -8,4 +8,3 @@
              style="border-radius: 12px; padding: 0 10px; font-size: 17px">{{ updatesCount(id) }}</div>
     </div>
 </md-list-item>
-<!-- md-colors="{borderColor: $ls.courses[id].color}" -->
