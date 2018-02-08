@@ -1,9 +1,3 @@
-@media (max-width: 599px) {
-    .layout-xs-column md-card {
-        max-height: 350px;
-    }
-}
-
 .fill-width {
     width: 100%;
 }

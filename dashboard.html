@@ -3,11 +3,11 @@
 </script>
 
 <div layout="row">
-    <div layout="column" flex-gt-xs="66">
-        <div layout="row" flex-gt-xs="60" layout-xs="column">
+    <div layout="column" flex="66" ng-if="$media('gt-xs')">
+        <div layout="row" flex="60">
             <card ng-repeat="card in mainCards" template="card"></card>
         </div>
-        <div layout="row" flex-gt-xs="40" layout-xs="column">
+        <div layout="row" flex="40">
             <card ng-repeat="card in subCards" template="card"></card>
         </div>
     </div>

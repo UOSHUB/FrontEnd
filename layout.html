@@ -15,7 +15,7 @@
             </md-toolbar>
             <md-content md-colors="::{background: 'accent-900'}" flex>
                 <md-list flex>
-                    <md-list-item class="md-1-line" ng-repeat="(page, icon) in pages" ng-click="goto(page)"
+                    <md-list-item class="md-1-line" ng-repeat="(page, icon) in pages" ng-click="toggleSidenav(); goto(page)"
                                   md-colors="{background: page == currentPage ? 'accent-700' : 'accent-900'}">
                         <md-icon md-font-icon="fa fa-{{ icon }} fa-fw" class="md-avatar-icon"></md-icon>
                         <div class="md-list-item-text" flex>
@@ -29,7 +29,7 @@
             <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar">
                     <md-button ng-show="$ls.loggedIn" class="md-icon-button md-accent md-hue-3"
-                               ng-click="toggleSidenav()" style="margin-right: 16px">
+                               ng-click="toggleSidenav(true)" style="margin-right: 16px">
                         <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
                     </md-button>
                     <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('calendar')">Academic Calendar</md-button>
@@ -43,8 +43,8 @@
                 </div>
             </md-toolbar>
             <div id="content" layout="row" flex>
-                <ng-view layout-gt-xs="column" flex ng-cloak></ng-view>
-                <div id="right-margin" ng-class="{'inflate': !$ls.loggedIn}" hide-sm></div>
+                <ng-view layout="column" flex ng-cloak></ng-view>
+                <div id="right-margin" ng-class="{'inflate': !$ls.loggedIn && $media('gt-sm')}"></div>
             </div>
         </md-content>
     </body>

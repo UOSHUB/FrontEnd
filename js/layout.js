@@ -8,6 +8,7 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
     });
     angular.extend($scope, {
         $toolbar: $toolbar,
+        $media: $mdMedia,
         goto: $goto,
         $ls: $ls
     });
@@ -18,12 +19,11 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
         email: "envelope",
         calendar: "globe"
     };
-    $scope.toggleSidenav = function() {
-        if($mdMedia("gt-sm"))
-            $ls.selected.tightNav = !$ls.selected.tightNav;
-        else {
+    $scope.toggleSidenav = function(burgerButton) {
+        if(!$mdMedia("gt-sm")) {
             $mdSidenav("sidenav").toggle();
             $ls.selected.tightNav = false;
-        }
+        } else if(burgerButton)
+            $ls.selected.tightNav = !$ls.selected.tightNav;
     };
 }]);
