@@ -29,7 +29,7 @@
             <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar">
                     <md-button ng-show="$ls.loggedIn" class="md-icon-button md-accent md-hue-3"
-                               ng-click="toggleSidenav(true)" style="margin-right: 16px">
+                               ng-click="toggleSidenav(true)">
                         <md-icon md-font-icon="fa fa-bars fa-lg"></md-icon>
                     </md-button>
                     <md-button ng-hide="$ls.loggedIn" class="md-accent md-hue-2" ng-click="goto('calendar')">Academic Calendar</md-button>
@@ -37,7 +37,7 @@
                     <div ng-hide="hasToolbar" flex></div>
                     <span ng-show="$ls.loggedIn" md-colors="::{color: 'grey-800'}" account>
                         <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-user-circle-o"></md-icon>
-                        {{ $ls.student.firstName }} {{ $ls.student.lastName }}
+                        {{ $ls.student.firstName }} <span hide-xs>{{ $ls.student.lastName }}</span>
                     </span>
                     <md-button ng-hide="$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
                 </div>

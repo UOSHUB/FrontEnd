@@ -12,7 +12,9 @@
 
 #right-margin.inflate,
 #sidenav {
+    max-width: 200px;
     width: 200px;
+    min-width: 0;
 }
 
 #toolbar, #sidenav {
@@ -96,8 +98,10 @@ md-toolbar {
     margin-right: 8px;
 }
 
-ng-view, ng-view md-card {
-    margin: 10px;
+@media (min-width: 600px) {
+    ng-view, ng-view md-card {
+        margin: 10px;
+    }
 }
 
 md-card {
@@ -142,4 +146,8 @@ md-list-item.md-2-line .md-list-item-text p {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.fill-width {
+    width: 100%;
 }
