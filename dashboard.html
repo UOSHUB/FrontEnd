@@ -5,11 +5,11 @@
 <div layout="row">
     <div layout="column" flex="66" ng-if="$media('gt-xs')">
         <div layout="row" flex="60">
-            <card ng-repeat="card in mainCards" template="card"></card>
+            <card ng-repeat="card in cards[0]" template="card"></card>
         </div>
         <div layout="row" flex="40">
-            <card ng-repeat="card in subCards" template="card"></card>
+            <card ng-repeat="card in cards[2]" template="card"></card>
         </div>
     </div>
-    <card layout="column" flex-gt-xs="33" template="defaultCard"></card>
+    <card layout="column" flex-gt-xs="33" template="$media('gt-xs') ? cards[1] : $ls.selected.card"></card>
 </div>

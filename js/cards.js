@@ -1,6 +1,7 @@
 app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function($http, $ls, $goto, $filter, $location) {
-    function getData(storage, location, url) {
+    function getData(location, url, parent) {
         return function() {
+            var storage = !parent ? $ls : $ls[parent];
             if(!storage[location])
                 $http.get("/api/" + url + "/").then(function(response) {
                     storage[location] = response.data;
@@ -10,14 +11,14 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
     var cards = {
         deadlines: {
             title: "Deadlines", color: "orange-600", icon: "tasks",
-            getData: getData($ls, "deadlines", "terms/" + term + "/deadlines"),
+            getData: getData("deadlines", "terms/" + term + "/deadlines"),
             beforeDue: function(date) {
                 return new Date(date) > today;
             }
         },
         updates: {
             title: "Updates", color: "green-600", icon: "bell",
-            getData: getData($ls, "updates", "updates"),
+            getData: getData("updates", "updates"),
             dismissUpdate: function(updateId) {
                 $http({
                     method: "delete",
@@ -28,7 +29,7 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
         },
         emails: {
             title: "Emails", color: "blue-600", icon: "envelope",
-            getData: getData($ls.emails, "personal", "emails/personal/10"),
+            getData: getData("personal", "emails/personal/10", "emails"),
             getInitials: getInitials,
             goToEmail: function(emailId) {
                 $ls.selected.tab = 0;
@@ -47,16 +48,16 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
         },
         holds: {
             title: "Holds", color: "red-600", icon: "exclamation-triangle",
-            getData: getData($ls, "holds", "holds"),
+            getData: getData("holds", "holds"),
             parseDate: parseDate
         },
         grades: {
             title: "Grades", color: "teal-600", icon: "graduation-cap",
-            getData: getData($ls, "grades", "grades/" + term)
+            getData: getData("grades", "grades/" + term)
         },
         finals: {
             title: "Final Exams", color: "brown-600", icon: "clipboard",
-            getData: getData($ls, "finals", "finals/" + term),
+            getData: getData("finals", "finals/" + term),
             parseDate: parseDate
         },
         classes: {
