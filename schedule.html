@@ -1,8 +1,8 @@
 <script type="text/ng-template" id="schedule">
-    <md-select ng-model="$ls.selected.term" ng-click="$toolbar.getTerms()" class="no-margin" flex="30">
-        <md-option ng-repeat="term in $ls.terms | orderTerms" ng-value="term" ng-click="$toolbar.getSchedule(term)">{{ term | termTitle }}</md-option>
+    <md-select ng-model="$ls.selected.term" ng-click="$toolbar.getTerms()" class="no-margin" flex-gt-xs="30" flex>
+        <md-option ng-repeat="term in $ls.terms | orderTerms" ng-bind-html="term | termTitle"
+                   ng-click="$toolbar.getSchedule(term)" ng-value="term"></md-option>
     </md-select>
-    <span flex></span>
 </script>
 
 <md-card flex>
@@ -13,7 +13,7 @@
 
         <div class="hour as-days-head" md-colors="::{background: 'green-50'}"></div>
         <div ng-repeat-start="fraction in term.fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * term.height }}%">
-            {{ term.labels[$index].hour }}<span class="hide-on-med-and-down">{{ term.labels[$index].period }}</span>
+            {{ term.labels[$index].hour }}<span class="hide-xs">{{ term.labels[$index].period }}</span>
         </div>
         <div ng-if="!$last" class="half hour" style="top: {{ 5 + term.height * (0.5 + fraction) }}%"></div>
         <div class="hour" style="top: {{ 5 + fraction * term.height }}%" ng-repeat-end></div>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div ng-repeat="day in days" class="day-label blue-grey-text text-darken-2" style="left: {{ 5 + $index * 19 }}%">
-            {{ day }} <span class="hide-on-small-only">{{ term.dates[$index] }}</span>
+            {{ day }} <span class="hide-xs">{{ term.dates[$index] }}</span>
         </div>
     </md-card-content>
 </md-card><!--Schedule card end-->

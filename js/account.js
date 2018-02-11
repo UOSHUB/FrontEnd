@@ -26,10 +26,15 @@ function($mdPanel, $http, $ls, $goto) {
             $scope.logout = function() {
                 $http({method: "delete", url: "/api/login/"}).then(nothing, error);
                 $scope.panel.close().then(function() {
+                    var reset = {};
                     if($scope.currentPage != "calendar")
                         $goto("/");
+                    else reset = {
+                        selected: {calDir: $ls.selected.calDir},
+                        events: $ls.events
+                    };
                     element.addClass("ng-hide");
-                    $ls.$reset();
+                    $ls.$reset(reset);
                 }, error);
             };
         }

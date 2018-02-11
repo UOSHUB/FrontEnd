@@ -1,11 +1,6 @@
 app.controller("calendar", ["$scope", "$ls", "$http", "MaterialCalendarData",
 
 function($scope, $ls, $http, $calendar) {
-    $ls.$default({
-        terms: {}, emails: {}, courses: {},
-        selected: {tab: 0, email: [], term: term}
-    });
-
     angular.extend($scope, {
         selectedDate: new Date(),
         firstDayOfWeek: 6, // First day of the week, 0 for Sunday, 1 for Monday, etc.
@@ -31,7 +26,7 @@ function($scope, $ls, $http, $calendar) {
     }
 
     if(!$ls.events)
-        $http.get("/api/calendar/" + $ls.selected.term + "/").then(function(response) {
+        $http.get("/api/calendar/" + term + "/").then(function(response) {
             $ls.events = response.data;
             parseEvents();
             var start = new Date(year, month - 2, 24), end = new Date(year, month, 6);

@@ -35,10 +35,11 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
 }])
 
 .filter("termTitle", function() {
+    var termName = {"10": "Fall", "20": "Spring", "30": "Summer"};
     return function(termCode) {
         var yearString = termCode.slice(0, 4);
-        return {"10": "Fall", "20": "Spring", "30": "Summer"}[termCode.slice(4)]
-               + " Semester " + yearString + " - " + (Number(yearString) + 1);
+        return termName[termCode.slice(4)] + " Semester " +
+            yearString + "&nbsp;-&nbsp;" + (Number(yearString) + 1);
     };
 })
 

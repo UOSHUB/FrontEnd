@@ -21,3 +21,8 @@ md-content.agenda .breadcrumb {
 div[tabindex] {
     padding-bottom: 0;
 }
+
+calendar-md md-content > md-content.agenda > * > * :first-child {
+    width: 60px;
+    text-align: left;
+}

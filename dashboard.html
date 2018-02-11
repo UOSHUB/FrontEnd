@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="dashboard">
-    {{ $toolbar.thisTerm | termTitle }}
+    <span ng-bind-html="$toolbar.thisTerm | termTitle"></span>
 </script>
 
 <div layout="row" flex>
