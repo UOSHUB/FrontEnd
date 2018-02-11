@@ -2,7 +2,7 @@
     {{ $toolbar.thisTerm | termTitle }}
 </script>
 
-<div layout="row">
+<div layout="row" flex>
     <div layout="column" flex="66" ng-if="$media('gt-xs')">
         <div layout="row" flex="60">
             <card ng-repeat="card in cards[0]" template="card"></card>
@@ -13,3 +13,10 @@
     </div>
     <card layout="column" flex-gt-xs="33" template="$media('gt-xs') ? cards[1] : $ls.selected.card"></card>
 </div>
+<md-nav-bar md-selected-nav-item="$ls.selected.card" class="md-accent md-hue-2 md-whiteframe-4dp hide-gt-xs"
+            ng-init="$ls.selected.card = $ls.selected.card || cards[1]">
+    <md-nav-item ng-repeat="card in [].concat.apply([], cards) | filter: '!courses'"
+                 md-nav-click="$ls.selected.card = card" name="{{ card }}" class="fill-width">
+        {{ card }}
+    </md-nav-item>
+</md-nav-bar>

@@ -105,6 +105,9 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
         scope: { template: "=" },
         controller: ["$scope", function($scope) {
             angular.extend($scope, {$ls: $ls}, cards[$scope.template]);
+            $scope.$watch("template", function(template) {
+                angular.extend($scope, cards[template]);
+            });
             if($location.path() == "/courses/")
                 $scope.inCourse = true;
         }]
