@@ -3,8 +3,6 @@ app.controller("calendar", ["$scope", "$ls", "$http", "MaterialCalendarData",
 function($scope, $ls, $http, $calendar) {
     angular.extend($scope, {
         selectedDate: new Date(),
-        firstDayOfWeek: 6, // First day of the week, 0 for Sunday, 1 for Monday, etc.
-        tooltips: true,
         events: []
     });
 

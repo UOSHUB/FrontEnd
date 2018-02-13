@@ -6,8 +6,8 @@
         <!--INCLUDES-->
     </head>
     <body ng-controller="layout" layout="row" md-colors="::{background: 'accent-50'}">
-        <md-sidenav id="sidenav" class="md-sidenav-left" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.selected.tightNav}"
-                    md-whiteframe="1" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="sidenav" layout="column" flex-none>
+        <md-sidenav id="sidenav" class="md-sidenav-left md-whiteframe-1dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="sidenav"
+                    layout="column" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.selected.tightNav && $media('gt-sm')}">
             <md-toolbar layout="row" layout-align="start center" md-colors="::{background: 'grey-A100'}" ng-click="goto('/')">
                 <md-icon md-svg-icon="logo" md-colors="::{fill: 'accent-800'}"></md-icon>
                 <b md-colors="::{color: 'accent-800'}">UOS</b>

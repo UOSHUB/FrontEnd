@@ -20,10 +20,9 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
         calendar: "globe"
     };
     $scope.toggleSidenav = function(burgerButton) {
-        if(!$mdMedia("gt-sm")) {
+        if(!$mdMedia("gt-sm"))
             $mdSidenav("sidenav").toggle();
-            $ls.selected.tightNav = false;
-        } else if(burgerButton)
+        else if(burgerButton)
             $ls.selected.tightNav = !$ls.selected.tightNav;
     };
 }]);
