@@ -18,7 +18,12 @@ function($mdDialog, $http, $ls, $goto) {
                         $scope.pin = '';
                         $ls.$default({
                             terms: {}, emails: {}, courses: {},
-                            selected: {tab: 0, email: [], term: term}
+                            selected: {
+                                card: "emails",
+                                term: term,
+                                email: [],
+                                tab: 0
+                            }
                         });
                         $ls.loggedIn = true;
                         $goto("dashboard");

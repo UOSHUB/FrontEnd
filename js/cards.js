@@ -2,7 +2,7 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
     function getData(location, url, parent) {
         return function() {
             var storage = !parent ? $ls : $ls[parent];
-            if(!storage[location])
+            if((storage[location] || []).length == 0)
                 $http.get("/api/" + url + "/").then(function(response) {
                     storage[location] = response.data;
                 }, error);
@@ -102,12 +102,19 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
         templateUrl: "/static/cards/layout.html",
         restrict: "E",
         replace: true,
-        scope: { template: "=" },
+        scope: {
+            template: "<",
+            dynamic: "@"
+        },
         controller: ["$scope", function($scope) {
             angular.extend($scope, {$ls: $ls}, cards[$scope.template]);
-            $scope.$watch("template", function(template) {
-                angular.extend($scope, cards[template]);
-            });
+            if($scope.dynamic)
+                $scope.$watch("template", function(newTemplate, oldTemplate) {
+                    if(newTemplate != oldTemplate) {
+                        angular.extend($scope, cards[newTemplate]);
+                        $scope.getData();
+                    }
+                });
             if($location.path() == "/courses/")
                 $scope.inCourse = true;
         }]
