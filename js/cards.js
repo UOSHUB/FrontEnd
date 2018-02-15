@@ -13,7 +13,7 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
             title: "Deadlines", color: "orange-600", icon: "tasks",
             getData: getData("deadlines", "terms/" + term + "/deadlines"),
             beforeDue: function(date) {
-                return new Date(date) > today;
+                return !date || new Date(date) > today;
             }
         },
         updates: {

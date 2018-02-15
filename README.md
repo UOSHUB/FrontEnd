@@ -49,7 +49,7 @@ There're a lot of thing we still need to do in the front-end:
 - [ ] Add a sub-section for designing next semester's schedule live with drag and drop
 - [ ] Add a section to display student's information and frequently looked up data
 - [ ] Make the whole website responsive to all screen sizes
-- [ ] Dynamically show or hide dashboard cards according to time of the semester
+- [x] Dynamically show or hide dashboard cards according to time of the semester
 - [ ] Redesign account fees summary and e-services to make it less confusing
 - [ ] Show classroom location on a map of the university (for freshmen)
 - [ ] Allow students to review all courses together to avoid reading the forms again

@@ -27,6 +27,7 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
 
 .filter("timeDistance", function() {
     return function(date) {
+        if(!date) return;
         date = new Date(date);
         var period, now = new Date(), direction = "ago",
             time = (now - date) / 86400000;
