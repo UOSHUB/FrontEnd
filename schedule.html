@@ -23,9 +23,9 @@
             <div ng-repeat="point in course.points" ng-click="showCourse($event, id)" class="class"
                  md-colors="::{background: course.color, color: 'grey-A100'}" ng-if="course.start"
                  ng-style="{height: course.length * term.height + '%', left: point.x + '%', top: point.y + '%'}">
-                <span class="course-title">{{ course.title }}</span><br>
-                <md-icon md-font-icon="fa fa-user fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.doctor }}<br>
-                <md-icon md-font-icon="fa fa-map-marker fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.location }}
+                <div>{{ course.title }}</div>
+                <div hide-xs><md-icon md-font-icon="fa fa-user fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.doctor }}</div>
+                <div hide-xs><md-icon md-font-icon="fa fa-map-marker fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.location }}</div>
             </div>
         </div>
         <div ng-repeat="day in days" class="day-label blue-grey-text text-darken-2" style="left: {{ 5 + $index * 19 }}%">
@@ -35,7 +35,7 @@
 </md-card><!--Schedule card end-->
 
 <script type="text/ng-template" id="class-dialog">
-    <md-dialog flex="40" md-colors="{background: 'default-grey-A100', color: 'default-grey-800'}" layout="column">
+    <md-dialog md-colors="{background: 'default-grey-A100', color: 'default-grey-800'}" layout="column" flex="40" flex-xs="90">
         <md-toolbar flex="10" md-colors="{background: 'default-' + course.color, color: 'default-grey-A100'}">
             <div class="md-toolbar-tools" flex>
                 <span flex>{{ course.title }}</span>

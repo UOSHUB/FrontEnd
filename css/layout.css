@@ -116,6 +116,7 @@ md-dialog .md-toolbar-tools {
 md-dialog p {
     font-size: 20px;
     padding: 4px 0;
+    white-space: nowrap;
 }
 
 .course-info-icons md-icon {
