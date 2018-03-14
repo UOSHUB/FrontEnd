@@ -1,4 +1,4 @@
-app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function($http, $ls, $goto, $filter, $location) {
+app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, $filter, $http) {
     function getData(location, url, parent) {
         return function() {
             var storage = !parent ? $ls : $ls[parent];
@@ -8,7 +8,7 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
                 }, error);
         }
     }
-    var cards = {
+    return {
         deadlines: {
             title: "Deadlines", color: "orange-600", icon: "tasks",
             getData: getData("deadlines", "terms/" + term + "/deadlines"),
@@ -98,6 +98,8 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
             }
         }
     };
+}])
+.directive("card", ["$ls", "$location", "$cards", function($ls, $location, $cards) {
     return {
         templateUrl: "/static/cards/layout.html",
         restrict: "E",
@@ -107,11 +109,11 @@ app.directive("card", ["$http", "$ls", "$goto", "$filter", "$location", function
             dynamic: "@"
         },
         controller: ["$scope", function($scope) {
-            angular.extend($scope, {$ls: $ls}, cards[$scope.template]);
+            angular.extend($scope, {$ls: $ls}, $cards[$scope.template]);
             if($scope.dynamic)
                 $scope.$watch("template", function(newTemplate, oldTemplate) {
                     if(newTemplate != oldTemplate) {
-                        angular.extend($scope, cards[newTemplate]);
+                        angular.extend($scope, $cards[newTemplate]);
                         $scope.getData();
                     }
                 });

@@ -1,5 +1,6 @@
-app.controller("dashboard", ["$scope", "$refresh", "$toolbar", function($scope, $refresh, $toolbar) {
+app.controller("dashboard", ["$scope", "$refresh", "$toolbar", "$cards", function($scope, $refresh, $toolbar, $cards) {
     $toolbar.thisTerm = term;
+    $scope.$cards = $cards;
 
     $scope.cards = [
         ["updates", "courses"], "emails",

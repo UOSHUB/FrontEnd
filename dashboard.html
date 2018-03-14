@@ -14,8 +14,8 @@
     <card layout="column" flex-gt-xs="33" template="$media('gt-xs') ? cards[1] : $ls.selected.card" dynamic="true"></card>
 </div>
 <md-nav-bar md-selected-nav-item="$ls.selected.card" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">
-    <md-nav-item ng-repeat="card in [].concat.apply([], cards) | filter: '!courses'"
-                 md-nav-click="$ls.selected.card = card" name="{{ card }}" class="fill-width">
-        {{ card }}
+    <md-nav-item ng-repeat="card in [].concat.apply([], cards)" class="fill-width"
+                 md-nav-click="$ls.selected.card = card" name="{{ card }}" layout="column">
+        <md-icon md-font-icon="fa fa-{{ $cards[card].icon }} fa-1x" md-colors="{color: 'grey-A100'}"></md-icon>
     </md-nav-item>
 </md-nav-bar>
