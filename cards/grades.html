@@ -1,10 +1,10 @@
-<md-list-item class="md-2-line" ng-repeat="grade in $ls.grades | orderBy: '-time'" ng-click="null">
+<md-list-item class="md-2-line" ng-repeat="grade in $ls.grades | orderBy: '-'" ng-click="null">
     <div class="md-list-item-text" flex>
         <h3>{{ grade.title }}</h3>
         <p>{{ $ls.courses[grade.course].title }}</p>
     </div>
     <div class="md-secondary md-avatar-icon fix-icon" style="margin-right: 0"
-         md-colors="{background: (grade | gradeColor) + '-600', color: 'grey-50'}">
+         md-colors="{background: gradeColor(grade) + '-600', color: 'grey-50'}">
         <span style="line-height: 28px; margin-left: -2px;">
             {{ grade.grade }}<sub style="font-size: 12px">/<sub>{{ grade.outOf }}</sub></sub>
         </span>

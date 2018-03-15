@@ -53,7 +53,19 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
         },
         grades: {
             title: "Grades", color: "teal-600", icon: "graduation-cap",
-            getData: getData("grades", "grades/" + term)
+            getData: getData("grades", "grades/" + term),
+            gradeColor: function(grade) {
+                var percent = grade.grade / grade.outOf * 100;
+                if(percent < 60)
+                    return "red";
+                if(percent < 70)
+                    return "orange";
+                if(percent < 80)
+                    return "yellow";
+                if(percent < 90)
+                    return "lime";
+                return "green";
+            }
         },
         finals: {
             title: "Final Exams", color: "brown-600", icon: "clipboard",
