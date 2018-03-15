@@ -1,10 +1,20 @@
-#welcome #title {
-    font-size: 30px;
-    line-height: 48px;
+#welcome-slogan {
+    max-width: 720px;
+    max-height: 180px;
 }
 
-#welcome #subtitle {
-    font-size: 20px;
-    line-height: 28px;
+#welcome-slogan img {
+    object-fit: contain;
+    max-width: calc(100% - 16px);
+}
+
+#welcome-text p {
+    font-size: 30px;
+    line-height: 40px;
+}
+
+#welcome-text span {
+    font-size: 22px;
+    line-height: 30px;
     margin-bottom: 36px;
 }

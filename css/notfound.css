@@ -74,9 +74,9 @@
         }
 
 #slogan img {
-    margin-left: 36px;
-    width: 600px;
-    height: 175px;
+    margin-left: -275px;
+    width: 900px;
+    height: 225px;
 }
 
 #slogan span {
@@ -86,8 +86,9 @@
         animation: reveal 2.2s ease-in-out 2.5s forwards;
         background-color: #eceff1;
         position: absolute;
-        height: 200px;
-        width: 700px;
+        height: 225px;
+        width: 900px;
+        left: -275px;
         top: 0;
     }
 
@@ -130,5 +131,5 @@
 }
 
 @keyframes reveal {
-    to { width: 0; }
+    to { width: 280px; }
 }

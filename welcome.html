@@ -1,11 +1,16 @@
-<div id="welcome" layout-gt-xs="row" layout-xs="column" layout-align-gt-xs="center center" ng-init="$ls.loggedIn && goto('dashboard')" flex>
-    <div layout="column" flex-gt-xs="40" flex-order-xs="2" layout-padding>
-        <span id="title" md-colors="{color: 'primary'}">By Students, For Students</span>
-        <span id="subtitle">This'll revolutionize your experience with UOS websites and combines all of them in one place (Blackboard, MyUDC, Outlook Email)</span>
-        <md-button class="md-raised md-primary" layout-padding login>Get Started</md-button>
+<div layout="column" layout-align="center center" ng-init="$ls.loggedIn && goto('dashboard')" flex>
+    <div id="welcome-slogan" layout="row" layout-margin>
+        <img ng-src="/static/img/slogan.png">
     </div>
-    <div layout="column" flex-gt-xs="60" flex-order-xs="1">
-        <img ng-repeat="(image, icon) in pages track by $index" style="width: 100%"
-             ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
+    <div layout-gt-xs="row" layout-xs="column" flex>
+        <div id="welcome-text" layout="column" flex-gt-xs="40" flex-xs="noshrink" flex-order-xs="2" layout-padding>
+            <p md-colors="{color: 'primary'}">By Students, For Students</p>
+            <span>This will revolutionize your experience with UOS websites and combines all of them in one place (Blackboard, MyUDC, Email and Academic Calendar)</span>
+            <md-button class="md-raised md-primary" layout-padding login>Get Started</md-button>
+        </div>
+        <div layout="column" flex-gt-xs="60" flex-xs="noshrink" flex-order-xs="1">
+            <img ng-repeat="(image, icon) in pages track by $index" class="fill-width"
+                 ng-src="/static/img/{{ image }}.png" ng-show="$index == counter"/>
+        </div>
     </div>
 </div>
