@@ -1,9 +1,22 @@
 <html ng-app="UOSHUB" ng-cloak ng-strict-di>
     <head>
+        <meta name="author" content="Omar Einea">
+        <meta name="description" content="The Unified Hub of UOS Websites">
+        <meta name="keywords" content="University of Sharjah, UOS, uos udc, uos bb, uos email">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title ng-bind="title">UOS HUB</title>
         <base href="/">
         <!--INCLUDES-->
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Organization",
+                "name": "UOS HUB",
+                "url": "https://uoshub.com",
+                "logo": "https://github.com/UOSHUB/Images/raw/master/logo.png",
+                "description": "The Unified Hub of UOS Websites"
+            }
+        </script>
     </head>
     <body ng-controller="layout" layout="row" md-colors="::{background: 'accent-50'}">
         <md-sidenav id="sidenav" class="md-sidenav-left md-whiteframe-1dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="sidenav"
