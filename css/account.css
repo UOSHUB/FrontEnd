@@ -19,6 +19,7 @@
 }
 
 .account-panel {
+    margin: 8px;
     background-color: white;
     border-radius: 2px;
     overflow: hidden;

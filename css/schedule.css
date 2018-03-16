@@ -96,17 +96,17 @@ md-card md-card-content.fill-card {
     .hour-label, .day-label, .class, md-dialog p {
         font-size: 14px;
     }
-    md-dialog .course-info-icons md-icon {
+    md-dialog.schedule .course-info-icons md-icon {
         font-size: 16px;
         margin-right: 4px;
     }
-    md-dialog .md-toolbar-tools {
+    md-dialog.schedule .md-toolbar-tools {
         padding: 0 12px;
     }
-    md-dialog .layout-margin {
+    md-dialog.schedule .layout-margin {
         margin: 2px !important;
     }
-    md-dialog .layout-margin > * {
+    md-dialog.schedule .layout-margin > * {
         margin: 4px;
     }
 }

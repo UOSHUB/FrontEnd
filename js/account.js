@@ -12,11 +12,7 @@ function($mdPanel, $http, $ls, $goto) {
                     .openFrom(element)
                     .withAnimation($mdPanel.animation.SCALE),
                 position: $mdPanel.newPanelPosition()
-                    .relativeTo(element)
-                    .addPanelPosition(
-                        $mdPanel.xPosition.OFFSET_END,
-                        $mdPanel.yPosition.ALIGN_TOPS
-                    )
+                    .absolute().top("0").end("0")
             };
             element.on("click", function($event) {
                 $mdPanel.open(panelOptions).then(function(panel) {

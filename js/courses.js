@@ -13,7 +13,7 @@ function($scope, $ls, $http, $refresh, $toolbar, $toast, $mdDialog) {
     else if(!$ls.selected.course)
         $ls.selected.course = $ls.terms[term].courses[0];
 
-    else if(!$ls.documents)
+    if(!$ls.documents)
         $http.get("/api/terms/" + term + "/documents/").then(function(response) {
             $ls.documents = response.data;
         }, error);
