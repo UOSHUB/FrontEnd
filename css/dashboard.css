@@ -71,6 +71,10 @@ md-list-item.removeable:hover, [account]:hover {
     top: 1;
 }
 
+.md-nav-bar {
+    height: auto;
+}
+
 .md-nav-item:first-of-type {
     margin-left: 0;
 }
@@ -79,5 +83,10 @@ md-list-item.removeable:hover, [account]:hover {
     min-width: 0;
     width: 100%;
     margin: 0;
-    padding: 12px 0;
+    padding: 8px 0 6px;
+    text-transform: capitalize;
+}
+
+.md-button._md-nav-button.md-active md-icon {
+    color: #ffffffde;
 }

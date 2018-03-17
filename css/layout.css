@@ -85,7 +85,7 @@ md-card {
     padding: 6px;
 }
 
-md-toolbar {
+md-toolbar, .md-toolbar-tools {
     min-height: 64px;
 }
 

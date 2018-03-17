@@ -16,6 +16,9 @@
 <md-nav-bar md-selected-nav-item="$ls.selected.card" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">
     <md-nav-item ng-repeat="card in [].concat.apply([], cards)" class="fill-width"
                  md-nav-click="$ls.selected.card = card" name="{{ card }}" layout="column">
-        <md-icon md-font-icon="fa fa-{{ $cards[card].icon }} fa-1x" md-colors="{color: 'grey-A100'}"></md-icon>
+        <div layout="column">
+            <md-icon md-font-icon="fa fa-{{ $cards[card].icon }} fa-1x"></md-icon>
+            {{card}}
+        </div>
     </md-nav-item>
 </md-nav-bar>

@@ -1,5 +1,5 @@
 <md-list-item class="md-2-line" ng-class="beforeDue(deadline.dueDate) ? 'removeable' : 'archived'"
-              ng-repeat="deadline in $ls.deadlines | filter: inCourse && {course: $ls.selected.course} | orderBy: ['!dueDate', '-dueDate']">
+              ng-repeat="deadline in $ls.deadlines | filter: inCourse && {course: $ls.selected.course} | orderBy: ['!dueDate', 'dueDate']">
     <div class="md-list-item-text" flex>
         <h3>{{ deadline.title }}</h3>
         <p ng-if="!inCourse">{{ $ls.courses[deadline.course].title }}</p>

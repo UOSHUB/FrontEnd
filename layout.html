@@ -51,7 +51,7 @@
                     <div ng-hide="hasToolbar" flex></div>
                     <span ng-show="$ls.loggedIn" md-colors="::{color: 'grey-800'}" account>
                         <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-user-circle-o"></md-icon>
-                        <span hide-xs>{{ $ls.student.firstName }}</span> <span hide-sm hide-xs>{{ $ls.student.lastName }}</span>
+                        {{ $ls.student.firstName }} <span hide-xs>{{ $ls.student.lastName }}</span>
                     </span>
                     <md-button ng-hide="$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
                 </div>

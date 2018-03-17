@@ -2,14 +2,13 @@ app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSid
 
 function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
     var toolbars = ["dashboard", "schedule", "courses", "email", "calendar"];
+    $scope.$on("$routeChangeStart", function(event, next) {
+        if(next.$$route && next.$$route.controller == "welcome" && $ls.loggedIn)
+            $goto("/dashboard/");
+    });
     $scope.$on("$routeChangeSuccess", function(event, current) {
-        if(current.$$route) {
-            $scope.currentPage = current.$$route.controller;
-            $scope.hasToolbar = toolbars.indexOf($scope.currentPage) > -1;
-            console.log($scope.currentPage);
-            if($scope.currentPage == "welcome" && $ls.loggedIn)
-                $goto("/dashboard/");
-        }
+        $scope.currentPage = current.$$route ? current.$$route.controller : null;
+        $scope.hasToolbar = toolbars.indexOf($scope.currentPage) > -1;
     });
     angular.extend($scope, {
         $toolbar: $toolbar,
