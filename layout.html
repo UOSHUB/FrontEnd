@@ -19,6 +19,7 @@
         </script>
     </head>
     <body ng-controller="layout" layout="row" md-colors="::{background: 'accent-50'}">
+        <div class="background-pattern" ng-if="currentPage == 'welcome'"><i></i></div>
         <md-sidenav id="sidenav" class="md-sidenav-left md-whiteframe-1dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="sidenav"
                     layout="column" ng-class="{'open': $ls.loggedIn, 'tight': $ls.loggedIn && $ls.selected.tightNav && $media('gt-sm')}">
             <md-toolbar layout="row" layout-align="start center" md-colors="::{background: 'grey-A100'}" ng-click="goto('/')">
@@ -38,7 +39,7 @@
                 </md-list>
             </md-content>
         </md-sidenav>
-        <md-content layout="column" md-colors="::{background: 'accent-50'}" flex>
+        <md-content layout="column" style="background: rgba(0, 0, 0, 0)" flex>
             <md-toolbar md-whiteframe="1" md-colors="::{background: 'grey-A100'}">
                 <div class="md-toolbar-tools" id="toolbar" layout="row">
                     <md-button ng-show="$ls.loggedIn" class="md-icon-button md-accent md-hue-3"
