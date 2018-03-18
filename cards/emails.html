@@ -1,19 +1,30 @@
-<md-list-item class="md-2-line removeable" ng-repeat="email in $ls.emails['personal'] | orderBy: '-time'" style="position: relative">
-    <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}" style="min-width: 36px">
-        {{ getInitials(email.sender) }}
+<md-toolbar md-colors="{background: 'blue-600', color: 'grey-A100'}">
+    <div class="md-toolbar-tools" flex>
+        <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw"></md-icon>
+        <span flex>Emails</span>
     </div>
-    <div class="md-list-item-text">
-        <h3>{{ email.title || "No Title" }}</h3>
-        <p>{{ email.sender }}</p>
-    </div>
-    <div class="md-list-item-text align-right">
-        <h3>{{ email.time | timeDistance }}</h3>
-        <p class="md-caption">{{ email.event | limitTo: 12 }}</p>
-    </div>
-    <div class="md-secondary">
-        <md-button class="md-icon-button" ng-click="deleteEmail(email.id)">
-            <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
-        </md-button>
-    </div>
-    <span class="list-button" ng-click="goToEmail(email.id)"></span>
-</md-list-item>
+</md-toolbar>
+
+<md-content>
+    <md-list>
+        <md-list-item class="md-2-line removeable" ng-repeat="email in $ls.emails['personal'] | orderBy: '-time'" style="position: relative">
+            <div class="md-avatar-icon fix-icon" md-colors="{background: 'blue-grey-400'}" style="min-width: 36px">
+                {{ getInitials(email.sender) }}
+            </div>
+            <div class="md-list-item-text">
+                <h3>{{ email.title || "No Title" }}</h3>
+                <p>{{ email.sender }}</p>
+            </div>
+            <div class="md-list-item-text align-right">
+                <h3>{{ email.time | timeDistance }}</h3>
+                <p class="md-caption">{{ email.event | limitTo: 12 }}</p>
+            </div>
+            <div class="md-secondary">
+                <md-button class="md-icon-button" ng-click="deleteEmail(email.id)">
+                    <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
+                </md-button>
+            </div>
+            <span class="list-button" ng-click="goToEmail(email.id)"></span>
+        </md-list-item>
+    </md-list>
+</md-content>

@@ -10,15 +10,13 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
     }
     return {
         deadlines: {
-            title: "Deadlines", color: "orange-600", icon: "tasks",
-            getData: getData("deadlines", "terms/" + term + "/deadlines"),
+            icon: "tasks", getData: getData("deadlines", "terms/" + term + "/deadlines"),
             beforeDue: function(date) {
                 return !date || new Date(date) > today;
             }
         },
         updates: {
-            title: "Updates", color: "green-600", icon: "bell",
-            getData: getData("updates", "updates"),
+            icon: "bell", getData: getData("updates", "updates"),
             dismissUpdate: function(updateId) {
                 $http({
                     method: "delete",
@@ -28,8 +26,7 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
             }
         },
         emails: {
-            title: "Emails", color: "blue-600", icon: "envelope",
-            getData: getData("personal", "emails/personal/10", "emails"),
+            icon: "envelope", getData: getData("personal", "emails/personal/10", "emails"),
             getInitials: getInitials,
             goToEmail: function(emailId) {
                 $ls.selected.tab = 0;
@@ -47,13 +44,12 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
             }
         },
         holds: {
-            title: "Holds", color: "red-600", icon: "exclamation-triangle",
+            icon: "exclamation-triangle",
             getData: getData("holds", "holds"),
             parseDate: parseDate
         },
         grades: {
-            title: "Grades", color: "teal-600", icon: "graduation-cap",
-            getData: getData("grades", "grades/" + term),
+            icon: "graduation-cap", getData: getData("grades", "grades/" + term),
             gradeColor: function(grade) {
                 var percent = grade.grade / grade.outOf * 100;
                 if(percent < 60)
@@ -68,13 +64,11 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
             }
         },
         finals: {
-            title: "Final Exams", color: "brown-600", icon: "clipboard",
             getData: getData("finals", "finals/" + term),
-            parseDate: parseDate
+            icon: "clipboard", parseDate: parseDate
         },
         classes: {
-            title: "Today's Classes", color: "lime-700", icon: "flag",
-            getData: function() {
+            icon: "flag", getData: function() {
                 if(!$ls.terms[term])
                     $http.get("/api/terms/" + term + "/").then(function(response) {
                         if(!angular.equals(response.data, {})) {
@@ -95,8 +89,8 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
             }
         },
         courses: {
-            title: "Courses", color: "purple-500", icon: "book",
-            getData: nothing, term: term, updatesCount: function(courseId) {
+            icon: "book", getData: nothing,
+            term: term, updatesCount: function(courseId) {
                 var count = 0;
                 angular.forEach($ls.updates, function(update) {
                     if(update.course == courseId)
@@ -112,8 +106,15 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
     };
 }])
 .directive("card", ["$ls", "$location", "$cards", function($ls, $location, $cards) {
+    function loadTemplate(newTemplate, oldTemplate, $scope) {
+        if(newTemplate != oldTemplate) {
+            $scope.templateURL = "/static/cards/" + newTemplate + ".html";
+            angular.extend($scope, $cards[newTemplate]);
+            $scope.getData();
+        }
+    }
     return {
-        templateUrl: "/static/cards/layout.html",
+        template: '<md-card ng-include="templateURL" flex></md-card>',
         restrict: "E",
         replace: true,
         scope: {
@@ -121,14 +122,10 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
             dynamic: "@"
         },
         controller: ["$scope", function($scope) {
-            angular.extend($scope, {$ls: $ls}, $cards[$scope.template]);
+            $scope.$ls = $ls;
+            loadTemplate($scope.template, null, $scope);
             if($scope.dynamic)
-                $scope.$watch("template", function(newTemplate, oldTemplate) {
-                    if(newTemplate != oldTemplate) {
-                        angular.extend($scope, $cards[newTemplate]);
-                        $scope.getData();
-                    }
-                });
+                $scope.$watch("template", loadTemplate);
             if($location.path() == "/courses/")
                 $scope.inCourse = true;
         }]
