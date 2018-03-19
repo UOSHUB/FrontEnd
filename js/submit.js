@@ -1,11 +1,9 @@
 app.directive("submit", ["$http", "$timeout", "$toast", "$mdDialog",
 
 function ($http, $timeout, $toast, $mdDialog) {
-    var target = $("#confirm"), dialog = {
+    var dialog = {
         templateUrl: "/static/confirm.html",
         parent: body,
-        openFrom: target,
-        closeTo: target,
         clickOutsideToClose: true,
         controller: ["$scope", "files", function($scope, files) {
             $scope.hide = $mdDialog.hide;
@@ -14,6 +12,8 @@ function ($http, $timeout, $toast, $mdDialog) {
         }]
     };
     function confirmSubmission(event, subUrl, rawFiles) {
+        dialog.closeTo = event;
+        dialog.openFrom = event;
         dialog.locals = {files: rawFiles};
         $mdDialog.show(dialog).then(function() {
             var files = new FormData();
