@@ -42,23 +42,7 @@
             <card template="'deadlines'"></card>
         </div>
         <div layout="row" flex>
-            <md-card flex="66">
-                <md-toolbar md-colors="{background: 'pink-500', color: 'grey-A100'}">
-                    <div class="md-toolbar-tools" flex>
-                        <md-icon md-font-icon="fa fa-info-circle fa-fw"></md-icon>
-                        <span flex>Course Info</span>
-                    </div>
-                </md-toolbar>
-                <md-content class="course-info-icons thin-margin" layout="row" flex>
-                    <div ng-repeat="column in course.columns" layout="column" layout-align="space-between start" flex layout-margin>
-                        <p ng-repeat="row in column">
-                            <md-icon md-font-icon="fa fa-{{ row[2] }} fa-fw"></md-icon>
-                            {{ row[1] }} <span ng-if="row[3]" md-colors="{color: 'default-grey-500'}">{{ row[3] }}</span>
-                            <md-tooltip md-direction="right">{{ row[0] }}</md-tooltip>
-                        </p>
-                    </div>
-                </md-content>
-            </md-card>
+            <card flex="66" template="'info'"></card>
             <md-card flex>
                 <md-toolbar md-colors="{background: 'light-blue-500', color: 'grey-A100'}">
                     <div class="md-toolbar-tools" flex>

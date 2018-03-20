@@ -1,27 +1,13 @@
-app.controller("courses", ["$scope", "$ls", "$http", "$refresh", "$toolbar", "$toast", "$mdDialog",
+app.controller("courses", ["$scope", "$ls", "$http", "$cards", "$refresh", "$toolbar", "$toast", "$mdDialog",
 
-function($scope, $ls, $http, $refresh, $toolbar, $toast, $mdDialog) {
+function($scope, $ls, $http, $cards, $refresh, $toolbar, $toast, $mdDialog) {
+    $cards.classes.getData(true);
     $toolbar.term = term;
-    if(!$ls.terms[term])
-        $http.get("/api/terms/" + term + "/").then(function(response) {
-            if(!angular.equals(response.data, {})) {
-                $ls.terms[term] = {};
-                angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
-                $ls.selected.course = $ls.terms[term].courses[0];
-            }
-        }, error);
-    else if(!$ls.selected.course)
-        $ls.selected.course = $ls.terms[term].courses[0];
 
     if(!$ls.documents)
         $http.get("/api/terms/" + term + "/documents/").then(function(response) {
             $ls.documents = response.data;
         }, error);
-
-    $scope.$watch(function() { return $ls.selected.course; }, function(id) {
-        if($ls.courses[id])
-            $scope.course = structureCourse($ls.courses[id], id);
-    });
 
     $scope.mass = false;
     $scope.all = false;

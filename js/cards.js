@@ -68,14 +68,18 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
             icon: "clipboard", parseDate: parseDate
         },
         classes: {
-            icon: "flag", getData: function() {
+            icon: "flag", getData: function(selectCourse) {
                 if(!$ls.terms[term])
                     $http.get("/api/terms/" + term + "/").then(function(response) {
                         if(!angular.equals(response.data, {})) {
                             $ls.terms[term] = {};
                             angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
+                            if(selectCourse)
+                                $ls.selected.course = $ls.terms[term].courses[0];
                         }
                     }, error);
+                else if(selectCourse && !$ls.selected.course)
+                    $ls.selected.course = $ls.terms[term].courses[0];
             },
             todayClasses: function() {
                 var classes = [], day = days[today.getDay()];
@@ -101,6 +105,15 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
             goToCourse: function(courseId) {
                 $ls.selected.course = courseId;
                 $goto("courses");
+            }
+        },
+        info: {
+            icon: "info-circle", getData: nothing,
+            watchCourse: function($scope) {
+                $scope.$watch(function() { return $ls.selected.course; }, function(id) {
+                    if(id && $ls.courses[id])
+                        $scope.course = structureCourse($ls.courses[id], id);
+                });
             }
         }
     };
