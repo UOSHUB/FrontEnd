@@ -1,4 +1,6 @@
-app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, $filter, $http) {
+app.factory("$cards", ["$ls", "$goto", "$filter", "$http", "$mdDialog", "$toast",
+
+function($ls, $goto, $filter, $http, $mdDialog, $toast) {
     function getData(location, url, parent) {
         return function() {
             var storage = !parent ? $ls : $ls[parent];
@@ -114,6 +116,30 @@ app.factory("$cards", ["$ls", "$goto", "$filter", "$http", function($ls, $goto, 
                     if(id && $ls.courses[id])
                         $scope.course = structureCourse($ls.courses[id], id);
                 });
+            }
+        },
+        mailto: {
+            icon: "envelope", getData: nothing,
+            sendEmail: function($event, subject, body, course) {
+                $mdDialog.show(
+                    $mdDialog.confirm()
+                        .title("Subject: " + subject)
+                        .textContent("To: " + $ls.courses[course].doctor)
+                        .targetEvent($event)
+                        .clickOutsideToClose(true)
+                        .ok("Send it")
+                        .cancel("Cancel")
+                ).then(function() {
+                    $http.post("/api/emails/send/", {
+                        subject: subject,
+                        body: body,
+                        recipients: $ls.courses[course].email
+                    }).then(function() {
+                        $toast("Your emails has been sent");
+                    }, function() {
+                        $toast("Failed to send email!");
+                    });
+                }, nothing);
             }
         }
     };

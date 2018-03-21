@@ -43,28 +43,7 @@
         </div>
         <div layout="row" flex>
             <card flex="66" template="'info'"></card>
-            <md-card flex>
-                <md-toolbar md-colors="{background: 'light-blue-500', color: 'grey-A100'}">
-                    <div class="md-toolbar-tools" flex>
-                        <md-icon md-font-icon="fa fa-envelope fa-fw"></md-icon>
-                        <span flex>Email My Doctor</span>
-                    </div>
-                </md-toolbar>
-                <md-content flex layout-padding style="position: relative">
-                    <div layout="column">
-                        <md-input-container style="margin-top: 4px" class="md-block">
-                            <label>Subject</label>
-                            <input type="text" ng-model="subject">
-                        </md-input-container>
-                        <md-input-container style="margin: -24px 0 -8px" class="md-block">
-                            <label>Body</label>
-                            <textarea rows="2" ng-model="body"></textarea>
-                        </md-input-container>
-                        <md-button class="md-raised no-margin" ng-click="sendEmail($event, subject, body, $ls.selected.course)"
-                                   style="position: absolute; bottom: 16px; width: calc(100% - 32px)" md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
-                    </div>
-                </md-content>
-            </md-card>
+            <card template="'mailto'"></card>
         </div>
     </div>
 </div>

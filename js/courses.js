@@ -1,6 +1,6 @@
-app.controller("courses", ["$scope", "$ls", "$http", "$cards", "$refresh", "$toolbar", "$toast", "$mdDialog",
+app.controller("courses", ["$scope", "$ls", "$http", "$cards", "$refresh", "$toolbar",
 
-function($scope, $ls, $http, $cards, $refresh, $toolbar, $toast, $mdDialog) {
+function($scope, $ls, $http, $cards, $refresh, $toolbar) {
     $cards.classes.getData(true);
     $toolbar.term = term;
 
@@ -24,28 +24,6 @@ function($scope, $ls, $http, $cards, $refresh, $toolbar, $toast, $mdDialog) {
             if(file.querySelector("md-checkbox").classList.contains("md-checked"))
                 file.querySelector("a").click();
         });
-    };
-
-    $scope.sendEmail = function($event, subject, body, course) {
-        $mdDialog.show(
-            $mdDialog.confirm()
-                .title("Subject: " + subject)
-                .textContent("To: " + $ls.courses[course].doctor)
-                .targetEvent($event)
-                .clickOutsideToClose(true)
-                .ok("Send it")
-                .cancel("Cancel")
-        ).then(function() {
-            $http.post("/api/emails/send/", {
-                subject: subject,
-                body: body,
-                recipients: $ls.courses[course].email
-            }).then(function() {
-                $toast("Your emails has been sent");
-            }, function() {
-                $toast("Failed to send email!");
-            });
-        }, nothing);
     };
 
     $refresh(["content", "updates"])
