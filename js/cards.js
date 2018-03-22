@@ -69,6 +69,22 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             getData: getData("finals", "finals/" + term),
             icon: "clipboard", parseDate: parseDate
         },
+        documents: {
+            icon: "file-text", mass: false, all: false,
+            getData: getData("documents", "terms/" + term + "/documents"),
+            openFile: function(doc) {
+                var link = angular.element("<a href='" + doc.url + "' name='" + doc.file + "' target='_blank'></a>");
+                body.append(link);
+                link[0].click();
+                link.remove();
+            },
+            downloadFiles: function() {
+                angular.forEach($(".download"), function(file) {
+                    if(file.querySelector("md-checkbox").classList.contains("md-checked"))
+                        file.querySelector("a").click();
+                });
+            }
+        },
         classes: {
             icon: "flag", getData: function(selectCourse) {
                 if(!$ls.terms[term])

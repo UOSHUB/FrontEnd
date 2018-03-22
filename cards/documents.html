@@ -1,0 +1,30 @@
+<md-toolbar md-colors="{background: 'brown-600'}">
+    <div class="md-toolbar-tools" style="padding-right: 30px" flex>
+        <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw"></md-icon>
+        <span flex>Documents</span>
+        <md-button class="md-icon-button" style="margin-right: 2px" ng-hide="mass" ng-click="mass = !mass">
+            <md-icon md-font-icon="fa fa-cloud-download fa-2x fa-fw"></md-icon>
+        </md-button>
+        <md-button ng-show="mass" style="margin-right: 16px" ng-click="downloadFiles()"
+                   md-colors="{background: 'amber-300'}">Download Selected</md-button>
+        <md-checkbox ng-show="mass" ng-checked="all" ng-click="all = !all"></md-checkbox>
+    </div>
+</md-toolbar>
+
+<md-content>
+    <md-list>
+        <md-list-item ng-repeat="document in $ls.documents | filter: {'course': $ls.selected.course} | orderBy: 'uploadDate' | limitTo: 25"
+                      class="md-2-line documents" ng-click="openFile(document)">
+            <div class="md-list-item-text" flex>
+                <h3>{{ document.title }}</h3>
+                <p>{{ document.file }}</p>
+            </div>
+            <div class="md-list-item-text fixed-56-width download">
+                <md-button ng-hide="mass" ng-href="{{ document.url }}" download="{{ document.file }}" name="{{ document.file }}" class="md-icon-button">
+                    <md-icon md-font-icon="fa fa-download fa-2x"></md-icon>
+                </md-button>
+                <md-checkbox ng-show="mass" ng-checked="all" class="md-accent md-hue-3" style="margin: 16px" flex></md-checkbox>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-content>
