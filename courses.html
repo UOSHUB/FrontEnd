@@ -1,12 +1,14 @@
 <script type="text/ng-template" id="courses">
     <md-select ng-model="$ls.selected.course" class="no-margin" flex-gt-xs="30" flex>
-        <md-option ng-repeat="id in $ls.terms[$toolbar.term].courses" ng-value="id" ng-if="$ls.courses[id].title && id.length < 8">{{ $ls.courses[id].title }}</md-option>
+        <md-option ng-repeat="id in $ls.terms[$toolbar.term].courses" ng-value="id" ng-if="$ls.courses[id].title && id.length < 8">
+            {{ $ls.courses[id].title }}
+        </md-option>
     </md-select>
 </script>
 
-<div layout="row" flex>
-    <card flex="30" template="'documents'"></card>
-    <div layout="column" flex>
+<div ng-init="$ls.selected.coursesCard = $ls.selected.coursesCard || 'documents'" layout="row" flex>
+    <card flex-gt-xs="30" template="$media('gt-xs') ? 'documents' : $ls.selected.coursesCard" dynamic="true"></card>
+    <div layout="column" ng-if="$media('gt-xs')" flex>
         <div layout="row" flex="50">
             <card template="'updates'"></card>
             <card template="'deadlines'"></card>
@@ -17,3 +19,12 @@
         </div>
     </div>
 </div>
+
+<md-nav-bar md-selected-nav-item="$ls.selected.coursesCard" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">
+    <md-nav-item ng-repeat="card in cards" class="fill-width" md-nav-click="$ls.selected.coursesCard = card" name="{{ card }}">
+        <div layout="column">
+            <md-icon md-font-icon="fa fa-{{ $cards[card].icon }} fa-1x"></md-icon>
+            {{card}}
+        </div>
+    </md-nav-item>
+</md-nav-bar>

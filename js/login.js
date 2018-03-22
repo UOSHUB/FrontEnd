@@ -19,7 +19,6 @@ function($mdDialog, $http, $ls, $goto) {
                         $ls.$default({
                             terms: {}, emails: {}, courses: {},
                             selected: {
-                                card: "emails",
                                 term: term,
                                 email: [],
                                 tab: 0

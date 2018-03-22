@@ -2,7 +2,7 @@
     <span ng-bind-html="$toolbar.thisTerm | termTitle"></span>
 </script>
 
-<div layout="row" flex>
+<div ng-init="$ls.selected.dashboardCard = $ls.selected.dashboardCard || cards[1]" layout="row" flex>
     <div layout="column" flex="66" ng-if="$media('gt-xs')">
         <div layout="row" flex="60">
             <card ng-repeat="card in cards[0]" template="card"></card>
@@ -11,11 +11,12 @@
             <card ng-repeat="card in cards[2]" template="card"></card>
         </div>
     </div>
-    <card layout="column" flex-gt-xs="33" template="$media('gt-xs') ? cards[1] : $ls.selected.card" dynamic="true"></card>
+    <card layout="column" flex-gt-xs="33" template="$media('gt-xs') ? cards[1] : $ls.selected.dashboardCard" dynamic="true"></card>
 </div>
-<md-nav-bar md-selected-nav-item="$ls.selected.card" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">
+
+<md-nav-bar md-selected-nav-item="$ls.selected.dashboardCard" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">
     <md-nav-item ng-repeat="card in [].concat.apply([], cards)" class="fill-width"
-                 md-nav-click="$ls.selected.card = card" name="{{ card }}" layout="column">
+                 md-nav-click="$ls.selected.dashboardCard = card" name="{{ card }}" layout="column">
         <div layout="column">
             <md-icon md-font-icon="fa fa-{{ $cards[card].icon }} fa-1x"></md-icon>
             {{card}}
