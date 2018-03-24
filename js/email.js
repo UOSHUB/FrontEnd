@@ -4,7 +4,6 @@ function($scope, $ls, $http, $refresh, $toast, $mdDialog) {
     if(!$ls.emails.body)
         $ls.emails.body = {};
 
-    $ls.writingEmail = false;
     $scope.getInitials = getInitials;
     $scope.tabs = ["personal", "courses", "events"];
     $scope.icons = {personal: "users", courses: "book", events: "bullhorn"};
@@ -20,7 +19,6 @@ function($scope, $ls, $http, $refresh, $toast, $mdDialog) {
 
     ($scope.openEmail = function(tab, id) {
         if(tab && id) {
-            $ls.writingEmail = false;
             $ls.selected.email = [tab, id];
             if(!$ls.emails.body[id])
                 $http.get("/api/emails/" + id + "/").then(function(response) {
@@ -40,7 +38,7 @@ function($scope, $ls, $http, $refresh, $toast, $mdDialog) {
             subject: subject,
             body: body
         }).then(function() {
-            $ls.writingEmail = false;
+            $ls.emailsAction = 'select';
             $toast("Your emails has been sent");
         }, function() {
             $toast("Failed to send email!");

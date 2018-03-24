@@ -18,6 +18,7 @@ function($mdDialog, $http, $ls, $goto) {
                         $scope.pin = '';
                         $ls.$default({
                             terms: {}, emails: {}, courses: {},
+                            emailsAction: 'select',
                             selected: {
                                 term: term,
                                 email: [],
