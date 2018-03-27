@@ -2,7 +2,7 @@
     <span ng-bind-html="$toolbar.thisTerm | termTitle"></span>
 </script>
 
-<div ng-init="$ls.selected.dashboardCard = $ls.selected.dashboardCard || cards[1]" layout="row" flex>
+<div ng-init="$ls.selected.dashboardCard = $ls.selected.dashboardCard || 'finals'" layout="row" flex>
     <div layout="column" flex="66" ng-if="$media('gt-xs')">
         <div layout="row" flex="60">
             <card ng-repeat="card in cards[0]" template="card"></card>
