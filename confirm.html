@@ -11,13 +11,13 @@
 
     <md-dialog-content>
         <md-list style="padding: 16px 8px 8px">
-            <md-list-item class="md-1-line" ng-repeat="file in files">
+            <md-list-item class="md-1-line" ng-repeat="file in ::files">
                 <div class="md-list-item-text">
                     <md-icon md-font-icon="fa fa-file"></md-icon>
-                    {{ file.name }}
+                    {{ ::file.name }}
                 </div>
                 <div class="md-secondary" style="padding-left: 16px">
-                    {{ file.size | bytes }}
+                    {{ ::file.size | bytes }}
                 </div>
             </md-list-item>
         </md-list>

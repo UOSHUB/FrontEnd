@@ -1,4 +1,4 @@
-<md-toolbar md-colors="{background: 'light-blue-500', color: 'grey-A100'}">
+<md-toolbar md-colors="::{background: 'light-blue-500', color: 'grey-A100'}">
     <div class="md-toolbar-tools" flex>
         <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw"></md-icon>
         <span flex>Email My Doctor</span>
@@ -16,6 +16,7 @@
             <textarea rows="2" ng-model="body"></textarea>
         </md-input-container>
         <md-button class="md-raised no-margin" ng-click="sendEmail($event, subject, body, $ls.selected.course)"
-                   style="position: absolute; bottom: 16px; width: calc(100% - 32px)" md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
+                   style="position: absolute; bottom: 16px; width: calc(100% - 32px)"
+                   md-colors="::{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
     </div>
 </md-content>

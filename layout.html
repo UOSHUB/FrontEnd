@@ -29,11 +29,11 @@
             </md-toolbar>
             <md-content md-colors="::{background: 'accent-900'}" flex>
                 <md-list flex>
-                    <md-list-item class="md-1-line" ng-repeat="(page, icon) in pages" ng-click="toggleSidenav(); goto(page)"
+                    <md-list-item class="md-1-line" ng-repeat="(page, icon) in ::pages" ng-click="toggleSidenav(); goto(page)"
                                   md-colors="{background: page == currentPage ? 'accent-700' : 'accent-900'}">
-                        <md-icon md-font-icon="fa fa-{{ icon }} fa-fw" class="md-avatar-icon"></md-icon>
+                        <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw" class="md-avatar-icon"></md-icon>
                         <div class="md-list-item-text" flex>
-                            <p class="md-title">{{ page.capitalize() }}</p>
+                            <p class="md-title">{{ ::page.capitalize() }}</p>
                         </div>
                     </md-list-item>
                 </md-list>
@@ -51,7 +51,7 @@
                     <div ng-hide="hasToolbar" flex></div>
                     <span ng-show="$ls.loggedIn" md-colors="::{color: 'grey-800'}" account>
                         <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-user-circle-o"></md-icon>
-                        {{ $ls.student.firstName }} <span hide-xs>{{ $ls.student.lastName }}</span>
+                        {{ ::$ls.student.firstName }} <span hide-xs>{{ ::$ls.student.lastName }}</span>
                     </span>
                     <md-button ng-hide="$ls.loggedIn" class="md-primary md-hue-2" login>Login</md-button>
                 </div>

@@ -1,4 +1,4 @@
-<md-toolbar md-colors="{background: 'red-600', color: 'grey-A100'}">
+<md-toolbar md-colors="::{background: 'red-600', color: 'grey-A100'}">
     <div class="md-toolbar-tools" flex>
         <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw"></md-icon>
         <span flex>Holds</span>
@@ -10,12 +10,12 @@
         <md-list-item ng-if="$ls.holds">You have no holds. Yay!</md-list-item>
         <md-list-item ng-repeat="hold in $ls.holds" class="md-2-line" ng-click="null">
             <div class="md-list-item-text">
-                <h3>{{ hold.reason }}</h3>
-                <p>{{ hold.type }}</p>
+                <h3>{{ ::hold.reason }}</h3>
+                <p>{{ ::hold.type }}</p>
             </div>
             <div class="md-list-item-text" style="max-width: 60px; text-align: center">
-                <h3>{{ parseDate(hold.end) | date: 'MMM, dd' }}</h3>
-                <p>{{ parseDate(hold.end) | date: 'yyyy' }}</p>
+                <h3>{{ ::parseDate(hold.end) | date: 'MMM, dd' }}</h3>
+                <p>{{ ::parseDate(hold.end) | date: 'yyyy' }}</p>
             </div>
         </md-list-item>
     </md-list>

@@ -9,7 +9,7 @@
     <md-card-content layout="row" class="fill-card">
         {{ term = !loading && $ls.terms[$ls.selected.term]; '' }}
         <div class="day as-hours-head" md-colors="::{background: 'green-50'}"></div>
-        <div class="day" ng-repeat="day in [1,2,3,4]"></div>
+        <div class="day" ng-repeat="day in ::[1,2,3,4]"></div>
 
         <div class="hour as-days-head" md-colors="::{background: 'green-50'}"></div>
         <div ng-repeat-start="fraction in term.fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * term.height }}%">
@@ -22,23 +22,23 @@
             {{ course = $ls.courses[id]; ''}}
             <div ng-repeat="point in course.points" ng-click="showCourse($event, id)" class="class"
                  md-colors="::{background: course.color, color: 'grey-A100'}" ng-if="course.start"
-                 ng-style="{height: course.length * term.height + '%', left: point.x + '%', top: point.y + '%'}">
+                 ng-style="::{height: course.length * term.height + '%', left: point.x + '%', top: point.y + '%'}">
                 <div>{{ course.title }}</div>
-                <div hide-xs><md-icon md-font-icon="fa fa-user fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.doctor }}</div>
-                <div hide-xs><md-icon md-font-icon="fa fa-map-marker fa-fw" md-colors="{color: 'grey-A100'}"></md-icon> {{ course.location }}</div>
+                <div hide-xs><md-icon md-font-icon="fa fa-user fa-fw" md-colors="::{color: 'grey-A100'}"></md-icon> {{ ::course.doctor }}</div>
+                <div hide-xs><md-icon md-font-icon="fa fa-map-marker fa-fw" md-colors="::{color: 'grey-A100'}"></md-icon> {{ ::course.location }}</div>
             </div>
         </div>
-        <div ng-repeat="day in days" class="day-label blue-grey-text text-darken-2" style="left: {{ 5 + $index * 19 }}%">
-            {{ day }} <span class="hide-xs">{{ term.dates[$index] }}</span>
+        <div ng-repeat="day in ::days" class="day-label blue-grey-text text-darken-2" style="left: {{ ::(5 + $index * 19) }}%">
+            {{ ::day }} <span class="hide-xs">{{ ::term.dates[$index] }}</span>
         </div>
     </md-card-content>
 </md-card><!--Schedule card end-->
 
 <script type="text/ng-template" id="class-dialog">
-    <md-dialog class="schedule" md-colors="{background: 'default-grey-A100', color: 'default-grey-800'}" layout="column" flex="40" flex-xs="90">
-        <md-toolbar flex="10" md-colors="{background: 'default-' + course.color, color: 'default-grey-A100'}">
+    <md-dialog class="schedule" md-colors="::{background: 'default-grey-A100', color: 'default-grey-800'}" layout="column" flex="40" flex-xs="90">
+        <md-toolbar flex="10" md-colors="::{background: 'default-' + course.color, color: 'default-grey-A100'}">
             <div class="md-toolbar-tools" flex>
-                <span flex>{{ course.title }}</span>
+                <span flex>{{ ::course.title }}</span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-font-icon="fa fa-times fa-lg"></md-icon>
                 </md-button>
@@ -47,9 +47,9 @@
         <md-dialog-content class="course-info-icons" layout="row" layout-margin>
             <div ng-repeat="column in course.columns" layout="column" layout-align="space-between start" flex layout-margin>
                 <p ng-repeat="row in column">
-                    <md-icon md-font-icon="fa fa-{{ row[2] }} fa-fw"></md-icon>
-                    {{ row[1] }} <span ng-if="row[3]" md-colors="{color: 'default-grey-500'}">{{ row[3] }}</span>
-                    <md-tooltip md-direction="right">{{ row[0] }}</md-tooltip>
+                    <md-icon md-font-icon="fa fa-{{ ::row[2] }} fa-fw"></md-icon>
+                    {{ ::row[1] }} <span ng-if="row[3]" md-colors="{color: 'default-grey-500'}">{{ ::row[3] }}</span>
+                    <md-tooltip md-direction="right">{{ ::row[0] }}</md-tooltip>
                 </p>
             </div>
         </md-dialog-content>

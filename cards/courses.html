@@ -1,4 +1,4 @@
-<md-toolbar md-colors="{background: 'purple-500', color: 'grey-A100'}">
+<md-toolbar md-colors="::{background: 'purple-500', color: 'grey-A100'}">
     <div class="md-toolbar-tools" flex>
         <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw"></md-icon>
         <span flex>Courses</span>
@@ -9,12 +9,12 @@
     <md-list>
         <md-list-item ng-repeat="id in $ls.terms[term].courses" ng-if="id.length < 8" ng-click="goToCourse(id)" class="md-2-line">
             <div class="md-list-item-text">
-                <h3>{{ $ls.courses[id].title }}</h3>
-                <p>{{ $ls.courses[id].doctor }}</p>
+                <h3>{{ ::$ls.courses[id].title }}</h3>
+                <p>{{ ::$ls.courses[id].doctor }}</p>
             </div>
             <div class="md-secondary">
-                <div md-colors="{backgroundColor: $ls.courses[id].color + '-400', color: 'grey-A100'}"
-                     style="border-radius: 12px; padding: 0 10px; font-size: 17px">{{ updatesCount(id) }}</div>
+                <div md-colors="::{backgroundColor: $ls.courses[id].color + '-400', color: 'grey-A100'}"
+                     style="border-radius: 12px; padding: 0 10px; font-size: 17px">{{ ::updatesCount(id) }}</div>
             </div>
         </md-list-item>
     </md-list>
