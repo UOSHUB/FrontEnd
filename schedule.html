@@ -9,7 +9,7 @@
     <md-card-content layout="row" class="fill-card">
         {{ term = !loading && $ls.terms[$ls.selected.term]; '' }}
         <div class="day as-hours-head" md-colors="::{background: 'green-50'}"></div>
-        <div class="day" ng-repeat="day in ::[1,2,3,4]"></div>
+        <div class="day" ng-repeat="day in ::[1, 2, 3, 4]"></div>
 
         <div class="hour as-days-head" md-colors="::{background: 'green-50'}"></div>
         <div ng-repeat-start="fraction in term.fractions" class="hour-label blue-grey-text" style="top: {{ 2 + fraction * term.height }}%">

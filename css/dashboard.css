@@ -56,7 +56,7 @@ md-list-item.removeable:hover, [account]:hover {
 }
 
 .archived {
-    opacity: 0.5;
+    opacity: .5;
 }
 
 .archived > .md-secondary-container {

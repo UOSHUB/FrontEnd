@@ -1,5 +1,11 @@
 html {
-    zoom: 0.8;
+    zoom: .8;
+}
+
+@media (max-width: 720px) {
+    html {
+        zoom: .9;
+    }
 }
 
 [ng-click] {
