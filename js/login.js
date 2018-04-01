@@ -1,6 +1,27 @@
 app.directive("login", ["$mdDialog", "$http", "$ls", "$goto",
 
 function($mdDialog, $http, $ls, $goto) {
+    var fails = 0;
+    function getCourses() {
+        if(fails++ < 3)
+            $http.get("/api/terms/" + term + "/").then(function(response) {
+                if(!angular.equals(response.data, {})) {
+                    $ls.terms[term] = {};
+                    angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
+                    $ls.selected.course = $ls.terms[term].courses[0];
+                } else getCourses();
+            }, getCourses);
+        else error();
+    }
+    function getDetails() {
+        $http.get("/api/details/").then(function(response) {
+            angular.extend($ls, response.data);
+        }, error);
+    }
+    if($ls.loggedIn) {
+        if(!$ls.student) getDetails();
+        if(!$ls.terms[term]) getCourses();
+    }
     return {
         link: function($scope, element, attrs) {
             $scope.cancel = $mdDialog.cancel;
@@ -27,10 +48,8 @@ function($mdDialog, $http, $ls, $goto) {
                         });
                         $ls.loggedIn = true;
                         $goto("dashboard");
-                        if(!$ls.student)
-                            $http.get("/api/details/").then(function(response) {
-                                angular.extend($ls, response.data);
-                            }, error);
+                        getDetails();
+                        getCourses();
                     }, function(response) {
                         element.triggerHandler("click");
                     });
