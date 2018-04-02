@@ -20,7 +20,7 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
         .when("/dashboard/", $load("dashboard", true))
         .when("/schedule/", $load("schedule", true))
         .when("/courses/", $load("courses", true))
-        .when("/email/", $load("email", true))
+        .when("/emails/", $load("emails", true))
         .when("/calendar/", $load("calendar"))
         .otherwise($load("notfound", false, "Page not found"));
 }])

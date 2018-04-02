@@ -3,7 +3,7 @@ app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSid
 function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
     $scope.$on("$routeChangeStart", function(event, next) {
         if(next.$$route && next.$$route.controller == "welcome" && $ls.loggedIn)
-            $goto("/dashboard/");
+            $goto("dashboard");
     });
     $scope.$on("$routeChangeSuccess", function(event, current) {
         $scope.currentPage = current.$$route ? current.$$route.controller : null;
@@ -19,7 +19,7 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
         dashboard: "tachometer",
         schedule: "calendar",
         courses: "book",
-        email: "envelope",
+        emails: "envelope",
         calendar: "globe"
     };
     $scope.toggleSidenav = function(burgerButton) {

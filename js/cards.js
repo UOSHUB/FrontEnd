@@ -34,7 +34,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
                 $ls.selected.tab = 0;
                 $ls.selected.email = ["personal", emailId];
                 $ls.emailsAction = "view";
-                $goto("email");
+                $goto("emails");
             },
             deleteEmail: function(emailId) {
                 $http({

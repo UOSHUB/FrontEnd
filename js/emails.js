@@ -1,4 +1,4 @@
-app.controller("email", ["$scope", "$ls", "$http", "$refresh", "$toast", "$mdDialog",
+app.controller("emails", ["$scope", "$ls", "$http", "$refresh", "$toast", "$mdDialog",
 
 function($scope, $ls, $http, $refresh, $toast, $mdDialog) {
     if(!$ls.emails.body)
