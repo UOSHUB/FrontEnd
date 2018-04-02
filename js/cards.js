@@ -8,18 +8,18 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
                 $http.get("/api/" + url + "/").then(function(response) {
                     storage[location] = response.data;
                 }, error);
-        }
+        };
     }
     return {
         deadlines: {
-            icon: "tasks", getData: getData("deadlines", "terms/" + term + "/deadlines"),
-            beforeDue: function(date) {
+            getData: getData("deadlines", "terms/" + term + "/deadlines"),
+            icon: "tasks", beforeDue: function(date) {
                 return !date || new Date(date) > today;
             }
         },
         updates: {
-            icon: "bell", getData: getData("updates", "updates"),
-            dismissUpdate: function(updateId) {
+            getData: getData("updates", "updates"),
+            icon: "bell", dismissUpdate: function(updateId) {
                 $http({
                     method: "delete",
                     url: "/api/updates/" + updateId + "/"
@@ -28,8 +28,8 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         emails: {
-            icon: "envelope", getData: getData("personal", "emails/personal/10", "emails"),
-            getInitials: getInitials,
+            getData: getData("personal", "emails/personal/10", "emails"),
+            icon: "envelope", getInitials: getInitials,
             goToEmail: function(emailId) {
                 $ls.selected.tab = 0;
                 $ls.selected.email = ["personal", emailId];
@@ -47,13 +47,13 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         holds: {
-            icon: "exclamation-triangle",
             getData: getData("holds", "holds"),
+            icon: "exclamation-triangle",
             parseDate: parseDate
         },
         grades: {
-            icon: "graduation-cap", getData: getData("grades", "grades/" + term),
-            gradeColor: function(grade) {
+            getData: getData("grades", "grades/" + term),
+            icon: "graduation-cap", gradeColor: function(grade) {
                 var percent = grade.grade / grade.outOf * 100;
                 if(percent < 60)
                     return "red";
@@ -71,8 +71,8 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             icon: "clipboard", parseDate: parseDate
         },
         documents: {
-            icon: "file-text", mass: false, all: false,
             getData: getData("documents", "terms/" + term + "/documents"),
+            icon: "file-text", mass: false, all: false,
             openFile: function(doc) {
                 var link = angular.element("<a href='" + doc.url + "' name='" + doc.file + "' target='_blank'></a>");
                 body.append(link);
@@ -87,20 +87,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         classes: {
-            icon: "flag", getData: function(selectCourse) {
-                if(!$ls.terms[term])
-                    $http.get("/api/terms/" + term + "/").then(function(response) {
-                        if(!angular.equals(response.data, {})) {
-                            $ls.terms[term] = {};
-                            angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
-                            if(selectCourse)
-                                $ls.selected.course = $ls.terms[term].courses[0];
-                        }
-                    }, error);
-                else if(selectCourse && !$ls.selected.course)
-                    $ls.selected.course = $ls.terms[term].courses[0];
-            },
-            todayClasses: function() {
+            icon: "flag", todayClasses: function() {
                 var classes = [], day = days[today.getDay()];
                 if($ls.terms && $ls.terms[term])
                     angular.forEach($ls.terms[term].courses, function(key) {
@@ -112,8 +99,8 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         courses: {
-            icon: "book", getData: nothing,
-            term: term, updatesCount: function(courseId) {
+            icon: "book", term: term,
+            updatesCount: function(courseId) {
                 var count = 0;
                 angular.forEach($ls.updates, function(update) {
                     if(update.course == courseId)
@@ -127,8 +114,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         info: {
-            icon: "info-circle", getData: nothing,
-            watchCourse: function($scope) {
+            icon: "info-circle", watchCourse: function($scope) {
                 $scope.$watch(function() { return $ls.selected.course; }, function(id) {
                     if(id && $ls.courses[id])
                         $scope.course = structureCourse($ls.courses[id], id);
@@ -136,8 +122,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         mailto: {
-            icon: "envelope", getData: nothing,
-            sendEmail: function($event, subject, body, course) {
+            icon: "envelope", sendEmail: function($event, subject, body, course) {
                 $mdDialog.show(
                     $mdDialog.confirm()
                         .title("Subject: " + subject)
@@ -166,7 +151,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         if(newTemplate != oldTemplate) {
             $scope.templateURL = "/static/cards/" + newTemplate + ".html";
             angular.extend($scope, $cards[newTemplate]);
-            $scope.getData();
+            ($scope.getData || nothing)();
         }
     }
     return {

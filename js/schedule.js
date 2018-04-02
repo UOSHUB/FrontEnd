@@ -1,7 +1,7 @@
 app.controller("schedule", ["$scope", "$toolbar", "$ls", "$http", "$mdDialog",
 
 function($scope, $toolbar, $ls, $http, $mdDialog) {
-    ($toolbar.getSchedule = function(selectedTerm) {
+    $toolbar.getSchedule = function(selectedTerm) {
         $ls.selected.term = selectedTerm;
         if(!$ls.terms[selectedTerm] && ($ls.terms[selectedTerm] = {}) || !$ls.terms[selectedTerm].courses) {
             $scope.loading = true;
@@ -10,7 +10,7 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
                 $scope.loading = false;
             }, error);
         }
-    })($ls.selected.term);
+    };
 
     $toolbar.getTerms = function() {
         if(Object.keys($ls.terms).length >= 1)

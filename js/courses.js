@@ -1,7 +1,6 @@
 app.controller("courses", ["$scope", "$cards", "$refresh", "$toolbar",
 
 function($scope, $cards, $refresh, $toolbar) {
-    $cards.classes.getData(true);
     $scope.$cards = $cards;
     $toolbar.term = term;
 
