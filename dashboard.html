@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="dashboard">
-    <span ng-bind-html="$toolbar.thisTerm | termTitle"></span>
+    <span ng-bind-html="::$toolbar.termTitle($toolbar.thisTerm)"></span>
 </script>
 
 <div ng-init="$ls.selected.dashboardCard = $ls.selected.dashboardCard || 'finals'" layout="row" flex>

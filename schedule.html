@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="schedule">
     <md-select ng-model="$ls.selected.term" ng-click="$toolbar.getTerms()" class="no-margin" flex-gt-xs="30" flex>
-        <md-option ng-repeat="term in $ls.terms | orderTerms" ng-bind-html="term | termTitle"
+        <md-option ng-repeat="term in $toolbar.orderTerms($ls.terms)" ng-bind-html="::$toolbar.termTitle(term)"
                    ng-click="$toolbar.getSchedule(term)" ng-value="term"></md-option>
     </md-select>
 </script>

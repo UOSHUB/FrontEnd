@@ -19,8 +19,13 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
             }, error);
     };
 
+    $toolbar.orderTerms = function(terms) {
+        return Object.keys(terms).reverse();
+    };
+
     $scope.days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
     $scope.cancel = $mdDialog.cancel;
+
     $scope.showCourse = function(event, id) {
         $scope.course = structureCourse($ls.courses[id], id);
         $mdDialog.show({
@@ -32,19 +37,4 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
             scope: $scope
         });
     };
-}])
-
-.filter("termTitle", function() {
-    var termName = {"10": "Fall", "20": "Spring", "30": "Summer"};
-    return function(termCode) {
-        var yearString = termCode.slice(0, 4);
-        return termName[termCode.slice(4)] + " Semester " +
-            yearString + "&nbsp;-&nbsp;" + (Number(yearString) + 1);
-    };
-})
-
-.filter("orderTerms", function() {
-    return function(terms) {
-        return Object.keys(terms).reverse();
-    };
-});
+}]);

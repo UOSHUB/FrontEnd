@@ -16,9 +16,18 @@ app.factory("$ls", ["$localStorage", function($localStorage) {
     };
 }])
 
-.factory("$toolbar", function() {
-    return {};
-})
+.factory("$toolbar", ["$sce", function($sce) {
+    var termName = {"10": "Fall", "20": "Spring", "30": "Summer"};
+    return {
+        termTitle: function(termCode) {
+            var yearString = termCode.slice(0, 4);
+            return $sce.trustAsHtml(
+                termName[termCode.slice(4)] + " Semester " +
+                yearString + "&nbsp;-&nbsp;" + (Number(yearString) + 1)
+            );
+        }
+    };
+}])
 
 .factory("$load", ["$rootScope", "$ls", "$goto", "$timeout", "$interval", "$toast",
 
@@ -37,7 +46,7 @@ function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
             controller: route,
             resolve: angular.extend({
                 onload: function() {
-                    $rootScope.title = (title || route.capitalize()) + " - UOS HUB";
+                    $rootScope.title = (title || route.capitalize()) + " | UOS HUB";
                     $timeout.cancel($rootScope.refresh);
                     $interval.cancel($rootScope.refresh);
                 }
