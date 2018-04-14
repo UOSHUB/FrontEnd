@@ -73,16 +73,17 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         documents: {
             getData: getData("documents", "terms/" + term + "/documents"),
             icon: "file-text", mass: false, all: false,
-            openFile: function(doc) {
-                var link = angular.element("<a href='" + doc.url + "' name='" + doc.file + "' target='_blank'></a>");
+            downloadFile: function(url) {
+                var link = angular.element("<a href='" + url + "'></a>");
                 body.append(link);
                 link[0].click();
                 link.remove();
             },
             downloadFiles: function() {
-                angular.forEach($(".download"), function(file) {
-                    if(file.querySelector("md-checkbox").classList.contains("md-checked"))
-                        file.querySelector("a").click();
+                var $scope = this;
+                angular.forEach($(".document-checkbox"), function(checkbox) {
+                    if(checkbox.classList.contains("md-checked"))
+                        $scope.downloadFile(checkbox.getAttribute("href"));
                 });
             }
         },
