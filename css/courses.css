@@ -62,10 +62,25 @@ iframe {
 }
 
 #docs-all {
-    margin-right: 14px;
     margin-left: 8px;
+    margin-right: 14px;
+}
+
+@media (max-width: 600px) {
+    #docs-all {
+        margin-right: -6px;
+    }
 }
 
 #docs-all:not(.md-checked) .md-icon {
     border-color: #ffffffc0;
+}
+
+#docs-download b {
+    margin: 0 4px;
+}
+
+#docs-download md-icon {
+    vertical-align: -8%;
+    margin-right: 2px;
 }

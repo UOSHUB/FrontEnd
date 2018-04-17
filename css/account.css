@@ -18,6 +18,12 @@
     padding-right: 4px;
 }
 
+@media (max-width: 600px) {
+    [account] > md-icon {
+        padding-right: 8px;
+    }
+}
+
 .account-panel {
     margin: 8px;
     background-color: white;

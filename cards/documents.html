@@ -2,11 +2,11 @@
     <div class="md-toolbar-tools" flex>
         <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw"></md-icon>
         <span flex>Documents</span>
-        <md-button ng-click="$ls.zip ? downloadZip() : downloadFiles()"
+        <md-button ng-click="$ls.zip ? downloadZip() : downloadFiles()" id="docs-download"
                    ng-show="$ls.mass && any" md-colors="::{background: 'amber-500', color: 'grey-A100'}">
             <b>Download</b>
-            <md-icon ng-hide="$ls.zip" md-font-icon="fa fa-list-ul fa-lg" style="vertical-align: -8%"></md-icon>
-            <md-icon ng-show="$ls.zip" md-font-icon="fa fa-archive fa-lg" style="vertical-align: -8%"></md-icon>
+            <md-icon ng-hide="$ls.zip" md-font-icon="fa fa-list-ul fa-lg"></md-icon>
+            <md-icon ng-show="$ls.zip" md-font-icon="fa fa-archive fa-lg"></md-icon>
         </md-button>
         <md-checkbox id="docs-all" ng-show="$ls.mass" ng-checked="all" ng-click="all = !all; any = true"></md-checkbox>
     </div>
