@@ -28,3 +28,25 @@
         </md-list-item>
     </md-list>
 </md-content>
+
+<md-fab-toolbar id="docs-fab" md-direction="right">
+    <md-fab-trigger class="align-with-text">
+        <md-button class="md-fab" md-colors="::{background: 'amber-500'}">
+            <md-icon md-font-icon="fa fa-cloud-download fa-1x" md-colors="::{color: 'grey-A100'}"></md-icon>
+        </md-button>
+    </md-fab-trigger>
+
+    <md-toolbar>
+        <md-fab-actions class="md-toolbar-tools">
+            <md-button class="md-button" ng-click="$ls.mass = false">
+                <md-icon md-font-icon="fa fa-download fa-1x"></md-icon>one
+            </md-button>
+            <md-button class="md-button" ng-click="$ls.mass = true; $ls.zip = false">
+                <md-icon md-font-icon="fa fa-list-ul fa-1x"></md-icon>many
+            </md-button>
+            <md-button class="md-button" ng-click="$ls.mass = true; $ls.zip = true">
+                <md-icon md-font-icon="fa fa-archive fa-1x"></md-icon>zip
+            </md-button>
+        </md-fab-actions>
+    </md-toolbar>
+</md-fab-toolbar>

@@ -34,6 +34,33 @@ iframe {
     display: none;
 }
 
+#docs-fab {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#docs-fab .md-fab-toolbar-wrapper {
+    height: 64px;
+}
+
+#docs-fab md-fab-trigger .md-button {
+    margin: 11px;
+}
+
+#docs-fab md-fab-actions {
+    margin-top: 0;
+}
+
+#docs-fab md-toolbar md-icon {
+    margin-right: 8px;
+}
+
+#docs-fab md-toolbar .md-fab-action-item {
+    width: 100%;
+}
+
 #docs-all {
     margin-right: 14px;
     margin-left: 8px;

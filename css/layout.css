@@ -16,6 +16,10 @@ html {
     outline: none;
 }
 
+md-card {
+    position: relative;
+}
+
 #right-margin {
     width: 0;
 }
