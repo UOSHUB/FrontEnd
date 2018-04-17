@@ -1,27 +1,29 @@
 <md-toolbar md-colors="::{background: 'brown-600'}">
-    <div class="md-toolbar-tools" style="padding-right: 30px" flex>
+    <div class="md-toolbar-tools" flex>
         <md-icon md-font-icon="fa fa-{{ ::icon }} fa-fw"></md-icon>
         <span flex>Documents</span>
-        <md-button class="md-icon-button" style="margin-right: 2px" ng-hide="mass" ng-click="mass = !mass">
-            <md-icon md-font-icon="fa fa-cloud-download fa-2x fa-fw"></md-icon>
+        <md-button ng-click="$ls.zip ? downloadZip() : downloadFiles()"
+                   ng-show="$ls.mass && any" md-colors="::{background: 'amber-500', color: 'grey-A100'}">
+            <b>Download</b>
+            <md-icon ng-hide="$ls.zip" md-font-icon="fa fa-list-ul fa-lg" style="vertical-align: -8%"></md-icon>
+            <md-icon ng-show="$ls.zip" md-font-icon="fa fa-archive fa-lg" style="vertical-align: -8%"></md-icon>
         </md-button>
-        <md-button ng-show="mass" style="margin-right: 16px" ng-click="downloadFiles()"
-                   md-colors="::{background: 'amber-300'}">Download Selected</md-button>
-        <md-checkbox ng-show="mass" ng-checked="all" ng-click="all = !all"></md-checkbox>
+        <md-checkbox id="docs-all" ng-show="$ls.mass" ng-checked="all" ng-click="all = !all; any = true"></md-checkbox>
     </div>
 </md-toolbar>
 
 <md-content>
-    <md-list>
+    <md-list ng-click="any = true">
         <md-list-item ng-repeat="document in $ls.documents | filter: {'course': $ls.selected.course} | orderBy: 'uploadDate'"
-                      class="md-2-line documents" ng-click="selected = mass ? !selected : downloadFile(document.url)">
+                      class="md-2-line documents" ng-click="selected = $ls.mass ? !selected : downloadFile(document.id)">
             <div class="md-list-item-text" flex>
                 <h3>{{ ::document.title }}</h3>
                 <p>{{ ::document.file }}</p>
             </div>
             <div class="md-list-item-text fixed-56-width">
+                <md-icon ng-hide="$ls.mass" md-font-icon="fa fa-download fa-2x"></md-icon>
                 <md-checkbox ng-checked="all || selected" class="md-accent md-hue-3 document-checkbox"
-                             href="{{ ::document.url }}" style="margin: 16px" ng-show="mass" flex></md-checkbox>
+                             id="{{ ::document.id }}" style="margin: 16px" ng-show="$ls.mass" flex></md-checkbox>
             </div>
         </md-list-item>
     </md-list>

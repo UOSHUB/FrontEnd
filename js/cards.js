@@ -72,19 +72,28 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         },
         documents: {
             getData: getData("documents", "terms/" + term + "/documents"),
-            icon: "file-text", mass: false, all: false,
-            downloadFile: function(url) {
-                var link = angular.element("<a href='" + url + "'></a>");
-                body.append(link);
-                link[0].click();
-                link.remove();
+            icon: "file-text", all: false,
+            downloadFile: function(id) {
+                document.body.append(
+                    angular.element("<iframe src='/api/documents/" + id + "/'></iframe>")[0]
+                );
             },
             downloadFiles: function() {
                 var $scope = this;
                 angular.forEach($(".document-checkbox"), function(checkbox) {
                     if(checkbox.classList.contains("md-checked"))
-                        $scope.downloadFile(checkbox.getAttribute("href"));
+                        $scope.downloadFile(checkbox.getAttribute("id"));
                 });
+            },
+            downloadZip: function() {
+                var ids = [];
+                angular.forEach($(".document-checkbox"), function(checkbox) {
+                    if(checkbox.classList.contains("md-checked"))
+                        ids.push(checkbox.getAttribute("id"));
+                });
+                this.downloadFile(
+                    "zip/" + ids.join(",") + "/" + $ls.courses[$ls.selected.course].title
+                );
             }
         },
         classes: {
