@@ -5,13 +5,13 @@
 <div ng-init="$ls.selected.dashboardCard = $ls.selected.dashboardCard || 'finals'" layout="row" flex>
     <div layout="column" flex="66" ng-if="$media('gt-xs')">
         <div layout="row" flex="60">
-            <card ng-repeat="card in ::cards[0]" template="card"></card>
+            <md-card ng-repeat="card in ::cards[0]" ng-include="::card.url()" card></md-card>
         </div>
         <div layout="row" flex="40">
-            <card ng-repeat="card in ::cards[2]" template="card"></card>
+            <md-card ng-repeat="card in ::cards[2]" ng-include="::card.url()" card></md-card>
         </div>
     </div>
-    <card layout="column" flex-gt-xs="33" template="$media('gt-xs') ? cards[1] : $ls.selected.dashboardCard" dynamic="true"></card>
+    <md-card layout="column" flex-gt-xs="33" ng-include="$media('gt-xs') ? cards[1].url() : $ls.selected.dashboardCard.url()" card></md-card>
 </div>
 
 <md-nav-bar md-selected-nav-item="$ls.selected.dashboardCard" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">

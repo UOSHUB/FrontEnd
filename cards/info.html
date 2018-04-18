@@ -4,8 +4,8 @@
         <span flex>Course Info</span>
     </div>
 </md-toolbar>
-
-<md-content ng-init="watchCourse(this)" class="course-info-icons thin-margin" layout="row" flex>
+{{ ::watchCourse(this);'' }}
+<md-content class="course-info-icons thin-margin" layout="row" flex>
     <div ng-repeat="column in course.columns" layout="column" layout-align="space-between start" flex layout-margin>
         <p ng-repeat="row in column">
             <md-icon md-font-icon="fa fa-{{ ::row[2] }} fa-fw"></md-icon>

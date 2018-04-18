@@ -7,7 +7,11 @@ var days = ["U", "M", "T", "W", "R", "F", "S"], today = new Date(), month = toda
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
-}
+};
+
+String.prototype.url = function() {
+    return "/static/cards/" + this + ".html";
+};
 
 function nothing() {}
 

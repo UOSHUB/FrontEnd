@@ -7,15 +7,15 @@
 </script>
 
 <div ng-init="$ls.selected.coursesCard = $ls.selected.coursesCard || 'documents'" layout="row" flex>
-    <card flex-gt-xs="30" template="$media('gt-xs') ? 'documents' : $ls.selected.coursesCard" dynamic="true"></card>
+    <md-card flex-gt-xs="30" ng-include="$media('gt-xs') ? 'documents'.url() : $ls.selected.coursesCard.url()" card></md-card>
     <div layout="column" ng-if="$media('gt-xs')" flex>
         <div layout="row" flex="50">
-            <card template="'updates'"></card>
-            <card template="'deadlines'"></card>
+            <md-card ng-include="::'updates'.url()" card></md-card>
+            <md-card ng-include="::'deadlines'.url()" card></md-card>
         </div>
         <div layout="row" flex>
-            <card flex="66" template="'info'"></card>
-            <card template="'mailto'"></card>
+            <md-card ng-include="::'info'.url()" flex="66" card></md-card>
+            <md-card ng-include="::'mailto'.url()" card></md-card>
         </div>
     </div>
 </div>

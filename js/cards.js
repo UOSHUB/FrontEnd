@@ -124,11 +124,13 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         info: {
-            icon: "info-circle", watchCourse: function($scope) {
+            icon: "info-circle", init: true, watchCourse: function($scope) {
+                if(!this.init) return;
                 $scope.$watch(function() { return $ls.selected.course; }, function(id) {
                     if(id && $ls.courses[id])
                         $scope.course = structureCourse($ls.courses[id], id);
                 });
+                this.init = false;
             }
         },
         mailto: {
@@ -156,29 +158,16 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         }
     };
 }])
-.directive("card", ["$ls", "$location", "$cards", function($ls, $location, $cards) {
-    function loadTemplate(newTemplate, oldTemplate, $scope) {
-        if(newTemplate != oldTemplate) {
-            $scope.templateURL = "/static/cards/" + newTemplate + ".html";
-            angular.extend($scope, $cards[newTemplate]);
-            ($scope.getData || nothing)();
-        }
-    }
+.directive("card", ["$location", "$cards", function($location, $cards) {
     return {
-        template: '<md-card ng-include="templateURL" flex></md-card>',
-        restrict: "E",
-        replace: true,
-        scope: {
-            template: "<",
-            dynamic: "@"
-        },
-        controller: ["$scope", function($scope) {
-            $scope.$ls = $ls;
-            loadTemplate($scope.template, null, $scope);
-            if($scope.dynamic)
-                $scope.$watch("template", loadTemplate);
+        link: function($scope, element) {
+            element.addClass("flex");
+            $scope.$on("$includeContentLoaded", function($event, template) {
+                angular.extend($scope, $cards[template.slice(14, -5)]);
+                ($scope.getData || nothing)();
+            });
             if($location.path() == "/courses/")
                 $scope.inCourse = true;
-        }]
+        }
     };
 }]);
