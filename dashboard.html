@@ -14,12 +14,22 @@
     <md-card layout="column" flex-gt-xs="33" ng-include="$media('gt-xs') ? cards[1].url() : $ls.selected.dashboardCard.url()" card></md-card>
 </div>
 
-<md-nav-bar md-selected-nav-item="$ls.selected.dashboardCard" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">
-    <md-nav-item ng-repeat="card in ::[].concat.apply([], cards)" class="fill-width"
-                 md-nav-click="$ls.selected.dashboardCard = card" name="{{ ::card }}" layout="column">
+<md-nav-bar md-selected-nav-item="$ls.selected.dashboardCard" class="md-accent md-hue-3 md-whiteframe-4dp" ng-if="$media('xs')">
+    <md-nav-item ng-repeat="card in ::[].concat.apply([], cards)" class="fill-width" name="{{ ::card }}" layout="column"
+                 md-nav-click="$ls.selected.dashboardCard = card">
         <div layout="column">
             <md-icon md-font-icon="fa fa-{{ ::$cards[card].icon }} fa-1x"></md-icon>
             {{ ::card }}
         </div>
     </md-nav-item>
+    {{ color = getColor($ls.selected.dashboardCard); '' }}
+    <style>
+        .md-button._md-nav-button.md-active md-icon,
+        .md-button._md-nav-button.md-active {
+            color: {{ color }} !important;
+        }
+        md-nav-bar .md-nav-bar md-nav-ink-bar {
+            background: {{ color }} !important;
+        }
+    </style>
 </md-nav-bar>

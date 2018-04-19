@@ -1,6 +1,6 @@
-app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSidenav", "$mdMedia",
+app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSidenav", "$mdMedia", "$mdColors", "$cards",
 
-function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
+function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia, $mdColors, $cards) {
     $scope.$on("$routeChangeStart", function(event, next) {
         if(next.$$route && next.$$route.controller == "welcome" && $ls.loggedIn)
             $goto("dashboard");
@@ -12,6 +12,7 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
     angular.extend($scope, {
         $toolbar: $toolbar,
         $media: $mdMedia,
+        $cards: $cards,
         goto: $goto,
         $ls: $ls
     });
@@ -21,6 +22,12 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
         courses: "book",
         emails: "envelope",
         calendar: "globe"
+    };
+    $scope.getColor = function(card) {
+        var color = $cards[card].color;
+        return $mdColors.getThemeColor(
+            color.slice(0, -3) + "3" + color.slice(-2)
+        );
     };
     $scope.toggleSidenav = function(burgerButton) {
         if(!$mdMedia("gt-sm"))

@@ -1,7 +1,6 @@
-app.controller("courses", ["$scope", "$cards", "$refresh", "$toolbar",
+app.controller("courses", ["$scope", "$refresh", "$toolbar",
 
-function($scope, $cards, $refresh, $toolbar) {
-    $scope.$cards = $cards;
+function($scope, $refresh, $toolbar) {
     $toolbar.term = term;
 
     $scope.cards = [

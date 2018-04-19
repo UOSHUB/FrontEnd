@@ -20,11 +20,21 @@
     </div>
 </div>
 
-<md-nav-bar md-selected-nav-item="$ls.selected.coursesCard" class="md-accent md-hue-3 md-whiteframe-4dp hide-gt-xs">
+<md-nav-bar md-selected-nav-item="$ls.selected.coursesCard" class="md-accent md-hue-3 md-whiteframe-4dp" ng-if="$media('xs')">
     <md-nav-item ng-repeat="card in ::cards" class="fill-width" md-nav-click="$ls.selected.coursesCard = card" name="{{ ::card }}">
         <div layout="column">
             <md-icon md-font-icon="fa fa-{{ ::$cards[card].icon }} fa-1x"></md-icon>
             {{ ::card }}
         </div>
     </md-nav-item>
+    {{ color = getColor($ls.selected.coursesCard); '' }}
+    <style>
+        .md-button._md-nav-button.md-active md-icon,
+        .md-button._md-nav-button.md-active {
+            color: {{ color }} !important;
+        }
+        md-nav-bar .md-nav-bar md-nav-ink-bar {
+            background: {{ color }} !important;
+        }
+    </style>
 </md-nav-bar>

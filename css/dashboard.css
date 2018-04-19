@@ -86,8 +86,3 @@ md-list-item.removeable:hover, [account]:hover {
     padding: 10px 0 6px;
     text-transform: capitalize;
 }
-
-.md-button._md-nav-button.md-active md-icon,
-.md-button._md-nav-button.md-active {
-    color: #66bb6a !important;
-}
