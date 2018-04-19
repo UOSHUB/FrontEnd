@@ -13,13 +13,13 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
     return {
         deadlines: {
             getData: getData("deadlines", "terms/" + term + "/deadlines"),
-            icon: "tasks", beforeDue: function(date) {
+            icon: "tasks", color: "orange-600", beforeDue: function(date) {
                 return !date || new Date(date) > today;
             }
         },
         updates: {
-            getData: getData("updates", "updates"),
-            icon: "bell", dismissUpdate: function(updateId) {
+            getData: getData("updates", "updates"), icon: "bell",
+            color: "green-600", dismissUpdate: function(updateId) {
                 $http({
                     method: "delete",
                     url: "/api/updates/" + updateId + "/"
@@ -29,7 +29,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         },
         emails: {
             getData: getData("personal", "emails/personal/10", "emails"),
-            icon: "envelope", getInitials: getInitials,
+            icon: "envelope", color: "blue-600", getInitials: getInitials,
             goToEmail: function(emailId) {
                 $ls.selected.tab = 0;
                 $ls.selected.email = ["personal", emailId];
@@ -49,10 +49,10 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         holds: {
             getData: getData("holds", "holds"),
             icon: "exclamation-triangle",
-            parseDate: parseDate
+            color: "red-600", parseDate: parseDate
         },
         grades: {
-            getData: getData("grades", "grades/" + term),
+            getData: getData("grades", "grades/" + term), color: "teal-600",
             icon: "graduation-cap", gradeColor: function(grade) {
                 var percent = grade.grade / grade.outOf * 100;
                 if(percent < 60)
@@ -68,11 +68,11 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         },
         finals: {
             getData: getData("finals", "finals/" + term),
-            icon: "clipboard", parseDate: parseDate
+            icon: "clipboard", color: "brown-600", parseDate: parseDate
         },
         documents: {
             getData: getData("documents", "terms/" + term + "/documents"),
-            icon: "file-text", all: false,
+            icon: "file-text", color: "brown-600", all: false,
             downloadFile: function(id) {
                 document.body.append(
                     angular.element("<iframe src='/api/documents/" + id + "/'></iframe>")[0]
@@ -97,7 +97,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         classes: {
-            icon: "flag", todayClasses: function() {
+            icon: "flag", color: "lime-700", todayClasses: function() {
                 var classes = [], day = days[today.getDay()];
                 if($ls.terms && $ls.terms[term])
                     angular.forEach($ls.terms[term].courses, function(key) {
@@ -109,7 +109,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         courses: {
-            icon: "book", term: term,
+            icon: "book", color: "purple-500", term: term,
             updatesCount: function(courseId) {
                 var count = 0;
                 angular.forEach($ls.updates, function(update) {
@@ -124,7 +124,8 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         info: {
-            icon: "info-circle", init: true, watchCourse: function($scope) {
+            icon: "info-circle", color: "pink-500",
+            init: true, watchCourse: function($scope) {
                 if(!this.init) return;
                 $scope.$watch(function() { return $ls.selected.course; }, function(id) {
                     if(id && $ls.courses[id])
@@ -134,7 +135,8 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         mailto: {
-            icon: "envelope", sendEmail: function($event, subject, body, course) {
+            icon: "envelope", color: "light-blue-500",
+            sendEmail: function($event, subject, body, course) {
                 $mdDialog.show(
                     $mdDialog.confirm()
                         .title("Subject: " + subject)
@@ -158,12 +160,13 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         }
     };
 }])
-.directive("card", ["$location", "$cards", function($location, $cards) {
+.directive("card", ["$location", "$cards", "$mdColors", function($location, $cards, $mdColors) {
     return {
         link: function($scope, element) {
             element.addClass("flex");
             $scope.$on("$includeContentLoaded", function($event, template) {
                 angular.extend($scope, $cards[template.slice(14, -5)]);
+                element.find("md-toolbar").css("background-color", $mdColors.getThemeColor($scope.color));
                 ($scope.getData || nothing)();
             });
             if($location.path() == "/courses/")
