@@ -22,8 +22,8 @@ app.factory("$ls", ["$localStorage", function($localStorage) {
         termTitle: function(termCode) {
             var yearString = termCode.slice(0, 4);
             return $sce.trustAsHtml(
-                termName[termCode.slice(4)] + " Semester " +
-                yearString + "&nbsp;-&nbsp;" + (Number(yearString) + 1)
+                termName[termCode.slice(4)] + " " + yearString +
+                "&nbsp;-&nbsp;" + (Number(yearString) + 1)
             );
         }
     };
@@ -33,7 +33,7 @@ app.factory("$ls", ["$localStorage", function($localStorage) {
 
 function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
     function onLoggedOut() {
-        if(!$ls.loggedIn) {
+        if(!$ls.session) {
             $goto("/");
             $timeout(function() {
                 $toast("You need to login first!");
@@ -62,7 +62,7 @@ function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
 function($rootScope, $ls, $http, $timeout, $interval) {
     var timezoneOffset = today.getTimezoneOffset() * 60000, delay = 5 * 60000;
     function setTimestamp() {
-        $ls.timestamp = (new Date(Date.now() - timezoneOffset)).toISOString().slice(0, -5);
+        $ls.session.timestamp = (new Date(Date.now() - timezoneOffset)).toISOString().slice(0, -5);
     }
     function update$ls(data, ls) {
         angular.forEach(data, function(list, key) {
@@ -73,16 +73,16 @@ function($rootScope, $ls, $http, $timeout, $interval) {
         });
     }
     function refresh(queries) {
-        $http.get("/api/refresh/" + $ls.timestamp + "/?" + queries.join("&")).then(function(response) {
+        $http.get("/api/refresh/" + $ls.session.timestamp + "/?" + queries.join("&")).then(function(response) {
             update$ls(response.data, $ls);
             setTimestamp();
         }, error);
     }
     return function(queries) {
-        if(!$ls.timestamp) setTimestamp();
+        if(!$ls.session.timestamp) setTimestamp();
         $rootScope.refresh = $timeout(function() {
             refresh(queries);
             $rootScope.refresh = $interval(refresh, delay, 0, true, queries);
-        }, Math.max((new Date($ls.timestamp)).getTime() + delay - Date.now(), 0));
+        }, Math.max((new Date($ls.session.timestamp)).getTime() + delay - Date.now(), 0));
     };
 }]);

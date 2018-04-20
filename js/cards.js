@@ -33,7 +33,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             goToEmail: function(emailId) {
                 $ls.selected.tab = 0;
                 $ls.selected.email = ["personal", emailId];
-                $ls.emailsAction = "view";
+                $ls.emails.action = "view";
                 $goto("emails");
             },
             deleteEmail: function(emailId) {

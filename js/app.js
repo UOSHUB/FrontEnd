@@ -1,3 +1,5 @@
+var version = 0.81;
+
 var app = angular.module("UOSHUB", ["ngMaterial", "ngRoute", "ngStorage", "materialCalendar"])
 
 .config(["$locationProvider", "$compileProvider", "$mdAriaProvider", "$mdThemingProvider",

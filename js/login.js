@@ -18,7 +18,7 @@ function($mdDialog, $http, $ls, $goto) {
             angular.extend($ls, response.data);
         }, error);
     }
-    if($ls.loggedIn) {
+    if($ls.session) {
         if(!$ls.student) getDetails();
         if(!$ls.terms[term]) getCourses();
     }
@@ -36,17 +36,17 @@ function($mdDialog, $http, $ls, $goto) {
                     scope: $scope
                 }).then(function(data) {
                     $http.post("/api/login/", data).then(function(response) {
-                        $scope.pin = '';
+                        $scope.pin = "";
                         $ls.$default({
-                            terms: {}, emails: {}, courses: {},
-                            emailsAction: 'select',
+                            terms: {}, courses: {},
+                            emails: { action: "select" },
+                            session: { version: version },
                             selected: {
                                 term: term,
                                 email: [],
                                 tab: 0
                             }
                         });
-                        $ls.loggedIn = true;
                         $goto("dashboard");
                         getDetails();
                         getCourses();

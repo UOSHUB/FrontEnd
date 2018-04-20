@@ -2,7 +2,7 @@ app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSid
 
 function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
     $scope.$on("$routeChangeStart", function(event, next) {
-        if(next.$$route && next.$$route.controller == "welcome" && $ls.loggedIn)
+        if(next.$$route && next.$$route.controller == "welcome" && $ls.session)
             $goto("dashboard");
     });
     $scope.$on("$routeChangeSuccess", function(event, current) {

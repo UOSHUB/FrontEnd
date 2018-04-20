@@ -1,9 +1,9 @@
 <script type="text/ng-template" id="emails">
-    <md-button class="md-accent md-hue-2 no-margin" ng-click="$ls.emailsAction = 'write'">Write a new Email</md-button>
+    <md-button class="md-accent md-hue-2 no-margin" ng-click="$ls.emails.action = 'write'">Write a new Email</md-button>
 </script>
 
 <div layout="row" flex>
-    <md-card ng-if="$media('gt-xs') || $ls.emailsAction == 'select'" flex-gt-xs="33" flex>
+    <md-card ng-if="$media('gt-xs') || $ls.emails.action == 'select'" flex-gt-xs="33" flex>
         <md-content layout="row" flex>
             <md-tabs md-selected="$ls.selected.tab" flex>
                 <md-tab ng-repeat="tab in ::tabs" ng-click="getEmails(tab)">
@@ -13,7 +13,7 @@
                     </md-tab-label>
                     <md-tab-body>
                         <md-list flex>
-                            <md-list-item ng-repeat="email in $ls.emails[tab] | orderBy: '-time'" ng-click="$ls.emailsAction = 'view'; openEmail(tab, email.id)"
+                            <md-list-item ng-repeat="email in $ls.emails[tab] | orderBy: '-time'" ng-click="$ls.emails.action = 'view'; openEmail(tab, email.id)"
                                           md-colors="isSelected(tab, email.id) && {background: 'accent-A100'}" class="md-2-line">
                                 <div ng-if="tab != 'events'" class="md-avatar-icon fix-icon" md-colors="::{background: 'blue-grey-400'}" style="min-width: 36px">
                                     {{ ::getInitials(email.sender || email.course) }}
@@ -33,13 +33,13 @@
             </md-tabs>
         </md-content>
     </md-card>
-    <md-card ng-if="$media('gt-xs') && $ls.emailsAction != 'write' || $ls.emailsAction == 'view'" flex>
+    <md-card ng-if="$media('gt-xs') && $ls.emails.action != 'write' || $ls.emails.action == 'view'" flex>
         <md-content ng-if="$ls.selected.email[1]" layout-padding flex>
             {{ email = ($ls.emails[$ls.selected.email[0]] | find: 'id' : $ls.selected.email[1]); '' }}
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-display-1">
-                        <md-button class="md-icon-button" ng-click="$ls.emailsAction = 'select'"
+                        <md-button class="md-icon-button" ng-click="$ls.emails.action = 'select'"
                                    style="margin-right: 12px; padding: 4px 8px 12px" hide-gt-xs>
                             <md-icon md-font-icon="fa fa-arrow-left fa-2x" md-colors="{color: 'grey-800'}"></md-icon>
                         </md-button>
@@ -66,7 +66,7 @@
             </md-card-content>
         </md-content>
     </md-card>
-    <md-card ng-if="$ls.emailsAction == 'write'" flex>
+    <md-card ng-if="$ls.emails.action == 'write'" flex>
         <md-content layout-padding flex style="position: relative">
             <md-card-title>
                 <md-card-title-text>
@@ -91,7 +91,7 @@
                 <div layout="row" flex style="position: absolute; bottom: 16px">
                     <md-button class="md-raised" ng-click="sendEmail($event, to, subject, body)"
                                md-colors="{background: 'light-blue-500', color: 'grey-A100'}">Send</md-button>
-                    <md-button class="md-raised" ng-click="$ls.emailsAction = 'select'"
+                    <md-button class="md-raised" ng-click="$ls.emails.action = 'select'"
                                md-colors="{background: 'blue-grey-300', color: 'grey-A100'}">Cancel</md-button>
                 </div>
             </md-card-content>

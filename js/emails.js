@@ -38,7 +38,7 @@ function($scope, $ls, $http, $refresh, $toast, $mdDialog) {
             subject: subject,
             body: body
         }).then(function() {
-            $ls.emailsAction = 'select';
+            $ls.emails.action = "select";
             $toast("Your emails has been sent");
         }, function() {
             $toast("Failed to send email!");
