@@ -6,7 +6,7 @@
     </md-select>
 </script>
 
-<div ng-init="$ls.selected.coursesCard = $ls.selected.coursesCard || 'documents'" layout="row" flex>
+<div layout="row" flex>
     <md-card flex-gt-xs="30" ng-include="$media('gt-xs') ? 'documents'.url() : $ls.selected.coursesCard.url()" card></md-card>
     <div layout="column" ng-if="$media('gt-xs')" flex>
         <div layout="row" flex="50">
@@ -20,21 +20,4 @@
     </div>
 </div>
 
-<md-nav-bar md-selected-nav-item="$ls.selected.coursesCard" class="md-accent md-hue-3 md-whiteframe-4dp" ng-if="$media('xs')">
-    <md-nav-item ng-repeat="card in ::cards" class="fill-width" md-nav-click="$ls.selected.coursesCard = card" name="{{ ::card }}">
-        <div layout="column">
-            <md-icon md-font-icon="fa fa-{{ ::$cards[card].icon }} fa-1x"></md-icon>
-            {{ ::card }}
-        </div>
-    </md-nav-item>
-    {{ color = getColor($ls.selected.coursesCard); '' }}
-    <style>
-        .md-button._md-nav-button.md-active md-icon,
-        .md-button._md-nav-button.md-active {
-            color: {{ color }} !important;
-        }
-        md-nav-bar .md-nav-bar md-nav-ink-bar {
-            background: {{ color }} !important;
-        }
-    </style>
-</md-nav-bar>
+<navbar cards="::cards" select="coursesCard" default="documents" ng-if="$media('xs')"></navbar>

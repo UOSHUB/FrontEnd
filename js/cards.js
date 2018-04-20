@@ -162,6 +162,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
 }])
 .directive("card", ["$location", "$cards", "$mdColors", function($location, $cards, $mdColors) {
     return {
+        restrict: "A",
         link: function($scope, element) {
             element.addClass("flex");
             $scope.$on("$includeContentLoaded", function($event, template) {
@@ -171,6 +172,30 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             });
             if($location.path() == "/courses/")
                 $scope.inCourse = true;
+        }
+    };
+}])
+.directive("navbar", ["$ls", "$cards", "$mdColors", function($ls, $cards, $mdColors) {
+    return {
+        templateUrl: "navbar".url(),
+        restrict: "E",
+        scope: {
+            cards: "<",
+            select: "@"
+        },
+        link: function($scope, element, attrs) {
+            angular.extend($scope, {
+                $ls: $ls,
+                $cards: $cards,
+                cards: [].concat.apply([], $scope.cards)
+            });
+            $ls.selected[$scope.select] = $ls.selected[$scope.select] || attrs["default"];
+            $scope.$watch(function() { return $ls.selected[$scope.select]; }, function(card) {
+                var color = $cards[card].color;
+                $scope.color = $mdColors.getThemeColor(
+                    color.slice(0, -3) + "3" + color.slice(-2)
+                );
+            });
         }
     };
 }]);

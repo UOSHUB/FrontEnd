@@ -1,0 +1,18 @@
+<md-nav-bar md-selected-nav-item="$ls.selected[select]" class="md-accent md-hue-3 md-whiteframe-4dp">
+    <md-nav-item ng-repeat="card in ::cards" class="fill-width" name="{{ ::card }}" layout="column"
+                 md-nav-click="$ls.selected[select] = card">
+        <div layout="column">
+            <md-icon md-font-icon="fa fa-{{ ::$cards[card].icon }} fa-1x"></md-icon>
+            {{ ::card }}
+        </div>
+    </md-nav-item>
+    <style>
+        .md-button._md-nav-button.md-active md-icon,
+        .md-button._md-nav-button.md-active {
+            color: {{ color }} !important;
+        }
+        md-nav-bar .md-nav-bar md-nav-ink-bar {
+            background: {{ color }} !important;
+        }
+    </style>
+</md-nav-bar>

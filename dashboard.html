@@ -2,7 +2,7 @@
     <span ng-bind-html="::$toolbar.termTitle($toolbar.thisTerm)"></span>
 </script>
 
-<div ng-init="$ls.selected.dashboardCard = $ls.selected.dashboardCard || 'finals'" layout="row" flex>
+<div layout="row" flex>
     <div layout="column" flex="66" ng-if="$media('gt-xs')">
         <div layout="row" flex="60">
             <md-card ng-repeat="card in ::cards[0]" ng-include="::card.url()" card></md-card>
@@ -14,22 +14,4 @@
     <md-card layout="column" flex-gt-xs="33" ng-include="$media('gt-xs') ? cards[1].url() : $ls.selected.dashboardCard.url()" card></md-card>
 </div>
 
-<md-nav-bar md-selected-nav-item="$ls.selected.dashboardCard" class="md-accent md-hue-3 md-whiteframe-4dp" ng-if="$media('xs')">
-    <md-nav-item ng-repeat="card in ::[].concat.apply([], cards)" class="fill-width" name="{{ ::card }}" layout="column"
-                 md-nav-click="$ls.selected.dashboardCard = card">
-        <div layout="column">
-            <md-icon md-font-icon="fa fa-{{ ::$cards[card].icon }} fa-1x"></md-icon>
-            {{ ::card }}
-        </div>
-    </md-nav-item>
-    {{ color = getColor($ls.selected.dashboardCard); '' }}
-    <style>
-        .md-button._md-nav-button.md-active md-icon,
-        .md-button._md-nav-button.md-active {
-            color: {{ color }} !important;
-        }
-        md-nav-bar .md-nav-bar md-nav-ink-bar {
-            background: {{ color }} !important;
-        }
-    </style>
-</md-nav-bar>
+<navbar cards="::cards" select="dashboardCard" default="finals" ng-if="$media('xs')"></navbar>
