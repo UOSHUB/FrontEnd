@@ -13,10 +13,15 @@ String.prototype.url = function() {
     return "/static/cards/" + this + ".html";
 };
 
+if("serviceWorker" in navigator)
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("/static/worker.js").then(nothing, error);
+    });
+
 function nothing() {}
 
-function error() {
-    console.log("An error occurred while carrying out the request");
+function error(message) {
+    console.log("The following error occured:", message);
 }
 
 function $(selector) {
