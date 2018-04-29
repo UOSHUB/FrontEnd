@@ -15,7 +15,7 @@ On top of that, we're suing a flat icon pack called Font Awesome.
 ![](./img/dashboard.png)
 
 For more, check out the current state of the website at the following link:
-https://uoshub.com
+https://uoshub.github.io
 
 ***
 
