@@ -47,8 +47,10 @@ function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
             resolve: angular.extend({
                 onload: function() {
                     $rootScope.title = (title || route.capitalize()) + " | UOS HUB";
-                    $timeout.cancel($rootScope.refresh);
-                    $interval.cancel($rootScope.refresh);
+                    if($rootScope.refresh) {
+                        $interval.cancel($rootScope.refresh);
+                        delete $rootScope.refresh;
+                    }
                 }
             }, secure && {
                 security: onLoggedOut
@@ -80,7 +82,7 @@ function($rootScope, $ls, $http, $timeout, $interval) {
     }
     return function(queries) {
         if(!$ls.session.timestamp) setTimestamp();
-        $rootScope.refresh = $timeout(function() {
+        $timeout(function() {
             refresh(queries);
             $rootScope.refresh = $interval(refresh, delay, 0, true, queries);
         }, Math.max((new Date($ls.session.timestamp)).getTime() + delay - Date.now(), 0));
