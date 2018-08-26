@@ -15,7 +15,7 @@ function($mdDialog, $http, $ls, $goto) {
     }
     function getDetails() {
         $http.get("/api/details/").then(function(response) {
-            angular.extend($ls, response.data);
+            angular.extend($ls.student, response.data);
         }, error);
     }
     if($ls.session) {
@@ -38,6 +38,7 @@ function($mdDialog, $http, $ls, $goto) {
                     $http.post("/api/login/", data).then(function(response) {
                         $scope.pin = "";
                         $ls.$default({
+                            student: response.data,
                             terms: {}, courses: {},
                             emails: { action: "select" },
                             session: { version: version },
