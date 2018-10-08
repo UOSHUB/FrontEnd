@@ -13,10 +13,10 @@ String.prototype.url = function() {
     return "/static/cards/" + this + ".html";
 };
 
-if("serviceWorker" in navigator)
-    window.addEventListener("load", function() {
-        navigator.serviceWorker.register("/static/worker.js").then(nothing, error);
-    });
+//if("serviceWorker" in navigator)
+//    window.addEventListener("load", function() {
+//        navigator.serviceWorker.register("/static/worker.js").then(nothing, error);
+//    });
 
 function nothing() {}
 
