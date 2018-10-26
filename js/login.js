@@ -1,26 +1,34 @@
-app.directive("login", ["$mdDialog", "$http", "$ls", "$goto",
+app.directive("login", ["$mdDialog", "$http", "$ls", "$goto", "$toolbar",
 
-function($mdDialog, $http, $ls, $goto) {
-    var fails = 0;
-    function getCourses() {
-        if(fails++ < 3)
-            $http.get("/api/terms/" + term + "/").then(function(response) {
+function($mdDialog, $http, $ls, $goto, $toolbar) {
+    term = ($ls.student || {}).term || (month > 7 ? year + "10" : year - 1 + (month < 6 ? "20" : "30"));
+    if($ls.session) {
+        if(!$ls.student.term) getDetails();
+        else if(!$ls.terms[term]) getCourses();
+    }
+    function getCourses(prevFails) {
+        var fails = prevFails || 0, thisTerm = term;
+        if(fails++ <= 3)
+            $http.get("/api/terms/" + thisTerm + "/").then(function(response) {
                 if(!angular.equals(response.data, {})) {
-                    $ls.terms[term] = {};
-                    angular.merge($ls.courses, processSchedule(response.data, $ls.terms[term]));
-                    $ls.selected.course = $ls.terms[term].courses[0];
-                } else getCourses();
-            }, getCourses);
-        else error();
+                    $ls.terms[thisTerm] = {};
+                    angular.merge($ls.courses, processSchedule(response.data, $ls.terms[thisTerm]));
+                    $ls.selected.course = $ls.terms[thisTerm].courses[0];
+                } else getCourses(fails);
+            }, function() { getCourses(fails); });
+        else error("Couldn't fetch courses!");
     }
     function getDetails() {
         $http.get("/api/details/").then(function(response) {
             angular.extend($ls.student, response.data);
+            if(term !== response.data.term) {
+                term = response.data.term;
+                $toolbar.thisTerm = term;
+                $ls.selected.term = term;
+                location.reload();
+            }
+            getCourses();
         }, error);
-    }
-    if($ls.session) {
-        if(!$ls.student) getDetails();
-        if(!$ls.terms[term]) getCourses();
     }
     return {
         link: function($scope, element, attrs) {
@@ -50,7 +58,6 @@ function($mdDialog, $http, $ls, $goto) {
                         });
                         $goto("dashboard");
                         getDetails();
-                        getCourses();
                     }, function(response) {
                         element.triggerHandler("click");
                     });

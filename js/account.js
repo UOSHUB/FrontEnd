@@ -1,6 +1,6 @@
-app.directive("account", ["$mdPanel", "$http", "$ls", "$goto",
+app.directive("account", ["$mdPanel", "$http", "$ls", "$goto", "$rootScope", "$interval",
 
-function($mdPanel, $http, $ls, $goto) {
+function($mdPanel, $http, $ls, $goto, $rootScope, $interval) {
     return {
         link: function($scope, element, attrs) {
             var panelOptions = {
@@ -30,6 +30,10 @@ function($mdPanel, $http, $ls, $goto) {
                         events: $ls.events
                     };
                     element.addClass("ng-hide");
+                    if($rootScope.refresh) {
+                        $interval.cancel($rootScope.refresh);
+                        delete $rootScope.refresh;
+                    }
                     $ls.$reset(reset);
                 }, error);
             };

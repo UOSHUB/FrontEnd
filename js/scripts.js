@@ -1,6 +1,7 @@
-var days = ["U", "M", "T", "W", "R", "F", "S"], today = new Date(), month = today.getMonth() + 1,
-    year = today.getFullYear(), term = month > 7 ? year + "10" : year - 1 + (month < 6 ? "20" : "30"),
-    body = $("body"), maxTime, minTime, hoursCount, colors = [
+var days = ["U", "M", "T", "W", "R", "F", "S"],
+    today = new Date(), month = today.getMonth() + 1,
+    year = today.getFullYear(), body = $("body"),
+    term, maxTime, minTime, hoursCount, colors = [
         "red", "teal", "green", "orange", "purple",
         "light-blue", "brown", "yellow", "deep-orange", "blue"
     ];
