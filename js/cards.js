@@ -202,11 +202,11 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
 }])
 .directive("loading", ["$mdColors", function($mdColors) {
     return {
-        template: `<div ng-if="!items || items.length === 0" layout="row" flex
-                   layout-align="center center" style="height: 100%; overflow: hidden">
-            <md-progress-circular ng-if="!items" md-diameter="80px"></md-progress-circular>
-            <span ng-if="items && items.length === 0">Nothing to see here ;)</span>
-        </div>`,
+        template: '<div ng-if="!items || items.length === 0" layout="row" flex ' +
+                  'layout-align="center center" style="height: 100%; overflow: hidden">' +
+            '<md-progress-circular ng-if="!items" md-diameter="80px"></md-progress-circular>' +
+            '<span ng-if="items && items.length === 0">Nothing to see here ;)</span>' +
+        '</div>',
         scope: {
             items: "<",
             color: "<"
