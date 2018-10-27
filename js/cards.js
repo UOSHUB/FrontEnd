@@ -167,6 +167,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             element.addClass("flex");
             $scope.$on("$includeContentLoaded", function($event, template) {
                 angular.extend($scope, $cards[template.slice(14, -5)]);
+                element.find("md-content").css("height", "100%");
                 element.find("md-toolbar").css("background-color", $mdColors.getThemeColor($scope.color));
                 ($scope.getData || nothing)();
             });
@@ -195,6 +196,24 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
                 $scope.color = $mdColors.getThemeColor(
                     color.slice(0, -3) + "3" + color.slice(-2)
                 );
+            });
+        }
+    };
+}])
+.directive("loading", ["$mdColors", function($mdColors) {
+    return {
+        template: `<div ng-if="!items || items.length === 0" layout="row" flex
+                   layout-align="center center" style="height: 100%; overflow: hidden">
+            <md-progress-circular ng-if="!items" md-diameter="80px"></md-progress-circular>
+            <span ng-if="items && items.length === 0">Nothing to see here ;)</span>
+        </div>`,
+        scope: {
+            items: "<",
+            color: "<"
+        },
+        link: function($scope, element) {
+            element.ready(function() {
+                element.find("path").css("stroke", $mdColors.getThemeColor($scope.color));
             });
         }
     };

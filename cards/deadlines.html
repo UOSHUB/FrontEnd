@@ -6,6 +6,7 @@
 </md-toolbar>
 
 <md-content>
+    <loading items="$ls.deadlines" color="color"></loading>
     <md-list>
         <md-list-item class="md-2-line" ng-class="beforeDue(deadline.dueDate) ? 'removeable' : 'archived'"
                       ng-repeat="deadline in $ls.deadlines | filter: inCourse && {course: $ls.selected.course} | orderBy: ['!dueDate', 'dueDate']">
