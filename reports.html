@@ -1,0 +1,24 @@
+<script type="text/ng-template" id="reports">
+    <p>You can download these reports even when you're outside the university</p>
+</script>
+
+<div layout="row" flex>
+    <div layout="column" flex>
+        <div layout="row" layout-md="column" ng-repeat="row in ::reports" flex="50">
+            <md-card ng-repeat="(type, report) in ::row" flex
+                layout="row" layout-md="column" layout-align="strech">
+                <md-button layout="column" layout-align="center" style="text-transform: none" target="_blank"
+                    href="/api/reports/{{ ::type.toLowerCase().replace(' ', '_') }}/{{ $ls.student.term }}/" flex>
+                    <div md-colors="::{color: 'blue-grey-700'}">
+                        <md-icon md-font-icon="fa fa-{{ ::report.icon }} fa-fw fa-5x"
+                            style="line-height: 1em; height: 72px" md-colors="::{color: 'blue-grey-700'}"></md-icon>
+                        <h2>{{ ::type }}</h2>
+                        <p>{{ ::report.desc }}</p>
+                    </div>
+                </md-button>
+            </md-card>
+        </div>
+    </div>
+</div>
+
+<navbar cards="::cards" select="coursesCard" default="documents" ng-if="$media('xs')"></navbar>

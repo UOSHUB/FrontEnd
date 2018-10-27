@@ -19,11 +19,12 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
     var $load = $loadProvider.$get();
     $routeProvider
         .when("/", $load("welcome"))
-        .when("/dashboard/", $load("dashboard", true))
-        .when("/schedule/", $load("schedule", true))
-        .when("/courses/", $load("courses", true))
-        .when("/emails/", $load("emails", true))
-        .when("/calendar/", $load("calendar"))
+        .when("/dashboard/", $load("dashboard"))
+        .when("/schedule/", $load("schedule"))
+        .when("/courses/", $load("courses"))
+        .when("/emails/", $load("emails"))
+        .when("/reports/", $load("reports"))
+        .when("/calendar/", $load("calendar", true))
         .otherwise($load("notfound", false, "Page not found"));
 }])
 

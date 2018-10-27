@@ -40,7 +40,7 @@ function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
             }, 300);
         }
     }
-    return function(route, secure, title) {
+    return function(route, insecure, title) {
         return {
             templateUrl: "/static/" + route + ".html",
             controller: route,
@@ -52,7 +52,7 @@ function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
                         delete $rootScope.refresh;
                     }
                 }
-            }, secure && {
+            }, insecure || {
                 security: onLoggedOut
             })
         };

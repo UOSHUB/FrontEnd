@@ -20,6 +20,7 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
         schedule: "calendar",
         courses: "book",
         emails: "envelope",
+        reports: "file",
         calendar: "globe"
     };
     $scope.toggleSidenav = function(burgerButton) {
