@@ -208,7 +208,9 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         template: '<div ng-if="!items || items.length === 0" layout="row" flex ' +
                   'layout-align="center center" style="height: 100%; overflow: hidden">' +
             '<md-progress-circular ng-if="!items" md-diameter="80px"></md-progress-circular>' +
-            '<span ng-if="items && items.length === 0">Nothing to see here ;)</span>' +
+            '<h4 ng-if="items && items.length === 0" layout="column" style="color: #90A4AE">' +
+            '<md-icon md-font-icon="fa fa-thumbs-up fa-5x" style="height: 64px; color: #B0BEC5"></md-icon>' +
+            'Seems there aren\'t any yet!</h4>' +
         '</div>',
         scope: {
             items: "<",

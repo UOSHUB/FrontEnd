@@ -1,4 +1,4 @@
-var version = 0.86;
+var version = 0.88;
 
 var app = angular.module("UOSHUB", ["ngMaterial", "ngRoute", "ngStorage", "materialCalendar"])
 

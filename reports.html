@@ -1,23 +1,23 @@
 <script type="text/ng-template" id="reports">
-    <p>You can download these reports even when you're outside the university</p>
+    <p>Download even outside UOS!</p>
 </script>
 
-<div layout="row" flex>
-    <div layout="column" flex>
-        <div layout="row" layout-md="column" ng-repeat="row in ::reports" flex="50">
-            <md-card ng-repeat="(type, report) in ::row" flex
-                layout="row" layout-md="column" layout-align="strech">
-                <md-button layout="column" layout-align="center" style="text-transform: none" target="_blank"
-                    href="/api/reports/{{ ::type.toLowerCase().replace(' ', '_') }}/{{ $ls.student.term }}/" flex>
-                    <div md-colors="::{color: 'blue-grey-700'}">
-                        <md-icon md-font-icon="fa fa-{{ ::report.icon }} fa-fw fa-5x"
-                            style="line-height: 1em; height: 72px" md-colors="::{color: 'blue-grey-700'}"></md-icon>
+<div layout="column" flex>
+    <div layout="row" layout-xs="column" ng-repeat="row in ::reports" flex="50">
+        <md-card ng-repeat="(type, report) in ::row" flex>
+            <md-button layout="column" layout-align="center" style="text-transform: none" target="_blank"
+                href="/api/reports/{{ ::type.toLowerCase().replace(' ', '_') }}/{{ $ls.student.term }}/" flex>
+                <div md-colors="::{color: 'blue-grey-700'}" layout="column" layout-xs="row">
+                    <md-icon md-font-icon="fa fa-{{ ::report.icon }} fa-fw fa-5x"
+                        style="line-height: 1em; height: 72px; width: 1.2em"
+                        md-colors="::{color: 'blue-grey-700'}"></md-icon>
+                    <div flex-xs>
                         <h2>{{ ::type }}</h2>
-                        <p>{{ ::report.desc }}</p>
+                        <div hide-xs>{{ ::report.desc }}</div>
                     </div>
-                </md-button>
-            </md-card>
-        </div>
+                </div>
+            </md-button>
+        </md-card>
     </div>
 </div>
 

@@ -8,6 +8,7 @@
 <md-card flex>
     <md-card-content layout="row" class="fill-card">
         {{ term = !loading && $ls.terms[$ls.selected.term]; '' }}
+        <loading items="term.courses" color="color" style="position: absolute; left: 50%; top: 45%"></loading>
         <div class="day as-hours-head" md-colors="::{background: 'green-50'}"></div>
         <div class="day" ng-repeat="day in ::[1, 2, 3, 4]"></div>
 
