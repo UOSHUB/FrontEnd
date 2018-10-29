@@ -15,6 +15,9 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             getData: getData("deadlines", "terms/" + term + "/deadlines"),
             icon: "tasks", color: "orange-600", beforeDue: function(date) {
                 return !date || new Date(date) > today;
+            }, nearest: function(deadline) {
+                var diff = today - new Date(deadline.dueDate || today);
+                return diff >= 0 ? diff : 1 / diff;
             }
         },
         updates: {

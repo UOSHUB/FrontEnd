@@ -6,6 +6,7 @@
 </md-toolbar>
 
 <md-content>
+    <loading items="$ls.documents" color="color"></loading>
     <md-list>
         <md-list-item ng-if="$ls.holds">You have no holds. Yay!</md-list-item>
         <md-list-item ng-repeat="hold in $ls.holds" class="md-2-line" ng-click="null">

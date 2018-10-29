@@ -37,6 +37,8 @@ function($mdPanel, $http, $ls, $goto, $rootScope, $interval) {
                     $ls.$reset(reset);
                 }, error);
             };
+            if(version !== $ls.session.version)
+                $scope.logout();
         }
     };
 }])

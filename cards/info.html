@@ -6,6 +6,7 @@
 </md-toolbar>
 {{ ::watchCourse(this); '' }}
 <md-content class="course-info-icons thin-margin" layout="row" flex>
+    <loading items="course.columns" color="color"></loading>
     <div ng-repeat="column in course.columns" layout="column" layout-align="space-between start" flex layout-margin>
         <p ng-repeat="row in column">
             <md-icon md-font-icon="fa fa-{{ ::row[2] }} fa-fw"></md-icon>

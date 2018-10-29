@@ -13,6 +13,7 @@
 </md-toolbar>
 
 <md-content>
+    <loading items="$ls.documents" color="color"></loading>
     <md-list ng-click="any = true">
         <md-list-item ng-repeat="document in $ls.documents | filter: {'course': $ls.selected.course} | orderBy: 'uploadDate'"
                       class="md-2-line documents" ng-click="selected = $ls.mass ? !selected : downloadFile(document.id)">

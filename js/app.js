@@ -18,7 +18,7 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
         .icon("md-tabs-arrow", "/static/img/tabs-arrow-icon.svg");
     var $load = $loadProvider.$get();
     $routeProvider
-        .when("/", $load("welcome"))
+        .when("/", $load("welcome", true))
         .when("/dashboard/", $load("dashboard"))
         .when("/schedule/", $load("schedule"))
         .when("/courses/", $load("courses"))
