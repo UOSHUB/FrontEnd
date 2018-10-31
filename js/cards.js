@@ -21,7 +21,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         updates: {
-            getData: getData("updates", "updates"), icon: "bell",
+            getData: getData("updates", "updates"), icon: "bell", toast: $toast,
             color: "green-600", dismissUpdate: function(updateId) {
                 $http({
                     method: "delete",

@@ -9,10 +9,9 @@ app.factory("$ls", ["$localStorage", function($localStorage) {
 }])
 
 .factory("$toast", ["$mdToast", function($mdToast) {
-    var toast = $mdToast.simple().hideDelay(2000)
-        .position("top right").parent($("#content"));
-    return function(message) {
-        $mdToast.show(toast.textContent(message));
+    var toast = $mdToast.simple().hideDelay(2000).parent($("#content"));
+    return function(message, side) {
+        $mdToast.show(toast.textContent(message).position("top " + (side || "right")));
     };
 }])
 

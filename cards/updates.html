@@ -8,10 +8,10 @@
 <md-content>
     <loading items="$ls.updates" color="color"></loading>
     <md-list>
-        <md-list-item class="md-2-line removeable"
-                      ng-repeat="update in $ls.updates | filter: inCourse && {course: $ls.selected.course} | orderBy: '-time'">
+        <md-list-item class="md-2-line removeable" ng-style="{backgroundColor: expand && '#e8f5e9'}"
+                ng-repeat-start="update in $ls.updates | filter: inCourse && {course: $ls.selected.course} | orderBy: '-time'">
             <div class="md-list-item-text">
-                <h3>{{ ::update.title }}</h3>
+                <h3>{{ ::update.title }}<sup ng-if="update.body" md-colors="{color: 'green'}">*</sup></h3>
                 <p ng-if="!inCourse">{{ ::$ls.courses[update.course].title }}</p>
             </div>
             <div class="md-list-item-text align-right">
@@ -23,6 +23,10 @@
                     <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
                 </md-button>
             </div>
+            <span class="list-button" ng-click="expand = update.body ? !expand : toast('Details not available', 'left')"></span>
         </md-list-item>
+        <div ng-repeat-end ng-style="{maxHeight: expand && '100%'}" class="update-body">
+            <p ng-bind-html="update.body"></p>
+        </div>
     </md-list>
 </md-content>

@@ -2,7 +2,7 @@ app.directive("account", ["$mdPanel", "$http", "$ls", "$goto", "$rootScope", "$i
 
 function($mdPanel, $http, $ls, $goto, $rootScope, $interval) {
     return {
-        link: function($scope, element, attrs) {
+        link: function($scope, element) {
             var panelOptions = {
                 scope: $scope,
                 clickOutsideToClose: true,
@@ -37,7 +37,7 @@ function($mdPanel, $http, $ls, $goto, $rootScope, $interval) {
                     $ls.$reset(reset);
                 }, error);
             };
-            if(version !== $ls.session.version)
+            if($ls.session && version !== $ls.session.version)
                 $scope.logout();
         }
     };
