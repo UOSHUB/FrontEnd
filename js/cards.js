@@ -31,7 +31,29 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         emails: {
-            getData: getData("personal", "emails/personal/10", "emails"),
+            emailsLoader: {
+                loading: ($ls.emails.personal || new Array(10)).length,
+                getItemAtIndex: function(index) {
+                    if(!$ls.emails.personal) return null;
+                    if(index >= $ls.emails.personal.length) {
+                        this.getMoreEmails(index);
+                        return null;
+                    }
+                    return $ls.emails.personal[index];
+                },
+                getLength: function() {
+                    return ($ls.emails.personal || []).length + 1;
+                },
+                getMoreEmails: function(load) {
+                    if(load >= this.loading) {
+                        $http.get("/api/emails/personal/10/" + this.loading + "/").then(function(response) {
+                            $ls.emails.personal = $ls.emails.personal.concat(response.data);
+                        }, error);
+                        this.loading += 10;
+                    }
+                }
+            },
+            getData: getData("personal", "emails/personal", "emails"),
             icon: "envelope", color: "blue-600", getInitials: getInitials,
             goToEmail: function(emailId) {
                 $ls.selected.tab = 0;

@@ -6,26 +6,31 @@
 </md-toolbar>
 
 <md-content>
-    <loading items="$ls.emails['personal']" color="color"></loading>
-    <md-list>
-        <md-list-item class="md-2-line removeable" ng-repeat="email in $ls.emails['personal'] | orderBy: '-time'" style="position: relative">
-            <div class="md-avatar-icon fix-icon" md-colors="::{background: 'blue-grey-400'}" style="min-width: 36px">
-                {{ ::getInitials(email.sender) }}
+    <loading items="$ls.emails.personal" color="color"></loading>
+    <md-virtual-repeat-container style="height: 100%">
+        <md-list>
+            <div md-virtual-repeat="email in emailsLoader" md-on-demand>
+                <md-list-item ng-if="email" class="md-2-line removeable" style="position: relative">
+                    <div class="md-avatar-icon fix-icon" md-colors="::{background: 'blue-grey-400'}" style="min-width: 36px">
+                        {{ getInitials(email.sender) }}
+                    </div>
+                    <div class="md-list-item-text">
+                        <h3>{{ email.title || "No Title" }}</h3>
+                        <p>{{ email.sender }}</p>
+                    </div>
+                    <div class="md-list-item-text align-right">
+                        <h3>{{ email.time | timeDistance }}</h3>
+                        <p class="md-caption">{{ email.event | limitTo: 12 }}</p>
+                    </div>
+                    <div class="md-secondary">
+                        <md-button class="md-icon-button" ng-click="deleteEmail(email.id)">
+                            <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
+                        </md-button>
+                    </div>
+                    <span class="list-button" ng-click="goToEmail(email.id)"></span>
+                </md-list-item>
+                <loading ng-if="!email" color="color" style="display: block; margin-top: 32px"></loading>
             </div>
-            <div class="md-list-item-text">
-                <h3>{{ ::email.title || "No Title" }}</h3>
-                <p>{{ ::email.sender }}</p>
-            </div>
-            <div class="md-list-item-text align-right">
-                <h3>{{ ::email.time | timeDistance }}</h3>
-                <p class="md-caption">{{ ::email.event | limitTo: 12 }}</p>
-            </div>
-            <div class="md-secondary">
-                <md-button class="md-icon-button" ng-click="deleteEmail(email.id)">
-                    <md-icon md-font-icon="fa fa-trash fa-1x"></md-icon>
-                </md-button>
-            </div>
-            <span class="list-button" ng-click="goToEmail(email.id)"></span>
-        </md-list-item>
-    </md-list>
+        </md-list>
+    </md-virtual-repeat-container>
 </md-content>
