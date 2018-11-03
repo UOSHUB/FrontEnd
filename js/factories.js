@@ -86,4 +86,30 @@ function($rootScope, $ls, $http, $timeout, $interval) {
             $rootScope.refresh = $interval(refresh, delay, 0, true, queries);
         }, Math.max((new Date($ls.session.timestamp)).getTime() + delay - Date.now(), 0));
     };
+}])
+
+.factory("$emailsLoader", ["$ls", "$http", function($ls, $http) {
+    return function(type) {
+        var loading = ($ls.emails[type] || []).length;
+        function getEmails(load) {
+            if(load >= loading) {
+                console.log(type, loading);
+                var count = $ls.emails[type] ? 10 : 20;
+                $http.get("/api/emails/" + type + "/" + count + "/" + loading + "/").then(function(response) {
+                    $ls.emails[type] = ($ls.emails[type] || []).concat(response.data);
+                }, error);
+                loading += count;
+            }
+        };
+        return {
+            getItemAtIndex: function(index) {
+                if(!$ls.emails[type] || index >= $ls.emails[type].length)
+                    return getEmails(index);
+                return $ls.emails[type][index];
+            },
+            getLength: function() {
+                return ($ls.emails[type] || []).length + 1;
+            }
+        };
+    };
 }]);
