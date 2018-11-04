@@ -1,21 +1,17 @@
-app.controller("emails", ["$scope", "$ls", "$http", "$refresh", "$toast", "$mdDialog",
+app.controller("emails", ["$scope", "$ls", "$http", "$refresh", "$toast", "$emailsLoader",
 
-function($scope, $ls, $http, $refresh, $toast, $mdDialog) {
+function($scope, $ls, $http, $refresh, $toast, $emailsLoader) {
     if(!$ls.emails.body)
         $ls.emails.body = {};
 
     $scope.getInitials = getInitials;
     $scope.tabs = ["personal", "courses", "events"];
     $scope.icons = {personal: "users", courses: "book", events: "bullhorn"};
-
-    ($scope.getEmails = function(category) {
-        if(!$ls.emails[category] || $ls.emails[category].length < 20)
-            $http.get("/api/emails/" + category + "/").then(function(response) {
-                $ls.emails[category] = response.data;
-                if($ls.selected.email.length == 0)
-                    $scope.openEmail("personal", response.data[0].id);
-            }, error);
-    })($scope.tabs[$ls.selected.tab]);
+    $scope.emailsLoaders = {
+        personal: $emailsLoader("personal"),
+        courses: $emailsLoader("courses"),
+        events: $emailsLoader("events")
+    };
 
     ($scope.openEmail = function(tab, id) {
         if(tab && id) {

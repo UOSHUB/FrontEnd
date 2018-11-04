@@ -9,7 +9,10 @@
             </div>
         </md-toolbar>
         <md-dialog-content layout-margin>
-            <br>
+            <p ng-if="error" md-colors="{color: 'red'}" layout-padding>
+                Oops! something went wrong, try again.
+            </p>
+            <br ng-hide="error">
             <div layout-margin layout="column">
                 <md-input-container>
                     <label>Student ID</label>

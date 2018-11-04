@@ -12,22 +12,28 @@
                         {{ ::tab.capitalize() }}
                     </md-tab-label>
                     <md-tab-body>
-                        <md-list flex>
-                            <md-list-item ng-repeat="email in $ls.emails[tab] | orderBy: '-time'" ng-click="$ls.emails.action = 'view'; openEmail(tab, email.id)"
-                                          md-colors="isSelected(tab, email.id) && {background: 'accent-A100'}" class="md-2-line">
-                                <div ng-if="tab != 'events'" class="md-avatar-icon fix-icon" md-colors="::{background: 'blue-grey-400'}" style="min-width: 36px">
-                                    {{ ::getInitials(email.sender || email.course) }}
+                        <md-virtual-repeat-container style="height: 100%">
+                            <md-list flex>
+                                <div md-virtual-repeat="email in emailsLoaders[tab]" md-on-demand>
+                                    <md-list-item ng-click="$ls.emails.action = 'view'; openEmail(tab, email.id)" ng-if="email"
+                                            md-colors="isSelected(tab, email.id) && {background: 'accent-A100'}" class="md-2-line">
+                                        <div ng-if="tab != 'events'" class="md-avatar-icon fix-icon"
+                                                md-colors="::{background: 'blue-grey-400'}" style="min-width: 36px">
+                                            {{ getInitials(email.sender || email.course) }}
+                                        </div>
+                                        <div class="md-list-item-text">
+                                            <h3>{{ email.title || "No Title" }}</h3>
+                                            <p>{{ email.sender || email.course }}</p>
+                                        </div>
+                                        <div class="md-list-item-text align-right">
+                                            <h3>{{ email.time | timeDistance }}</h3>
+                                            <p class="md-caption">{{ email.event }}</p>
+                                        </div>
+                                    </md-list-item>
+                                    <loading ng-if="!email" color="'green'" style="display: block; margin-top: 32px"></loading>
                                 </div>
-                                <div class="md-list-item-text">
-                                    <h3>{{ ::email.title || "No Title" }}</h3>
-                                    <p>{{ ::email.sender || email.course }}</p>
-                                </div>
-                                <div class="md-list-item-text align-right">
-                                    <h3>{{ ::email.time | timeDistance }}</h3>
-                                    <p class="md-caption">{{ ::email.event }}</p>
-                                </div>
-                            </md-list-item>
-                        </md-list>
+                            </md-list>
+                        </md-virtual-repeat-container>
                     </md-tab-body>
                 </md-tab>
             </md-tabs>

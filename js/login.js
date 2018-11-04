@@ -31,7 +31,7 @@ function($mdDialog, $http, $ls, $goto, $toolbar) {
         }, error);
     }
     return {
-        link: function($scope, element, attrs) {
+        link: function($scope, element) {
             $scope.cancel = $mdDialog.cancel;
             $scope.submit = $mdDialog.hide;
             element.on("click", function($event) {
@@ -58,7 +58,8 @@ function($mdDialog, $http, $ls, $goto, $toolbar) {
                         });
                         $goto("dashboard");
                         getDetails();
-                    }, function(response) {
+                    }, function() {
+                        $scope.error = true;
                         element.triggerHandler("click");
                     });
                 }, error);

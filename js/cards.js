@@ -1,16 +1,15 @@
-app.factory("$cards", ["$ls", "$goto", "$filter", "$http", "$mdDialog", "$toast",
+app.factory("$cards", ["$ls", "$goto", "$filter", "$http", "$mdDialog", "$toast", "$emailsLoader",
 
-function($ls, $goto, $filter, $http, $mdDialog, $toast) {
-    function getData(location, url, parent) {
+function($ls, $goto, $filter, $http, $mdDialog, $toast, $emailsLoader) {
+    function getData(location, url) {
         return function() {
-            var storage = !parent ? $ls : $ls[parent];
-            if((storage[location] || []).length == 0)
+            if(($ls[location] || []).length == 0)
                 $http.get("/api/" + url + "/").then(function(response) {
-                    storage[location] = response.data;
+                    $ls[location] = response.data;
                 }, error);
         };
     }
-    return {
+    var cards = {
         deadlines: {
             getData: getData("deadlines", "terms/" + term + "/deadlines"),
             icon: "tasks", color: "orange-600", beforeDue: function(date) {
@@ -31,29 +30,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         },
         emails: {
-            emailsLoader: {
-                loading: ($ls.emails.personal || new Array(10)).length,
-                getItemAtIndex: function(index) {
-                    if(!$ls.emails.personal) return null;
-                    if(index >= $ls.emails.personal.length) {
-                        this.getMoreEmails(index);
-                        return null;
-                    }
-                    return $ls.emails.personal[index];
-                },
-                getLength: function() {
-                    return ($ls.emails.personal || []).length + 1;
-                },
-                getMoreEmails: function(load) {
-                    if(load >= this.loading) {
-                        $http.get("/api/emails/personal/10/" + this.loading + "/").then(function(response) {
-                            $ls.emails.personal = $ls.emails.personal.concat(response.data);
-                        }, error);
-                        this.loading += 10;
-                    }
-                }
-            },
-            getData: getData("personal", "emails/personal", "emails"),
+            getData: function() { cards.emails.emailsLoader = $emailsLoader("personal"); },
             icon: "envelope", color: "blue-600", getInitials: getInitials,
             goToEmail: function(emailId) {
                 $ls.selected.tab = 0;
@@ -184,6 +161,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
             }
         }
     };
+    return cards;
 }])
 .directive("card", ["$location", "$cards", "$mdColors", function($location, $cards, $mdColors) {
     return {
@@ -191,10 +169,11 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast) {
         link: function($scope, element) {
             element.addClass("flex");
             $scope.$on("$includeContentLoaded", function($event, template) {
-                angular.extend($scope, $cards[template.slice(14, -5)]);
+                var card = $cards[template.slice(14, -5)];
+                (card.getData || nothing)();
+                angular.extend($scope, card);
                 element.find("md-content").css("height", "100%");
                 element.find("md-toolbar").css("background-color", $mdColors.getThemeColor($scope.color));
-                ($scope.getData || nothing)();
             });
             if($location.path() == "/courses/")
                 $scope.inCourse = true;
