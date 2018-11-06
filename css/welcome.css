@@ -11,12 +11,13 @@
 #welcome-text p {
     font-size: 30px;
     line-height: 40px;
+    margin: 4px 0;
 }
 
 #welcome-text span {
     font-size: 22px;
     line-height: 30px;
-    margin-bottom: 36px;
+    margin: 20px 0;
 }
 
 .background-pattern {
