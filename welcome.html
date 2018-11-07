@@ -11,9 +11,9 @@
                 Demo (without login)
             </md-button>
         </div>
-        <div layout="column" flex-gt-xs="60" flex-xs="noshrink" flex-order-xs="1">
+        <div layout="column" flex-gt-xs="60" flex-xs="noshrink" flex-order-xs="1" style="margin-top: 16px">
             <img ng-repeat="(image, icon) in ::pages track by $index" class="fill-width"
-                 ng-src="/static/img/{{ ::image }}.png" ng-show="$index == counter"/>
+                ng-src="/static/img/{{ ::image }}.png" ng-show="$index == counter"/>
         </div>
     </div>
 </div>
