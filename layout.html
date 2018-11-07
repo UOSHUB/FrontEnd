@@ -28,7 +28,7 @@
                 <b md-colors="::{color: 'accent-800'}">UOS</b>
                 <span md-colors="::{color: 'primary-800'}">HUB</span>
             </md-toolbar>
-            <md-content md-colors="::{background: 'accent-900'}" flex>
+            <md-content md-colors="::{background: 'accent-900'}" layout="column" flex>
                 <md-list flex>
                     <md-list-item class="md-1-line" ng-repeat="(page, icon) in ::pages" ng-click="toggleSidenav(); goto(page)"
                                   md-colors="{background: page == currentPage ? 'accent-700' : 'accent-900'}">
@@ -38,6 +38,10 @@
                         </div>
                     </md-list-item>
                 </md-list>
+                <md-list-item ng-click="sendFeedback($event)" id="feedback">
+                    <md-icon md-font-icon="fa fa-comment-o fa-fw" class="md-avatar-icon"></md-icon>
+                    <div flex>Send Us Feedback</div>
+                </md-list-item>
             </md-content>
         </md-sidenav>
         <md-content layout="column" style="background: rgba(0, 0, 0, 0)" flex>

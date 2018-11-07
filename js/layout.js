@@ -1,6 +1,6 @@
-app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSidenav", "$mdMedia",
+app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSidenav", "$mdMedia", "$mdDialog", "$toast",
 
-function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
+function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia, $mdDialog, $toast) {
     $scope.$on("$routeChangeStart", function(event, next) {
         if(next.$$route && next.$$route.controller == "welcome" && $ls.session)
             $goto("dashboard");
@@ -28,5 +28,27 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia) {
             $mdSidenav("sidenav").toggle();
         else if(burgerButton)
             $ls.selected.tightNav = !$ls.selected.tightNav;
+    };
+
+    $scope.sendFeedback = function(event) {
+        $mdDialog.show(
+            $mdDialog.prompt()
+                .title("Share your feedback, suggestion or idea :)")
+                .placeholder("Your website is, has, needs...")
+                .clickOutsideToClose(true)
+                .targetEvent(event)
+                .cancel("cancel")
+                .ok("Send")
+        ).then(function(feedback) {
+            $http.post("/api/emails/send/", {
+                recipients: "uoshub@gmail.com",
+                subject: "Feedback from " + $ls.student.name,
+                body: feedback
+            }).then(function() {
+                $toast("Thank you for your feedback ^_^");
+            }, function() {
+                $toast("Failed to send your feedback!");
+            });
+        }, nothing);
     };
 }]);

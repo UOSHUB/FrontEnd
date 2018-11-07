@@ -165,3 +165,14 @@ md-list-item.md-2-line .md-list-item-text p {
 .fill-width {
     width: 100%;
 }
+
+#feedback md-icon.md-avatar-icon {
+    color: #9e9e9e;
+    padding: 6px 5px 6px 7px;
+}
+
+#feedback div {
+    color: #9e9e9e;
+    font-size: 14px;
+    white-space: nowrap;
+}
