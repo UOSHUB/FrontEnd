@@ -3,8 +3,8 @@ app.controller("dashboard", ["$scope", "$refresh", "$toolbar", "$cards", functio
 
     $scope.cards = [
         ["updates", "deadlines"], "emails",
-        ["finals", "grades"]
+        ["finals", "holds"]
     ];
 
-    $refresh(["content=deadlines", "emails=personal", "updates", "grades"])
+    $refresh(["content=deadlines", "emails=personal", "updates"]);
 }]);

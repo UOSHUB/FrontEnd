@@ -48,26 +48,26 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast, $emailsLoader) {
                 $filter("find")($ls.emails.personal, "id", emailId, "delete");
             }
         },
-        // holds: {
-        //     getData: getData("holds", "holds"),
-        //     icon: "exclamation-triangle",
-        //     color: "red-600", parseDate: parseDate
-        // },
-        grades: {
-            getData: getData("grades", "grades/" + term), color: "teal-600",
-            icon: "graduation-cap", gradeColor: function(grade) {
-                var percent = grade.grade / grade.outOf * 100;
-                if(percent < 60)
-                    return "red";
-                if(percent < 70)
-                    return "orange";
-                if(percent < 80)
-                    return "yellow";
-                if(percent < 90)
-                    return "lime";
-                return "green";
-            }
+        holds: {
+            getData: getData("holds", "holds"),
+            icon: "exclamation-triangle",
+            color: "red-700", parseDate: parseDate
         },
+        // grades: {
+        //     getData: getData("grades", "grades/" + term), color: "teal-600",
+        //     icon: "graduation-cap", gradeColor: function(grade) {
+        //         var percent = grade.grade / grade.outOf * 100;
+        //         if(percent < 60)
+        //             return "red";
+        //         if(percent < 70)
+        //             return "orange";
+        //         if(percent < 80)
+        //             return "yellow";
+        //         if(percent < 90)
+        //             return "lime";
+        //         return "green";
+        //     }
+        // },
         finals: {
             getData: getData("finals", "finals/" + term),
             icon: "clipboard", color: "brown-600", parseDate: parseDate
@@ -211,7 +211,7 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast, $emailsLoader) {
             '<md-progress-circular ng-if="!items" md-diameter="80px"></md-progress-circular>' +
             '<h4 ng-if="items && items.length === 0" layout="column" style="color: #90A4AE">' +
             '<md-icon md-font-icon="fa fa-thumbs-up fa-5x" style="height: 64px; color: #B0BEC5"></md-icon>' +
-            'Seems there aren\'t any yet!</h4>' +
+            'Seems there aren\'t any!</h4>' +
         '</div>',
         scope: {
             items: "<",

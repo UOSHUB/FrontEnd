@@ -21,7 +21,7 @@ function($mdDialog, $http, $ls, $goto, $toolbar) {
     function getDetails() {
         $http.get("/api/details/").then(function(response) {
             angular.extend($ls.student, response.data);
-            if(term !== response.data.term) {
+            if(term > response.data.term) {
                 term = response.data.term;
                 $toolbar.thisTerm = term;
                 $ls.selected.term = term;

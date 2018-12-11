@@ -1,6 +1,7 @@
-app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSidenav", "$mdMedia", "$mdDialog", "$toast",
+app.controller("layout", ["$scope", "$ls", "$toolbar", "$goto", "$http", "$mdSidenav", "$mdMedia", "$mdDialog", "$toast", "$location",
 
-function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia, $mdDialog, $toast) {
+function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia, $mdDialog, $toast, $location) {
+    $location.search({});
     $scope.$on("$routeChangeStart", function(event, next) {
         if(next.$$route && next.$$route.controller == "welcome" && $ls.session)
             $goto("dashboard");
