@@ -93,7 +93,6 @@ function($rootScope, $ls, $http, $timeout, $interval) {
         var loading = ($ls.emails[type] || []).length;
         function getEmails(load) {
             if(load >= loading) {
-                console.log(type, loading);
                 var count = $ls.emails[type] ? 10 : 20;
                 $http.get("/api/emails/" + type + "/" + count + "/" + loading + "/").then(function(response) {
                     $ls.emails[type] = ($ls.emails[type] || []).concat(response.data);
