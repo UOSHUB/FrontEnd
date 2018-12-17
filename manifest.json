@@ -1,5 +1,5 @@
 {
-    "name": "UOS HUB Website App",
+    "name": "UOS HUB Web App",
     "short_name": "UOSHUB",
     "icons": [
         {
@@ -26,6 +26,6 @@
     ],
     "start_url": "/",
     "display": "standalone",
-    "theme_color": "#2E7D32",
-    "background_color": "#2E7D32"
+    "theme_color": "#FAFAFA",
+    "background_color": "#FAFAFA"
 }

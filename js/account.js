@@ -22,7 +22,7 @@ function($mdPanel, $http, $ls, $goto, $rootScope, $interval, $toast) {
             $scope.subscribe = function(remove) {
                 $http({method: remove ? "delete" : "post", url: "/api/subscribe/"}).then(function() {
                     $scope.panel.close().then(function() {
-                        if(remove) $toast("Unsubscribed successfully");
+                        if(remove) $toast("Unsubscribed successfully, keep in touch :)");
                         else $toast("Subscribed! You should get an email soon");
                         $ls.student.subscribed = !remove;
                     }, error);
