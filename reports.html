@@ -6,7 +6,7 @@
     <div layout="row" layout-xs="column" ng-repeat="row in ::reports" flex="50">
         <md-card ng-repeat="(type, report) in ::row" flex>
             <md-button layout="column" layout-align="center" style="text-transform: none" target="_blank"
-                href="/api/reports/{{ ::type.toLowerCase().replace(' ', '_') }}/{{ $ls.student.term }}/" flex>
+                href="/api/reports/{{ ::type.toLowerCase().replace(' ', '_') }}/{{ $media('xs') ? 'html/' : '' }}" flex>
                 <div md-colors="::{color: 'blue-grey-700'}" layout="column" layout-xs="row">
                     <md-icon md-font-icon="fa fa-{{ ::report.icon }} fa-fw fa-5x"
                         style="line-height: 1em; height: 72px; width: 1.2em"

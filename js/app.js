@@ -25,7 +25,7 @@ function($locationProvider, $compileProvider, $mdAriaProvider, $mdThemingProvide
         .when("/emails/", $load("emails"))
         .when("/reports/", $load("reports"))
         .when("/calendar/", $load("calendar", true))
-        .otherwise($load("notfound", false, "Page not found"));
+        .otherwise($load("notfound", true, "Page not found"));
 }])
 
 .filter("timeDistance", function() {

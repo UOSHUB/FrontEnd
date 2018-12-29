@@ -15,13 +15,7 @@
 
 [account] > md-icon {
     vertical-align: baseline;
-    padding-right: 4px;
-}
-
-@media (max-width: 600px) {
-    [account] > md-icon {
-        padding-right: 8px;
-    }
+    padding-right: 8px;
 }
 
 .account-panel {
