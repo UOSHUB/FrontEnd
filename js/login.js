@@ -46,10 +46,13 @@ function($mdDialog, $http, $ls, $goto, $toolbar) {
                     $http.post("/api/login/", data).then(function(response) {
                         $scope.pin = "";
                         $ls.$default({
-                            student: response.data,
                             terms: {}, courses: {},
                             emails: { action: "select" },
                             session: { version: version },
+                            student: {
+                                name: response.data.name,
+                                studentId: $scope.sid
+                            },
                             selected: {
                                 term: term,
                                 email: [],

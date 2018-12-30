@@ -55,8 +55,8 @@
                     <ng-include src="hasToolbar && currentPage" layout="row" flex></ng-include>
                     <div ng-hide="hasToolbar" flex></div>
                     <span ng-show="$ls.session" md-colors="::{color: 'grey-800'}" account>
-                        <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-user-circle-o"></md-icon>
-                        {{ ::$ls.student.name.split(' ')[0] }}
+                        <md-icon md-colors="::{color: 'grey-800'}" md-font-icon="fa fa-user-circle-o">
+                        </md-icon>{{ $ls.student.name.split(' ')[0] }}
                     </span>
                     <md-button ng-hide="$ls.session" class="md-primary md-hue-2" login>Login</md-button>
                 </div>
