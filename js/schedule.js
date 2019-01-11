@@ -12,12 +12,13 @@ function($scope, $toolbar, $ls, $http, $mdDialog) {
         }
     };
 
-    $toolbar.getTerms = function() {
-        if(Object.keys($ls.terms).length >= 1)
+    ($toolbar.getTerms = function() {
+        if(Object.keys($ls.terms).length > 0) {
             $http.get("/api/terms/").then(function(response) {
                 $ls.terms = angular.extend(response.data, $ls.terms);
             }, error);
-    };
+        }
+    })();
 
     $toolbar.orderTerms = function(terms) {
         return Object.keys(terms).reverse();

@@ -3,7 +3,7 @@ app.directive("login", ["$mdDialog", "$http", "$ls", "$goto", "$toolbar",
 function($mdDialog, $http, $ls, $goto, $toolbar) {
     term = ($ls.student || {}).term || (month > 7 ? year + "10" : year - 1 + (month < 6 ? "20" : "30"));
     if($ls.session) {
-        if(!$ls.student.term) getDetails();
+        if(!$ls.student.name) getDetails();
         else if(!$ls.terms[term]) getCourses();
     }
     function getCourses(prevFails) {
