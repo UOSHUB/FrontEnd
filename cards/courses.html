@@ -14,8 +14,9 @@
                 <p>{{ ::$ls.courses[id].doctor }}</p>
             </div>
             <div class="md-secondary">
-                <div md-colors="::{backgroundColor: $ls.courses[id].color + '-400', color: 'grey-A100'}"
-                     style="border-radius: 12px; padding: 0 10px; font-size: 17px">{{ ::updatesCount(id) }}</div>
+                {{ count = updatesCount(id); ''}}
+                <div ng-if="count" md-colors="::{backgroundColor: $ls.courses[id].color + '-400', color: 'grey-A100'}"
+                     style="border-radius: 12px; padding: 0 10px; font-size: 17px">{{ count }}</div>
             </div>
         </md-list-item>
     </md-list>

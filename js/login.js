@@ -1,7 +1,6 @@
-app.directive("login", ["$mdDialog", "$http", "$ls", "$goto", "$toolbar",
+app.directive("login", ["$mdDialog", "$http", "$ls", "$goto", "$toolbar", "$cards",
 
-function($mdDialog, $http, $ls, $goto, $toolbar) {
-    term = ($ls.student || {}).term || (month > 7 ? year + "10" : year - 1 + (month < 6 ? "20" : "30"));
+function($mdDialog, $http, $ls, $goto, $toolbar, $cards) {
     if($ls.session) {
         if(!$ls.student.name) getDetails();
         else if(!$ls.terms[term]) getCourses();
@@ -14,6 +13,7 @@ function($mdDialog, $http, $ls, $goto, $toolbar) {
                     $ls.terms[thisTerm] = {};
                     angular.merge($ls.courses, processSchedule(response.data, $ls.terms[thisTerm]));
                     $ls.selected.course = $ls.terms[thisTerm].courses[0];
+                    if('classes' in $cards) $cards.classes.getData();
                 } else getCourses(fails);
             }, function() { getCourses(fails); });
         else error("Couldn't fetch courses!");

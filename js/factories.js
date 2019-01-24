@@ -31,6 +31,7 @@ app.factory("$ls", ["$localStorage", function($localStorage) {
 .factory("$load", ["$rootScope", "$ls", "$goto", "$timeout", "$interval", "$toast",
 
 function($rootScope, $ls, $goto, $timeout, $interval, $toast) {
+    term = ($ls.student || {}).term || (month > 7 ? year + "10" : year - 1 + (month < 6 ? "20" : "30"));
     function onLoggedOut() {
         if(!$ls.session) {
             $goto("/");
