@@ -29,25 +29,25 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast, $emailsLoader) {
                 $filter("find")($ls.updates, "dismiss", updateId, "delete");
             }
         },
-        emails: {
-            getData: function() { cards.emails.emailsLoader = $emailsLoader("personal"); },
-            icon: "envelope", color: "blue-600", getInitials: getInitials,
-            goToEmail: function(emailId) {
-                $ls.selected.tab = 0;
-                $ls.selected.email = ["personal", emailId];
-                $ls.emails.action = "view";
-                $goto("emails");
-            },
-            deleteEmail: function(emailId) {
-                $http({
-                    method: "delete",
-                    url: "/api/emails/" + emailId + "/"
-                }).then(nothing, error);
-                $ls.selected.tab = 0;
-                $ls.selected.email = [];
-                $filter("find")($ls.emails.personal, "id", emailId, "delete");
-            }
-        },
+        // emails: {
+        //     getData: function() { cards.emails.emailsLoader = $emailsLoader("personal"); },
+        //     icon: "envelope", color: "blue-600", getInitials: getInitials,
+        //     goToEmail: function(emailId) {
+        //         $ls.selected.tab = 0;
+        //         $ls.selected.email = ["personal", emailId];
+        //         $ls.emails.action = "view";
+        //         $goto("emails");
+        //     },
+        //     deleteEmail: function(emailId) {
+        //         $http({
+        //             method: "delete",
+        //             url: "/api/emails/" + emailId + "/"
+        //         }).then(nothing, error);
+        //         $ls.selected.tab = 0;
+        //         $ls.selected.email = [];
+        //         $filter("find")($ls.emails.personal, "id", emailId, "delete");
+        //     }
+        // },
         holds: {
             getData: getData("holds", "holds"),
             icon: "exclamation-triangle",
@@ -68,10 +68,10 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast, $emailsLoader) {
         //         return "green";
         //     }
         // },
-        finals: {
-            getData: getData("finals", "finals/" + term),
-            icon: "clipboard", color: "brown-600", parseDate: parseDate
-        },
+        // finals: {
+        //     getData: getData("finals", "finals/" + term),
+        //     icon: "clipboard", color: "brown-600", parseDate: parseDate
+        // },
         documents: {
             getData: getData("documents", "terms/" + term + "/documents"),
             icon: "file-text", color: "brown-600", all: false,
@@ -98,33 +98,33 @@ function($ls, $goto, $filter, $http, $mdDialog, $toast, $emailsLoader) {
                 );
             }
         },
-        // classes: {
-        //     icon: "flag", color: "lime-700", todayClasses: function() {
-        //         var classes = [], day = days[today.getDay()];
-        //         if($ls.terms && $ls.terms[term])
-        //             angular.forEach($ls.terms[term].courses, function(key) {
-        //                 var course = $ls.courses[key];
-        //                 if(course.days && course.days.indexOf(day) > -1)
-        //                     classes.push(course);
-        //             });
-        //         return classes;
-        //     }
-        // },
-        // courses: {
-        //     icon: "book", color: "purple-500", term: term,
-        //     updatesCount: function(courseId) {
-        //         var count = 0;
-        //         angular.forEach($ls.updates, function(update) {
-        //             if(update.course == courseId)
-        //                 count++;
-        //         });
-        //         return count;
-        //     },
-        //     goToCourse: function(courseId) {
-        //         $ls.selected.course = courseId;
-        //         $goto("courses");
-        //     }
-        // },
+        classes: {
+            icon: "flag", color: "lime-700", getData: function() {
+                $ls.classes = [];
+                var day = days[today.getDay()];
+                if($ls.terms && $ls.terms[term])
+                    angular.forEach($ls.terms[term].courses, function(key) {
+                        var course = $ls.courses[key];
+                        if(course.days && course.days.indexOf(day) > -1)
+                            $ls.classes.push(course);
+                    });
+            }
+        },
+        courses: {
+            icon: "book", color: "purple-500", term: term,
+            updatesCount: function(courseId) {
+                var count = 0;
+                angular.forEach($ls.updates, function(update) {
+                    if(update.course == courseId)
+                        count++;
+                });
+                return count;
+            },
+            goToCourse: function(courseId) {
+                $ls.selected.course = courseId;
+                $goto("courses");
+            }
+        },
         info: {
             icon: "info-circle", color: "pink-500",
             init: true, watchCourse: function($scope) {
