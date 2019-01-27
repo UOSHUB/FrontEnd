@@ -1,7 +1,7 @@
 app.controller("emails", ["$scope", "$ls", "$http", "$refresh", "$toast", "$emailsLoader",
 
 function($scope, $ls, $http, $refresh, $toast, $emailsLoader) {
-    if(!$ls.emails.body)
+    /*if(!$ls.emails.body)
         $ls.emails.body = {};
 
     $scope.getInitials = getInitials;
@@ -41,5 +41,5 @@ function($scope, $ls, $http, $refresh, $toast, $emailsLoader) {
         });
     };
 
-    $refresh(["emails"])
+    $refresh(["emails"])*/
 }]);

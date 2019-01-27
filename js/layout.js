@@ -41,11 +41,7 @@ function($scope, $ls, $toolbar, $goto, $http, $mdSidenav, $mdMedia, $mdDialog, $
                 .cancel("cancel")
                 .ok("Send")
         ).then(function(feedback) {
-            $http.post("/api/emails/send/", {
-                recipients: "uoshub@gmail.com",
-                subject: "Feedback from " + $ls.student.name,
-                body: feedback
-            }).then(function() {
+            $http.post("/api/feedback/", {feedback: feedback}).then(function() {
                 $toast("Thank you for your feedback ^_^");
             }, function() {
                 $toast("Failed to send your feedback!");
