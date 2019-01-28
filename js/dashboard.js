@@ -2,9 +2,9 @@ app.controller("dashboard", ["$scope", "$refresh", "$toolbar", function($scope, 
     $toolbar.thisTerm = term;
 
     $scope.cards = [
-        ["updates", "deadlines"], "classes",
-        ["holds", "courses"]
+        ["updates", "courses"], "deadlines",
+        ["classes", "holds"]
     ];
 
-    $refresh(["content=deadlines", "emails=personal", "updates"]);
+    $refresh(["content=deadlines", "updates"]);
 }]);
