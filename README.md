@@ -3,10 +3,10 @@
 # UOS HUB Website Front-End
 
 This repository contains the client-side code of UOS HUB website. 
-We're using a JavaScript web framework called AngularJS to manage and render the data sent from the our server-side.
+We're using a JavaScript web framework called AngularJS to manage and render the data sent from our server-side.
 As for the visuals of the website, We're implementing the concepts of Google's [Material Design](https://material.io/guidelines). 
 That's by using AngularJS Material, which can be programmed using HTML, CSS, and JavaScript.
-On top of that, we're suing a flat icon pack called Font Awesome.
+On top of that, we're using a flat icon pack called Font Awesome.
 
 ***
 
